@@ -1,0 +1,9 @@
+* Сборка
+#+BEGIN_EXAMPLE shell
+$ make
+#+END_EXAMPLE
+
+Очистить каталог от сгенерированных файлов можно через команду:
+#+BEGIN_EXAMPLE shell
+$ make clean
+#+END_EXAMPLE
