@@ -1,3 +1,7 @@
 main.pdf
 *.log
 *.dvi
+main.aux
+main.out
+main.toc
+*.~undo-tree~
