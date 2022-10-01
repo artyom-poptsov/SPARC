@@ -1,3 +1,8 @@
+* Зависимости
+- =latex=
+- =xelatex=
+- =abcm2ps=
+
 * Сборка
 #+BEGIN_EXAMPLE shell
 $ make

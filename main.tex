@@ -2,18 +2,25 @@
 
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
+\usepackage{fontspec}
+\setmainfont{Liberation Serif}
+\setmonofont{Liberation Mono}
+
 \usepackage{graphicx}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
 \usepackage{hyperref}
 \usepackage{multirow}
 \usepackage[absolute,overlay,showboxes]{textpos}
 \usepackage{etoolbox}
 \usepackage{longtable}
 \usepackage{tikz}
+\usepackage{lilyglyphs}
+
 
 \urlstyle{same}
 \usepackage[printonlyused,withpage]{acronym}
 
-\graphicspath{ {images/} }
+\graphicspath{ {images/} {../images/} }
 
 %% This procedure adds the "Example" block to the text.
 \newcommand{\example}[1]{
@@ -1336,9 +1343,10 @@ void loop() {
 
 \subsection{Более сложные ритмы}
 
-Возможно некотыре из вас знают такую зажигательную композициюю, как ``We Will
-Rock You'' в исполнении группы Queen
-(\url{https://www.youtube.com/watch?v=-tJYN-eG1zk}). Данная композиция имеет
+Возможно некотыре из вас знают такую зажигательную композицию, как ``We Will
+Rock You'' в исполнении группы Queen\footnote{Официальное музыкальное видео на
+данную композицию можно посмотреть здесь:
+\url{https://www.youtube.com/watch?v=-tJYN-eG1zk}}. Данная композиция имеет
 чётко выраженный, легко узнаваемый ритм, который можно упрощенно описать как
 ``два притопа, один прихлоп'', вокруг которого строится вся композиция -- вы сами
 можете достаточно легко повторить этот ритм, коротко топая ногой два раза, и
@@ -1348,24 +1356,27 @@ Rock You'' в исполнении группы Queen
 (\ref{fig:queen-we-will-rock-you-rhythm-1}.) Частоты звуков мы опять же берём
 произвольно.
 
-\begin{tikzpicture}
+\begin{figure}[ht]
   \label{fig:queen-we-will-rock-you-rhythm-1}
-  \draw[thick] (0, 0.5) -- (8, 0.5) node[anchor=north west] {t};
-  \foreach \x/\n in {0/1, 8/2} {
-    \draw (\x, 0) -- (\x, 1) -- (\x, 1) node[midway, above] {\n};
-  };
+  \caption{Ритм мелодии ``We Will Rock You''}
+  \begin{tikzpicture}
+    \draw[thick] (0, 0.5) -- (8, 0.5) node[anchor=north west] {t};
+    \foreach \x/\n in {0/1, 8/2} {
+      \draw (\x, 0) -- (\x, 1) -- (\x, 1) node[midway, above] {\n};
+    };
 
-  \foreach \x in {0, 2} {
-    \draw (\x, 0) -- (\x, 0.5) node[pos=0.25, right] {$ \frac{1}{4} $};
-  };
+    \foreach \x in {0, 2} {
+      \draw (\x, 0) -- (\x, 0.5) node[pos=0.25, right] {$ \frac{1}{4} $};
+    };
 
-  \draw (4, 0) -- (4, 0.5) node[pos=0.25, right] {$ \frac{1}{2} $};
+    \draw (4, 0) -- (4, 0.5) node[pos=0.25, right] {$ \frac{1}{2} $};
 
-  \foreach \x/\freq in {0/50, 2/50} {
-    \draw (\x, 0) -- (\x, 0.5) node[pos=1.5, right] {\freq Гц};
-  };
-  \draw (4, 0) -- (4, 0.5) node[pos=1.5, right] {100 Гц};
-\end{tikzpicture}
+    \foreach \x/\freq in {0/50, 2/50} {
+      \draw (\x, 0) -- (\x, 0.5) node[pos=1.5, right] {\freq Гц};
+    };
+    \draw (4, 0) -- (4, 0.5) node[pos=1.5, right] {100 Гц};
+  \end{tikzpicture}
+\end{figure}
 
 Как мы видимо из рисунка \ref{fig:queen-we-will-rock-you-rhythm-1}, деление
 такта на части не обязательно должно быть всегда равномерным -- здесь мы получили
@@ -1377,6 +1388,82 @@ Rock You'' в исполнении группы Queen
   \label{equation:queen-we-will-rock-you-rhythm-1}
   \frac{1}{4} + \frac{1}{4} + \frac{1}{2} = \frac{1}{4} + \frac{1}{4} + \frac{2}{4} = \frac{4}{4} = \frac{1}{1} = 1
 \end{equation}
+
+\subsection{Музыкальная запись ритма}
+
+С точки зрения музыкальной нотации, данный ритм можно записать примерно
+следующим образом (см. рисунок \ref{fig:lilypond-queen-1}.)
+
+\begin{figure}[ht]
+  \caption{Ритм мелодии ``We Will Rock You'' в музыкальной нотации (упрощенная версия.)}
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      e,4 e4 e'2
+    }
+  \end{lilypond}
+  \label{fig:lilypond-queen-1}
+\end{figure}
+
+Если вы не знакомы с музыкальной нотацией (т.е. способом записи музыки), и
+изображение выглядит для вас совершенно непонятно, то не отчаивайтесь -- на
+данном этапе нам достаточно увидеть, что есть три ``закорючки'', которые
+обозначают звуки разной длительности: ``\quarterNote'' ($\frac{1}{4}$),
+``\quarterNote'' ($\frac{1}{4}$) и ``\halfNote'' ($\frac{1}{2}$).
+
+Расположение ``закорючек'' слева направо говорит нам о порядке ``извлечения''
+звуков из музыкальных инстнументов, а каждый вид начертания ``закорючки''
+соответствует длительности звука, согласно следующей таблице
+(\ref{table:music-notes-legths}.)
+
+\begin{table}[ht]
+  \caption{Некоторые возможные длительности нот.}
+\begin{tabular}{p{3cm}|p{4cm}|p{3.5cm}}
+  Начертание & Длительность & Название \\
+  \hline \hline
+  \wholeNote     & $\frac{1}{1}$ & ``Целая'' \\
+  \hline
+  \halfNote      & $\frac{1}{2}$ & ``Половина'' \\
+  \hline
+  \quarterNote   & $\frac{1}{4}$ & ``Четверть'' \\
+  \hline
+  \eighthNote     & $\frac{1}{8}$ & ``Восьмая'' \\
+  \hline
+  \sixteenthNote & $\frac{1}{16}$ & ``Шестнадцатая'' \\
+  \hline
+\end{tabular}
+\label{table:music-notes-legths}
+\end{table}
+
+Существуют и более длинные и более короткие ноты, но они встречаются реже, чем
+перечисленные в таблице \ref{table:music-notes-legths}, поэтому для краткости мы
+их рассматривать не будем.
+
+Какие выводы мы можем сделать в итоге? Что в музыкальной нотации звуки, которые
+необходимо ``извлечь'' из музыкального инструмента, записываются слева на право,
+как и обычный, привычный нам русский текст (или английский, к слову говоря.)
+
+Мы можем расположить музыкальную запись для удобства нашего понимания на
+графике, где ось $\mbox{X}$, будет обозначать время, идущее слева направо:
+
+\begin{figure}[ht]
+  \caption{Музыкальный ``график''.}
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      e,4 e4 e'2
+    }
+  \end{lilypond}
+  \begin{tikzpicture}
+    \draw[thick, ->] (0, 0.5) -- (12, 0.5) node[anchor=north east] {Время};
+  \end{tikzpicture}
+
+  \label{fig:lilypond-queen-1}
+\end{figure}
 
 Теперь нам нужно более точно определить, какова длительность целого отрезка
 времени, чтобы посчитать длину его частей.

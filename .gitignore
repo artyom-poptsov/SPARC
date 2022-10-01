@@ -5,3 +5,5 @@ main.aux
 main.out
 main.toc
 *.~undo-tree~
+out
+tmp*
