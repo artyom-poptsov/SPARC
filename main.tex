@@ -2451,6 +2451,42 @@ void play_tone(int port, float f, long t) {
 Для наглядной демонстрации использования пауз возьмём другое музыкальное
 произведение -- ``Кабы небыло зимы'' из мультфильма ``Простоквашино''.
 
+\begin{figure}[ht]
+  \caption{Часть мелодии ``Кабы небыло зимы'' из мультфильма ``Простоквашино''.}
+  \begin{lilypond}
+    \relative c' {
+      \key g \major
+      \numericTimeSignature
+      \time 4/4
+      (b'8 b cis dis e4-.) << g,8 b e >> r8 \bar ".|:"
+      b,8 b b'8. fis16 a8 g e4 |
+      d8 d << b'8. d8. >> << c16 a >> << c8 a >> << b8 g8 >> r4
+      d'8 c a fis << a c >> << g b >> << g4 b >>
+      b,8 b << g'8. b8. >> << fis16 a >> << fis8 a >> << e8 g8 >> r4
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \label{fig:lilypond-melody-prostokvashino}
+\end{figure}
+
+В нотной записи на рисунке \ref{fig:lilypond-melody-prostokvashino} представлена
+часть мелодии, которую мы попытаемся переложить на программный код. Полную
+версию мелодии можно увидеть на рисунке
+\ref{fig:lilypond-melody-prostokvashino-full}.
+
+Можно заметить две четвертные паузы (\crotchetRest), которые необходимо добавить
+в массив нот, чтобы произведение звучало, как в оригинале.
+
+Можно также заметить двойные ноты, записанные одна над другой -- это значит, что
+данные ноты должны играться одновременно. Для упрощения нашей задачи мы пока
+будем брать самую верхнюю ноту из группы.
+
+Начнём вписывать ноты в массив.
+
 \section{Задачи}
 \begin{itemize}
 \item Добавьте паузы между воспроизведением нот.
@@ -2617,6 +2653,33 @@ void play_tone(int port, float f, long t) {
   \label{table:octaveList}
 
 \end{longtable}
+
+\newpage
+\section{Приложение Б}
+
+\begin{figure}[ht]
+  \caption{Мелодия ``Кабы небыло зимы'' из мультфильма ``Простоквашино''.}
+  \begin{lilypond}
+    \relative c' {
+      \key g \major
+      \numericTimeSignature
+      \time 4/4
+      (b'8 b cis dis e4-.) << g,8 b e >> r8 \bar ".|:"
+      b,8 b b'8. fis16 a8 g e4 |
+      d8 d << b'8. d8. >> << c16 a >> << c8 a >> << b8 g8 >> r4
+      d'8 c a fis << a c >> << g b >> << g4 b >>
+      b,8 b << g'8. b8. >> << fis16 a >> << fis8 a >> << e8 g8 >> r4
+      b,8 b b'8. fis16 a8 g8 e4
+      d8 d << b8. d'8. >>
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \label{fig:lilypond-melody-prostokvashino-full}
+\end{figure}
 
 
 \section{Список сокращений}
