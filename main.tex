@@ -2764,6 +2764,52 @@ float prostokvashino[28][2] = {
 // ...
 \end{verbatim}
 
+\section{Музыкальнй размер}
+
+Вы могли видеть, что на нотном стане в самом начале, возле скрипичного (или
+басового) ключа часто написано $\frac{4}{4}$ -- что же это означает?
+
+Пометка $\frac{4}{4}$ (читается как ``четыре четверти'') обозначает
+\emph{музыкальный размер} произведения.  С точки зрения кодирования мелодии в
+программе это не влияет ни на частоту нот, ни на их длительность.  При этом,
+однако, данная пометка напрямую влияет на звучание произведения, и без её учёта
+все произведения будут звучать ``плоско'' и менее интересно.
+
+Удивительный эффект музыкальнй размер даёт благодаря \emph{акцентированию}
+определённых нот.
+
+Например, посмотрим ещё раз на ``Twinkle, Twinkle, Little Star''
+(\ref{fig:lilypond-musical-scale-example-1}.)
+
+\begin{figure}[ht]
+  \caption{``Twinkle, Twinkle, Little Star''}
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+      g'4 g a a
+      e e d2
+      g4 g f f
+      e e d2
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \label{fig:lilypond-musical-scale-example-1}
+\end{figure}
+
 \section{Задачи}
 \begin{itemize}
 \item Добавьте паузы между воспроизведением нот.
