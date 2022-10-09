@@ -9,8 +9,12 @@
 («Атрибуция-СохранениеУсловий») 4.0 Всемирная (CC BY-SA 4.0)
 (https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
 
+В книге используются изображения, созданные [[https://thenounproject.com/][The Noun Project]], которые находятся
+в общественном достоянии.
+
 ** Зависимости
 - =latex=
+- =inkscape=
 - =xelatex=
 - =lilypad=
 

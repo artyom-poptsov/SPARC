@@ -15,7 +15,9 @@
 \usepackage{longtable}
 \usepackage{tikz}
 \usepackage{lilyglyphs}
+\usepackage{tabularx}
 
+\usepackage{svg}
 
 \urlstyle{same}
 \usepackage[printonlyused,withpage]{acronym}
@@ -32,12 +34,11 @@
 
 %% This procedure adds the "Experiment" block to the text.
 \newcommand{\experiment}[2]{
-  \fbox {
-    \begin{minipage}{30em}
-      \textbf{Эксперимент №#1:}
-      #2
-    \end{minipage}
-  }
+  \vspace{8pt}
+  \begin{tabularx}{\textwidth}{m{1cm} m{9cm}}
+    \includesvg[width=1cm]{the-noun-project/flask}
+    & \textbf{Эксперимент №#1:} #2 \\
+  \end{tabularx}
 }
 
 \newcommand{\note}[1]{
