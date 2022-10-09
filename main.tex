@@ -1842,19 +1842,40 @@ void loop() {
 Star'' \footnote{\url{https://ru.wikipedia.org/wiki/Twinkle,_Twinkle,_Little_Star}}
 -- английскую колыбельную:
 
-%% TODO: Переписать через LilyPad.
-\begin{figure}[h]
-  \caption{Мелодия ``Twinkle, Twinkle, Little Star''.}
-  \label{fig:sound-fig-3}
-  \includegraphics[width=10cm]{twinkle-twinkle-little-star}
+\begin{figure}[ht]
+  \caption{``Twinkle, Twinkle, Little Star''}
   \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+      g'4 g f f
+      e e d2
+      g4 g f f
+      e e d2
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 100\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \label{fig:sound-fig-3}
 \end{figure}
 
 Из таблицы \ref{table:music-notes-legths}, мы уже знаем, как различать нотные
 ``закорючки'', чтобы понять их длительность, но мы пока не разбирали, как
 определить частоты нот по нотной записи. Поэтому ниже приводится полный список
 нот композиции в правильном порядке (см.
-\ref{table:twinkle-twinkle-little-star-notes}), где ноты разбиты по строкам
+\ref{table:twinklet-winkle-little-star-notes}), где ноты разбиты по строкам
 таким образом, чтобы каждая строка соответствовала одному такту.
 
 \begin{tabular}{p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}}
@@ -2223,12 +2244,33 @@ void loop() {
 
 Посмотрим ещё раз на мелодию ``Twinkle, Twinkle, Little Star''.
 
-%% TODO: Переписать через LilyPad.
-\begin{figure}[h]
-  \caption{Мелодия ``Twinkle, Twinkle, Little Star''.}
-  \label{fig:sound-fig-4}
-  \includegraphics[width=10cm]{twinkle-twinkle-little-star}
+\begin{figure}[ht]
+  \caption{``Twinkle, Twinkle, Little Star''}
   \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+      g'4 g f f
+      e e d2
+      g4 g f f
+      e e d2
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 100\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \label{fig:sound-fig-4}
 \end{figure}
 
 Ранее мы проигнорировали расположение нот по оси ``Y'' и вместо этого
