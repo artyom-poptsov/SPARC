@@ -10,7 +10,7 @@
 (https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
 
 В книге используются изображения, созданные [[https://thenounproject.com/][The Noun Project]], которые находятся
-в общественном достоянии.
+в общественном достоянии или под лицензией Creative Commons.
 
 ** Зависимости
 - =latex=
