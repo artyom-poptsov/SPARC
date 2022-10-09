@@ -43,10 +43,11 @@
 }
 
 \newcommand{\note}[1]{
-  \fbox {
-    \textbf{Примечание:}
-    \parbox{\linewidth}{#1}
-  }
+  \vspace{8pt}
+  \begin{tabularx}{\textwidth}{m{1cm} m{9cm}}
+    \includesvg[width=1cm]{the-noun-project/note}
+    & \textbf{Примечание:} #1 \\
+  \end{tabularx}
 }
 
 \newcommand{\hotkey}[1]{
