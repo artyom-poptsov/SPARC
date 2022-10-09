@@ -1,3 +1,6 @@
 * Источники файлов и лицензии на них
-| =flask.svg= | CC0 1.0      | https://commons.wikimedia.org/wiki/File:Flask_(31697)_-_The_Noun_Project.svg    |
-| =note.svg=  | CC-BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Noun_Project_author_icon_1642368_cc.svg |
+| =flask.svg=                                 | CC0 1.0      | https://commons.wikimedia.org/wiki/File:Flask_(31697)_-_The_Noun_Project.svg    |
+| =note.svg=                                  | CC-BY-SA 3.0 | https://commons.wikimedia.org/wiki/File:Noun_Project_author_icon_1642368_cc.svg |
+| =request.svg=                               | CC-BY        | https://thenounproject.com/icon/request-3818807/                                |
+| =request-mirrored.svg= (производная работа) | -            | -                                                                               |
+
