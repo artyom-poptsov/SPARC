@@ -529,81 +529,83 @@ Copyright © 2016-2022 Артём ``avp'' Попцов.
 
 Будучи подключенными последовательно, значения сопротивлений складываются.
 Проводя аналогию с водой, мы можем сказать, что удлинение трубопровода, по
-которому течёт вода, повышает сопротивление этого трубопровода.  На
-рис. \ref{fig:electronics-resistance-1} показано две пары ёмкостей, соединённых
-трубами разных длин, но одинаковых диаметров; сопротивление для тока воды между
-ёмкостями ``А'' и ``Б'' меньше, нежели чем между ёмкостями ``В'' и ``Г'', так
-как между ``В'' и ``Г'' длина трубы при сохранении её диаметра больше, что
-увеличивает сопротивление и понижает ток.
+которому течёт вода, повышает сопротивление этого трубопровода.  На рис.
+\ref{fig:electronics-resistance-1} показана пара ёмкостей, соединённых
+последовательно двумя отрезками труб; сопротивление для тока воды между
+ёмкостями ``А'' и ``Б'' равно сумме сопротивлений $R_1$ и $R_2$.  Таким образом,
+суммарное сопротивление трубопровода току будет больше, чем $R_1$ или же $R_2$,
+взятые по-отдельности.
 
 \begin{figure}[ht]
   \centering
-  \def\offset{6}
+  \def\offset{0}
   \begin{tikzpicture}[
       declare function={f1(\x) = 0.15 * sin(8.0 * deg(\x));
     }]
 
-    \draw[thick] (0, 0) -- (0, 4);
-    \draw[thick] (2, 0.5) -- (2, 4);
-    \draw[thick] (0, 0) -- (2, 0);
-
-    \draw[thick] (3, 0.5) -- (3, 4);
-    \draw[thick] (5, 0) -- (5, 4);
-    \draw[thick] (3, 0) -- (5, 0);
-
-    \draw[thick] (2, 0) -- (3, 0);
-    \draw[thick] (2, 0.5) -- (3, 0.5);
-
     \draw[thick] (\offset, 0) -- (\offset, 4);
     \draw[thick] (\offset + 2, 0.5) -- (\offset + 2, 4);
 
-    \draw[thick] (\offset + 4, 0.5) -- (\offset + 4, 4);
+    \draw[thick] (\offset + 4, 0.25) -- (\offset + 4, 4);
     \draw[thick] (\offset + 6, 0) -- (\offset + 6, 4);
 
+    %% "Труба" между ёмкостями "В" и "Г".
     \draw[thick] (\offset, 0) -- (\offset + 6, 0);
-    \draw[thick] (\offset + 2, 0.5) -- (\offset + 4, 0.5);
+    \draw[thick] (\offset + 2, 0.5) -- (\offset + 3, 0.5);
+    \draw[thick] (\offset + 3, 0.5) -- (\offset + 3, 0.25);
+    \draw[thick] (\offset + 3, 0.25) -- (\offset + 4, 0.25);
 
-    \draw[thick, color=blue, ->] (1, 0.25) -- (4, 0.25);
-
-    \draw[thick, color=blue, ->] (\offset + 1, 0.25) -- (\offset + 5, 0.25);
+    \draw[thick, color=blue, ->] (\offset + 1, 0.125) -- (\offset + 5, 0.125);
 
     \draw[thick, color=red, <->] (2, 1) -- (3, 1);
     \draw[color=red] (2.5, 1) node[above] {$R_1$};
 
-    \draw[thick, color=red, <->] (\offset + 2, 1) -- (\offset + 4, 1);
-    \draw[color=red] (\offset +3, 1) node[above] {$R_2$};
+    \draw[thick, color=red, <->] (\offset + 2, 1) -- (\offset + 3, 1);
+    \draw[color=red] (\offset + 2.5, 1) node[above] {$R_1$};
+    \draw[thick, dotted, color=red] (\offset + 3, 2) -- (\offset + 3, -1);
+    \draw[thick, color=red, <->] (\offset + 3, 1) -- (\offset + 4, 1);
+    \draw[color=red] (\offset + 3.5, 1) node[above] {$R_2$};
 
     \begin{scope}[yshift=1.5cm, color=blue]
       \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
     \end{scope}
 
-    \begin{scope}[yshift=1.5cm, xshift=6 cm, color=blue]
-      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
-    \end{scope}
-
     \draw (1, 0) node[below] {А};
-    \draw (4, 0) node[below] {Б};
-    \draw (7, 0) node[below] {В};
-    \draw (10, 0) node[below] {Г};
+    \draw (5, 0) node[below] {Б};
 
   \end{tikzpicture}
-  \caption{Пример ёмкостей, соединённых трубами разных сопротивлений.}
+  \caption{Последовательное подключение сопротивлений на примере воды.}
   \label{fig:electronics-resistance-1}
 \end{figure}
 
-Мы можем приедставить, что ёмкости ``В'' и ``Г'' соеденины двумя одинаковыми
-труб, каждый из которых такой же длины, что и между ``А'' и ``Б''.
-
-Из вышесказанного можно сделать вывод, что понизить сопротивление проводника
-можно, увеличив его сечение: более толстый провод лучше пропускает ток, чем
-тонкий.  Существует формула \ref{equation:elemctronics-resistance-0}, которая
-позволяет рассчитать общее сопротивление проводинка при последовательном
-соединении отдельных сопротивлений.
+Формула \ref{equation:elemctronics-resistance-0} позволяет рассчитать общее
+сопротивление проводника при последовательном соединении отдельных
+сопротивлений.
 
 \begin{equation}
   \mbox{R}_{\mbox{общее}} = \mbox{R}_{\mbox{1}} + \mbox{R}_{\mbox{2}}
   \label{equation:elemctronics-resistance-0}
 \end{equation}
+
+Электрическая схема с последовательным соединением резисторов показана на
+рис. \ref{fig:electronics-circuit-resistors-in-series}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{circuitikz}
+    \draw
+    (0, 0) to[battery, l=Батарея]
+    (0, 4) to[short]
+    (1, 4) to[resistor, l=$R_1$] (3, 4)
+    (3, 4) to[resistor, l=$R_2$] (5, 4)
+    (5, 4) to[full led, l=Светодиод] (7, 4)
+    (7, 4) to[short]
+    (7, 0) to[short]
+    (0, 0);
+  \end{circuitikz}
+  \caption{Последовательное подключение сопротивлений $R_1$ и $R_2$.}
+  \label{fig:electronics-circuit-resistors-in-series}
+\end{figure}
 
 Другим способом понизить сопротивление является использование нескольких
 проводников, соединённых \emph{паралельно}, как показано на
@@ -672,17 +674,17 @@ Copyright © 2016-2022 Артём ``avp'' Попцов.
     (0, 0) to[battery, l=Батарея]
     (0, 4) to[short]
     (1, 4) to[short]
-    (1, 5) to[resistor] (4, 5) -- (4, 4);
+    (1, 5) to[resistor, l=$R_1$] (4, 5) -- (4, 4);
     \draw
     (1, 4) to[short]
-    (1, 3) to[resistor] (4, 3) -- (4, 4);
+    (1, 3) to[resistor, l=$R_2$] (4, 3) -- (4, 4);
     \draw
     (4, 4) to[full led, l=Светодиод] (6, 4)
     (6, 4) to[short]
     (6, 0) to[short]
     (0, 0);
   \end{circuitikz}
-  \caption{Параллельное подключение резисторов.}
+  \caption{Параллельное подключение резисторов $R_1$ и $R_2$.}
   \label{fig:electronics-circuit-parallel-resistors}
 \end{figure}
 
