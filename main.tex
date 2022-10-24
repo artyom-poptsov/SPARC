@@ -961,17 +961,19 @@ Copyright © 2016-2022 Артём ``avp'' Попцов.
 \section{Структура программы на Arduino}
 
 Программа для Arduino обычно состоит из двух основных частей, также называемых
-функциями: "setup" и "loop". Пример программы, которая мигает одним светодиодом:
+функциями: \texttt{setup} и \texttt{loop}. Пример программы, которая мигает
+одним светодиодом:
+
 \begin{verbatim}
 void setup() {
-    pinMode(2, OUTPUT);
+  pinMode(2, OUTPUT);
 }
 
 void loop() {
-    digitalWrite(2, HIGH);
-    delay(500);
-    digitalWrite(2, LOW);
-    delay(500);
+  digitalWrite(2, HIGH);
+  delay(500);
+  digitalWrite(2, LOW);
+  delay(500);
 }
 \end{verbatim}
 
@@ -988,7 +990,7 @@ void loop() {
 вход или выход:
 
 \begin{verbatim}
-  pinMode(pin, mode);
+pinMode(pin, mode);
 \end{verbatim}
 
 где \texttt{pin} -- номер пина, \texttt{mode} -- режим работы
@@ -998,7 +1000,7 @@ void loop() {
 
 Функция
 \begin{verbatim}
-  digitalWrite(pin,value);
+digitalWrite(pin,value);
 \end{verbatim}
 
 где \texttt{pin} -– номер пина, \texttt{value} -- уровень сигнала
@@ -1090,11 +1092,11 @@ int k = 500;
 
 \begin{verbatim}
 void loop() {
-    int delay_val = 500;
-    digitalWrite(2, HIGH);
-    delay(delay_val);
-    digitalWrite(2, LOW);
-    delay(delay_val);
+  int delay_val = 500;
+  digitalWrite(2, HIGH);
+  delay(delay_val);
+  digitalWrite(2, LOW);
+  delay(delay_val);
 }
 \end{verbatim}
 
@@ -1103,8 +1105,8 @@ void loop() {
 
 \begin{verbatim}
 void loop() {
-    int delayVal = 600;
-    // ...
+  int delay_val = 600;
+  // ...
 }
 \end{verbatim}
 
@@ -1113,12 +1115,12 @@ void loop() {
 
 \begin{verbatim}
 void loop() {
-    int delay_val = 100;
-    digitalWrite(2, HIGH);
-    delay(delay_val);
-    digitalWrite(2, LOW);
-    delay(delay_val);
-    delay_val = delay_val + 100;
+  int delay_val = 100;
+  digitalWrite(2, HIGH);
+  delay(delay_val);
+  digitalWrite(2, LOW);
+  delay(delay_val);
+  delay_val = delay_val + 100;
 }
 \end{verbatim}
 
@@ -1157,14 +1159,14 @@ void loop() {
 int delay_val = 100;
 
 void loop() {
-    digitalWrite(2, HIGH);
-    delay(delay_val);
-    digitalWrite(2, LOW);
-    delay(delay_val);
+  digitalWrite(2, HIGH);
+  delay(delay_val);
+  digitalWrite(2, LOW);
+  delay(delay_al);
 
-    if (delay_val < 600){
-      delay_val += 100;
-    }
+  if (delay_val < 600){
+    delay_val += 100;
+  }
 }
 \end{verbatim}
 
