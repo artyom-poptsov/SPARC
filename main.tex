@@ -762,6 +762,35 @@ Copyright © 2016-2022 Артём ``avp'' Попцов.
 означает ``Ground'', или ``Земля'' -- это порт, на котором напряжение всегда
 имеет значене ноль.  ``5V'' соответственно имеет всегда значение 5 Вольт.
 
+Попробуем собрать электрическую цепь с резистором и светодиодом, приведённую на
+рис. \ref{fig:electronics-arduino-circuit-00}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{circuitikz}
+    \draw (3.5, 0) node[
+      dipchip,
+      num pins=2,
+      external pins width=0.0,
+      no topmark,
+      hide numbers,
+      xscale = 2.5,
+      yscale = 2.5](C1){Arduino};
+    \node [right, font=\tiny] at (C1.bpin 1) {5V};
+    \node [left, font=\tiny] at (C1.bpin 2) {GND};
+    \draw
+    (C1.bpin 1) to[short]
+    (0, 0) to[short]
+    (0, 4) to[resistor, l=$R_1$] (3, 4)
+    (3, 4) to[full led, l=Светодиод] (7, 4)
+    (7, 4) to[short]
+    (7, 0) to[short]
+    (C1.bpin 2);
+  \end{circuitikz}
+  \caption{Схема подключения светодиода к Arduino.}
+  \label{fig:electronics-arduino-circuit-00}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \chapter{Диалоги с компьютером}
 \label{chapter:dialogues-with-computer}
