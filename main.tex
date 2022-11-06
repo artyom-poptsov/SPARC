@@ -26,22 +26,30 @@
 
 \graphicspath{ {images/} {../images/} }
 
+\newcounter{example-counter}
+\setcounter{example-counter}{1}
+
 %% This procedure adds the "Example" block to the text.
 \newcommand{\example}[1]{
   \vspace{8pt}
   \begin{tabularx}{\textwidth}{m{1cm} m{9cm}}
     \includesvg[width=1.25cm]{the-noun-project/request-mirrored}
-    & \textbf{Пример:} #1 \\
+    & \textbf{Пример \arabic{example-counter}}: #1 \\
   \end{tabularx}
+  \addtocounter{example-counter}{1}
 }
+
+\newcounter{experiment-counter}
+\setcounter{experiment-counter}{1}
 
 %% This procedure adds the "Experiment" block to the text.
 \newcommand{\experiment}[2]{
   \vspace{8pt}
   \begin{tabularx}{\textwidth}{m{1cm} m{9cm}}
     \includesvg[width=1cm]{the-noun-project/flask}
-    & \textbf{Эксперимент №#1:} #2 \\
+    & \textbf{Эксперимент №\arabic{experiment-counter}:} #2 \\
   \end{tabularx}
+  \addtocounter{experiment-counter}{1}
 }
 
 \newcommand{\note}[1]{
