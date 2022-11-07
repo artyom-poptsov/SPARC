@@ -1,6 +1,9 @@
 all: main.pdf
 
-out/main.tex: main.tex
+out/sections/introduction.tex: sections/introduction.tex
+	lilypond-book --output out/sections/ --pdf sections/introduction.tex
+
+out/main.tex: main.tex out/sections/introduction.tex
 	lilypond-book --output out --pdf main.tex
 
 main.pdf: main.tex out/main.tex
