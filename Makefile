@@ -20,7 +20,10 @@ out/main.tex: main.tex $(SECTIONS_OUT)
 	@echo "GEN out/main.tex" && lilypond-book --output out --pdf main.tex > out/main.tex.log 2>&1
 
 main.pdf: main.tex out/main.tex
-	@echo "PDF main.pdf" && cd out && (xelatex --interaction=batchmode --shell-escape main.tex; xelatex --shell-escape main.tex) && cp main.pdf ../
+	@echo "PDF main.pdf" \
+		&& cd out \
+		&& ( xelatex --interaction=batchmode --shell-escape main.tex; xelatex --shell-escape main.tex > main.pdf.log 2>&1 ) \
+		&& cp main.pdf ../
 
 .PHONY: clean
 
