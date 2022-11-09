@@ -1,0 +1,100 @@
+\documentclass[../main.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Электрическая цепь}
+
+Представим теперь две ёмкости, в одном из которой десять литров воды, в другой
+-- ноль литров (или, как говорят люди, оно пустое), как показано на рисунке
+\ref{fig:electronics-circuits-0}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[
+      declare function={f1(\x) = 0.15 * sin(8.0 * deg(\x));
+    }]
+
+    \draw[thick] (0, 0) -- (0, 4);
+    \draw[thick] (2, 0) -- (2, 4);
+    \draw[thick] (0, 0) -- (2, 0);
+
+    \draw[thick] (3, 0) -- (3, 4);
+    \draw[thick] (5, 0) -- (5, 4);
+    \draw[thick] (3, 0) -- (5, 0);
+
+    \begin{scope}[yshift=3cm, color=blue]
+      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
+    \end{scope}
+
+    \draw (1, 0) node[below] {А};
+    \draw (4, 0) node[below] {Б};
+
+  \end{tikzpicture}
+  \caption{Пример двух ёмкостей: с водой (А) и пустая (Б).}
+  \label{fig:electronics-circuits-0}
+\end{figure}
+
+Если мы соединим ёмкость ``А'' и ``Б'' трубой, то вода потечёт из ``А'' в ``Б'',
+по законам физики (см. рисунок \ref{fig:electronics-circuits-1}.)
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[
+      declare function={f1(\x) = 0.15 * sin(8.0 * deg(\x));
+    }]
+
+    \draw[thick] (0, 0) -- (0, 4);
+    \draw[thick] (2, 0.5) -- (2, 4);
+    \draw[thick] (0, 0) -- (2, 0);
+
+    \draw[thick] (3, 0.5) -- (3, 4);
+    \draw[thick] (5, 0) -- (5, 4);
+    \draw[thick] (3, 0) -- (5, 0);
+
+    \draw[thick] (2, 0) -- (3, 0);
+    \draw[thick] (2, 0.5) -- (3, 0.5);
+
+    \draw[thick, color=blue, ->] (1, 0.25) -- (4, 0.25);
+
+
+    \begin{scope}[yshift=3cm, color=blue]
+      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
+    \end{scope}
+
+    \draw (1, 0) node[below] {А};
+    \draw (4, 0) node[below] {Б};
+
+  \end{tikzpicture}
+  \caption{Пример двух ёмкостей: с водой (А) и пустая (Б), соединённые трубкой.}
+  \label{fig:electronics-circuits-1}
+\end{figure}
+
+Соединив две ёмкости, мы получили \emph{замкнутую цепь}, по которой возможен ток
+воды.  Подобным образом работают электрические цепи, только вместо тока воды в
+электрических цепях происходит ток элементарных заряженных частиц.
+
+Итак, второе правило, которое мы должны усвоить: электрический ток возможен в
+замкнутой цепи.
+
+Ток в электрической цепи измеряется в \emph{Амперах} (А).
+
+Электрическая схема, аналогичная по своей сути
+рис. \ref{fig:electronics-circuits-1}, будет выглядеть, как на
+рис. \ref{fig:electronics-simple-circuit}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{circuitikz}
+    \draw (0,0)
+    to[battery, l=Батарея] (0,2) % The voltage source
+    to[short] (2,2)
+    to[full led, l=Светодиод] (2,0) % The lamp
+    to[short] (0,0);
+  \end{circuitikz}
+  \caption{Электрическая цепь с батареей в качестве источника напряжения и светодиодом
+    в качестве нагрузки.}
+  \label{fig:electronics-simple-circuit}
+\end{figure}
+
+\end{document}
