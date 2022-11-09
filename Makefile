@@ -6,6 +6,7 @@ SECTIONS = \
 	sections/electronics-voltage.tex	\
 	sections/electronics-circuits.tex \
 	sections/electronics-potential-difference.tex	\
+	sections/electronics-resistance.tex	\
 	sections/appendix-octaves.tex
 
 SECTIONS_OUT = \
