@@ -9,6 +9,10 @@ SECTIONS = \
 	sections/electronics-resistance.tex	\
 	sections/electronics-building-circuits.tex \
 	sections/dialogues-with-computer-introduction.tex \
+	sections/dialogues-with-computer-algorithms.tex \
+	sections/dialogues-with-computer-arduino.tex \
+	sections/dialogues-with-computer-memory.tex \
+	sections/dialogues-with-computer-control-flow.tex \
 	sections/appendix-octaves.tex
 
 SECTIONS_OUT = \
