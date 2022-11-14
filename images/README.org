@@ -1,3 +1,4 @@
 * Источники файлов и лицензии на них
-| =Arduino_Uno_-_R3.jpg= | CC-BY 2.0 | https://en.wikipedia.org/wiki/File:Arduino_Uno_-_R3.jpg |
+| =Arduino_Uno_-_R3.jpg= | CC-BY 2.0 | https://en.wikipedia.org/wiki/File:Arduino_Uno_-_R3.jpg             |
+| =Breadboard.png=       | CC0       | https://en.wikipedia.org/wiki/Breadboard#/media/File:Breadboard.png |
 
