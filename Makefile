@@ -1,4 +1,4 @@
-all: out/sections main.pdf
+all: out/sections sparc.pdf
 
 SECTIONS = \
 	sections/commands.tex	\
@@ -24,17 +24,17 @@ out/sections:
 out/sections/%.tex: sections/%.tex
 	@echo "GEN $@" && lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1
 
-out/main.tex: main.tex $(SECTIONS_OUT)
-	@echo "GEN out/main.tex" && lilypond-book --output out --pdf main.tex > out/main.tex.log 2>&1
+out/sparc.tex: sparc.tex $(SECTIONS_OUT)
+	@echo "GEN out/sparc.tex" && lilypond-book --output out --pdf sparc.tex > out/sparc.tex.log 2>&1
 
-main.pdf: main.tex out/main.tex
-	@echo "PDF main.pdf" \
+sparc.pdf: sparc.tex out/sparc.tex
+	@echo "PDF sparc.pdf" \
 		&& cd out \
-		&& ( xelatex --interaction=batchmode --shell-escape main.tex; xelatex --shell-escape main.tex > main.pdf.log 2>&1 ) \
-		&& cp main.pdf ../
+		&& ( xelatex --interaction=batchmode --shell-escape sparc.tex; xelatex --shell-escape sparc.tex > sparc.pdf.log 2>&1 ) \
+		&& cp sparc.pdf ../sparc.pdf
 
 .PHONY: clean
 
 clean:
 	rm -rf out
-	rm main.pdf
+	rm sparc.pdf
