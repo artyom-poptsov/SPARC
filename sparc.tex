@@ -194,70 +194,7 @@
 \newpage
 \subfile{sections/dialogues-with-computer-arduino-ide}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Структура программы на Arduino}
-
-Программа для Arduino обычно состоит из двух основных частей, также называемых
-функциями: \texttt{setup} и \texttt{loop}. Пример программы, которая мигает
-одним светодиодом:
-
-\begin{minted}{cpp}
-void setup() {
-  pinMode(2, OUTPUT);
-}
-
-void loop() {
-  digitalWrite(2, HIGH);
-  delay(500);
-  digitalWrite(2, LOW);
-  delay(500);
-}
-\end{minted}
-
-Функция \texttt{setup} производит инициализацию микроконтроллера при его
-включении. В неё следует помещать все команды, которые должны выполняться
-единожды на старте системы.
-
-Цифровой порт (или, по-другому, пин) Arduino может находиться в двух состояниях.
-В режиме входа пин считывает напряжение, а в режиме выхода – позволяет выдавать
-на пине такое же напряжение.
-
-Рассмотрим приведённый выше пример. В \texttt{setup} выполняется функция
-\texttt{pinMode}, которая позволяет настроить режим работы указанного пина как
-вход или выход:
-
-\begin{minted}{cpp}
-pinMode(pin, mode);
-\end{minted}
-
-где \texttt{pin} -- номер пина, \texttt{mode} -- режим работы
-(\texttt{INPUT}/\texttt{OUTPUT}).
-
-В \texttt{loop} вызываются две функции: \texttt{digitalWrite} и \texttt{delay}.
-
-Функция
-\begin{minted}{cpp}
-digitalWrite(pin,value);
-\end{minted}
-
-где \texttt{pin} -– номер пина, \texttt{value} -- уровень сигнала
-(\texttt{HIGH}/\texttt{LOW}), подаёт на пин высокое или низкое напряжение.
-
-Функция
-\begin{minted}{cpp}
-delay(value);
-\end{minted}
-
-где \texttt{value} -- количество миллисекунд, останавливает выполнение программы
-на указанное время.
-
-\subsection{Задачи}
-\begin{itemize}
-\item Соберите на макетной плате ``бегущий огонь'': светодиоды должны поочерёдно
-  включаться и выключаться, один за другим.
-\item Модифицируйте ``бегущий огонь'' так, чтобы он бежал сначала в одну
-  сторону, затем в другую.
-\end{itemize}
+\subfile{sections/dialogues-with-computer-program-structure}
 
 \subfile{sections/dialogues-with-computer-memory}
 
