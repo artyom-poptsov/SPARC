@@ -13,6 +13,7 @@ SECTIONS = \
 	sections/dialogues-with-computer-arduino.tex \
 	sections/dialogues-with-computer-memory.tex \
 	sections/dialogues-with-computer-control-flow.tex \
+	sections/dialogues-with-computer-arduino-ide.tex \
 	sections/appendix-octaves.tex
 
 SECTIONS_OUT = \
