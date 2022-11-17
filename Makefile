@@ -15,6 +15,12 @@ SECTIONS = \
 	sections/dialogues-with-computer-control-flow.tex \
 	sections/dialogues-with-computer-arduino-ide.tex \
 	sections/dialogues-with-computer-program-structure.tex \
+	sections/white-noise-introduction.tex \
+	sections/white-noise-analog-ports.tex \
+	sections/white-noise-serial-port.tex	\
+	sections/white-noise-signal-types.tex	\
+	sections/white-noise-adc.tex \
+	sections/white-noise-voltage-divider.tex	\
 	sections/appendix-octaves.tex
 
 SECTIONS_OUT = \
