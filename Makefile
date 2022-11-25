@@ -38,7 +38,7 @@ out/sparc.tex: sparc.tex $(SECTIONS_OUT)
 sparc.pdf: sparc.tex out/sparc.tex
 	@echo "PDF sparc.pdf" \
 		&& cd out \
-		&& ( xelatex --interaction=batchmode --shell-escape sparc.tex; xelatex --shell-escape sparc.tex > sparc.pdf.log 2>&1 ) \
+		&& ( xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1; xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 ) \
 		&& cp sparc.pdf ../sparc.pdf
 
 .PHONY: clean
