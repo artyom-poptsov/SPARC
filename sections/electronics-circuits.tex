@@ -55,18 +55,23 @@
     \draw[thick] (2, 0) -- (3, 0);
     \draw[thick] (2, 0.5) -- (3, 0.5);
 
-    \draw[thick, color=blue, ->] (1, 0.25) -- (4, 0.25);
-
+    \draw[thick, color=blue, -{Implies}, double] (2, 0.25) -- (3, 0.25);
 
     \begin{scope}[yshift=3cm, color=blue]
       \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
     \end{scope}
+    \draw[thick, color=blue, -{Implies}, double] (1, 3cm) -- (1, 2cm);
+
+    \begin{scope}[yshift=0.75cm, xshift=3cm, color=blue]
+      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
+    \end{scope}
+    \draw[thick, color=blue, -{Implies}, double] (4, 1cm) -- (4, 2cm);
 
     \draw (1, 0) node[below] {А};
     \draw (4, 0) node[below] {Б};
 
   \end{tikzpicture}
-  \caption{Пример двух ёмкостей: с водой (А) и пустая (Б), соединённые трубкой.}
+  \caption{Пример двух ёмкостей с рмвазным уровнем воды, соединённые трубкой.}
   \label{fig:electronics-circuits-1}
 \end{figure}
 
