@@ -1,9 +1,8 @@
-sparc.pdf
 *.log
 *.dvi
-main.aux
-main.out
-main.toc
+sparc.aux
+sparc.out
+sparc.toc
 *.~undo-tree~
 out
 tmp*
