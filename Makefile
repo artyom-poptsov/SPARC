@@ -21,6 +21,8 @@ SECTIONS = \
 	sections/white-noise-signal-types.tex	\
 	sections/white-noise-adc.tex \
 	sections/white-noise-voltage-divider.tex	\
+	sections/pwm-intro.tex \
+	sections/music-and-technology-synthesis-bass-clef.tex \
 	sections/appendix-octaves.tex
 
 SECTIONS_OUT = \
