@@ -26,6 +26,7 @@ SECTIONS = \
 	sections/pwm-wavelength.tex	\
 	sections/music-and-technology-synthesis-sound.tex \
 	sections/music-and-technology-synthesis-speaker.tex \
+	sections/music-and-technology-synthesis-rhythm.tex \
 	sections/music-and-technology-synthesis-bass-clef.tex \
 	sections/appendix-octaves.tex
 
