@@ -29,6 +29,7 @@ SECTIONS = \
 	sections/music-and-technology-synthesis-rhythm.tex \
 	sections/music-and-technology-synthesis-harmony.tex \
 	sections/music-and-technology-synthesis-octave-system.tex \
+	sections/music-and-technology-synthesis-simple-melodies.tex \
 	sections/music-and-technology-synthesis-bass-clef.tex \
 	sections/appendix-octaves.tex
 

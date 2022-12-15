@@ -1,0 +1,171 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Программирование простых мелодий}
+
+Для того, чтобы запрограммировать мелодию, нам потребуется узнать ноты, из
+которых состоит данная мелодия, и их порядок. Как правило, эта информация
+записывается в виде нотной записи -- но если вы ещё не умеете читать нотную
+запись, то можно найти мелодии в упрощенной записи, где используется буквенная
+(научная) нотация. К примеру, возьмём мелодию ``Twinkle, Twinkle, Little
+Star'' \footnote{\url{https://ru.wikipedia.org/wiki/Twinkle,_Twinkle,_Little_Star}}
+-- английскую колыбельную:
+
+\begin{figure}[ht]
+  \caption{``Twinkle, Twinkle, Little Star''}
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+      g'4 g f f
+      e e d2
+      g4 g f f
+      e e d2
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 100\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \label{fig:sound-fig-3}
+\end{figure}
+
+Из таблицы \ref{table:music-notes-legths}, мы уже знаем, как различать нотные
+``закорючки'', чтобы понять их длительность, но мы пока не разбирали, как
+определить частоты нот по нотной записи. Поэтому ниже приводится полный список
+нот композиции в правильном порядке (см.
+\ref{table:twinklet-winkle-little-star-notes}), где ноты разбиты по строкам
+таким образом, чтобы каждая строка соответствовала одному такту.
+
+\begin{tabular}{p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}}
+  № такта & \multicolumn{4}{c}{Ноты} \\
+  \hline \hline
+  0 & C4 & C4 & G4 & G4 \\
+  \hline
+  1 & A4 & A4 & G4 & \\
+  \hline
+  2 & F4 & F4 & E4 & E4 \\
+  \hline
+  3 & D4 & D4 & C4 & \\
+  \hline
+  4 & G4 & G4 & F4 & F4 \\
+  \hline
+  5 & E4 & E4 & D4 & \\
+  \hline
+  6 & G4 & G4 & F4 & F4 \\
+  \hline
+  7 & E4 & E4 & D4 & \\
+  \hline
+  8 & C4 & C4 & G4 & G4 \\
+  \hline
+  9 & A4 & A4 & G4 & \\
+  \hline
+  \label{table:twinkle-twinkle-little-star-notes}
+\end{tabular}
+
+Используя наши знания про нотные ``закорючки'', попробуем назначить длительность
+для каждой из нот, подписав его в скобках.
+
+\begin{tabular}{p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}}
+  № такта & \multicolumn{4}{c}{Ноты} \\
+  \hline \hline
+  0 & C4 ($\frac{1}{4}$) & C4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) \\
+  \hline
+  1 & A4 ($\frac{1}{4}$) & A4 ($\frac{1}{4}$) & G4 ($\frac{1}{2}$) & \\
+  \hline
+  2 & F4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$) \\
+  \hline
+  3 & D4 ($\frac{1}{4}$) & D4 ($\frac{1}{4}$) & C4 ($\frac{1}{2}$) & \\
+  \hline
+  4 & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) \\
+  \hline
+  5 & E4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$) & D4 ($\frac{1}{2}$) & \\
+  \hline
+  6 & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) \\
+  \hline
+  7 & E4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$) & D4 ($\frac{1}{2}$) & \\
+  \hline
+  8 & C4 ($\frac{1}{4}$) & C4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) \\
+  \hline
+  9 & A4 ($\frac{1}{4}$) & A4 ($\frac{1}{4}$) & G4 ($\frac{1}{2}$) & \\
+  \hline
+  \label{table:twinkle-twinkle-little-star-notes}
+\end{tabular}
+
+Для того, чтобы запрограммировать данную мелодию, удобно в начале программы
+объявить каждую ноту в виде константы. Каждая константа будет хранить частоту
+звука.\footnote{Имена констант обычно пишутся заглавными буквами, т.е.
+правильнее было бы именовать эти константы ``C4'', ``D4'', ``E4'' и т.д. Однако мы
+используем здесь буквы в нижнем регистре, чтобы избежать конфликтов имён с
+константами, которые уже есть в Arduino (к примеру, ``A4''.)}
+
+Нам пока потребуются только ноты из четвёртой октавы. Константы разумно объявить
+до функции \texttt{setup}, в самом верху программы.
+
+\begin{minted}{cpp}
+const float c4 = 261.630;
+const float d4 = 293.660;
+const float e4 = 329.630;
+const float f4 = 349.230;
+const float g4 = 392.000;
+const float a4 = 440.000;
+const float b4 = 493.880;
+\end{minted}
+
+Также нам нужно знать темп мелодии -- то есть, BPM. Для ``Twinkle, Twinkle,
+Little Star'' это параметр равен 120 ударов в минуту.
+
+Как только мы объявили все необходимые константы и узнали BPM, то
+запрограммировать мелодию не составит труда.
+
+\begin{minted}{cpp}
+// ...
+
+void loop() {
+  const long BPM = 120;
+  const long MINUTE = 60 * 1000000;
+  const long T = (MINUTE / BPM) * 4;
+
+  // 0-й такт.
+  play_tone(SPEAKER_PIN, c4, T / 4);
+  delay(100);
+  play_tone(SPEAKER_PIN, c4, T / 4);
+  delay(100);
+  play_tone(SPEAKER_PIN, g4, T / 4);
+  delay(100);
+  play_tone(SPEAKER_PIN, g4, T / 4);
+  delay(100);
+
+  // 1-й такт.
+  play_tone(SPEAKER_PIN, a4, T / 4);
+  delay(100);
+  play_tone(SPEAKER_PIN, a4, T / 4);
+  delay(100);
+  play_tone(SPEAKER_PIN, g4, T / 2);
+  delay(100);
+
+  // и так далее
+}
+\end{minted}
+
+Допишите необходимые части кода (\texttt{setup}, \texttt{play\_tone} и т.д.) и
+загрузите его в Arduino. Если вы всё сделали правильно, то у вас должна заиграть
+мелодия. Прекрасно!
+
+Но данное решение является не совсем оптимальным с точки зрения количества кода,
+которое необходимо напмсать. Решением данной проблемы является использование
+\emph{массивов}.
+
+\end{document}
