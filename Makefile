@@ -35,6 +35,7 @@ SECTIONS = \
 	sections/music-and-technology-synthesis-rest.tex \
 	sections/music-and-technology-synthesis-dotted-notes.tex	\
 	sections/music-and-technology-synthesis-flats-and-sharps.tex	\
+	sections/music-and-technology-synthesis-musical-scale.tex	\
 	sections/music-and-technology-synthesis-bass-clef.tex \
 	sections/appendix-octaves.tex
 
