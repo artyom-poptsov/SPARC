@@ -184,7 +184,7 @@
   ухудшения работы как отдельных деталей, так и схемы в целом.  }
 
 \section{Подключение Arduino к компьютеру}
-Чтобы подключить ардуино к компьютеру вам потребуется сама платформа Arduino (в
+Чтобы подключить Arduino к компьютеру вам потребуется сама платформа Arduino (в
 нашем случае мы используем Arduino Mega 2560) и кабель стандарта USB-В.
 
 Соедините Arduino с компьютером через USB-кабель. Вы увидите, как на плате
@@ -355,43 +355,7 @@
 \chapter*{Приложения}
 
 \subfile{sections/appendix-octaves}
-
-\newpage
-\section{Приложение Б}
-
-\begin{figure}[ht]
-  \caption{Мелодия ``Кабы небыло зимы'' из мультфильма ``Простоквашино''.}
-  \begin{lilypond}
-    \relative c' {
-      \key g \major
-      \numericTimeSignature
-      \time 4/4
-      %% 0
-      (b'8 b cis dis e4-.) << g,8 b e >> r8 \bar ".|:"
-      %% 1
-      b,8 b b'8. fis16 a8 g e4 |
-      %% 2
-      d8 d << b'8. d8. >> << c16 a >> << c8 a >> << b8 g8 >> r4
-      %% 3
-      d'8 c a fis << a c >> << g b >> << g4 b >>
-      %% 4
-      b,8 b << g'8. b8. >> << fis16 a >> << fis8 a >> << e8 g8 >> r4
-      %% 5
-      b,8 b b'8. fis16 a8 g8 e4
-      %% 6
-      d8 d << b'8. d8. >> << a16 c >> << a8 c >> << g8 b8 >> r8 e4
-      %% 7
-%%       e8)
-%%       d8 d
-    }
-    \layout {
-      indent = 0\mm
-      line-width = 120\mm
-      ragged-last = ##t
-    }
-  \end{lilypond}
-  \label{fig:lilypond-melody-prostokvashino-full}
-\end{figure}
+\subfile{sections/appendix-melody-00}
 
 \end{document}
 
