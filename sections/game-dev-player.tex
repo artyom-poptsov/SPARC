@@ -25,12 +25,16 @@ int player_x = 0;
 int player_y = 0;
 \end{minted}
 
-После этого мы можем отобразить персонажа на экране.
+После этого мы можем отобразить персонажа на экране.  Полный код программы будет
+выглядеть примерно так, как показано ниже.
 
 \begin{minted}{cpp}
   #include <LiquidCrystal_I2C.h>
 
   LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+  int player_x = 0;
+  int player_y = 0;
 
   void setup() {
     lcd.init();
