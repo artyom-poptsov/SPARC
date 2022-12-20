@@ -39,6 +39,7 @@ SECTIONS = \
 	sections/music-and-technology-synthesis-bass-clef.tex \
 	sections/game-dev-intro.tex \
 	sections/game-dev-lcd.tex	\
+	sections/game-dev-genre-and-plot.tex	\
 	sections/appendix-octaves.tex	\
 	sections/appendix-melody-00.tex
 
