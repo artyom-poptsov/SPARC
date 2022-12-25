@@ -130,13 +130,13 @@ void play_tone(int port, float f, long t) {
 
 void loop() {
   const long T = 1000000; // Длина такта в микросекундах
-  play_tone(SPEAKER, 50, T / 4); // Четверть
+  play_tone(SPEAKER, 50,  T / 4); // Четверть
   delay(100); // Задержка между звуками
-  play_tone(SPEAKER, 50, T / 4); // Четверть
+  play_tone(SPEAKER, 50,  T / 4); // Четверть
   delay(100);
-  play_tone(SPEAKER, 50, T / 4); // Четверть
+  play_tone(SPEAKER, 50,  T / 4); // Четверть
   delay(100);
-  play_tone(SPEAKER, 100, T / 2); // Половина
+  play_tone(SPEAKER, 100, T / 4); // Четверть
   delay(100);
 }
 \end{minted}
