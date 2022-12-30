@@ -93,26 +93,21 @@ void play_tone(int pin, float f, long t) {
 }
 \end{minted}
 
-Теперь пришло время написать тело функции. Начнём с того, что зададим
-коэффициент заполнения в виде константы:
+Первым делом в теле функции из частоты найдём период \texttt{T}:
 \begin{minted}{cpp}
-const float DC = 0.5; // 50%
+const long T = 1000000 / f;
 \end{minted}
 
-Теперь из частоты найдём период \texttt{p}:
+Далее посчитаем длину задержки \texttt{d} -- для этого мы должны поделить период
+на 2, то есть, найти \emph{полупериод}:
 \begin{minted}{cpp}
-long p = 1000000 / f;
-\end{minted}
-
-Далее посчитаем длину задержки \texttt{d}:
-\begin{minted}{cpp}
-int d = p * DC;
+long d = T / 2;
 \end{minted}
 
 И посчитаем, сколько раз нам нужно повторить период длиной \texttt{p}
 микросекунд, чтобы заполнить время \texttt{t}:
 \begin{minted}{cpp}
-int count = t / p;
+int count = t / T;
 \end{minted}
 
 Почти всё готово. Осталось только написать цикл, который будет генерировать
@@ -120,7 +115,7 @@ int count = t / p;
 (\texttt{for}):
 
 \begin{minted}{cpp}
-for (int c = 0; c < count; c++) {
+for (int i = 0; i < count; i++) {
   digitalWrite(pin, HIGH);
   delayMicroseconds(d);
   digitalWrite(pin, LOW);
@@ -132,8 +127,8 @@ for (int c = 0; c < count; c++) {
 
 \begin{minted}{cpp}
 void play_tone(int port, float f, long t) {
-  const int T = 1000000 / f;
-  int d = T / 2;
+  const long T = 1000000 / f;
+  long d = T / 2;
   int count = t / T;
   for (int i = 0; i < count; i++) {
     digitalWrite(port, HIGH);
@@ -148,10 +143,7 @@ void play_tone(int port, float f, long t) {
 Arduino и протестировать нашу систему.
 
 \note{Во многих случаях одна и та же задача может быть решена несколькими
-  способами. К примеру, функция \texttt{play\_tone} может быть реализована
-  иначе; предложенная нами реализация является только одной из корректных. Как
-  вариант, вы можете реализовать вариант функции, которая оперирует не длиной
-  волны, а частотой. Подумайте над этим в свободное время. И не бойтесь
-  экспериментировать! }
+  способами.  К примеру, функция \texttt{play\_tone} может быть реализована
+  иначе; предложенная нами реализация является только одной из корректных.}
 
 \end{document}
