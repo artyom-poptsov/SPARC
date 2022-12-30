@@ -81,7 +81,7 @@
 Посмотрим, что данная функция должна принимать в качестве параметров:
 \begin{enumerate}
 \item Номер цифрового порта, к которому подключен динамик и куда будет
-  выводиться звук; назовём этот параметр ``pin'';
+  выводиться звук; назовём этот параметр ``port'';
 \item Частота ``f'', измеряемая в Герцах. 
 \item Длина звукового сигнала; назовём этот параметр ``t''.
 \end{enumerate}
@@ -116,9 +116,9 @@ int count = t / T;
 
 \begin{minted}{cpp}
 for (int i = 0; i < count; i++) {
-  digitalWrite(pin, HIGH);
+  digitalWrite(port, HIGH);
   delayMicroseconds(d);
-  digitalWrite(pin, LOW);
+  digitalWrite(port, LOW);
   delayMicroseconds(d);
 }
 \end{minted}
