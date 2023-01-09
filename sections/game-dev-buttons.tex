@@ -318,7 +318,7 @@ Arduino считает это значение единицей.
       player_x++;
     }
     if (digitalRead(BUTTON_L) == LOW) {
-      player_x++;
+      player_x--;
     }
     lcd.setCursor(player_x, player_y);
     lcd.print(PLAYER);
