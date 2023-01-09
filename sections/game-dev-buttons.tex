@@ -204,7 +204,60 @@ Arduino считает это значение единицей.
 
 \subsection{Обработка нажатий}
 
-Самым простым для нас способом обработки нажатий является поочерёдный опрос
-кнопок.
+Для начала зададим номер порта, куда подключена наша (пока единственная) кнопка,
+в виде именованной константы \texttt{BUTTON\_R} (``R'' от слова ``Right'',
+``Вправо''.)
+
+\begin{minted}{cpp}
+  #include <LiquidCrystal_I2C.h>
+
+  LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+  // Кнопки управления.
+  const char BUTTON_R = 2;      // Кнопка ``Вправо''
+
+  const char PLAYER = '@';
+
+  int player_x = 0;
+  int player_y = 0;
+\end{minted}
+
+Далее в \texttt{setup} необходимо настроить режим работы порта для кнопки через
+\texttt{pinMode}, как мы делали это в предыдущих примерах.
+
+\begin{minted}{cpp}
+  void setup() {
+    lcd.init();
+    lcd.backlight();
+
+    // Настройка кнопок управления.
+    pinMode(BUTTON_R, INPUT_PULLUP);
+  }
+\end{minted}
+
+После этого следует определиться, как мы будем обрабатывать нажатия кнопок.
+Сейчас самым простым для нас способом обработки нажатий является поочерёдный
+опрос кнопок, про другие способы мы с вами поговорим позднее.
+
+\begin{minted}{cpp}
+  #include <LiquidCrystal_I2C.h>
+
+  LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+  const char PLAYER = '@';
+
+  int player_x = 0;
+  int player_y = 0;
+
+  void setup() {
+    lcd.init();
+    lcd.backlight();
+  }
+
+  void loop() {
+    lcd.setCursor(player_x, player_y);
+    lcd.print(PLAYER);
+  }
+\end{minted}
 
 \end{document}
