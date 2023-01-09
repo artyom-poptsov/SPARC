@@ -239,10 +239,32 @@ Arduino считает это значение единицей.
 Сейчас самым простым для нас способом обработки нажатий является поочерёдный
 опрос кнопок, про другие способы мы с вами поговорим позднее.
 
+Для обработки нажатий мы будем в \texttt{loop} проверять значение на порту, куда
+подключена кнопка, используя уже знакомый нам \texttt{digitalRead}, и если
+значение будет \texttt{LOW}, то менять позицию персонажа.
+
+\begin{minted}{cpp}
+  void loop() {
+    if (digitalRead(BUTTON_R) == LOW) {
+      player_x++;
+    }
+    lcd.setCursor(player_x, player_y);
+    lcd.print(PLAYER);
+  }
+\end{minted}
+
+Таким образом, при нажатии кнопки ``ВПРАВО'' мы будем получать смещение
+персонажа вправо.
+
+В общем виде, код нашей игры на текущий момент выглядит так:
+
 \begin{minted}{cpp}
   #include <LiquidCrystal_I2C.h>
 
   LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+  // Кнопки управления.
+  const char BUTTON_R = 2;      // Кнопка ``Вправо''
 
   const char PLAYER = '@';
 
@@ -252,9 +274,52 @@ Arduino считает это значение единицей.
   void setup() {
     lcd.init();
     lcd.backlight();
+
+    // Настройка кнопок управления.
+    pinMode(BUTTON_R, INPUT_PULLUP);
   }
 
   void loop() {
+    if (digitalRead(BUTTON_R) == LOW) {
+      player_x++;
+    }
+    lcd.setCursor(player_x, player_y);
+    lcd.print(PLAYER);
+  }
+\end{minted}
+
+Точно таким же образом мы можем добавить кнопку движения влево, слегка дополнив
+код нашего примера.  Поскольку исходный код нашей игры будет дальше расти, для
+краткости будем сокращать уже написанные части, акцентрируя внимание на том, что
+поменялось.
+
+\begin{minted}{cpp}
+  // ... Код подключения библиотеки и создания
+  //     переменной "lcd". ...
+
+  // Кнопки управления.
+  const char BUTTON_R = 2;      // Кнопка "Вправо"
+  const char BUTTON_L = 3;      // Кнопка "Влево"
+
+  const char PLAYER = '@';
+
+  // ... Код задания переменных позиции игрока. ...
+
+  void setup() {
+    // ... Код настройки дисплея. ...
+
+    // Настройка кнопок управления.
+    pinMode(BUTTON_R, INPUT_PULLUP);
+    pinMode(BUTTON_L, INPUT_PULLUP);
+  }
+
+  void loop() {
+    if (digitalRead(BUTTON_R) == LOW) {
+      player_x++;
+    }
+    if (digitalRead(BUTTON_L) == LOW) {
+      player_x++;
+    }
     lcd.setCursor(player_x, player_y);
     lcd.print(PLAYER);
   }
