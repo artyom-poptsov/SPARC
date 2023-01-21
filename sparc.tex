@@ -20,7 +20,9 @@
 \usepackage{circuitikz}
 \usepackage{minted}
 \usepackage{glossaries}
+\usepackage{makeidx}
 
+\makeindex
 \makeglossaries
 
 \usepackage{svg}
@@ -353,6 +355,10 @@
 \subfile{sections/game-dev-genre-and-plot}
 \subfile{sections/game-dev-player}
 \subfile{sections/game-dev-buttons}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{chapter}{Предметный указатель}
+\printindex
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addcontentsline{toc}{chapter}{Словарь терминов}

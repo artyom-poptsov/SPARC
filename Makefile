@@ -66,7 +66,7 @@ out/sparc.tex: sparc.tex $(SECTIONS_OUT) version.tex
 sparc.pdf: sparc.tex out/sparc.tex version.tex
 	@echo "PDF sparc.pdf" \
 		&& cd out \
-		&& ( xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1; makeglossaries sparc; xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 ) \
+		&& ( xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1; makeglossaries sparc; makeindex sparc; xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 ) \
 		&& cp sparc.pdf ../sparc.pdf
 
 .PHONY: clean
