@@ -447,4 +447,22 @@ Arduino считает это значение единицей.
 проблемы мы должны прибегнуть к уже известным нам массивам, с одной оговоркой --
 мы должны будем использовать \emph{двумерные массивы}.
 
+Схематическое изображение двумерного массива можно увидеть на
+рис. \ref{fig:2d-array-example}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[step=0.5cm,black,very thin] (-5, -2) grid (5, 0);
+    \foreach[count=\n from 0] \x in {-5, -4.5, ..., 4.5} {
+      \draw (\x cm, 0) node[anchor=south west] {$\n$};
+    }
+    \foreach[count=\n from 0] \y in {-0.5, -1.0, ..., -2} {
+      \draw (-5.5, \y) node[anchor=south west] {$\n$};
+    }
+  \end{tikzpicture}
+  \caption{Схематическое изображение массива 4x20 (4 строки, 20 столбцов.)}
+  \label{fig:2d-array-example}
+\end{figure}
+
 \end{document}
