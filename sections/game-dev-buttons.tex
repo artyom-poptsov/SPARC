@@ -467,7 +467,28 @@ Arduino считает это значение единицей.
 
 Можно также представить двумерный массив 4x20, как одномерный массив из 4-х
 элементов, каждая ячейка которого содержит ссылку на ещё один одномерный массив
-длиной 20 ячеек.
+длиной 20 ячеек, как показано на
+рис. \ref{fig:2d-array-example-with-references}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[step=0.5cm,black,very thin] (-5, -2) grid (-4.5, 0);
+    \draw[step=0.5cm,black,very thin] (-4, -2) grid (6, 0);
+    \foreach[count=\n from 0] \x in {-4, -3.5, ..., 5.5} {
+      \draw (\x cm, 0) node[anchor=south west] {$\n$};
+    }
+    \foreach[count=\n from 0] \y in {-0.5, -1.0, ..., -2} {
+      \draw (-5.5, \y) node[anchor=south west] {$\n$};
+    }
+    \foreach[count=\n from 0] \y in {-0.25, -0.75, ..., -2} {
+      \draw[{Circle}-{Stealth}]  (-4.8, \y) -- (-4, \y);
+    }
+  \end{tikzpicture}
+  \caption{Схематическое представление массива 4x20 в виде одномерного массива
+    из 4-х элементов со ссылками на одномерные массивы по 20 элементов.}
+  \label{fig:2d-array-example-with-references}
+\end{figure}
 
 Для наших задач реализации игры нам потребуется задать массив, хранящий тип
 данных \texttt{char}.
