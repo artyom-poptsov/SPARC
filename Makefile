@@ -42,6 +42,7 @@ SECTIONS = \
 	sections/game-dev-genre-and-plot.tex	\
 	sections/game-dev-player.tex	\
 	sections/game-dev-buttons.tex	\
+	sections/game-dev-game-map.tex	\
 	sections/appendix-octaves.tex	\
 	sections/appendix-melody-00.tex
 
