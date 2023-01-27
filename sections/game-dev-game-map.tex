@@ -296,7 +296,7 @@ Manipulation Program (GIMP) -- подобные ``продвинутые'' ре�
   // на клетке карты по координатам x,y находится стена.
   // В противном случае функция возвращает 0 (false).
   bool map_is_wall(int x, int y) {
-    return game_map[player_y][player_x + 1] != WALL;
+    return game_map[player_y][player_x + 1] == WALL;
   }
 \end{minted}
 
