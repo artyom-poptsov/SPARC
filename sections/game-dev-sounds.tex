@@ -1,0 +1,97 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Добавление звуков}
+
+Редкая компьютерная игра обходится без специальных звуковых эффектов.  Добавим
+тоже в нашу игру немного звука.
+
+Пусть динамик для вывода звука у нас будет подключен к восьмому порту -- укажем
+это в коде с помощью именованной константы до функции \texttt{setup}:
+
+\begin{minted}{cpp}
+  const byte SPEAKER_PIN = 8; // Порт динамика
+\end{minted}
+
+В \texttt{setup} теперь настроим порт динамика на режим вывода.
+
+\begin{minted}{cpp}
+  void setup() {
+    lcd.init();
+    lcd.backlight();
+
+    // Настройка кнопок управления.
+    pinMode(BUTTON_R, INPUT_PULLUP);
+    pinMode(BUTTON_L, INPUT_PULLUP);
+
+    // Настройка порта динамика.
+    pinMode(SPEAKER_PIN, OUTPUT);
+
+    // Вызов функции генерации карты.
+    map_generate();
+  }
+\end{minted}
+
+Теперь перенесём функцию \texttt{play\_tone} из главы ``Звук'' в исходный код
+нашей игры, и добавим константы для нот.
+
+\begin{minted}{cpp}
+  // Четвёртая (в научной нотации, считая с нуля) октава.
+  const float c4 = 261.630;
+  const float d4 = 293.660;
+  const float e4 = 329.630;
+  const float f4 = 349.230;
+  const float g4 = 392.000;
+  const float a4 = 440.000;
+  const float b4 = 493.880;
+
+  // Функция воспроизведения звука указанной частоты.
+  void play_tone(int port, float f, long t) {
+    const long T = 1000000 / f;
+    long d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+\end{minted}
+
+Начнём со звука сбора предметов.  В предыдущих главах мы как раз реализовали
+обработку столкновения игрока с предметами на карте.  Теперь мы можем добавить
+звук при взятии ``аптечки'' с карты.
+
+Вы можете придумать свой звук ``по вкусу''; мы же возьмём ноты \texttt{e4} и
+\texttt{g4} с разными длительностями, что даст (на наш взгляд) интересный
+эффект.
+
+\begin{minted}{cpp}
+  void loop() {
+    if (digitalRead(BUTTON_R) == LOW) {
+      // ...
+    }
+
+    if (digitalRead(BUTTON_L) == LOW) {
+      // ...
+    }
+
+    if (is_hp(player_x, player_y)) {
+      game_map[player_y][player_x] = SPACE;
+
+      // Воспроизведение звука взятия предмета.
+      play_tone(SPEAKER_PIN, e4, 125000);
+      play_tone(SPEAKER_PIN, g4, 250000);
+    }
+
+    // Вызов функции отрисовки карты на экране дисплея.
+    map_show();
+
+    // ...
+  }
+\end{minted}
+
+\end{document}
