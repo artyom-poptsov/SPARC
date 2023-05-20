@@ -37,6 +37,7 @@ SECTIONS = \
 	sections/music-and-technology-synthesis-flats-and-sharps.tex	\
 	sections/music-and-technology-synthesis-musical-scale.tex	\
 	sections/music-and-technology-synthesis-bass-clef.tex \
+	sections/music-and-technology-synthesis-music-band.tex \
 	sections/game-dev-intro.tex \
 	sections/game-dev-lcd.tex	\
 	sections/game-dev-genre-and-plot.tex	\
