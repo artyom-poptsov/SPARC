@@ -47,6 +47,7 @@ SECTIONS = \
 	sections/game-dev-sounds.tex	\
 	sections/game-dev-graphics.tex	\
 	sections/game-dev-animation.tex	\
+	sections/game-dev-logic.tex	\
 	sections/appendix-octaves.tex	\
 	sections/appendix-melody-00.tex
 
