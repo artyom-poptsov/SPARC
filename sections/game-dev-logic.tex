@@ -85,6 +85,62 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Условие проигрыша}
 
+Проигрыш в игре можно сделать, например, при столкновении игрока с монстром.
+Обозначим монстра в виде константы:
+
+\begin{minted}{cpp}
+  const char SPACE   = ' ';    // Пустое пространство.
+  const char WALL    = '#';    // Стена.
+  const char HP      = '*';    // Аптечка.
+  const char DOOR    = 'D';    // Дверь.
+  const char MONSTER = 'M';  // Монстр.
+\end{minted}
+
+Далее добавим функцию проверки наличия монстра в клетке карты:
+
+\begin{minted}{cpp}
+  // Функция, возвращающая 1 (true) в случае, если
+  // на клетке карты по координатам x,y находится дверь.
+  // В противном случае функция возвращает 0 (false).
+  bool is_monster(int x, int y) {
+    return game_map[y][x] == MONSTER;
+  }
+\end{minted}
+
+В функцию \texttt{loop} добавим проверку столкновения игрока с монстром:
+
+\begin{minted}{cpp}
+  void loop() {
+    if (digitalRead(BUTTON_R) == LOW) {
+      // ...
+    }
+
+    if (digitalRead(BUTTON_L) == LOW) {
+      // ...
+    }
+
+    if (is_hp(player_x, player_y)) {
+      // ...
+    }
+
+    if (is_door(player_x, player_y)) {
+      win();
+    }
+
+    if (is_monster(player_x, player_y)) {
+      game_over();
+    }
+
+    // Вызов функции отрисовки карты на экране дисплея.
+    map_show();
+
+    // ...
+  }
+\end{minted}
+
+Простейшая реализация функциии проигрыша \texttt{game\_over} не сильно
+отличается от функции выигрыша \texttt{win}:
+
 \begin{minted}{cpp}
   void game_over() {
     lcd.setCursor(0, 0);
