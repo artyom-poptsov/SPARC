@@ -65,7 +65,8 @@ out/sections:
 
 out/sections/%.tex: sections/%.tex
 	@echo "GEN $@" \
-		&& lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1
+		&& lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1 \
+		|| (cat $@.log; exit 1)
 
 out/sparc.tex: sparc.tex $(SECTIONS_OUT) version.tex
 	@echo "GEN out/sparc.tex" \
@@ -75,7 +76,8 @@ out/sparc.tex: sparc.tex $(SECTIONS_OUT) version.tex
 make_glossary: out/sparc.aux
 	@echo "GLS sparc" \
 		&& cd out \
-		&& makeglossaries sparc > makeglossaries.log 2>&1
+		&& makeglossaries sparc > makeglossaries.log 2>&1 \
+		|| (cat makeglossaries.log; exit 1)
 
 make_index: out/sparc.aux
 	@echo "IDX sparc" \
@@ -91,7 +93,8 @@ out/sparc.aux: sparc.tex out/sparc.tex version.tex
 out/sparc.pdf: out/sparc.aux make_glossary make_index
 	@echo "XELATEX out/sparc.pdf" \
 	  && cd out \
-    && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1
+    && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
+		|| (cat sparc.pdf.log.2; exit 1)
 
 sparc.pdf: out/sparc.pdf
 	@echo "COPY sparc.pdf" && cp out/sparc.pdf sparc.pdf
