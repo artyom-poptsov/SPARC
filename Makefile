@@ -67,7 +67,7 @@ out/sections/%.tex: sections/%.tex
 	@echo "GEN $@" \
 		&& lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1
 
-out/sparc.tex: sparc.tex $(SECTIONS_OUT) out/version.tex
+out/sparc.tex: sparc.tex $(SECTIONS_OUT) version.tex
 	@echo "GEN out/sparc.tex" \
 		&& lilypond-book --output out --pdf sparc.tex > out/sparc.tex.log 2>&1 \
 		|| (cat out/sparc.tex.log; exit 1)
