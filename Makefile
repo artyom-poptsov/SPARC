@@ -57,7 +57,7 @@ COMMIT = $(shell git rev-parse HEAD)
 SECTIONS_OUT = \
 	$(foreach section, $(SECTIONS), out/$(section))
 
-out/version.tex: version.tex.in
+version.tex: version.tex.in
 	@echo "GEN $@" && sed "s/@COMMIT@/${COMMIT}/g" $< > $@
 
 out/sections:
@@ -82,7 +82,7 @@ make_index: out/sparc.aux
 		&& cd out \
 		&& makeindex sparc > makeindex.log 2>&1
 
-out/sparc.aux: sparc.tex out/sparc.tex out/version.tex
+out/sparc.aux: sparc.tex out/sparc.tex version.tex
 	@echo "XELATEX out/sparc.tex" \
 		&& cd out \
 		&& xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
