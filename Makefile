@@ -69,7 +69,8 @@ out/sections/%.tex: sections/%.tex
 
 out/sparc.tex: sparc.tex $(SECTIONS_OUT) out/version.tex
 	@echo "GEN out/sparc.tex" \
-		&& lilypond-book --output out --pdf sparc.tex > out/sparc.tex.log 2>&1
+		&& lilypond-book --output out --pdf sparc.tex > out/sparc.tex.log 2>&1 \
+		|| (cat out/sparc.tex.log; exit 1)
 
 make_glossary: out/sparc.aux
 	@echo "GLS sparc" \
