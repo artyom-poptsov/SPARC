@@ -57,23 +57,43 @@ COMMIT = $(shell git rev-parse HEAD)
 SECTIONS_OUT = \
 	$(foreach section, $(SECTIONS), out/$(section))
 
-version.tex: version.tex.in
+out/version.tex: version.tex.in
 	@echo "GEN $@" && sed "s/@COMMIT@/${COMMIT}/g" $< > $@
 
 out/sections:
 	@[ -d out/sections ] || mkdir -p out/sections
 
 out/sections/%.tex: sections/%.tex
-	@echo "GEN $@" && lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1
+	@echo "GEN $@" \
+		&& lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1
 
-out/sparc.tex: sparc.tex $(SECTIONS_OUT) version.tex
-	@echo "GEN out/sparc.tex" && lilypond-book --output out --pdf sparc.tex > out/sparc.tex.log 2>&1
+out/sparc.tex: sparc.tex $(SECTIONS_OUT) out/version.tex
+	@echo "GEN out/sparc.tex" \
+		&& lilypond-book --output out --pdf sparc.tex > out/sparc.tex.log 2>&1
 
-sparc.pdf: sparc.tex out/sparc.tex version.tex
-	@echo "PDF sparc.pdf" \
+make_glossary: out/sparc.aux
+	@echo "GLS sparc" \
 		&& cd out \
-		&& ( xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1; makeglossaries sparc; makeindex sparc; xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 ) \
-		&& cp sparc.pdf ../sparc.pdf
+		&& makeglossaries sparc > makeglossaries.log 2>&1
+
+make_index: out/sparc.aux
+	@echo "IDX sparc" \
+		&& cd out \
+		&& makeindex sparc > makeindex.log 2>&1
+
+out/sparc.aux: sparc.tex out/sparc.tex out/version.tex
+	@echo "XELATEX out/sparc.tex" \
+		&& cd out \
+		&& xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
+		|| exit 0
+
+out/sparc.pdf: out/sparc.aux make_glossary make_index
+	@echo "XELATEX out/sparc.pdf" \
+	  && cd out \
+    && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1
+
+sparc.pdf: out/sparc.pdf
+	@echo "COPY sparc.pdf" && cp out/sparc.pdf sparc.pdf
 
 .PHONY: clean
 
