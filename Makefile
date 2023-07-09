@@ -88,7 +88,7 @@ out/sparc.aux: sparc.tex out/sparc.tex version.tex
 	@echo "XELATEX out/sparc.tex" \
 		&& cd out \
 		&& xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
-		|| (cat sparc.pdf.log.1; exit 0)
+		|| (echo "---- sparc.pdf.log.1 ----"; cat sparc.pdf.log.1; echo "---- sparc.log ----"; cat sparc.log; exit 0)
 
 out/sparc.pdf: out/sparc.aux make_glossary make_index
 	@echo "XELATEX out/sparc.pdf" \
