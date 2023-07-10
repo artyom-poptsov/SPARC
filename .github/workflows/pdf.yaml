@@ -46,8 +46,6 @@ jobs:
       - name: Update font cache
         run: |
           sudo mktexlsr
-          # sudo texhash /var/lib/texmf /home/runner/texmf/
-          sudo fc-cache -fsv /usr/share/lilypond/2.22.1/fonts/ /home/runner/texmf/lilyglyphs/fonts/
       - name: Build
         id: build-project
         run: |
