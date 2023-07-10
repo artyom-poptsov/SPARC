@@ -1,0 +1,60 @@
+name: LaTeX to PDF
+
+on:
+  push:
+    branches: 
+      - master
+      - add-github-workflow
+    tags:
+       - '*'
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build_latex:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up Git repository
+        uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -yqq \
+              make \
+              python3-pygments \
+              tex-common \
+              texlive-base \
+              texlive-latex-base \
+              texlive-latex-extra \
+              texlive-xetex \
+              texlive-music \
+              texlive-extra-utils \
+              texlive-fonts-extra-links \
+              texlive-lang-cyrillic \
+              texlive-binaries \
+              inkscape \
+              lilypond \
+              lilypond-data \
+              lilypond-fonts
+      - name: Download Lilyglyphs
+        run: |
+          mkdir /home/runner/texmf/
+          cd /home/runner/texmf/
+          wget https://mirrors.ctan.org/macros/unicodetex/latex/lilyglyphs.zip
+          unzip lilyglyphs.zip
+          sudo cp -r /home/runner/texmf/lilyglyphs/tex/* /usr/share/texmf/tex/latex/
+      - name: Update font cache
+        run: |
+          sudo mktexlsr
+          # sudo texhash /var/lib/texmf /home/runner/texmf/
+          sudo fc-cache -fsv /usr/share/lilypond/2.22.1/fonts/ /home/runner/texmf/lilyglyphs/fonts/
+      - name: Build
+        id: build-project
+        run: |
+          make
+      - name: Upload PDF to the workflow tab
+        id: upload-workflow-tab
+        uses: actions/upload-artifact@v2
+        with:
+          name: avp-sparc-book-pdf
+          path: sparc.pdf
