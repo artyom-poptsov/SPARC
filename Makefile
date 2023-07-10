@@ -94,7 +94,7 @@ out/sparc.pdf: out/sparc.aux make_glossary make_index
 	@echo "XELATEX out/sparc.pdf" \
 	  && cd out \
     && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
-		|| (cat sparc.pdf.log.2; exit 1)
+		|| cat sparc.pdf.log.2 && exit 0
 
 sparc.pdf: out/sparc.pdf
 	@echo "COPY sparc.pdf" && cp out/sparc.pdf sparc.pdf
