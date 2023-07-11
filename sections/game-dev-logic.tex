@@ -152,6 +152,33 @@
   }
 \end{minted}
 
+Поскольку и в функции \texttt{game\_over}, и в функции \texttt{win} используется
+``сброс'' игры в исходное состояние, то мы можем вынести этот набор операций в
+отдельную функцию \texttt{reset\_game}:
+
+\begin{minted}{cpp}
+  // Функция "сброса" игры в исходное состояние.
+  void reset_game() {
+    player_x = 0;
+    player_y = 0;
+    generate_map();
+  }
+
+  void win() {
+    lcd.setCursor(0, 0);
+    lcd.print("Y O U  W I N!");
+    reset_game();
+    delay(1000);
+  }
+
+  void game_over() {
+    lcd.setCursor(0, 0);
+    lcd.print("G A M E  O V E R");
+    reset_game();
+    delay(1000);
+  }
+\end{minted}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Дополнительные квесты}
 
