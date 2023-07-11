@@ -22,6 +22,8 @@
 - =lilypond=
 
 ** Сборка
+Сборка осуществляется через утилиту =make=:
+
 #+BEGIN_EXAMPLE shell
 $ make
 #+END_EXAMPLE
@@ -29,4 +31,36 @@ $ make
 Очистить каталог от сгенерированных файлов можно через команду:
 #+BEGIN_EXAMPLE shell
 $ make clean
+#+END_EXAMPLE
+
+** Ubuntu GNU/Linux 22.04
+Установка зависимостей из репозитория:
+#+BEGIN_EXAMPLE shell
+sudo apt update
+sudo apt install -yqq \
+    make \
+    python3-pygments \
+    tex-common \
+    texlive-base \
+    texlive-latex-base \
+    texlive-latex-extra \
+    texlive-xetex \
+    texlive-music \
+    texlive-extra-utils \
+    texlive-fonts-extra-links \
+    texlive-lang-cyrillic \
+    texlive-binaries \
+    inkscape \
+    lilypond \
+    lilypond-data \
+    lilypond-fonts
+#+END_EXAMPLE
+
+Установка пакета Lilyglyphs:
+#+BEGIN_EXAMPLE shell
+cd /tmp/
+wget https://mirrors.ctan.org/macros/unicodetex/latex/lilyglyphs.zip
+unzip lilyglyphs.zip
+sudo cp -r ./lilyglyphs/tex/* /usr/share/texmf/tex/latex/
+sudo mktexlsr
 #+END_EXAMPLE
