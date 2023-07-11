@@ -33,7 +33,7 @@ $ make
 $ make clean
 #+END_EXAMPLE
 
-** Ubuntu GNU/Linux 22.04
+*** Ubuntu GNU/Linux 22.04
 Установка зависимостей из репозитория:
 #+BEGIN_EXAMPLE shell
 sudo apt update
