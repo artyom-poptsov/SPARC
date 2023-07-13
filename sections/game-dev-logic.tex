@@ -254,7 +254,9 @@
 \end{minted}
 
 Когда игрок ``наступает'' на ключ, то эта закрытая дверь будет заменяться на
-открытую:
+открытую.  Для работы с картой мы можем воспользоваться функциями
+\texttt{map\_set} и \texttt{map\_clear}, описанными в разделе
+\ref{game-dev-game-map:extra-procedures}:
 
 \begin{minted}{cpp}
   void loop() {
@@ -262,10 +264,10 @@
 
     if (is_key(player_x, player_y)) {
       // "Открытие" двери ключом.
-      game_map[door_y][door_x] = OPEN_DOOR;
+      map_set(door_x, door_y, OPEN_DOOR);
 
       // Очистка клетки карты.
-      game_map[player_y][player_x] = SPACE;
+      map_clear(player_x, player_y);
     }
 
     // ...
@@ -298,10 +300,10 @@
 
     if (is_key(player_x, player_y)) {
       // "Открытие" двери ключом.
-      game_map[door_y][door_x] = OPEN_DOOR;
+      map_set(door_x, door_y, OPEN_DOOR);
 
       // Очистка клетки карты.
-      game_map[player_y][player_x] = SPACE;
+      map_clear(player_x, player_y);
     }
 
     if (is_open_door(player_x, player_y)) {
