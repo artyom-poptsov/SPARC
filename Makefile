@@ -8,6 +8,7 @@ SECTIONS = \
 	sections/electronics-potential-difference.tex	\
 	sections/electronics-resistance.tex	\
 	sections/electronics-building-circuits.tex \
+	sections/dialogues-with-computer-title-image.tex \
 	sections/dialogues-with-computer-introduction.tex \
 	sections/dialogues-with-computer-algorithms.tex \
 	sections/dialogues-with-computer-arduino.tex \
@@ -87,7 +88,7 @@ make_index: out/sparc.aux
 out/sparc.aux: sparc.tex out/sparc.tex version.tex
 	@echo "XELATEX out/sparc.tex" \
 		&& cd out \
-		&& xelatex --interaction=batchmode --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
+		&& xelatex --interaction=batchmode --draftmode --no-pdf --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
 		|| (echo "---- sparc.pdf.log.1 ----"; cat sparc.pdf.log.1; echo "---- sparc.log ----"; cat sparc.log) && exit 0
 
 out/sparc.pdf: out/sparc.aux make_glossary make_index
