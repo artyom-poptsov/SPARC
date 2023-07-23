@@ -49,7 +49,7 @@ jobs:
       - name: Build
         id: build-project
         run: |
-          make
+          make -j$(nproc)
       - name: Upload PDF to the workflow tab
         id: upload-workflow-tab
         uses: actions/upload-artifact@v2
