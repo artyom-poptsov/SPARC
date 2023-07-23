@@ -62,10 +62,8 @@ SECTIONS_OUT = \
 version.tex: version.tex.in
 	@echo "GEN       $@" && sed "s/@COMMIT@/${COMMIT}/g" $< > $@
 
-output_directory:
-	@[ -d out/sections ] || mkdir -p out/sections
-
 out/sections/%.tex: sections/%.tex
+	@[ -d out/sections ] || mkdir -p out/sections
 	@echo "LILYPOND  $< -> $@" \
 		&& lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1 \
 		|| (cat $@.log; exit 1)
@@ -98,7 +96,7 @@ out/sparc.pdf: out/sparc.aux make_glossary make_index
     && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
 		|| cat sparc.pdf.log.2 && exit 0
 
-sparc.pdf: output_directory out/sparc.pdf
+sparc.pdf: out/sparc.pdf
 	@echo "COPY      sparc.pdf" && cp out/sparc.pdf sparc.pdf
 
 .PHONY: clean
