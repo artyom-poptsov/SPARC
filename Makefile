@@ -12,6 +12,7 @@ SECTIONS = \
 	sections/dialogues-with-computer-introduction.tex \
 	sections/dialogues-with-computer-algorithms.tex \
 	sections/dialogues-with-computer-arduino.tex \
+	sections/dialogues-with-computer-breadboard.tex \
 	sections/dialogues-with-computer-memory.tex \
 	sections/dialogues-with-computer-control-flow.tex \
 	sections/dialogues-with-computer-arduino-ide.tex \
