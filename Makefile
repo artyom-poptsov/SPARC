@@ -1,4 +1,4 @@
-all: out/sections sparc.pdf
+all: sparc.pdf
 
 SECTIONS = \
 	sections/commands.tex	\
@@ -60,46 +60,46 @@ SECTIONS_OUT = \
 	$(foreach section, $(SECTIONS), out/$(section))
 
 version.tex: version.tex.in
-	@echo "GEN $@" && sed "s/@COMMIT@/${COMMIT}/g" $< > $@
+	@echo "GEN       $@" && sed "s/@COMMIT@/${COMMIT}/g" $< > $@
 
-out/sections:
+output_directory:
 	@[ -d out/sections ] || mkdir -p out/sections
 
 out/sections/%.tex: sections/%.tex
-	@echo "GEN $@" \
+	@echo "LILYPOND  $< -> $@" \
 		&& lilypond-book --output out/sections/ --pdf $< > $@.log 2>&1 \
 		|| (cat $@.log; exit 1)
 
 out/sparc.tex: sparc.tex $(SECTIONS_OUT) version.tex
-	@echo "GEN out/sparc.tex" \
+	@echo "LILYPOND  sparc.tex -> out/sparc.tex" \
 		&& lilypond-book --output out --pdf sparc.tex > out/sparc.tex.log 2>&1 \
 		|| (cat out/sparc.tex.log; exit 1)
 
 make_glossary: out/sparc.aux
-	@echo "GLS sparc" \
+	@echo "GLOSSARY  sparc" \
 		&& cd out \
 		&& makeglossaries sparc > makeglossaries.log 2>&1 \
 		|| (cat makeglossaries.log; exit 1)
 
 make_index: out/sparc.aux
-	@echo "IDX sparc" \
+	@echo "INDEX     sparc" \
 		&& cd out \
 		&& makeindex sparc > makeindex.log 2>&1
 
 out/sparc.aux: sparc.tex out/sparc.tex version.tex
-	@echo "XELATEX out/sparc.tex" \
+	@echo "XELATEX   out/sparc.tex -> out/sparc.xdv" \
 		&& cd out \
 		&& xelatex --interaction=batchmode --draftmode --no-pdf --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
 		|| (echo "---- sparc.pdf.log.1 ----"; cat sparc.pdf.log.1; echo "---- sparc.log ----"; cat sparc.log) && exit 0
 
 out/sparc.pdf: out/sparc.aux make_glossary make_index
-	@echo "XELATEX out/sparc.pdf" \
+	@echo "XELATEX   out/sparc.tex -> out/sparc.pdf" \
 	  && cd out \
     && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
 		|| cat sparc.pdf.log.2 && exit 0
 
-sparc.pdf: out/sparc.pdf
-	@echo "COPY sparc.pdf" && cp out/sparc.pdf sparc.pdf
+sparc.pdf: output_directory out/sparc.pdf
+	@echo "COPY      sparc.pdf" && cp out/sparc.pdf sparc.pdf
 
 .PHONY: clean
 
