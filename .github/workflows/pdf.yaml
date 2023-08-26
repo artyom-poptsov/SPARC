@@ -2,7 +2,7 @@ name: LaTeX to PDF
 
 on:
   push:
-    branches: 
+    branches:
       - master
       - add-github-workflow
     tags:
@@ -26,6 +26,7 @@ jobs:
               texlive-base \
               texlive-latex-base \
               texlive-latex-extra \
+              texlive-bibtex-extra \
               texlive-xetex \
               texlive-music \
               texlive-extra-utils \
