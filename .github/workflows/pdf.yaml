@@ -37,13 +37,19 @@ jobs:
               lilypond \
               lilypond-data \
               lilypond-fonts
-      - name: Download Lilyglyphs
+      - name: Install Lilyglyphs
         run: |
+          echo "Downloading Lilyglyphs ..."
           mkdir /home/runner/texmf/
           cd /home/runner/texmf/
           wget https://mirrors.ctan.org/macros/unicodetex/latex/lilyglyphs.zip
+          echo "Downloading Lilyglyphs ... done"
+          echo "Extracting Lilyglyphs ... "
           unzip lilyglyphs.zip
+          echo "Extracting Lilyglyphs ... done"
+          echo "Installing Lilyglyphs data to the system ..."
           sudo cp -r /home/runner/texmf/lilyglyphs/tex/* /usr/share/texmf/tex/latex/
+          echo "Installing Lilyglyphs data to the system ... done"
       - name: Update font cache
         run: |
           sudo mktexlsr
