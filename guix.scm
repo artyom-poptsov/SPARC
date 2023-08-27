@@ -1,6 +1,6 @@
 ;; guix.scm --- GNU Guix package recipe    -*- coding: utf-8 -*-
 ;;
-;; Copyright (C) 2022 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+;; Copyright (C) 2022-2023 Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ;;
 ;; Author: Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ;; Created: 17 November 2022
@@ -40,7 +40,10 @@
              (guix build-system gnu)
              (gnu packages base)
              (gnu packages tex)
+             (gnu packages texlive)
              (gnu packages inkscape)
+             (gnu packages fonts)
+             (gnu packages version-control)
              (gnu packages music))
 
 
@@ -54,8 +57,21 @@
                      #:recursive? #t
                      #:select? (git-predicate %source-dir)))
  (build-system gnu-build-system)
- (native-inputs
-  (list gnu-make texlive inkscape lilypond))
+ (inputs
+  (list gnu-make
+        git
+        texlive
+        texlive-minted
+        texlive-bibtex
+        texlive-xetex
+        texlive-collection-langcyrillic
+        inkscape
+        lilypond
+        font-liberation))
+ (arguments
+  (list #:phases
+        #~(modify-phases %standard-phases
+            (delete 'configure))))
  (home-page "https://github.com/artyom-poptsov/SPARC")
  (synopsis "Book on combining art and technology")
  (description
