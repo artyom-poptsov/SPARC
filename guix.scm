@@ -39,10 +39,13 @@
              (guix git-download)
              (guix build-system gnu)
              (gnu packages base)
+             (gnu packages bash)
              (gnu packages tex)
              (gnu packages texlive)
              (gnu packages inkscape)
              (gnu packages fonts)
+             (gnu packages perl)
+             (gnu packages python-xyz)
              (gnu packages version-control)
              (gnu packages music))
 
@@ -57,14 +60,23 @@
                      #:recursive? #t
                      #:select? (git-predicate %source-dir)))
  (build-system gnu-build-system)
+ (native-inputs
+  (list python-pygments
+        bash-minimal
+        perl
+        which))
  (inputs
   (list gnu-make
         git
         texlive
+        texlive-latex-fonts
         texlive-minted
         texlive-bibtex
         texlive-xetex
         texlive-collection-langcyrillic
+        texlive-t1utils
+        texlive-ttfutils
+        texlive-bibtexperllibs
         inkscape
         lilypond
         font-liberation))
