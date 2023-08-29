@@ -56,7 +56,7 @@
 
 (define-public book-sparc
   (package
-   (name "sparc-book")
+   (name "book-sparc")
    (version "git")
    (source (local-file %source-dir
                        #:recursive? #t
