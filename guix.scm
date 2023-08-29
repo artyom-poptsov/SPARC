@@ -37,7 +37,7 @@
              (guix packages)
              (guix licenses)
              (guix git-download)
-             (guix build-system gnu)
+             (guix build-system copy)
              (gnu packages base)
              (gnu packages bash)
              (gnu packages tex)
@@ -61,7 +61,7 @@
    (source (local-file %source-dir
                        #:recursive? #t
                        #:select? (git-predicate %source-dir)))
-   (build-system gnu-build-system)
+   (build-system copy-build-system)
    (native-inputs
     (list python-pygments
           bash-minimal
@@ -74,7 +74,6 @@
           gnu-make
           inkscape
           lilypond
-          ;; texlive
           texlive-fontspec
           texlive-koma-script
           texlive-trimspaces
@@ -99,13 +98,17 @@
           texlive-transparent
           texlive-xetex))
    (arguments
-    (list #:phases
-          #~(modify-phases %standard-phases
-                           (add-after 'unpack 'debug
-                                      (lambda _
-                                        (invoke "which" "env")))
-                           (delete 'check)
-                           (delete 'configure))))
+    (list #:install-plan #~'(("sparc.pdf" "share/doc/sparc/"))
+          #:phases #~(modify-phases %standard-phases
+                       (delete 'check)
+                       (delete 'configure)
+                       (add-before 'install 'build
+                         (lambda* (#:key make-flags parallel-build? #:allow-other-keys)
+                           (invoke "make"
+                                   "-j"
+                                   (if parallel-build?
+                                       (number->string (parallel-job-count))
+                                       "1")))))))
    (home-page "https://github.com/artyom-poptsov/SPARC")
    (synopsis "Book on combining art and technology")
    (description
