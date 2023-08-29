@@ -37,7 +37,7 @@ jobs:
           guix build --file=guix.scm
       - name: Install the book
         run: |
-          guix build --install-from-file=guix.scm
+          guix package --install-from-file=guix.scm
       - name: Upload PDF to the workflow tab
         id: upload-workflow-tab
         uses: actions/upload-artifact@v2
