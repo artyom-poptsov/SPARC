@@ -73,6 +73,10 @@
         gnu-make
         inkscape
         lilypond
+        ;; texlive
+        texlive-fontspec
+        texlive-koma-script
+        texlive-trimspaces
         texlive-acronym
         texlive-adjustbox
         texlive-bibtex
@@ -81,10 +85,12 @@
         texlive-circuitikz
         texlive-collection-langcyrillic
         texlive-glossaries
+        texlive-glossaries-extra
         texlive-lilyglyphs
         texlive-minted
         texlive-multirow
         texlive-pgf
+        texlive-pgfplots
         texlive-subfiles
         texlive-svg
         texlive-t1utils
@@ -94,6 +100,7 @@
  (arguments
   (list #:phases
         #~(modify-phases %standard-phases
+            (delete 'check)
             (delete 'configure))))
  (home-page "https://github.com/artyom-poptsov/SPARC")
  (synopsis "Book on combining art and technology")
