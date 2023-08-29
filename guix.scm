@@ -104,6 +104,7 @@
                        (delete 'configure)
                        (add-before 'install 'build
                          (lambda* (#:key make-flags parallel-build? #:allow-other-keys)
+                           (setenv "REPRODUCIBILITY" "yes")
                            (invoke "make"
                                    "-j"
                                    (if parallel-build?
