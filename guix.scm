@@ -54,62 +54,68 @@
 (define %source-dir (dirname (current-filename)))
 
 
-(package
- (name "sparc-book")
- (version "git")
- (source (local-file %source-dir
-                     #:recursive? #t
-                     #:select? (git-predicate %source-dir)))
- (build-system gnu-build-system)
- (native-inputs
-  (list python-pygments
-        bash-minimal
-        perl
-        which
-        fontconfig))
- (inputs
-  (list font-liberation
-        git
-        gnu-make
-        inkscape
-        lilypond
-        ;; texlive
-        texlive-fontspec
-        texlive-koma-script
-        texlive-trimspaces
-        texlive-acronym
-        texlive-adjustbox
-        texlive-bibtex
-        texlive-bibtexperllibs
-        texlive-bigfoot
-        texlive-circuitikz
-        texlive-collection-langcyrillic
-        texlive-glossaries
-        texlive-glossaries-extra
-        texlive-lilyglyphs
-        texlive-minted
-        texlive-multirow
-        texlive-pgf
-        texlive-pgfplots
-        texlive-subfiles
-        texlive-svg
-        texlive-t1utils
-        texlive-textpos
-        texlive-transparent
-        texlive-xetex))
- (arguments
-  (list #:phases
-        #~(modify-phases %standard-phases
-            (delete 'check)
-            (delete 'configure))))
- (home-page "https://github.com/artyom-poptsov/SPARC")
- (synopsis "Book on combining art and technology")
- (description
-  "Science, Programming, Art and Radioelectronics Club (SPARC) is a book that
+(define-public book-sparc
+  (package
+   (name "sparc-book")
+   (version "git")
+   (source (local-file %source-dir
+                       #:recursive? #t
+                       #:select? (git-predicate %source-dir)))
+   (build-system gnu-build-system)
+   (native-inputs
+    (list python-pygments
+          bash-minimal
+          perl
+          which
+          fontconfig))
+   (inputs
+    (list font-liberation
+          git
+          gnu-make
+          inkscape
+          lilypond
+          ;; texlive
+          texlive-fontspec
+          texlive-koma-script
+          texlive-trimspaces
+          texlive-acronym
+          texlive-adjustbox
+          texlive-bibtex
+          texlive-bibtexperllibs
+          texlive-bigfoot
+          texlive-circuitikz
+          texlive-collection-langcyrillic
+          texlive-glossaries
+          texlive-glossaries-extra
+          texlive-lilyglyphs
+          texlive-minted
+          texlive-multirow
+          texlive-pgf
+          texlive-pgfplots
+          texlive-subfiles
+          texlive-svg
+          texlive-t1utils
+          texlive-textpos
+          texlive-transparent
+          texlive-xetex))
+   (arguments
+    (list #:phases
+          #~(modify-phases %standard-phases
+                           (add-after 'unpack 'debug
+                                      (lambda _
+                                        (invoke "which" "env")))
+                           (delete 'check)
+                           (delete 'configure))))
+   (home-page "https://github.com/artyom-poptsov/SPARC")
+   (synopsis "Book on combining art and technology")
+   (description
+    "Science, Programming, Art and Radioelectronics Club (SPARC) is a book that
 explains how to combine the topics mentined in the title to build projects.  The
 book can be used to teach programming classes in colleges and to organize
 workshops in hackerspaces or other community-driven spaces.  Currently the book
 is available only in Russian.")
- (license cc-by-sa4.0))
+   (license cc-by-sa4.0)))
+
+book-sparc
 
 ;;; guix.scm ends here.
