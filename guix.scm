@@ -47,6 +47,7 @@
              (gnu packages perl)
              (gnu packages python-xyz)
              (gnu packages version-control)
+             (gnu packages fontutils)
              (gnu packages music))
 
 
@@ -64,22 +65,32 @@
   (list python-pygments
         bash-minimal
         perl
-        which))
+        which
+        fontconfig))
  (inputs
-  (list gnu-make
+  (list font-liberation
         git
-        texlive
-        texlive-latex-fonts
-        texlive-minted
-        texlive-bibtex
-        texlive-xetex
-        texlive-collection-langcyrillic
-        texlive-t1utils
-        texlive-ttfutils
-        texlive-bibtexperllibs
+        gnu-make
         inkscape
         lilypond
-        font-liberation))
+        texlive-acronym
+        texlive-adjustbox
+        texlive-bibtex
+        texlive-bibtexperllibs
+        texlive-bigfoot
+        texlive-circuitikz
+        texlive-collection-langcyrillic
+        texlive-glossaries
+        texlive-lilyglyphs
+        texlive-minted
+        texlive-multirow
+        texlive-pgf
+        texlive-subfiles
+        texlive-svg
+        texlive-t1utils
+        texlive-textpos
+        texlive-transparent
+        texlive-xetex))
  (arguments
   (list #:phases
         #~(modify-phases %standard-phases
