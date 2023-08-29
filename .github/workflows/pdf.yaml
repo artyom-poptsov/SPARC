@@ -32,9 +32,12 @@ jobs:
           test -z "$(guix --version 2>&1 >/dev/null)"
       - name: "Checkout repository"
         uses: "actions/checkout@v3"
-      - name: Build the book.
+      - name: Build the book
         run: |
-          guix package --file=guix.scm
+          guix build --file=guix.scm
+      - name: Install the book
+        run: |
+          guix build --install-from-file=guix.scm
       - name: Upload PDF to the workflow tab
         id: upload-workflow-tab
         uses: actions/upload-artifact@v2
