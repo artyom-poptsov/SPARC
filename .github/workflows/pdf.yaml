@@ -4,7 +4,6 @@ on:
   push:
     branches:
       - master
-      - add-github-workflow
     tags:
        - '*'
   pull_request:
@@ -14,52 +13,31 @@ jobs:
   build_latex:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v2
-      - name: Install dependencies
+      - name: Get the current date
+        id: date
+        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
+      - name: "Guix cache"
+        uses: "actions/cache@v3"
+        with:
+          path: "~/.cache/guix"
+          # Guix cashed once a day; the first build will be slow but the
+          # subsequent builds on the current day will be faster.
+          key: "guix-cache-x86-${{ steps.date.outputs.date }}"
+          restore-keys: |
+            guix-cache-x86-
+      - name: "Install Guix"
+        uses: "PromyLOPh/guix-install-action@v1"
+      - name: "Ensure no locale warning"
         run: |
-          sudo apt update
-          sudo apt install -yqq \
-              make \
-              python3-pygments \
-              tex-common \
-              texlive-base \
-              texlive-latex-base \
-              texlive-latex-extra \
-              texlive-bibtex-extra \
-              texlive-xetex \
-              texlive-music \
-              texlive-extra-utils \
-              texlive-fonts-extra-links \
-              texlive-lang-cyrillic \
-              texlive-binaries \
-              inkscape \
-              lilypond \
-              lilypond-data \
-              lilypond-fonts
-      - name: Install Lilyglyphs
+          test -z "$(guix --version 2>&1 >/dev/null)"
+      - name: "Checkout repository"
+        uses: "actions/checkout@v3"
+      - name: Build the book.
         run: |
-          echo "Downloading Lilyglyphs ..."
-          mkdir /home/runner/texmf/
-          cd /home/runner/texmf/
-          wget https://mirrors.ctan.org/macros/unicodetex/latex/lilyglyphs.zip
-          echo "Downloading Lilyglyphs ... done"
-          echo "Extracting Lilyglyphs ... "
-          unzip lilyglyphs.zip
-          echo "Extracting Lilyglyphs ... done"
-          echo "Installing Lilyglyphs data to the system ..."
-          sudo cp -r /home/runner/texmf/lilyglyphs/tex/* /usr/share/texmf/tex/latex/
-          echo "Installing Lilyglyphs data to the system ... done"
-      - name: Update font cache
-        run: |
-          sudo mktexlsr
-      - name: Build
-        id: build-project
-        run: |
-          make -j$(nproc)
+          guix package --file=guix.scm
       - name: Upload PDF to the workflow tab
         id: upload-workflow-tab
         uses: actions/upload-artifact@v2
         with:
           name: avp-sparc-book-pdf
-          path: sparc.pdf
+          path: "~/.guix-profile/share/doc/sparc/sparc.pdf"
