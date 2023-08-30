@@ -1,0 +1,143 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Мелодия ``Twinkle Twinkle Little Star'' (версия 1.0}
+\label{app:twinkle-twinkle-little-star-01}
+
+Данный пример показывает полный вариант программирования мелодии ``Twinkle
+Twinkle, Little Star''. Как можно видеть, пример получился достаточно длинным,
+отчасти потому, что в нём не используются массивы.
+
+\begin{minted}{cpp}
+  // Ноты:
+  const float c4 = 261.630;
+  const float d4 = 293.660;
+  const float e4 = 329.630;
+  const float f4 = 349.230;
+  const float g4 = 392.000;
+  const float a4 = 440.000;
+  const float b4 = 493.880;
+
+  // Номер порта, куда подключен динамик:
+  const int SPEAKER_PIN = 8;
+
+  // Функция воспроизвдения звука на порту PORT
+  // с частотой F и длительностью T.
+  void play_tone(int port, float f, long t) {
+    const long T = 1000000 / f;
+    long d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+
+  void setup() {
+    pinMode(SPEAKER_PIN, OUTPUT);
+  }
+
+  void loop() {
+    const long BPM = 120; // Удары в минуту.
+    const long MINUTE = 60000000; // 1 минута в микросекундах.
+    const long T = (MINUTE / BPM) * 4; // Длина целой ноты.
+    const byte D = 100; // Задержка между нотами.
+
+    // 0-й такт.
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+
+    // 1-й такт.
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 2);
+    delay(D);
+
+    // 2-й такт.
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+
+    // 3-й такт.
+    play_tone(SPEAKER_PIN, d4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, d4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, c4, T / 2);
+    delay(D);
+
+    // 4-й такт.
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+
+    // 5-й такт.
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, d4, T / 2);
+    delay(D);
+
+    // 6-й такт.
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+
+    // 7-й такт.
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, d4, T / 2);
+    delay(D);
+
+    // 8-й такт.
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+
+    // 9-й такт.
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 2);
+    delay(D);
+  }
+\end{minted}
+
+\end{document}
