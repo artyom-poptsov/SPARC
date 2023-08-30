@@ -1,0 +1,87 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter{Мелодия ``Twinkle Twinkle Little Star'' (версия 2.0)}
+\label{app:twinkle-twinkle-little-star-02}
+
+В данном примере мы видим полный вариант программирования мелодии ``Twinkle
+Twinkle, Little Star'', написанный с использованием одномерных массивов. Если
+сравнить с кодом в приложении \ref{app:twinkle-twinkle-little-star-01}, то
+видно, что программа стала занчительно короче; однако её можно сократить и даже
+упростить в некотором роде ещё -- если использовать двумерные массивы.
+
+\begin{minted}{cpp}
+  // Ноты:
+  const float c4 = 261.630;
+  const float d4 = 293.660;
+  const float e4 = 329.630;
+  const float f4 = 349.230;
+  const float g4 = 392.000;
+  const float a4 = 440.000;
+  const float b4 = 493.880;
+
+  // Номер порта, куда подключен динамик:
+  const int SPEAKER_PIN = 8;
+
+  // Функция воспроизвдения звука на порту PORT
+  // с частотой F и длительностью T.
+  void play_tone(int port, float f, long t) {
+    const long T = 1000000 / f;
+    long d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+
+  void setup() {
+    pinMode(SPEAKER_PIN, OUTPUT);
+  }
+
+  // Массив с нотами (их частотами.)
+  float melody[28] = {
+    c4, c4, g4, g4,
+    a4, a4, g4,
+    f4, f4, e4, e4,
+    d4, d4, c4,
+    g4, g4, f4, f4,
+    e4, e4, d4,
+    g4, g4, f4, f4,
+    e4, e4, d4,
+  };
+
+  // Массив с длительностями нот.
+  float melody_t[28] = {
+    4,  4,  4,  4,
+    4,  4,  2,
+    4,  4,  4,  4,
+    4,  4,  2,
+    4,  4,  4,  4,
+    4,  4,  2,
+    4,  4,  4,  4,
+    4,  4,  2,
+  };
+
+  void loop() {
+    const long BPM = 120; // Удары в минуту.
+    const long MINUTE = 60000000; // 1 минута в микросекундах.
+    const long T = (MINUTE / BPM) * 4; // Длина целой ноты.
+    const byte D = 100; // Задержка между нотами.
+
+    // Цикл воспроизведения мелодии из массива.
+    for (int note_idx = 0; note_idx < 28; note_idx++) {
+      play_tone(SPEAKER_PIN,
+                melody[note_idx],
+                T / melody_t[note_idx]);
+      delay(D);
+    }
+  }
+\end{minted}
+
+\end{document}
