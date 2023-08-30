@@ -51,7 +51,7 @@ SECTIONS = \
 	sections/game-dev-animation.tex	\
 	sections/game-dev-logic.tex	\
 	sections/appendix-octaves.tex	\
-	sections/appendix-melody-00.tex \
+	sections/appendix-prostokvashino-score.tex \
 	sections/appendix-twinkle-twinkle-little-star-01.tex
 
 COMMIT = $(shell git rev-parse HEAD)
