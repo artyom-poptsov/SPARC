@@ -22,6 +22,7 @@
 \usepackage{minted}
 \usepackage{glossaries}
 \usepackage{makeidx}
+\usepackage{expl3}
 
 \makeindex
 \makeglossaries
@@ -38,6 +39,18 @@
 \usepackage{subfiles}
 
 \newgetenv[\REPRODUCIBILITY]{REPRODUCIBILITY}%
+\newgetenv[\RANDOMSEED]{RANDOMSEED}
+
+\ifdefstring{\REPRODUCIBILITY}{yes}{%
+  \ifthenelse{\equal{\RANDOMSEED}{}}%
+  {%
+    \typeout{Setting the random seed to a fixed value.}%
+    \pgfmathsetseed{\number42}%
+  }{%
+    \typeout{Setting the random seed to a \RANDOMSEED .}%
+    \pgfmathsetseed{\number\RANDOMSEED}%
+  }%
+}{}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Автомато-программато-компарадио-кружок}
