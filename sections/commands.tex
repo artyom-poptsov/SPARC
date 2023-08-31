@@ -63,4 +63,19 @@
  \if\relax\detokenize{#1}\relax\temp\else\edef#1{\temp}\fi%
 }%
 
+\newcommand\esymbol[1]{%
+  \begin{circuitikz}%
+    \draw (0,0) to [#1] (1,0);%
+  \end{circuitikz}%
+}
+
+\newcommand*{\soundWaveIcon}[0]{%
+  \begin{tikzpicture}
+    \draw[black, fill=black] (0, 0) circle (.25mm);
+    \draw (.5mm, 0.7mm) arc (45:-45:1mm);
+    \draw (1mm, 1mm) arc (45:-45:1.5mm);
+    \draw (1.5mm, 1.3mm) arc (45:-45:2mm);
+  \end{tikzpicture}%
+}
+
 %% \end{document}
