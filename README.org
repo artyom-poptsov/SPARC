@@ -32,6 +32,18 @@ $ make
 #+BEGIN_EXAMPLE shell
 $ make clean
 #+END_EXAMPLE
+*** GNU Guix
+Сборка и установка версии из репозитория (книга будет располагаться в
+=~/.guix-profile/share/doc/sparc/sparc.pdf=):
+#+BEGIN_EXAMPLE shell
+guix package -f guix.scm
+#+END_EXAMPLE
+
+Для разработки книги удобно использовать Guix Shell:
+#+BEGIN_EXAMPLE shell
+guix shell --pure -D -f guix.scm
+make -j$(nproc)
+#+END_EXAMPLE
 
 *** Ubuntu GNU/Linux 22.04
 Установка зависимостей из репозитория:
