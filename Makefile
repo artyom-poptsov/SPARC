@@ -100,7 +100,10 @@ out/sparc.pdf: out/sparc.aux make_glossary make_index
 		|| cat sparc.pdf.log.2 && exit 0
 
 sparc.pdf: out/sparc.pdf
-	@echo "COPY      sparc.pdf" && cp out/sparc.pdf sparc.pdf
+	@echo "COPY      sparc.pdf" \
+		&& [ -e out/sparc.pdf ] && cp out/sparc.pdf sparc.pdf \
+		|| echo "ERROR: File 'out/sparc.pdf' not found" \
+		&& exit 1
 
 .PHONY: clean
 
