@@ -103,8 +103,20 @@
                        (delete 'check)
                        (delete 'configure)
                        (add-before 'install 'build
-                         (lambda* (#:key make-flags parallel-build? #:allow-other-keys)
-                           (setenv "REPRODUCIBILITY" "yes")
+                         (lambda* (#:key inputs make-flags parallel-build? #:allow-other-keys)
+                           (use-modules (ice-9 regex)
+                                        (srfi srfi-1))
+                           (let* ((src (assoc-ref inputs "source"))
+                                  (rx  (make-regexp "/gnu/store/(.*)-SPARC"))
+                                  (src-hash (match:substring (regexp-exec rx src) 1))
+                                  (random-seed
+                                   (fold (lambda (ch prev)
+                                           (+ (char->integer ch)
+                                              prev))
+                                         0
+                                         (string->list src-hash))))
+                             (setenv "RANDOMSEED" (number->string random-seed))
+                             (setenv "REPRODUCIBILITY" "yes"))
                            (invoke "make"
                                    "-j"
                                    (if parallel-build?
