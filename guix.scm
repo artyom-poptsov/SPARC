@@ -74,7 +74,6 @@
           gnu-make
           inkscape
           lilypond
-          texlive-marvosym
           texlive-fontspec
           texlive-koma-script
           texlive-trimspaces
