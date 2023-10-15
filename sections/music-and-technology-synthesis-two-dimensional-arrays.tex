@@ -174,18 +174,28 @@ Little Star'' используется только один из видов к�
     частота звука.}
   \centering
   \begin{tikzpicture}
-    \node (image) at (2, 0) { \resizebox{0.8\textwidth}{!}{
+    \node (image) at (2, 0) { \resizebox{1.0\textwidth}{!}{
         \begin{lilypond}
           \relative c' {
             \numericTimeSignature
             \time 4/4
-            c4 d4 e4 f4 g4 a4 b4
+            c8 d8 e8 f8 g8 a8 b4
           }
         \end{lilypond}
       }
     };
-    \draw[thick, ->] (-3.0, -2.0) -- (8.0, -2.0) node[anchor=north east] {x};
-    \draw[thick, ->] (-3.0, -2.0) -- (-3.0, 1.5) node[anchor=north east] {y};
+    \foreach \n [count=\i, evaluate=\i as \y using real(\i / 2.6)] in {
+      C4, E4, G4, B4, D5, F5
+    } {
+      \node at (-3.3, \y - 1.6) {\tiny \n};
+    };
+    \foreach \n [count=\i, evaluate=\i as \y using real(\i / 2.6)] in {
+      D4, F4, A4, C5, E5, G5
+    } {
+      \node at (-3.0, \y - 1.4) {\tiny \n};
+    };
+    \draw[thick, ->] (-4.0, -2.0) -- (8.0, -2.0) node[anchor=north east] {x};
+    \draw[thick, ->] (-4.0, -2.0) -- (-4.0, 1.5) node[anchor=north east] {y};
     \label{fig:lilypond-music-graph-1}
   \end{tikzpicture}
 \end{figure}
