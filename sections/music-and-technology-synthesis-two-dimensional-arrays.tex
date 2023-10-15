@@ -194,8 +194,8 @@ Little Star'' используется только один из видов к�
     };
     \draw[thick, ->] (-4.0, -2.0) -- (8.0, -2.0) node[anchor=north east] {x};
     \draw[thick, ->] (-4.0, -2.0) -- (-4.0, 1.5) node[anchor=north east] {y};
-    \label{fig:lilypond-music-graph-1}
   \end{tikzpicture}
+  \label{fig:lilypond-music-graph-1}
   \caption{Музыкальный ``график''.  По оси ``x'' отложено время, по оси ``y'' --
     частота звука.}
 \end{figure}
@@ -217,16 +217,20 @@ Little Star'' используется только один из видов к�
 
 Для того, чтобы запомнить расположение нот на нотном стане, можно
 воспользоваться ``запоминалками'' -- мнемониками. В интернете их можно найти
-великое множество. Вот наш вариант мнемоники для скрипичного ключа:
+великое множество.  Наш вариант мнемоники для скрипичного ключа показан на рис.
+\ref{fig:lilypond-music-clef-mnemonic}.
 
-\begin{tikzpicture}
-  \node (image) at (4, 2) {
-    \includegraphics[width=8cm]{music-clef-mnemonic}
-  };
-  \draw[thick, ->] (0, -1.0) -- (10, -1.0) node[anchor=north east] {x (Время)};
-  \draw[thick, ->] (0, -1.0) -- (0, 4.0) node[anchor=north east] {y (Частота)};
-  \label{fig:lilypond-music-graph-1}
-\end{tikzpicture}
+\begin{figure}[ht]
+  \begin{tikzpicture}
+    \node (image) at (4, 2) {
+      \includegraphics[width=8cm]{music-clef-mnemonic}
+    };
+    \draw[thick, ->] (0, -1.0) -- (10, -1.0) node[anchor=north east] {x (Время)};
+    \draw[thick, ->] (0, -1.0) -- (0, 4.0) node[anchor=north east] {y (Частота)};
+  \end{tikzpicture}
+  \label{fig:lilypond-music-clef-mnemonic}
+  \caption{Мнемоника для запоминания расположения нот в скрипичном ключе.}
+\end{figure}
 
 Если читать слова снизу вверх, то образуется фраза ``\textbf{E}ating
 \textbf{G}reen \textbf{B}ananas \textbf{D}isgusts \textbf{F}riends \textbf{A}nd
