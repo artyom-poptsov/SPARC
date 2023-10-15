@@ -35,6 +35,7 @@ SECTIONS = \
 	sections/music-and-technology-synthesis-simple-melodies.tex \
 	sections/music-and-technology-synthesis-arrays.tex \
 	sections/music-and-technology-synthesis-two-dimensional-arrays.tex \
+	sections/music-and-technology-synthesis-staff.tex \
 	sections/music-and-technology-synthesis-rest.tex \
 	sections/music-and-technology-synthesis-dotted-notes.tex	\
 	sections/music-and-technology-synthesis-flats-and-sharps.tex	\
