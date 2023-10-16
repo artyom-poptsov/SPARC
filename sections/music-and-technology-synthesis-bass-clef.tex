@@ -10,11 +10,46 @@
 басовый ключ используется для тех музыкальных инструментов, у которых частотный
 диапазон находится ниже, чем охватывает скрипичный ключ.
 
-Мнемоника для басового ключа представлена на
-рис. \ref{fig:lilypond-music-graph-2}.
+На рис. \ref{fig:lilypond-bass-clef} можно видеть расположение нот на нотоносце
+с басовым ключом.
 
 \begin{figure}[ht]
-  \caption{Мнемоника для запоминания нот басового ключа.}
+  \centering
+  \begin{tikzpicture}
+    \node (image) at (2, 0) { \resizebox{1.0\textwidth}{!}{
+        \begin{lilypond}
+          \relative c {
+            \clef "bass"
+            \numericTimeSignature
+            \time 4/4
+            c8 d8 e8 f8 g8 a8 b4
+          }
+        \end{lilypond}
+      }
+    };
+    \foreach \n [count=\i, evaluate=\i as \y using real(\i / 2.55)] in {
+      E2, G2, B2, D3, F3, A3
+    } {
+      \node at (-3.3, \y - 1.5) {\tiny \n};
+    };
+    \foreach \n [count=\i, evaluate=\i as \y using real(\i / 2.55)] in {
+      F2, A2, C3, E3, G3, B3
+    } {
+      \node at (-3.0, \y - 1.3) {\tiny \n};
+    };
+    \draw[thick, ->] (-4.0, -2.0) -- (8.0, -2.0) node[anchor=north east] {x};
+    \draw[thick, ->] (-4.0, -2.0) -- (-4.0, 1.5) node[anchor=north east] {y};
+  \end{tikzpicture}
+  \caption{Музыкальный ``график'' для басового ключа.  По оси ``x'' отложено
+    время, по оси ``y'' -- частота звука.}
+  \label{fig:lilypond-bass-clef}
+\end{figure}
+
+Мнемоника для басового ключа представлена на
+рис. \ref{fig:lilypond-bass-clef-mnemonic}.
+
+\begin{figure}[ht]
+  \centering
   \begin{tikzpicture}
     \node (image) at (4, 2) {
       \includegraphics[width=8cm]{music-bass-clef-mnemonic}
@@ -22,7 +57,8 @@
     \draw[thick, ->] (0, -1.0) -- (10, -1.0) node[anchor=north east] {x (Время)};
     \draw[thick, ->] (0, -1.0) -- (0, 4.0) node[anchor=north east] {y (Частота)};
   \end{tikzpicture}
-  \label{fig:lilypond-music-graph-2}
+  \caption{Мнемоника для запоминания нот басового ключа.}
+  \label{fig:lilypond-bass-clef-mnemonic}
 \end{figure}
 
 \end{document}
