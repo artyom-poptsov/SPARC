@@ -67,7 +67,10 @@
 \index{Разработка игр!I2C}
 
 \newglossaryentry{I2C}{name=I2C, description={Inter-Integrated Circuit}}
-\newglossaryentry{USB}{name=USB, description={Universal Serial Bus}}
+
+\newglossaryentry{USB}{name=USB, description={Universal Serial Bus --
+    ``Универсальная последовательная шина.''}}
+
 \newglossaryentry{PCI}{name=PCI, description={Peripheral component interconnect
     -- ``взаимосвязь периферийных компонентов''}}
 
@@ -97,6 +100,48 @@ Express (используемой например для подключения
 позволяет на одну шину подключить до 127 устройств.  При этом, одно из
 устройство является ведущим (как правило, это какой-либо микроконтроллер) и
 остальные устройства являются ведомыми.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[draw=black] (0, 2) rectangle ++(2, 1) node[pos=.5] {%
+      \begin{tabular}{c}%
+        $\mu$C\\Controller%
+    \end{tabular}};
+    \draw[draw=black] (3, 2) rectangle ++(2, 1) node[pos=.5] {
+      \begin{tabular}{c}
+        ADC\\Target
+    \end{tabular}};
+    \draw[draw=black] (6, 2) rectangle ++(2, 1) node[pos=.5] {
+      \begin{tabular}{c}
+        DAC\\Target
+    \end{tabular}};
+    \draw[draw=black] (9, 2) rectangle ++(2, 1) node[pos=.5] {
+      \begin{tabular}{c}
+        $\mu$C\\Target
+    \end{tabular}};
+
+    %% Horizontal lines.
+    \draw [line width=0.5mm] (0, 3.5) -- (11, 3.5);
+    \draw [line width=0.5mm] (0, 4.0) -- (11, 4.0);
+    \draw [line width=0.5mm] (0, 6.0) -- (11, 6.0);
+
+    %% Vertical lines.
+    \foreach \a/\b in {0.75/1.25, 3.75/4.25, 6.75/7.25, 9.75/10.25} {
+      \draw [line width=0.5mm] (\a, 3) -- (\a, 4) node[circle,fill,inner sep=1.5pt]{};
+      \draw [line width=0.5mm] (\b, 3) -- (\b, 3.5) node[circle,fill,inner sep=1.5pt]{};
+    };
+
+    \draw[line width=0.5mm] (5.25, 4) -- (5.25, 6);
+    \draw[line width=0.5mm] (5.75, 3.5) -- (5.75, 6);
+
+    \draw[draw=black, fill=white] (5.1, 4.5) rectangle ++(0.3, 1);
+    \draw[draw=black, fill=white] (5.6, 4.5) rectangle ++(0.3, 1) node[right] {$R_p$};
+
+  \end{tikzpicture}
+  \caption{Устройство шины \gls{I2C}.}
+  \label{fig:i2c-schematics}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Вывод текста}
