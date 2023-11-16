@@ -85,6 +85,7 @@
           texlive-circuitikz
           texlive-collection-langcyrillic
           texlive-glossaries
+          texlive-glossaries-english
           texlive-glossaries-extra
           texlive-lilyglyphs
           texlive-minted
