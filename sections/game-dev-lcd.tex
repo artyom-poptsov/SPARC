@@ -101,6 +101,8 @@ Express (используемой например для подключения
 устройство является ведущим (как правило, это какой-либо микроконтроллер) и
 остальные устройства являются ведомыми.
 
+На рис. \ref{fig:i2c-schematics} показана схема шины \gls{I2C}.
+
 \begin{figure}[ht]
   \centering
   \begin{tikzpicture}
@@ -122,9 +124,9 @@ Express (используемой например для подключения
     \end{tabular}};
 
     %% Horizontal lines.
-    \draw [line width=0.5mm] (0, 3.5) -- (11, 3.5);
-    \draw [line width=0.5mm] (0, 4.0) -- (11, 4.0);
-    \draw [line width=0.5mm] (0, 6.0) -- (11, 6.0);
+    \draw [line width=0.5mm] (0, 3.5) -- (11, 3.5) node[right] {SCL};
+    \draw [line width=0.5mm] (0, 4.0) -- (11, 4.0) node[right] {SDA};
+    \draw [line width=0.5mm] (0, 6.0) -- (11, 6.0) node[right] {Vdd};
 
     %% Vertical lines.
     \foreach \a/\b in {0.75/1.25, 3.75/4.25, 6.75/7.25, 9.75/10.25} {
