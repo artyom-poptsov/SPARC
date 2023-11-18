@@ -7,6 +7,20 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Unreleased
+** Путеводитель по книге: Новый раздел
+** Улучшение "музыкальных графиков"
+"Шпаргалки" по чтению нотного стана для скрипичного и басового ключа доработаны.
+** Добавление описания шины I2C
+** Добавлено детальное описание цикла "do..while"
+Изменения коснулись файла:
+- dialogues-with-computer-control-flow
+** Улучшение изложения материала
+Переработаны следующие части:
+- electronics-potential-difference
+- electronics-circuits
+** guix.scm: Добавление "texlive-glossaries-english" в зависимости
+
 * Версия 1.0.1 (2023-09-01)
 ** Исправление воспроизводимой сборки в GNU Guix
 Книга не собиралась корректно, т.к. были проблемы с пакетом "latex-marvosym".  В
