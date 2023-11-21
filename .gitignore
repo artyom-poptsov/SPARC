@@ -3,6 +3,7 @@
 sparc.aux
 sparc.out
 sparc.toc
+sparc.pdf
 *.~undo-tree~
 out
 tmp*
