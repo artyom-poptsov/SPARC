@@ -155,8 +155,10 @@ Line'' (\textbf{SDL}) и ``Serial Clock Line'' (\textbf{SCL}). Обе линии
       \draw [line width=0.5mm] (\b, 3) -- (\b, 3.5) node[circle,fill,inner sep=1.5pt]{};
     };
 
-    \draw[line width=0.5mm] (5.25, 4) -- (5.25, 6);
-    \draw[line width=0.5mm] (5.75, 3.5) -- (5.75, 6);
+    \draw[line width=0.5mm] (5.25, 4) node[circle,fill,inner sep=1.5pt]{}
+    -- (5.25, 6) node[circle,fill,inner sep=1.5pt]{};
+    \draw[line width=0.5mm] (5.75, 3.5) node[circle,fill,inner sep=1.5pt]{}
+    -- (5.75, 6) node[circle,fill,inner sep=1.5pt]{};
 
     \draw[draw=black, fill=white] (5.1, 4.5) rectangle ++(0.3, 1);
     \draw[draw=black, fill=white] (5.6, 4.5) rectangle ++(0.3, 1) node[right] {$R_p$};
