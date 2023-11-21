@@ -7,7 +7,14 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
-* Unreleased
+* Версия 1.1.0 (2023-11-21)
+** Удаление PDF-версии книги из репозитория
+PDF-версию можно получить из исходников или же из страницы релизов на GitHub.
+
+Также книга доступна из репозитория GNU Guix:
+https://packages.guix.gnu.org/packages/book-sparc
+** Добавление примеров проектов
+Примеры проектов находятся в каталоге "examples".
 ** Путеводитель по книге: Новый раздел
 ** Улучшение "музыкальных графиков"
 "Шпаргалки" по чтению нотного стана для скрипичного и басового ключа доработаны.
@@ -15,6 +22,8 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ** Добавлено детальное описание цикла "do..while"
 Изменения коснулись файла:
 - dialogues-with-computer-control-flow
+** Разработка игр: Улучшение офрмления
+Исправлены примеры кода в разделе "Реализация управления".
 ** Улучшение изложения материала
 Переработаны следующие части:
 - electronics-potential-difference
