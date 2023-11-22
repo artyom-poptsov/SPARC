@@ -23,7 +23,7 @@
 мы можем добиться достаточно интересных результатов в плане разработки игр.
 
 Рабочая область дисплея 16x2 (16 столбцов, 2 строки) схематически выглядит, как
-показано на рис. \ref{fig:lcd-schematics}.
+показано на рис. \ref{fig:lcd-16x2-schematics}.
 
 \begin{figure}[ht]
   \centering
@@ -36,8 +36,28 @@
       \draw (-0.5, \y) node[anchor=south west] {\i};
     }
   \end{tikzpicture}
-  \caption{Схематическое изображение дисплея.}
-  \label{fig:lcd-schematics}
+  \caption{Схематическое изображение дисплея 16x2 (16 столбцов, 2 строки.)}
+  \label{fig:lcd-16x2-schematics}
+\end{figure}
+
+По возможности рекомендуется использовать для проектов, предложенных в данной
+главе, ЖК-дисплей размером 20x4 (20 столбцов, 4 строки) Рабочая область
+подобного дисплея больше (как показано на рис. \ref{fig:lcd-20x4-schematics}),
+что позволяет реализовать более сложные игры.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[gray, step=0.5] (0, 0) grid (10, 2);
+    \foreach [count=\i from 0] \x in {0.0, 0.5, 1.0, ..., 9.5} {
+      \draw (\x, 2.5) node[anchor=north west] {\i};
+    }
+    \foreach [count=\i from 0] \y in {1.5, 1.0, ..., 0.0} {
+      \draw (-0.5, \y) node[anchor=south west] {\i};
+    }
+  \end{tikzpicture}
+  \caption{Схематическое изображение дисплея 20x4 (20 столбцов, 4 строки.)}
+  \label{fig:lcd-20x4-schematics}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
