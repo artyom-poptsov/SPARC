@@ -1,6 +1,6 @@
 * Источники файлов и лицензии на них
-| =Arduino_Uno_-_R3.jpg=   | CC-BY 2.0    | https://en.wikipedia.org/wiki/File:Arduino_Uno_-_R3.jpg             |
-| =Breadboard.png=         | CC0          | https://en.wikipedia.org/wiki/Breadboard#/media/File:Breadboard.png |
-| =Digital_Multimeter.jpg= | CC-BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Digital_Multimeter.jpg      |
-
-
+| =Arduino_Uno_-_R3.jpg=   | CC-BY 2.0    | https://en.wikipedia.org/wiki/File:Arduino_Uno_-_R3.jpg                                           |
+| =Breadboard.png=         | CC0          | https://en.wikipedia.org/wiki/Breadboard#/media/File:Breadboard.png                               |
+| =Digital_Multimeter.jpg= | CC-BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Digital_Multimeter.jpg                                    |
+| =lcd-16x2.png=           | CC-BY-SA 3.0 | Fritzing components library: https://github.com/adafruit/Fritzing-Library/blob/master/LICENSE.txt |
+| =lcd-20x4.png=           | CC-BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:LCD_20x4_breadboard.svg                                   |
