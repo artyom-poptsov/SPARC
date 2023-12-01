@@ -97,6 +97,7 @@ void loop() {
   монитора порта.
 \end{enumerate}
 
+
 \begin{figure}[ht]
   \centering
   \includegraphics[width=10cm]{arduino-ide-serial-monitor}
@@ -164,6 +165,44 @@ void loop() {
   два символа -- перевод строки и возврат каретки.)  Данная опция влияет на то,
   какую последовательность символов монитор порта считает за конец строки
   данных.
+\end{enumerate}
+
+\newpage
+
+Кстати говоря, синусоидальный график, показаный на
+рис. \ref{fig:arduino-ide-serial-plotter}, был получен следующим кодом:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void setup() {
+      Serial.begin(9600);
+    }
+
+    int t = 0;
+    void loop() {
+      const double AMPLITUDE = 500;
+      double y = AMPLITUDE * sin(2.0 * PI / 200 * t);
+      Serial.println(y);
+      t++;
+      delay(1);
+    }
+  \end{minted}
+  \label{listing:serial-port-sine-wave-example}
+  \caption{Пример программы для Arduino, генерирующий синус в плоттере на
+    компьютере.}
+\end{listing}
+
+\subsection{Задачи}
+
+\begin{enumerate}
+\item Попробуйте модифицировать исходный код из примера
+  \ref{listing:serial-port-sine-wave-example}, генерирующей синус (как на
+  рис. \ref{fig:arduino-ide-serial-plotter}) таким образом, чтобы амплитуда
+  графика была больше.
+\item Модифицируйте также код, чтобы период синусоиды был меньше (иными словами,
+  чтобы частота была выше.)
+\item Сделайте вывод двух синусоид одновременно таким образом, чтобы они
+  находились в противофазе.
 \end{enumerate}
 
 \end{document}
