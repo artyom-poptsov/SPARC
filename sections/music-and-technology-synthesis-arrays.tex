@@ -38,44 +38,56 @@
 название, но чтобы указать, что это массив, после имени пишем квадратные скобки
 и в них количество элементов, из которых будет состоять массив:
 
-\begin{minted}{cpp}
-float melody[28] = {
-  c4, c4, g4, g4,
-  a4, a4, g4,
-  f4, f4, e4, e4,
-  d4, d4, c4,
-  g4, g4, f4, f4,
-  e4, e4, d4,
-  g4, g4, f4, f4,
-  e4, e4, d4,
-};
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    float melody[28] = {
+      c4, c4, g4, g4,
+      a4, a4, g4,
+      f4, f4, e4, e4,
+      d4, d4, c4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+    };
+  \end{minted}
+  \label{listing:music-array-example-1}
+  \caption{Пример объявления одномерного массива с нотами.}
+\end{listing}
 
 Для обращения к определённым элементам массива нужно написать имя массива и в
 квадратных скобках номер элемента. Например, если захотелось нам поменять
 значение нулевого элемента, то мы могли бы сделать это так:
 
-\begin{minted}{cpp}
-melody[0] = g4;
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    melody[0] = g4;
+  \end{minted}
+  \label{listing:music-array-example-2}
+  \caption{Пример присвоения значения нулевому элементу массива.}
+\end{listing}
 
 Этот массив стоит объявить перед функцией \texttt{loop} в нашей программе.
 Внутри же \texttt{loop} мы можем пройтись по данному массиву в цикле и
 воспроизвести каждую из нот, использовав в качестве номера элемента счётчик
 цикла:
 
-\begin{minted}{cpp}
-void loop() {
-  const long BPM = 120;
-  const long MINUTE = 60 * 1000000;
-  const long T = (MINUTE / BPM) * 4;
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      const long BPM = 120;
+      const long MINUTE = 60 * 1000000;
+      const long T = (MINUTE / BPM) * 4;
 
-  for (int note_idx = 0; note_idx < 28; note_idx++) {
-    play_tone(SPEAKER_PIN, melody[note_idx], T / 4);
-    delay(100);
-  }
-}
-\end{minted}
+      for (int note_idx = 0; note_idx < 28; note_idx++) {
+        play_tone(SPEAKER_PIN, melody[note_idx], T / 4);
+        delay(100);
+      }
+    }
+  \end{minted}
+  \label{listing:music-array-example-3}
+  \caption{Воспроизведение массива нот через цикл.}
+\end{listing}
 
 Заметьте, насколько сократилась запись нашей мелодии. Однако мы временно
 потеряли возможность задавать длительность для каждой ноты в отдельности.
@@ -90,50 +102,60 @@ void loop() {
 $\frac{1}{4}$, следовательно её длительность в массива \texttt{melody\_t} будет
 записана, как 4.
 
-\begin{minted}{cpp}
-// Массив с нотами (их частотами.)
-float melody[28] = {
-  c4, c4, g4, g4,
-  a4, a4, g4,
-  f4, f4, e4, e4,
-  d4, d4, c4,
-  g4, g4, f4, f4,
-  e4, e4, d4,
-  g4, g4, f4, f4,
-  e4, e4, d4,
-};
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    // Массив с нотами (их частотами.)
+    float melody[28] = {
+      c4, c4, g4, g4,
+      a4, a4, g4,
+      f4, f4, e4, e4,
+      d4, d4, c4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+    };
 
-// Массив с длительностями нот.
-float melody_t[28] = {
-  4,  4,  4,  4,
-  4,  4,  2,
-  4,  4,  4,  4,
-  4,  4,  2,
-  4,  4,  4,  4,
-  4,  4,  2,
-  4,  4,  4,  4,
-  4,  4,  2,
-};
-\end{minted}
+    // Массив с длительностями нот.
+    float melody_t[28] = {
+      4,  4,  4,  4,
+      4,  4,  2,
+      4,  4,  4,  4,
+      4,  4,  2,
+      4,  4,  4,  4,
+      4,  4,  2,
+      4,  4,  4,  4,
+      4,  4,  2,
+    };
+  \end{minted}
+  \label{listing:music-array-example-4}
+  \caption{Пример задания дополнительного массива для хранения длительности
+    нот.}
+\end{listing}
 
 После этого следует обновить наш код воспроизведения мелодии:
 
-\begin{minted}{cpp}
-// ...
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    // ...
 
-void loop() {
-  const long BPM = 120;
-  const long MINUTE = 60 * 1000000;
-  const long T = (MINUTE / BPM) * 4;
+    void loop() {
+      const long BPM = 120;
+      const long MINUTE = 60 * 1000000;
+      const long T = (MINUTE / BPM) * 4;
 
-  for (int note_idx = 0; note_idx < 28; note_idx++) {
-    play_tone(SPEAKER_PIN,
-              melody[note_idx],
-              T / melody_t[note_idx]);
-    delay(100);
-  }
-}
-\end{minted}
+      for (int note_idx = 0; note_idx < 28; note_idx++) {
+        play_tone(SPEAKER_PIN,
+        melody[note_idx],
+        T / melody_t[note_idx]);
+        delay(100);
+      }
+    }
+  \end{minted}
+  \label{listing:music-array-example-5}
+  \caption{Код для воспроизведения мелодии из массива с дополнительным массивом
+    для хранения длительностей нот.}
+\end{listing}
 
 Обратите внимание на код \texttt{T / melody\_t[note\_idx]}, который рассчитывает
 как раз длительность ноты -- в числителе простой дроби стоит \texttt{T}, а в
