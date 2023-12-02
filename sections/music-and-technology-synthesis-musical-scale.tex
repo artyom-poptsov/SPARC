@@ -22,7 +22,6 @@
 (\ref{fig:lilypond-musical-scale-example-1}.)
 
 \begin{figure}[ht]
-  \caption{``Twinkle, Twinkle, Little Star'' в размере четыре четверти.}
   \centering
   \begin{lilypond}
     \relative c' {
@@ -47,6 +46,7 @@
       ragged-last = ##t
     }
   \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' в размере четыре четверти.}
   \label{fig:lilypond-musical-scale-example-1}
 \end{figure}
 
@@ -69,7 +69,6 @@
 (см. рис. \ref{fig:lilypond-musical-scale-example-2}.)
 
 \begin{figure}[ht]
-  \caption{``Twinkle, Twinkle, Little Star''}
   \centering
   \begin{lilypond}
     \relative c' {
@@ -94,6 +93,8 @@
       ragged-last = ##t
     }
   \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' с указанием акцентов (знак ``>''
+    под нотами.)}
   \label{fig:lilypond-musical-scale-example-2}
 \end{figure}
 
@@ -115,7 +116,6 @@
 доля будет отстуствовать.
 
 \begin{figure}[ht]
-  \caption{``Twinkle, Twinkle, Little Star'' в размере две четверти.}
   \centering
   \begin{lilypond}
     \relative c' {
@@ -142,6 +142,7 @@
       ragged-last = ##t
     }
   \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' в размере две четверти.}
   \label{fig:lilypond-musical-scale-example-3}
 \end{figure}
 
@@ -154,8 +155,7 @@
 из трёх в каждом такте.  При этом, некоторые ноты длиной $\frac{1}{2}$ как бы
 ``разрезаются'' тактовой чертой на две четверти.
 
-\begin{figure}[ht]
-  \caption{``Twinkle, Twinkle, Little Star'' в размере три четверти}
+\begin{figure}[h]
   \centering
   \begin{lilypond}
     \relative c' {
@@ -184,6 +184,7 @@
       ragged-last = ##t
     }
   \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' в размере три четверти}
   \label{fig:lilypond-musical-scale-example-4}
 \end{figure}
 
@@ -192,7 +193,7 @@
 музыкальная инквизиция.
 
 Тем не менее, если мы сыграем в таком размере композицию музыкальном
-инструменте, то она будет звучать вальсирующе, ведь музыкальнй размер ``две
+инструменте, то она будет звучать вальсирующе, ведь музыкальный размер ``две
 четверти'' обычно используется для вальса.
 
 Каким же образом мы можем выразить эти музыкальные нюансы в нашем программном
@@ -206,17 +207,22 @@
 Допустим, громкий динамик будет у нас на цифровом порту 2, а тихий динамик -- на
 цифровом порту 3.
 
-\begin{minted}{cpp}
-const int LOUD_SPEAKER_PIN  = 2; // Громкий динамик.
-const int QUIET_SPEAKER_PIN = 3; // Тихий динамик.
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const int LOUD_SPEAKER_PIN  = 2; // Громкий динамик.
+    const int QUIET_SPEAKER_PIN = 3; // Тихий динамик.
 
-// ...
+    // ...
 
-void setup() {
-  pinMode(LOUD_SPEAKER_PIN, OUTPUT);
-  pinMode(QUIET_SPEAKER_PIN, OUTPUT);
-}
-\end{minted}
+    void setup() {
+      pinMode(LOUD_SPEAKER_PIN, OUTPUT);
+      pinMode(QUIET_SPEAKER_PIN, OUTPUT);
+    }
+  \end{minted}
+  \label{listing:adding-additional-speaker}
+  \caption{Добавление второго динамика для воспроизведения нот с разным уровнем
+    громкости.}
+\end{listing}
 
 Во-вторых, двумерный массив нот должен теперь иметь не два столбца, а три, так
 как в третьем столбце мы как раз будем хранить громкость ноты.  Исходя из
@@ -226,55 +232,73 @@ void setup() {
 Для размера ``четыре четверти'' мы будем первую ноту из такта делать громче
 остальных.
 
-\begin{minted}{cpp}
-// ...
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    // ...
 
-float twinkle_twinkle_little_star[][3] = {
-  /* 0 */ {c4, 4, 1}, {c4, 4, 0}, {g4, 4, 0}, {g4, 4, 0},
-  /* 1 */ {a4, 4, 1}, {a4, 4, 0}, {g4, 4, 0},
-  /* 2 */ {f4, 4, 1}, {f4, 4, 0}, {e4, 4, 0}, {e4, 4, 0},
-  /* 3 */ {d4, 4, 1}, {d4, 4, 0}, {c4, 4, 0},
+    float twinkle_twinkle_little_star[][3] = {
+      {c4, 4, 1}, {c4, 4, 0}, {g4, 4, 0}, {g4, 4, 0},  // 0
+      {a4, 4, 1}, {a4, 4, 0}, {g4, 4, 0},              // 1
+      {f4, 4, 1}, {f4, 4, 0}, {e4, 4, 0}, {e4, 4, 0},  // 2
+      {d4, 4, 1}, {d4, 4, 0}, {c4, 4, 0},              // 3
 
-  /* 4 */ {g4, 4, 1}, {g4, 4, 0}, {f4, 4, 0}, {f4, 4, 0},
-  /* 5 */ {e4, 4, 1}, {e4, 4, 0}, {d4, 4, 0},
-  /* 6 */ {g4, 4, 1}, {g4, 4, 0}, {f4, 4, 0}, {f4, 4, 0},
-  /* 7 */ {e4, 4, 1}, {e4, 4, 0}, {d4, 4, 0},
+      {g4, 4, 1}, {g4, 4, 0}, {f4, 4, 0}, {f4, 4, 0},  // 4
+      {e4, 4, 1}, {e4, 4, 0}, {d4, 4, 0},              // 5
+      {g4, 4, 1}, {g4, 4, 0}, {f4, 4, 0}, {f4, 4, 0},  // 6
+      {e4, 4, 1}, {e4, 4, 0}, {d4, 4, 0},              // 7
 
-  /* 4 */ {c4, 4, 1}, {c4, 4, 0}, {g4, 4, 0}, {g4, 4, 0},
-  /* 5 */ {a4, 4, 1}, {a4, 4, 0}, {g4, 4, 0},
-  /* 2 */ {f4, 4, 1}, {f4, 4, 0}, {e4, 4, 0}, {e4, 4, 0},
-  /* 3 */ {d4, 4, 1}, {d4, 4, 0}, {c4, 4, 0},
-};
+      {c4, 4, 1}, {c4, 4, 0}, {g4, 4, 0}, {g4, 4, 0},  // 8
+      {a4, 4, 1}, {a4, 4, 0}, {g4, 4, 0},              // 9
+      {f4, 4, 1}, {f4, 4, 0}, {e4, 4, 0}, {e4, 4, 0},  // 10
+      {d4, 4, 1}, {d4, 4, 0}, {c4, 4, 0},              // 11
+    };
 
-// ...
-\end{minted}
+    // ...
+  \end{minted}
+  \label{listing:adding-musical-scale-to-array}
+  \caption{Добавление акцента к нотам ноту согласно музыкальному
+    размеру.}
+\end{listing}
 
 Далее при воспроизведении музыки нам надо выбирать нужный динамик, в
 соответствии с громкостью (акцентом) ноты.
 
-\begin{minted}{cpp}
-// ...
+\begin{listing}[h]
+  \begin{minted}{cpp}
+    // ...
 
-void loop() {
-  const long BPM = 120;
-  const long MINUTE = 60 * 1000000;
-  const long T = (MINUTE / BPM) * 4;
+    void loop() {
+      const long BPM = 120;
+      const long MINUTE = 60 * 1000000;
+      const long T = (MINUTE / BPM) * 4;
 
-  for (int note_idx = 0; note_idx < 28; note_idx++) {
-    if (melody[note_idx][2] == 1) {
-      // Нота с акцентом
-      play_tone(LOUD_SPEAKER_PIN,
-                melody[note_idx][0],
-                T / melody[note_idx][1]);
-    } else {
-      // Нота без акцента
-      play_tone(QUIET_SPEAKER_PIN,
-                melody[note_idx][0],
-                T / melody[note_idx][1]);
+      for (int note_idx = 0; note_idx < 28; note_idx++) {
+        if (melody[note_idx][2] == 1) {
+          // Нота с акцентом
+          play_tone(LOUD_SPEAKER_PIN,
+          melody[note_idx][0],
+          T / melody[note_idx][1]);
+        } else {
+          // Нота без акцента
+          play_tone(QUIET_SPEAKER_PIN,
+          melody[note_idx][0],
+          T / melody[note_idx][1]);
+        }
+        delay(100);
+      }
     }
-    delay(100);
-  }
-}
-\end{minted}
+  \end{minted}
+  \label{listing:musical-scale-implementation}
+  \caption{Реализация акцента на определённую ноту согласно музыкальному
+    размеру.}
+\end{listing}
+
+В примере \ref{listing:musical-scale-implementation} мы в тело цикла добавили
+проверку, что если в текущей взятой из массива строке во второй ячейке считая с
+нуля находится единица, это значит, что данная нота находится под акцентом и
+должна быть сыграна громче остальных.  Подобные ноты мы отправляем на динамик,
+подключенный к \texttt{LOUD\_SPEAKER\_PIN}.  Остальные ноты, как описано в блоке
+\texttt{else}, отправляются на динамик, подключенный к порту
+\texttt{QUIET\_SPEAKER\_PIN}.
 
 \end{document}
