@@ -79,11 +79,11 @@
 
 Чтобы высчитать частоту ``F4\#'', надо найти среднее арифметическое для частот
 ноты ``F4'' и следующей перед ней ноты ``G4'' (см. формулу
-\ref{quation:f-sharp-calculation}.)
+\ref{equation:f-sharp-calculation}.)
 
 \begin{equation}
   \frac{\mbox{F4} + \mbox{G4}}{2} = \mbox{F4\#}
-  \label{quation:f-sharp-calculation}
+  \label{equation:f-sharp-calculation}
 \end{equation}
 
 Программно вычислить ``F4\#'' не составляет труда, как показано в коде ниже.
@@ -91,11 +91,15 @@
 Диез'' по-английски пишется, как ``Fa Sharp'', и мы используем букву ``s'' из
 слова ``sharp'' после ноты для краткости.
 
-\begin{minted}{cpp}
-const float f4  = 349.230;
-const float g4  = 392.000;
-const float f4s = (f4 + g4) / 2; // F4 Диез
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const float f4  = 349.230;
+    const float g4  = 392.000;
+    const float f4s = (f4 + g4) / 2; // F4 Диез
+  \end{minted}
+  \label{listing:music-f4-sharp}
+  \caption{Вычисление ``диеза'' для ноты.}
+\end{listing}
 
 Подобный подход работает и с другими нотами.
 
@@ -105,11 +109,15 @@ const float f4s = (f4 + g4) / 2; // F4 Диез
 
 Таким образом:
 
-\begin{minted}{cpp}
-const float e4  = 329.630;
-const float f4  = 349.230;
-const float e4s = f4; // E4 Диез
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const float e4  = 329.630;
+    const float f4  = 349.230;
+    const float e4s = f4; // E4 Диез
+  \end{minted}
+  \label{listing:music-e4-sharp}
+  \caption{Между некоторыми нотами расстояние ровно полутон.}
+\end{listing}
 
 \index{Музыка!Бемоль}
 Бемоли по логике работают схоже с диезами, с одним отличием -- они
@@ -147,11 +155,15 @@ const float e4s = f4; // E4 Диез
 двойные бемоли, что означает необходимость брать ноту на два полутона выше или
 ниже -- по сути, брать следующую или предыдующую ноту.}
 
-\begin{minted}{cpp}
-const float d4  = 293.660;
-const float e4  = 329.630;
-const float e4f = (e4 + d4) / 2; // E4 Бемоль
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const float d4  = 293.660;
+    const float e4  = 329.630;
+    const float e4f = (e4 + d4) / 2; // E4 Бемоль
+  \end{minted}
+  \label{listing:music-e4-flat}
+  \caption{Вычисление ``бемоля'' для ноты.}
+\end{listing}
 
 Все эти диезы и бемоли мы пока с вами рассматривали в вариантах, когда
 знак-модификатор пишется разу перед нотой, на которую ``накладывается
@@ -189,23 +201,27 @@ const float e4f = (e4 + d4) / 2; // E4 Бемоль
 
 Зная это, мы можем соответствующим образом модифицировать код нашей мелодии.
 
-\begin{minted}{cpp}
-const float f4s = (f4 + g4) / 2;
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const float f4s = (f4 + g4) / 2;
 
-// ...
+    // ...
 
-float prostokvashino[28][2] = {
-  /* 0 */ {b3,  8},  {b3, 8}, {b4, 16.0 / 3.0},
-  /*   */ {f4s, 16}, {a4, 8}, {g4,          8}, {e4, 4},
-  /* 1 */ {d4,  8},  {d4, 8}, {d5, 16.0 / 3.0},
-  /*   */ {c5,  16}, {c5, 8}, {b4,          8}, {R,  4},
-  /* 2 */ {d5,  8},  {c5, 8}, {a4,          8},
-  /*   */ {f4s, 8},  {c5, 8}, {b4,          8}, {b4, 4},
-  /* 3 */ {b3,  8},  {b3, 8}, {b4, 16.0 / 3.0},
-  /*   */ {a4,  16}, {a4, 8}, {g4,          8}, {R,  4},
-};
+    float prostokvashino[28][2] = {
+      /* 0 */ {b3,  8},  {b3, 8}, {b4, 16.0 / 3.0},
+      /*   */ {f4s, 16}, {a4, 8}, {g4,          8}, {e4, 4},
+      /* 1 */ {d4,  8},  {d4, 8}, {d5, 16.0 / 3.0},
+      /*   */ {c5,  16}, {c5, 8}, {b4,          8}, {R,  4},
+      /* 2 */ {d5,  8},  {c5, 8}, {a4,          8},
+      /*   */ {f4s, 8},  {c5, 8}, {b4,          8}, {b4, 4},
+      /* 3 */ {b3,  8},  {b3, 8}, {b4, 16.0 / 3.0},
+      /*   */ {a4,  16}, {a4, 8}, {g4,          8}, {R,  4},
+    };
 
-// ...
-\end{minted}
+    // ...
+  \end{minted}
+  \label{listing:prostokvashino-with-shaprs}
+  \caption{Ноты мелодии ``Кабы небыло зимы'' с добавлением диезов.}
+\end{listing}
 
 \end{document}
