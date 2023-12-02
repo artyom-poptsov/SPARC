@@ -32,17 +32,25 @@
 Переменная в языке С++ имеет определённый тип и уникальное имя. Объявление
 (\emph{инициализация}) переменной выглядит следующим образом:
 
-\begin{verbatim}
-тип имя = значение;
-\end{verbatim}
+\begin{listing}[ht]
+  \begin{verbatim}
+    тип имя = значение;
+  \end{verbatim}
+  \label{listing:dialogues-with-computer-variable-definition-structure}
+  \caption{Общая структура объявления переменной.}
+\end{listing}
 
 То есть, чтобы загрузить в оперативную память два числа 15 и 3, мы должны написать
 следующее:
 
-\begin{minted}{cpp}
-int a = 15;
-int b = 3;
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 15;
+    int b = 3;
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-definition-example}
+  \caption{Пример объявления переменных.}
+\end{listing}
 
 Слово \texttt{int} это тип переменной, означает, что эта переменная является
 числом.
@@ -51,106 +59,171 @@ int b = 3;
 
 Дальше -- складываем значения двух переменных \texttt{a} и \texttt{b}:
 
-\begin{minted}{cpp}
-int result = a + b;
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int result = a + b;
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-operations-example}
+  \caption{Пример операции над переменными.}
+\end{listing}
 
 Здесь мы присвоили переменной \texttt{result} результат операции сложения двух
 переменных.
 
+Заметьте, что имя переменной должно отражать её предназначение, чтобы код
+программы был легко читаем для человека.
+
 \emph{ВАЖНО!} Имя переменной может состоять только из букв, цифр и нижнего
-подчёркивания, причём имя не может начинаться с цифры.
+подчёркивания, причём имя не может начинаться с цифры.  Мы между словами в
+названии переменных в данной книге будем всегда использовать символ нижнего
+подчёркивания.  Например, если мы хотим задать время задержки между включением и
+выключением светодиодов, то логичным названием для переменной будет ``значение
+задержки'', или ``delay value'' по-английски.  Тогда название переменной будет
+следующим:
 
-Вернёмся к нашим светодиодам. Объявим новую переменную:
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int delay_value = 500;
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-names}
+  \caption{Разделение слов в названии переменной символом нижнего
+    подчёркивания.}
+\end{listing}
 
-\begin{minted}{cpp}
-int k = 500;
-\end{minted}
+Далее значение переменной \texttt{delay\_value} мы подставим в программе мигания
+светодиодом, заменив ей явно указанное значение задержки в функции
+\texttt{delay}:
 
-Что мы можем с ней сделать? Например, в программе мигания светодиодом заменим ею
-значение задержки в функции \texttt{delay}. Вообще, переменным следует давать
-осмысленные имена, в нашем случае пусть это будет не \texttt{k}, а
-\texttt{delay\_val}:
-
-\begin{minted}{cpp}
-void loop() {
-  int delay_val = 500;
-  digitalWrite(2, HIGH);
-  delay(delay_val);
-  digitalWrite(2, LOW);
-  delay(delay_val);
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      int delay_value = 500;
+      digitalWrite(2, HIGH);
+      delay(delay_value);
+      digitalWrite(2, LOW);
+      delay(delay_value);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-usage}
+  \caption{Пример подстановки значения переменной в программе.}
+\end{listing}
 
 Таким образом, мы сможем поменять значения всех задержек одной заменой значения
 \texttt{delay\_val}:
 
-\begin{minted}{cpp}
-void loop() {
-  int delay_val = 600;
-  // ...
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
 
-Можно, например, увеличивать \texttt{delay\_val} на 100 при каждом выполнении
+      int delay_value = 600; // <--
+
+      digitalWrite(2, HIGH);
+      delay(delay_value);
+      digitalWrite(2, LOW);
+      delay(delay_value);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-set-value}
+  \caption{Если поменять значение переменной, то везде, где она используется,
+    значение также поменяется..}
+\end{listing}
+
+Можно, например, увеличивать \texttt{delay\_value} на 100 при каждом выполнении
 \texttt{loop}:
 
-\begin{minted}{cpp}
-void loop() {
-  int delay_val = 100;
-  digitalWrite(2, HIGH);
-  delay(delay_val);
-  digitalWrite(2, LOW);
-  delay(delay_val);
-  delay_val = delay_val + 100;
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      int delay_value = 100;
+      digitalWrite(2, HIGH);
+      delay(delay_value);
+      digitalWrite(2, LOW);
+      delay_value = delay_value + 100; // <--
+      delay(delay_value);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-change}
+  \caption{Если поменять значение переменной, то везде, где она используется,
+    значение также поменяется.}
+\end{listing}
 
-Кстати, строчку \texttt{delay\_val = delay\_val + 100} можно заменить на
-\texttt{delay\_val += 100} и результат будет тем же, но запись короче.
+В примере \ref{listing:dialogues-with-computer-variable-change} в первом
+\texttt{delay} используется значение переменной 100, но во втором \texttt{delay}
+значение уже будет 200.
+
+Кстати, строчку \texttt{delay\_value = delay\_value + 100} можно заменить на
+\texttt{delay\_value += 100} и результат будет тем же, но запись короче.
 
 \texttt{+=} -- оператор присваивания, совмещённый со сложением.
 
 Существуют также другие операторы подобного рода -- например, ``-='' (читается
-``минус-равно'') Если мы запустим этот код, то увидим, что задержка переключения
-светодиодов… не меняется. Почему? При каждом выполнении \texttt{loop} каждый раз
-объявляется новая переменная \texttt{delay\_val} со значением 100 и потому
-задержка остаётся той же. Сейчас \texttt{delay\_val} объявлена как локальная
-переменная внутри \texttt{loop}, следует объявить её за пределами функции, чтобы
-она стала глобальной:
+``минус-равно''.)
 
-\begin{minted}{cpp}
-int delay_val = 100;
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Область видимости}
+\index{Программирование!Переменная!Область видимости}
 
-void loop() {
-  digitalWrite(2, HIGH);
-  delay(delay_val);
-  digitalWrite(2, LOW);
-  delay(delay_val);
+Обратите внимание, что при повторении функции \texttt{loop} значение переменной
+всегда сбрасывается к исходному -- то есть, к 100.  Это происходит потому, что
+после завершения выполнения \texttt{loop} переменная \texttt{delay\_value}
+удаляется, а при перезапуске \texttt{loop} она создаётся заново.
 
-  delay_val += 100;
-}
-\end{minted}
+У переменных, как и у других элементов программы, есть так называемая
+\emph{область видимости}, которая определяет, где данная переменная ``видна'' --
+иными словами, из какой части программы к ней можно обратиться.
+
+В примере \ref{listing:dialogues-with-computer-variable-change} переменная
+\texttt{delay\_value} является \emph{локальной переменной} по отношению к
+функции \texttt{loop}.  Локальные переменные существуют, пока функция, где они
+были объявлены, выполняется.
+
+Если же мы хотим, чтобы значение переменной сохранялось при перезапусках функции
+\texttt{loop}, мы должны сделать её \emph{глобальной переменной} -- то есть,
+вынести за пределы функции, поместив её где-нибудь выше функции \texttt{loop}
+(но не в \texttt{setup}, так если мы поместим объявление переменной в
+\texttt{setup}, её область видимости будет ограничена этой функцией -- иными
+слвоами, мы не сможем к ней обратиться из функции \texttt{loop}!)
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int delay_value = 100;   // <--
+
+    void loop() {
+      digitalWrite(2, HIGH);
+      delay(delay_value);
+      digitalWrite(2, LOW);
+      delay(delay_value);
+
+      delay_value += 100;
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-global-variable}
+  \caption{Пример объявления глобальной переменной.}
+\end{listing}
 
 Теперь всё будет работать. Но так задержка будет бесконтрольно расти. Решением
-будет сделать так, чтобы \texttt{delay\_val} увеличивалась до какого-то
+будет сделать так, чтобы \texttt{delay\_value} увеличивалась до какого-то
 порогового значения, например, до 600. Для этого нужно добавить условие
 (\texttt{if}):
 
-\begin{minted}{cpp}
-int delay_val = 100;
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int delay_value = 100;
 
-void loop() {
-  digitalWrite(2, HIGH);
-  delay(delay_val);
-  digitalWrite(2, LOW);
-  delay(delay_al);
+    void loop() {
+      digitalWrite(2, HIGH);
+      delay(delay_value);
+      digitalWrite(2, LOW);
+      delay(delay_alue);
 
-  if (delay_val < 600){
-    delay_val += 100;
-  }
-}
-\end{minted}
+      if (delay_value < 600){
+        delay_value += 100;
+      }
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-global-variable-2}
+  \caption{Пример работы с глобальной переменной.}
+\end{listing}
 
 Об условиях и других управляющих конструкциях будет подробнее рассказано в главе
 ``Управляющие конструкции''.
@@ -165,30 +238,42 @@ void loop() {
 представляют собой явно записанные значения -- например, значение ``500'' в коде
 ниже является безымянной константой:
 
-\begin{minted}{cpp}
-  delay(500);
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    delay(500);
+  \end{minted}
+  \label{listing:dialogues-with-computer-unnamed-const}
+  \caption{Безымянная константа 500.}
+\end{listing}
 
 \emph{Именованные константы} же имеют явно заданное имя.  Например, в
 приведённом ниже примере кода \texttt{D} является именованной константой, равной
 числу 500:
 
-\begin{minted}{cpp}
-  void loop() {
-    const int D = 500;
-    digitalWrite(2, HIGH);
-    delay(D);
-    digitalWrite(2, LOW);
-    delay(D);
-  }
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      const int D = 500;
+      digitalWrite(2, HIGH);
+      delay(D);
+      digitalWrite(2, LOW);
+      delay(D);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-const}
+  \caption{Пример объявления константы с именем ``D''.}
+\end{listing}
 
 Обратите внимание, что структура объявления константы практически повторяет
 структуру объявления переменных, добавляется только слово ``const'' перед типом.
 
-\begin{verbatim}
-const тип имя = значение;
-\end{verbatim}
+\begin{listing}[ht]
+  \begin{verbatim}
+    const тип имя = значение;
+  \end{verbatim}
+  \label{listing:dialogues-with-computer-const-definition-structure}
+  \caption{Общая структура объявления константы.}
+\end{listing}
 
 Как и в случае с переменными, мы можем ссылаться на константу по её имени;
 основное различие между переменными и константами в том, что после объявления
