@@ -18,22 +18,32 @@
 В языке C++ у нас есть две основные конструкции. Первая из них -- оператор
 \texttt{if} (буквально в переводе с английского ``если''). Пример использования:
 
-\begin{minted}{cpp}
-if (a > 10) {
-    // действие, выполняемое, если значение
-    // переменной 'a' больше 10.
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    if (a > 10) {
+      // действие, выполняемое, если значение
+      // переменной 'a' больше 10.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-more-than}
+  \caption{Пример использования условия (\texttt{if}) для проверки, что значение
+    переменной больше числа 10.}
+\end{listing}
 
 Если нужно проверить равно ли значение переменной чему-либо, используют оператор
 сравнения ``=='':
 
-\begin{minted}{cpp}
-if (a == 10) {
-    // действие, выполняемое, если значение
-    // переменной 'a' равно 10.
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    if (a == 10) {
+      // действие, выполняемое, если значение
+      // переменной 'a' равно 10.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-equals}
+  \caption{Пример использования условия (\texttt{if}) для проверки, что значение
+    переменной равно числу 10.}
+\end{listing}
 
 Не путайте оператор сравнения ``=='' с оператором присваивания ``='' - это важно!
 
@@ -42,15 +52,20 @@ if (a == 10) {
 тогда, когда условие не выполняется. В этом случае используют конструкцию
 \texttt{if ... else}:
 
-\begin{minted}{cpp}
-if (a > 10) {
-  // действие, выполняемое, если значение
-  // переменной 'a' больше 10.
-} else {
-  // действие, выполняемое, если значение
-  // переменной 'a' меньше или равно 10.
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    if (a > 10) {
+      // действие, выполняемое, если значение
+      // переменной 'a' больше 10.
+    } else {
+      // действие, выполняемое, если значение
+      // переменной 'a' меньше или равно 10.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-with-else}
+  \caption{Пример использования условия (\texttt{if}) с блоком \texttt{else} для
+    обеспечения ветвления хода выполнения программы.}
+\end{listing}
 
 Второй оператор, который нам будет встречаться, это так называемый
 \emph{оператор выбора} \texttt{switch}. С ним познакомимся позже. Он удобен,
@@ -89,13 +104,18 @@ if (a > 10) {
 создать счётчик, задать его начальное значение, описать условие выполнения цикла
 и операцию изменения счётчика:
 
-\begin{minted}{cpp}
-//                   5.
-//        1.         2.           4.
-for (int pin = 0; pin < 10; pin = pin + 1) {
-    // 3. (тело цикла)
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    //                   5.
+    //        1.         2.           4.
+    for (int pin = 0; pin < 10; pin = pin + 1) {
+      // 3. (тело цикла)
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-for}
+  \caption{Цикл со счётчиком \texttt{for} с указанием порядка выполнения шагов
+    цикла.}
+\end{listing}
 
 Выполняется эта конструкция в следующем порядке:
 \begin{enumerate}
@@ -117,13 +137,18 @@ for (int pin = 0; pin < 10; pin = pin + 1) {
 количество итераций.)
 
 Общий вид цикла \texttt{while} таков:
-\begin{minted}{cpp}
-int pin = 2;
 
-while (pin < 10) {
-    // тело цикла
-}
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int pin = 2;
+
+    while (pin < 10) {
+      // тело цикла
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-while}
+  \caption{Цикл со предусловием \texttt{while}.}
+\end{listing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Цикл с постусловием}
@@ -134,13 +159,18 @@ while (pin < 10) {
 Реализуется данный вид циклов конструкцией \texttt{do..while}.
 
 Общий вид цикла \texttt{do..while} таков:
-\begin{minted}{cpp}
-  int pin = 2;
 
-  do {
-    // тело цикла
-  } while (pin < 10);
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int pin = 2;
+
+    do {
+      // тело цикла
+    } while (pin < 10);
+  \end{minted}
+  \label{listing:dialogues-with-computer-do-while}
+  \caption{Цикл с постусловием \texttt{do..while}.}
+\end{listing}
 
 Исходя из свойства данного вида цикла можно заметить интересный момент: даже
 если условие ложно \emph{перед} началом цикла, тело цикла выполнится один раз.
@@ -149,17 +179,21 @@ while (pin < 10) {
 
 Возьмём для примера следующий код:
 
-\begin{minted}{cpp}
-  int a = 2;
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 2;
 
-  do {
-    digitalWrite(13, HIGH);
-    delay(200);
-    digitalWrite(13, LOW);
-    delay(200);
-    a = a + 1;
-  } while (a < 1);
-\end{minted}
+    do {
+      digitalWrite(13, HIGH);
+      delay(200);
+      digitalWrite(13, LOW);
+      delay(200);
+      a = a + 1;
+    } while (a < 1);
+  \end{minted}
+  \label{listing:dialogues-with-computer-do-while-example}
+  \caption{Пример использования цикла с постусловием \texttt{do..while}.}
+\end{listing}
 
 В данном примере, несмотря на то, что изначально переменная \texttt{a} имеет
 значение 2, а по условию цикла переменная \texttt{a} должна быть меньше 1,
