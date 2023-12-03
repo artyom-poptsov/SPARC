@@ -23,6 +23,8 @@
 \usepackage{glossaries}
 \usepackage{makeidx}
 \usepackage{expl3}
+\usepackage{chngcntr}
+%% \usepackage{tocloft}
 
 \makeindex
 \makeglossaries
@@ -37,6 +39,9 @@
 \input{sections/commands.tex}
 
 \usepackage{subfiles}
+
+\counterwithin{listing}{section}
+\renewcommand\listingscaption{Листинг}
 
 \newgetenv[\REPRODUCIBILITY]{REPRODUCIBILITY}%
 \newgetenv[\RANDOMSEED]{RANDOMSEED}

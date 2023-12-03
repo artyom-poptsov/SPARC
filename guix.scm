@@ -88,6 +88,7 @@
           texlive-glossaries-english
           texlive-glossaries-extra
           texlive-lilyglyphs
+          texlive-chngcntr
           texlive-minted
           texlive-multirow
           texlive-pgf
