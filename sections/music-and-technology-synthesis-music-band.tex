@@ -54,7 +54,8 @@ Arduino-кавер на композицию ``Sweet Dreams'' под автор�
 Данная композиция имеет две основных музыкальных ``дорожки'' --- первая является
 вокалом, вторая представляет собой гитарную партию.
 
-\begin{figure}[ht]
+\newpage
+\begin{figure}[H]
   \begin{lilypond}
     <<
     \new Staff \with { instrumentName = "Вокал" } {
@@ -132,6 +133,7 @@ Arduino-кавер на композицию ``Sweet Dreams'' под автор�
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{Реализация мелодии}
 
 Для того, чтобы реализовать первую ``дорожку'' нашей мелодии, нам следует
@@ -142,77 +144,85 @@ Arduino-кавер на композицию ``Sweet Dreams'' под автор�
 будет играть басовую часть.  Обратите внимание, что основная тема композиции
 повторяется.
 
-\begin{minted}{cpp}
-  float sweet_dreams_guitar[28][2] = {
-    /* 01 */
-    {c4,  8}, {c4,  8}, {g4,  8}, {с4,  8},
-    {a4b, 8}, {c4,  8}, {g4,  8}, {с4,  8},
-    /* 02 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 03 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 04 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 05 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 06 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 07 */
-    {c4,  8}, {c4,  8}, {g4,  8}, {с4,  8},
-    {a4b, 8}, {c4,  8}, {g4,  8}, {с4,  8},
-    /* 08 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 09 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 10 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 11 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-    /* 12 */
-    {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
-    {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
-  };
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    float sweet_dreams_guitar[28][2] = {
+      /* 01 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {с4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {с4,  8},
+      /* 02 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 03 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 04 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 05 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 06 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 07 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {с4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {с4,  8},
+      /* 08 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 09 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 10 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 11 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 12 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+    };
+  \end{minted}
+  \label{listing:music-band-sweet-dreams-1}
+  \caption{Гитарная партия ``Sweet Dreams''.}
+\end{listing}
 
 Вторая часть мелодии (вокал) будет реализована аналогичным образом.
 
-\begin{minted}{cpp}
-  float sweet_dreams_vocals[28][2] = {
-    /* 01 */
-    {R, 1},
-    /* 02 */
-    {R, 1},
-    /* 03 */
-    {R, 4}, {e5b, 4}, {e5b, 4}, {c5, 8}, {e5b, 4},
-    /* 04 */
-    {e5b, 8.0 / 3.0}, {d5, 2},
-    /* 05 */
-    {e5b, 4}, {c5, 8}, {e5b, 8.0 / 3.0}, {c5, 4},
-    /* 06 */
-    {e5b, 8}, {f5, 8.0 / 3.0}, {d5, 8.0 / 3.0}, {c5, 8},
-    /* 07 */
-    {e5b, 8}, {e5b, 8}, {c5, 8}, {e5b, 8.0 / 3.0},
-    /* 08 */
-    {e5b, 8}, {e5b, 8.0 / 3.0}, {d5, 2},
-    /* 09 */
-    {e5b, 4}, {c5, 8}, {e5b, 4}, {c5, 8.0 / 3.0},
-    /* 10 */
-    {e5b, 8}, {e5b, 8}, {f5, 8}, {e5b, 8}, {d5, 8}, {d5, 8.0 / 3.0},
-    /* 11 */
-    {e5b, 8}, {e5b, 8}, {c5, 4}, {e5b, 4}, {c5, 8}, {e5b, 4},
-    /* 12 */
-    {c5, 8.0 / 3.0}, {R, 2}
-  };
-\end{minted}
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    float sweet_dreams_vocals[28][2] = {
+      /* 01 */
+      {R, 1},
+      /* 02 */
+      {R, 1},
+      /* 03 */
+      {R, 4}, {e5b, 4}, {e5b, 4}, {c5, 8}, {e5b, 4},
+      /* 04 */
+      {e5b, 8.0 / 3.0}, {d5, 2},
+      /* 05 */
+      {e5b, 4}, {c5, 8}, {e5b, 8.0 / 3.0}, {c5, 4},
+      /* 06 */
+      {e5b, 8}, {f5, 8.0 / 3.0}, {d5, 8.0 / 3.0}, {c5, 8},
+      /* 07 */
+      {e5b, 8}, {e5b, 8}, {c5, 8}, {e5b, 8.0 / 3.0},
+      /* 08 */
+      {e5b, 8}, {e5b, 8.0 / 3.0}, {d5, 2},
+      /* 09 */
+      {e5b, 4}, {c5, 8}, {e5b, 4}, {c5, 8.0 / 3.0},
+      /* 10 */
+      {e5b, 8}, {e5b, 8}, {f5, 8}, {e5b, 8}, {d5, 8}, {d5, 8.0 / 3.0},
+      /* 11 */
+      {e5b, 8}, {e5b, 8}, {c5, 4}, {e5b, 4}, {c5, 8}, {e5b, 4},
+      /* 12 */
+      {c5, 8.0 / 3.0}, {R, 2}
+    };
+  \end{minted}
+  \label{listing:music-band-sweet-dreams-2}
+  \caption{Вокальная партия ``Sweet Dreams''.}
+\end{listing}
 
 При работе с двумя Arduino возникает проблема -- как загрузить в каждую из них
 свою мелодию.  Самый очевидный, однако не самый удобный вариант -- это сделать
@@ -228,47 +238,52 @@ Arduino, при этом по значению на одном из цифров
 Таким образом, мы при любом раскладе получим воспроизведение разных дорожек
 мелодии на разных Arduino.
 
-\begin{minted}{cpp}
-  // Порт, куда подключен динамик.
-  const int SPEAKER     = 2;
-  // Порт-переключатель мелодии.
-  const int SWITCH_PORT = 10;
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    // Порт, куда подключен динамик.
+    const int SPEAKER     = 2;
+    // Порт-переключатель мелодии.
+    const int SWITCH_PORT = 10;
 
-  void setup() {
-    pinMode(SPEAKER, OUTPUT);
-    pinMode(SWITCH_PORT, INPUT_PULLUP);
-  }
+    void setup() {
+      pinMode(SPEAKER, OUTPUT);
+      pinMode(SWITCH_PORT, INPUT_PULLUP);
+    }
 
-  void loop() {
-    const int BPM = 93;
-    const long MINUTE = 60000000;
-    const long T = (MINUTE / BPM) * 4;
+    void loop() {
+      const int BPM = 93;
+      const long MINUTE = 60000000;
+      const long T = (MINUTE / BPM) * 4;
 
-    // Исходя из состояния порта SWITCH_PORT решаем,
-    // какую из мелодий играть.
-    if (digitalRead(SWITCH_PORT) == LOW) {
-      int count = sizeof(sweet_dreams_guitar)
-                      / sizeof(sweet_dreams_guitar[0]);
-      for (int i = 0; i < count; i++) {
-        play_tone(SPEAKER,
-                  sweet_dreams_guitar[i][0],
-                  T / sweet_dreams_guitar[i][1]);
-        delay(10);
-      }
-    } else {
-      int count = sizeof(sweet_dreams_vocals)
-                      / sizeof(sweet_dreams_vocals[0]);
-      for (int i = 0; i < count; i++) {
-        play_tone(SPEAKER,
-                  sweet_dreams_vocals[i][0],
-                  T / sweet_dreams_vocals[i][1]);
-        delay(10);
+      // Исходя из состояния порта SWITCH_PORT решаем,
+      // какую из мелодий играть.
+      if (digitalRead(SWITCH_PORT) == LOW) {
+        int count = sizeof(sweet_dreams_guitar)
+        / sizeof(sweet_dreams_guitar[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+          sweet_dreams_guitar[i][0],
+          T / sweet_dreams_guitar[i][1]);
+          delay(10);
+        }
+      } else {
+        int count = sizeof(sweet_dreams_vocals)
+        / sizeof(sweet_dreams_vocals[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+          sweet_dreams_vocals[i][0],
+          T / sweet_dreams_vocals[i][1]);
+          delay(10);
+        }
       }
     }
-  }
-\end{minted}
+  \end{minted}
+  \label{listing:music-band-sweet-dreams-3}
+  \caption{Код для воспроизведения ``Sweet Dreams'' на двух Arduino.}
+\end{listing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \subsection{Синхронизация мелодий}
 
 Для запуска мелодий одновременно можно сразу на двух Arduino нажать кнопки
@@ -283,20 +298,25 @@ Arduino, при этом по значению на одном из цифров
 
 Первая причина в рассинхронизации кроется вот в этих строчках:
 
-\begin{minted}{cpp}
-for (int i = 0; i < count; i++) {
-  play_tone(SPEAKER,
-            sweet_dreams_vocals[i][0],
-            T / sweet_dreams_vocals[i][1]);
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    for (int i = 0; i < count; i++) {
+      play_tone(SPEAKER,
+      sweet_dreams_vocals[i][0],
+      T / sweet_dreams_vocals[i][1]);
 
-  delay(10); // <----- Проблема здесь.
-}
-\end{minted}
+      delay(10); // <----- Проблема здесь.
+    }
+  \end{minted}
+  \label{listing:music-band-problem-with-delay}
+  \caption{Одна из причин накопления ошибки в длительности композиции при её
+    воспроизведении.}
+\end{listing}
 
 Представим, что у нас воспроизводятся первые два такта мелодии
 (см. \ref{fig:lilypond-melody-sweet-dreams-part}.)
 
-\begin{figure}[h!]
+\begin{figure}[!h]
   \begin{lilypond}
     <<
     \new Staff \with { instrumentName = "Вокал" } {
@@ -359,58 +379,68 @@ for (int i = 0; i < count; i++) {
 основе длины отдельно взятой ноты.  Удобнее всего это сделать внутри функции
 \texttt{play\_tone}.
 
-\begin{minted}{cpp}
-  // Функция воспроизведения звука указанной частоты.
-  void play_tone(int port, float f, long t) {
-    if (f > 0) {
-      const int T = 1000000 / f;
-      int d = T / 2;
-      int count = t / T;
-      for (int i = 0; i < count; i++) {
-        digitalWrite(port, HIGH);
-        delayMicroseconds(d);
-        digitalWrite(port, LOW);
-        delayMicroseconds(d);
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    // Функция воспроизведения звука указанной частоты.
+    void play_tone(int port, float f, long t) {
+      if (f > 0) {
+        const int T = 1000000 / f;
+        int d = T / 2;
+        int count = t / T;
+        for (int i = 0; i < count; i++) {
+          digitalWrite(port, HIGH);
+          delayMicroseconds(d);
+          digitalWrite(port, LOW);
+          delayMicroseconds(d);
+        }
+      } else {
+        delay(t / 1000); // Пауза
       }
-    } else {
-      delay(t / 1000); // Пауза
+      // Задержка после ноты составляет примерно 10%
+      // от её длины:
+      delayMicroseconds(t * 0.10);
     }
-    // Задержка после ноты составляет примерно 10%
-    // от её длины:
-    delayMicroseconds(t * 0.10);
-  }
-\end{minted}
+  \end{minted}
+  \label{listing:music-band-play-tone-with-delay}
+  \caption{Модификация функции \texttt{play\_tone} для реализации задержки между
+    нотами.}
+\end{listing}
 
 После этих изменений в \texttt{play\_tone} надо поменять и код воспроизведения
 мелодии, убрав \texttt{delay}:
 
-\begin{minted}{cpp}
-  // ...
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    // ...
 
-  void loop() {
-    const int BPM = 93;
-    const long MINUTE = 60000000;
-    const long T = (MINUTE / BPM) * 4;
+    void loop() {
+      const int BPM = 93;
+      const long MINUTE = 60000000;
+      const long T = (MINUTE / BPM) * 4;
 
-    if (digitalRead(SWITCH_PORT) == LOW) {
-      int count = sizeof(sweet_dreams_guitar)
-                      / sizeof(sweet_dreams_guitar[0]);
-      for (int i = 0; i < count; i++) {
-        play_tone(SPEAKER,
-                  sweet_dreams_guitar[i][0],
-                  T / sweet_dreams_guitar[i][1]);
-      }
-    } else {
-      int count = sizeof(sweet_dreams_vocals)
-                      / sizeof(sweet_dreams_vocals[0]);
-      for (int i = 0; i < count; i++) {
-        play_tone(SPEAKER,
-                  sweet_dreams_vocals[i][0],
-                  T / sweet_dreams_vocals[i][1]);
+      if (digitalRead(SWITCH_PORT) == LOW) {
+        int count = sizeof(sweet_dreams_guitar)
+        / sizeof(sweet_dreams_guitar[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+          sweet_dreams_guitar[i][0],
+          T / sweet_dreams_guitar[i][1]);
+        }
+      } else {
+        int count = sizeof(sweet_dreams_vocals)
+        / sizeof(sweet_dreams_vocals[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+          sweet_dreams_vocals[i][0],
+          T / sweet_dreams_vocals[i][1]);
+        }
       }
     }
-  }
-\end{minted}
+  \end{minted}
+  \label{listing:music-band-using-new-play-tone}
+  \caption{Модификация функции \texttt{play\_tone} для реализации задержки между
+    нотами.}
+\end{listing}
 
 Второй источник накопления ошибки -- это погрешность, возникающая при вычислении
 длины периода на основе частоты в \texttt{play\_tone}.  Возьмём к примеру ноту
@@ -475,28 +505,33 @@ for (int i = 0; i < count; i++) {
 
 Код с компенсацией ошибки будет выглядеть так:
 
-\begin{minted}{cpp}
-  // Функция воспроизведения звука указанной частоты.
-  void play_tone(int port, float f, long t) {
-    if (f > 0) {
-      const int T = 1000000 / f;
-      int d = T / 2;
-      int count = t / T;
-      for (int i = 0; i < count; i++) {
-        digitalWrite(port, HIGH);
-        delayMicroseconds(d);
-        digitalWrite(port, LOW);
-        delayMicroseconds(d);
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    // Функция воспроизведения звука указанной частоты.
+    void play_tone(int port, float f, long t) {
+      if (f > 0) {
+        const int T = 1000000 / f;
+        int d = T / 2;
+        int count = t / T;
+        for (int i = 0; i < count; i++) {
+          digitalWrite(port, HIGH);
+          delayMicroseconds(d);
+          digitalWrite(port, LOW);
+          delayMicroseconds(d);
+        }
+
+        // Компенсация ошибки:
+        delayMicroseconds(t - (T * count));
+
+      } else {
+        delay(t / 1000); // Пауза
       }
-
-      // Компенсация ошибки:
-      delayMicroseconds(t - (T * count));
-
-    } else {
-      delay(t / 1000); // Пауза
+      delayMicroseconds(t * 0.10);
     }
-    delayMicroseconds(t * 0.10);
-  }
-\end{minted}
+  \end{minted}
+  \label{listing:music-band-play-tone-with-error-compensation}
+  \caption{Модификация функции \texttt{play\_tone} для реализации компенсации
+    ошибки в длительности звука.}
+\end{listing}
 
 \end{document}
