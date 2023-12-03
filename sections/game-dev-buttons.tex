@@ -38,7 +38,7 @@
 нажата, то цепь замыкается и ток идёт от \texttt{5V} до цифрового порта номер 2.
 И действительно, в этом случае с порта можно считать значение 1 (\texttt{HIGH}).
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \begin{circuitikz}
     \draw (3.5, 0) node[
@@ -118,7 +118,7 @@ Arduino считает это значение единицей.
 который будет подтягивать значение на порту, куда подключена кнопка, к земле
 (GND.)
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \begin{circuitikz}
     \draw (3.5, 0) node[
@@ -144,7 +144,6 @@ Arduino считает это значение единицей.
     (7, 1) to [european resistor, l=$R_1$]
     (8, 1) to [short]
     (9, 1);
-    
   \end{circuitikz}
   \caption{Схема подключения кнопки к Arduino с подтягивающим резистором.}
   \label{fig:game-dev-button-with-pull-down-resistor}
@@ -157,7 +156,7 @@ Arduino считает это значение единицей.
 при нажатии на кнопку замыкаться не на \texttt{5V}, а на \texttt{GND}
 (см. рис. \ref{fig:game-dev-button-with-pull-up-resistor}.)
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \begin{circuitikz}
     \draw (3.5, 0) node[
