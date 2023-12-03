@@ -149,31 +149,39 @@ int count = t / T;
 исходя из описания выше, нам нужно будет повторять волну \texttt{count} раз, то
 для этого удобно использовать цикл \texttt{for} (цикл со счётчиком):
 
-\begin{minted}{cpp}
-for (int c = 0; c < count; c++) {
-  digitalWrite(port, HIGH);
-  delayMicroseconds(d1);
-  digitalWrite(port, LOW);
-  delayMicroseconds(d2);
-}
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    for (int c = 0; c < count; c++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d1);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d2);
+    }
+  \end{minted}
+  \label{listing:pwm-cycle}
+  \caption{Цикл генерации ШИМ-сигнала.}
+\end{listing}
 
 Полностью функция \texttt{pwm} будет выглядеть вот так:
 
-\begin{minted}{cpp}
-void pwm(int port, float dc, long t) {
-  const int T = 1000; // мкс
-  int d1 = T * dc;
-  int d2 = T - d1;
-  int count = t / T;
-  for (int c = 0; c < count; c++) {
-    digitalWrite(port, HIGH);
-    delayMicroseconds(d1);
-    digitalWrite(port, LOW);
-    delayMicroseconds(d2);
-  }
-}
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void pwm(int port, float dc, long t) {
+      const int T = 1000; // мкс
+      int d1 = T * dc;
+      int d2 = T - d1;
+      int count = t / T;
+      for (int c = 0; c < count; c++) {
+        digitalWrite(port, HIGH);
+        delayMicroseconds(d1);
+        digitalWrite(port, LOW);
+        delayMicroseconds(d2);
+      }
+    }
+  \end{minted}
+  \label{listing:pwm-procedure}
+  \caption{Процедура генерации ШИМ-сигнала.}
+\end{listing}
 
 Готово! Осталось только задействовать функцию \texttt{pwm} в нашей программе.
 
