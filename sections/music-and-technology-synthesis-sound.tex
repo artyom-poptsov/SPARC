@@ -115,30 +115,41 @@ int count = t / T;
 заданную волну нужное количество раз. Здесь отлично подойдёт цикл со счётчиком
 (\texttt{for}):
 
-\begin{minted}{cpp}
-for (int i = 0; i < count; i++) {
-  digitalWrite(port, HIGH);
-  delayMicroseconds(d);
-  digitalWrite(port, LOW);
-  delayMicroseconds(d);
-}
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  \end{minted}
+  \label{listing:play-tone-cycle}
+  \caption{Реализация цикла генерации звукового сигнала на цифровом порту,
+    создающей \texttt{count} колебаний на порту \texttt{port} c полупериодом
+    \texttt{d}.}
+\end{listing}
 
 В общем виде, функция выглядит так:
 
-\begin{minted}{cpp}
-void play_tone(int port, float f, long t) {
-  const long T = 1000000 / f;
-  long d = T / 2;
-  int count = t / T;
-  for (int i = 0; i < count; i++) {
-    digitalWrite(port, HIGH);
-    delayMicroseconds(d);
-    digitalWrite(port, LOW);
-    delayMicroseconds(d);
-  }
-}
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void play_tone(int port, float f, long t) {
+      const long T = 1000000 / f;
+      long d = T / 2;
+      int count = t / T;
+      for (int i = 0; i < count; i++) {
+        digitalWrite(port, HIGH);
+        delayMicroseconds(d);
+        digitalWrite(port, LOW);
+        delayMicroseconds(d);
+      }
+    }
+  \end{minted}
+  \label{listing:play-tone-procedure}
+  \caption{Реализация простой процедуры генерации звукового сигнала на цифровом
+    порту.}
+\end{listing}
 
 Наша функция генерации звука завершена. Теперь нам нужно подключить динамик к
 Arduino и протестировать нашу систему.
