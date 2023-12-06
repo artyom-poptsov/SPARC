@@ -108,4 +108,30 @@ Line'' (\textbf{SDL}) и ``Serial Clock Line'' (\textbf{SCL}). Обе линии
   \label{fig:i2c-schematics}
 \end{figure}
 
+Стандартной библиотекой для работы с протоколом I2C является
+\href{https://www.arduino.cc/reference/en/language/functions/communication/wire/}{Wire}.
+Библиотека позволяет работать с I2C-устройствами.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{ | m{5em} | m{1cm}| m{1cm} | }
+    \hline
+    Плата & Порты I2C \\
+    \hline
+    UNO R3 & A4 (SDA), A5 (SCL) \\
+    \hline
+    Leonardo & D2 (SDA), D3 (SCL) \\
+    \hline
+    Mega 2560 Rev3 & D20 (SDA), D21 (SCL) \\
+    \hline
+  \end{tabular}
+  \caption{I2C-порты на разных платформах Arduino.}
+  \label{table:i2c-pins}
+\end{table}
+
+Из-за аппаратных различий между платформами Arduino, I2C-порты на разных видах
+Arduino могут отличаться. Например, таблица \ref{table:i2c-pins} приводит
+несколько примеров.
+
+
 \end{document}
