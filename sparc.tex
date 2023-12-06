@@ -4,9 +4,6 @@
 \usepackage[utf8]{inputenc}
 \usepackage[english,russian]{babel}
 \usepackage{fontspec}
-\setmainfont{Liberation Serif}
-\setmonofont{Liberation Mono}
-
 \usepackage{graphicx}
 \renewcommand{\thefigure}{\thesection.\arabic{figure}}
 \usepackage{hyperref}
@@ -24,21 +21,22 @@
 \usepackage{makeidx}
 \usepackage{expl3}
 \usepackage{chngcntr}
-%% \usepackage{tocloft}
+\usepackage{svg}
+\usepackage{subfiles}
+\usepackage[printonlyused,withpage]{acronym}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setmainfont{Liberation Serif}
+\setmonofont{Liberation Mono}
 
 \makeindex
 \makeglossaries
 
-\usepackage{svg}
-
 \urlstyle{same}
-\usepackage[printonlyused,withpage]{acronym}
 
 \graphicspath{ {images/} {../images/} }
 
 \input{sections/commands.tex}
-
-\usepackage{subfiles}
 
 \counterwithin{listing}{section}
 \renewcommand\listingscaption{Листинг}
@@ -84,13 +82,9 @@
 электрическую цепь шёл ток.
 
 \subfile{sections/electronics-voltage}
-
 \subfile{sections/electronics-circuits}
-
 \subfile{sections/electronics-potential-difference}
-
 \subfile{sections/electronics-resistance}
-
 \subfile{sections/electronics-building-circuits}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -106,11 +100,8 @@
 
 \newpage
 \subfile{sections/dialogues-with-computer-arduino-ide}
-
 \subfile{sections/dialogues-with-computer-program-structure}
-
 \subfile{sections/dialogues-with-computer-memory}
-
 \subfile{sections/dialogues-with-computer-control-flow}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
