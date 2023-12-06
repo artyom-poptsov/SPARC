@@ -27,6 +27,7 @@ SECTIONS = \
 	sections/pwm-intro.tex \
 	sections/pwm-duty-cycle.tex \
 	sections/pwm-wavelength.tex	\
+	sections/pwm-tasks.tex \
 	sections/music-and-technology-synthesis-sound.tex \
 	sections/music-and-technology-synthesis-speaker.tex \
 	sections/music-and-technology-synthesis-rhythm.tex \
