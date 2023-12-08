@@ -163,24 +163,77 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
 ввода/вывода один светодиод.  Записывая в модуль один 8 бит данных, значением
 битов мы сможем управлять состоянием светодиодов.
 
+Подключим библиотеку \texttt{Wire} в скетче для Arduino, в самом верху
+программы:
+
+\begin{minted}{cpp}
+  #include <Wire.h>
+\end{minted}
+
+Данная библиотека будет использоваться для работы с шиной I2C.
+
+Затем зададим адрес модуля PCF8574 на шине в виде коснтанты.  У произведённых в
+Китае I2C-адаптеров для ЖК-дисплеев обычно адрес \texttt{0x27}:
+
+\begin{minted}{cpp}
+  const byte ADDRESS = 0x27;
+\end{minted}
+
+Использование константы в данном случае удобно по двум причинам: во-первых, мы
+получаем человекочитаемое имя для значения, а не просто какое-то число;
+во-вторых, мы будем использовать адрес устройства в программе несколько раз,
+поэтому если мы ссылаемся на константу, риск ошибиться в программе снижается.
+
+В \texttt{setup} необходимо инициализировать шину I2C:
+
+\begin{minted}{cpp}
+  void setup() {
+    Wire.begin(ADDRESS);
+  }
+\end{minted}
+
+В функции \texttt{loop}, чтобы передать данные в модуль по шине I2C, необходимо
+сначала инициировать начало передачи данных.  Это делается функцией
+\texttt{beginTransmission} из библиотеки \texttt{Wire}:
+
+\begin{minted}{cpp}
+  Wire.beginTransmission(ADDRESS);
+\end{minted}
+
+После этого мы можем предать данные на устройство -- в данном случае мы будем
+передавать значение \texttt{0b00000001}:
+
+\begin{minted}{cpp}
+  Wire.write(0b00000001);
+\end{minted}
+
+Далее мы должны завершить передачу данных, вызвав функцию
+\texttt{endTransmission} из библиотеки:
+
+\begin{minted}{cpp}
+  Wire.endTransmission();
+\end{minted}
+
+Таким образом мы включили один светодиод, подключенный к модулю PCF8574.
+
 \begin{listing}[ht]
   \begin{minted}{cpp}
-    #include<Wire.h>
+    #include <Wire.h>
 
-    byte address = 0x27;
-    byte data    = 0xFF;
+    const byte ADDRESS = 0x27;
 
     void setup() {
-      Wire.begin(address);
+      Wire.begin(ADDRESS);
     }
+
     void loop() {
-      Wire.beginTransmission(address);
+      Wire.beginTransmission(ADDRESS);
       Wire.write(0b00000001);
       Wire.endTransmission();
 
       delay(1000);
 
-      Wire.beginTransmission(address);
+      Wire.beginTransmission(ADDRESS);
       Wire.write(0b00000000);
       Wire.endTransmission()
 
@@ -192,6 +245,7 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
     Wire.}
 \end{listing}
 
-В пример кода \ref{listing:communication-pcf8574} реализовано мигание одним из восьми подключенных к модулю светодиодов.
+В пример кода \ref{listing:communication-pcf8574} реализовано мигание одним из
+восьми подключенных к модулю светодиодов.
 
 \end{document}
