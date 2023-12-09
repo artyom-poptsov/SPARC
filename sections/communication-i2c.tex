@@ -158,10 +158,20 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
 однако мы будем использовать только встроенную в Arduino IDE библиотеку
 ``Wire''\footnote{\url{https://www.arduino.cc/reference/en/language/functions/communication/wire/}}.
 
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{schematics/lcm1602-i2c-leds}
+  \caption{I2C-модуль LCM1602 на базе микросхемы PCF8574 с подключенными восемью
+    светодиодами.}
+  \label{fig:lcm1602-i2c-leds}
+\end{figure}
+
 Для нашего проекта возьмём модуль, как на
 рис. \ref{fig:i2c-pcf8574-lcd-adapter}, и подключим к каждой из восьми ножек
 ввода/вывода один светодиод.  Записывая в модуль один 8 бит данных, значением
-битов мы сможем управлять состоянием светодиодов.
+битов мы сможем управлять состоянием светодиодов.  На
+рис. \ref{fig:lcm1602-i2c-leds} показан один из возможных вариантов подключения
+компонентов для проекта.
 
 Подключим библиотеку \texttt{Wire} в скетче для Arduino, в самом верху
 программы:
