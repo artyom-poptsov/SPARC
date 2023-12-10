@@ -106,7 +106,7 @@ Line'' (\textbf{SDL}) и ``Serial Clock Line'' (\textbf{SCL}). Обе линии
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{ | m{5em} | m{1cm}| m{1cm} | }
+  \begin{tabular}{ | m{5em} | m{2cm} | }
     \hline
     Плата & Порты I2C \\
     \hline
@@ -131,7 +131,8 @@ Arduino могут отличаться. Например, таблица \ref{t
 \begin{figure}[H]
   \centering
   \includegraphics[width=12cm]{I2C-PCF8574-LCD-ADAPTER}
-  \caption{I2C-адаптер ЖК-дисплея на базе расширителя портов PCF8574.}
+  \caption{I2C-адаптер ЖК-дисплея LCM1602-I2C на базе расширителя портов
+    PCF8574.}
   \label{fig:i2c-pcf8574-lcd-adapter}
 \end{figure}
 
@@ -157,6 +158,42 @@ PCF8574 является восмиканальным расширителем �
 PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
 однако мы будем использовать только встроенную в Arduino IDE библиотеку
 ``Wire''\footnote{\url{https://www.arduino.cc/reference/en/language/functions/communication/wire/}}.
+
+Обратите внимание, что модуль на рис. \ref{fig:i2c-pcf8574-lcd-adapter} имеет
+область с тремя группами контактов (``A0'', ``A1'' и ``A2''), помеченную на
+рисунке, как ``Select I2C Address'' -- через замыкание контактов путём впаивания
+перемычек можно менять адрес данного I2C-устройства.  Имея три места под
+перемычки, мы получаем $2^3 = 8$ возможных комбинаций перемычек.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | m{12em} | m{2cm} | }
+    \hline
+    \textbf{Состояние контактов} & \textbf{Адрес I2C} \\
+    \hline
+    \texttt{A0 A0 A1 A1 A2 A2} & \texttt{0x27} \\
+    \hline
+    \texttt{A0-A0 A1 A1 A2 A2} & \texttt{0x26} \\
+    \hline
+    \texttt{A0 A0 A1-A1 A2 A2} & \texttt{0x25} \\
+    \hline
+    \texttt{A0-A0 A1-A1 A2 A2} & \texttt{0x24} \\
+    \hline
+    \texttt{A0 A0 A1 A1 A2-A2} & \texttt{0x23} \\
+    \hline
+    \texttt{A0-A0 A1 A1 A2-A2} & \texttt{0x22} \\
+    \hline
+    \texttt{A0 A0 A1-A1 A2-A2} & \texttt{0x21} \\
+    \hline
+    \texttt{A0-A0 A1-A1 A2-A2} & \texttt{0x20} \\
+    \hline
+  \end{tabular}
+  \caption{Возможные варианты I2C-адреса модуля LCM1602-I2C.}
+  \label{table:i2c-lcm1602-addressing}
+\end{table}
+
+В таблице \ref{table:i2c-lcm1602-addressing} показаны возможные комбинации
+перемычек и соответствующие адреса модуля.
 
 \begin{figure}[H]
   \centering
