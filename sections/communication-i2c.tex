@@ -224,9 +224,20 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
   Wire.endTransmission();
 \end{minted}
 
-Таким образом мы включили один светодиод, подключенный к модулю PCF8574.
+Таким образом мы включили один светодиод, подключенный к модулю PCF8574.  Чтобы
+затем выключить светодиод и таким образом реализовать мигание этим светодиодом,
+мы должны записать в память PCF8574 значение \texttt{0b00000000}:
 
-\begin{listing}[ht]
+\begin{minted}{cpp}
+  Wire.beginTransmission(ADDRESS);
+  Wire.write(0b00000000);
+  Wire.endTransmission()
+\end{minted}
+
+Чтобы мигание не было слишком быстрым, между включением и выключением надо
+добавить задержку.
+
+\begin{listing}[H]
   \begin{minted}{cpp}
     #include <Wire.h>
 
@@ -255,7 +266,7 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
     Wire.}
 \end{listing}
 
-В пример кода \ref{listing:communication-pcf8574} реализовано мигание одним из
+В примере кода \ref{listing:communication-pcf8574} реализовано мигание одним из
 восьми подключенных к модулю светодиодов.
 
 \end{document}
