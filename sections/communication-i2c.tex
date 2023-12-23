@@ -184,25 +184,52 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
 
 \begin{table}[H]
   \centering
-  \begin{tabular}{ | m{12em} | m{2cm} | }
+  \begin{tabular}{
+      %% A2-A0
+      | m{2em}
+      | m{2em}
+      | m{2em}
+      %% A6-A0
+      | m{1.5em}
+      | m{1.5em}
+      | m{1.5em}
+      | m{1.5em}
+      | m{1.5em}
+      | m{1.5em}
+      | m{1.5em}
+      %% Address
+      | m{1cm} | }
     \hline
-    \textbf{Состояние контактов} & \textbf{Адрес I2C} \\
+    \multicolumn{3}{|c|}{\textbf{Подключение пинов}}
+    & \multicolumn{7}{|c|}{\textbf{Значение на пинах}}
+    & \multirow{2}{2em}{\textbf{Адрес I2C}} \\
+    \textbf{A2}
+    & \textbf{A1}
+    & \textbf{A0}
+    & \textbf{A6}
+    & \textbf{A5}
+    & \textbf{A4}
+    & \textbf{A3}
+    & \textbf{A2}
+    & \textbf{A1}
+    & \textbf{A0}
+    &   \\
     \hline
-    \texttt{A0 A0 A1 A1 A2 A2} & \texttt{0x27} \\
+    $V_{SS}$ & $V_{SS}$ & $V_{SS}$ & 0 & 1 & 0 & 0 & 0 & 0 & 0 & \texttt{0x20} \\
     \hline
-    \texttt{A0-A0 A1 A1 A2 A2} & \texttt{0x26} \\
+    $V_{SS}$ & $V_{SS}$ & $V_{DD}$ & 0 & 1 & 0 & 0 & 0 & 0 & 1 & \texttt{0x21} \\
     \hline
-    \texttt{A0 A0 A1-A1 A2 A2} & \texttt{0x25} \\
+    $V_{SS}$ & $V_{DD}$ & $V_{SS}$ & 0 & 1 & 0 & 0 & 0 & 1 & 0 & \texttt{0x22} \\
     \hline
-    \texttt{A0-A0 A1-A1 A2 A2} & \texttt{0x24} \\
+    $V_{SS}$ & $V_{DD}$ & $V_{DD}$ & 0 & 1 & 0 & 0 & 0 & 1 & 1 & \texttt{0x23} \\
     \hline
-    \texttt{A0 A0 A1 A1 A2-A2} & \texttt{0x23} \\
+    $V_{DD}$ & $V_{SS}$ & $V_{SS}$ & 0 & 1 & 0 & 0 & 1 & 0 & 0 & \texttt{0x24} \\
     \hline
-    \texttt{A0-A0 A1 A1 A2-A2} & \texttt{0x22} \\
+    $V_{DD}$ & $V_{SS}$ & $V_{DD}$ & 0 & 1 & 0 & 0 & 1 & 0 & 1 & \texttt{0x25} \\
     \hline
-    \texttt{A0 A0 A1-A1 A2-A2} & \texttt{0x21} \\
+    $V_{DD}$ & $V_{DD}$ & $V_{SS}$ & 0 & 1 & 0 & 0 & 1 & 1 & 0 & \texttt{0x26} \\
     \hline
-    \texttt{A0-A0 A1-A1 A2-A2} & \texttt{0x20} \\
+    $V_{DD}$ & $V_{DD}$ & $V_{DD}$ & 0 & 1 & 0 & 0 & 1 & 1 & 1 & \texttt{0x27} \\
     \hline
   \end{tabular}
   \caption{Возможные варианты I2C-адреса модуля LCM1602-I2C.}
@@ -210,7 +237,8 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
 \end{table}
 
 В таблице \ref{table:i2c-lcm1602-addressing} показаны возможные комбинации
-перемычек и соответствующие адреса модуля.
+перемычек и соответствующие адреса модуля.\footnote{Источник:
+\url{https://static.chipdip.ru/lib/807/DOC015807788.pdf}}
 
 \begin{figure}[H]
   \centering
