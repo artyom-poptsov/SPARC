@@ -228,7 +228,7 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
     $V_{DD}$ & $V_{DD}$ & $V_{DD}$ & 0 & 1 & 0 & 0 & 1 & 1 & 1 & -- & \texttt{0x27} \\
     \hline
   \end{tabular}
-  \caption{Возможные варианты I2C-адреса модуля LCM1602-I2C.}
+  \caption{Адресация модуля LCM1602-I2C.}
   \label{table:i2c-lcm1602-addressing}
 \end{table}
 
@@ -237,9 +237,12 @@ PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
 \url{https://static.chipdip.ru/lib/807/DOC015807788.pdf}}
 
 Как мы говорили выше, на самом деле на шине I2C адрес устройства кодируется
-восемью битами, где семь бит (\texttt{A6--A0}) являются собственно сами адресом
+восемью битами, где семь бит (\texttt{A6-A0}) являются собственно сами адресом
 устройства, а самый младший бит (\texttt{R/W}) кодирует направление передачи --
-  от устройства, или на устройство.
+от устройства, или на устройство.  Изменение значений на пинах A0-A2 (первые три
+столбца таблицы \ref{table:i2c-lcm1602-addressing}) меняет I2C-адрес устройства:
+$V_{DD}$ означает напряжение питания (``supply voltage''), $V_{SS}$ -- землю
+(``supply ground'').  Пины A3-A6 имеют фиксированное значение.
 
 \begin{figure}[H]
   \centering
