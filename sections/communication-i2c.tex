@@ -106,15 +106,21 @@ Line'' (\textbf{SDL}) и ``Serial Clock Line'' (\textbf{SCL}). Обе линии
 
 \begin{table}[h]
   \centering
-  \begin{tabular}{ | m{5em} | m{2cm} | }
+  \begin{tabular}{ | c | c | c | }
     \hline
-    Плата & Порты I2C \\
+    \multirow{2}{8em}{\textbf{Плата}} & \multicolumn{2}{c|}{\textbf{Порты I2C}} \\
+    \cline{2-3}
+    & \textbf{SDA} & \textbf{SCL} \\
     \hline
-    UNO R3 & A4 (SDA), A5 (SCL) \\
+    Nano & A4 & A5 \\
     \hline
-    Leonardo & D2 (SDA), D3 (SCL) \\
+    UNO R3 & A4 & A5 \\
     \hline
-    Mega 2560 Rev3 & D20 (SDA), D21 (SCL) \\
+    Leonardo & D2 & D3 \\
+    \hline
+    Mega 2560 Rev3 & D20 & D21 \\
+    \hline
+    Due & D20 & D21 \\
     \hline
   \end{tabular}
   \caption{I2C-порты на разных платформах Arduino.}
