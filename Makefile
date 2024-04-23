@@ -44,6 +44,7 @@ SECTIONS = \
 	sections/music-and-technology-synthesis-bass-clef.tex \
 	sections/music-and-technology-synthesis-music-band.tex \
 	sections/communication-intro.tex \
+	sections/communication-serial-port.tex \
 	sections/communication-i2c.tex \
 	sections/game-dev-intro.tex \
 	sections/game-dev-lcd.tex	\
