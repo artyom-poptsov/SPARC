@@ -7,6 +7,10 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Unreleased
+** Расширения раздела "Платформа Arduino"
+Добавлены примеры Arduino с кратким описанием.  Добавлено краткое описание плат
+расширения.
 * Версия 2.0.0 (2024-01-04)
 ** Новая глава "Язык общения машин"
 В данном разделе рассматриваются протоколы коммуникации между микроконтроллером
