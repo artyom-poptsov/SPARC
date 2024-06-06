@@ -43,11 +43,17 @@ Ethernet.  Однако последовательным портом обычн
 
 На всех платах Arduino есть как минимум один последовательный порт, на некоторых
 моделях (вроде Arduino Mega 2560) есть несколько последовательных портов.
+Таблица последовательных портов и ассоциированных с ними цифровых портов можно
+найти в таблице \ref{table:serial-ports--pins}. \footnote{Источник таблицы:
+\url{https://www.arduino.cc/reference/en/language/functions/communication/serial/}}
 
 \begin{table}[h]
 \centering
-\begin{tabular}{|c|c|c|c|c|c}
-Board                      & Serial pins  & Serial1 pins     & Serial2 pins     & Serial3 pins     & Serial4 pins     \\
+\begin{tabular}{|m{9em}|m{3.5em}|m{3.5em}|m{3.5em}|m{3.5em}|m{3.5em}|}
+  \hline
+  \multirow{2}{2em}{\textbf{Плата}} & \multicolumn{5}{c|}{\textbf{Цифровые порты}} \\
+  \cline{2-6}
+   & \textbf{Serial}  & \textbf{Serial1}     & \textbf{Serial2}     & \textbf{Serial3}     & \textbf{Serial4}     \\
 \hline
 UNO R3, UNO R3 SMD Mini    & 0(RX), 1(TX) &                  &                  &                  &                  \\
 \hline
@@ -73,10 +79,11 @@ Nano 33 IoT                &              & 0(RX0), 1(TX0)   &                  
 \hline
 Nano RP2040 Connect        &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
 \hline
-Nano BLE / BLE Sense       &              & 0(RX0), 1(TX0)   &                  &                  &                  
+Nano BLE / BLE Sense       &              & 0(RX0), 1(TX0)   &                  &                  & \\
+\hline
 \end{tabular}
-\caption{Последовательые порты на Arduino.}
-\label{table:i2c-pins}
+\caption{Последовательные порты на Arduino.}
+\label{table:serial-ports--pins}
 \end{table}
 
 У каждого последовательного порта есть ассоциированные с ним цифровые порты
