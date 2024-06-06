@@ -44,6 +44,41 @@ Ethernet.  Однако последовательным портом обычн
 На всех платах Arduino есть как минимум один последовательный порт, на некоторых
 моделях (вроде Arduino Mega 2560) есть несколько последовательных портов.
 
+\begin{table}[h]
+\centering
+\begin{tabular}{|c|c|c|c|c|c}
+Board                      & Serial pins  & Serial1 pins     & Serial2 pins     & Serial3 pins     & Serial4 pins     \\
+\hline
+UNO R3, UNO R3 SMD Mini    & 0(RX), 1(TX) &                  &                  &                  &                  \\
+\hline
+Nano (classic)             & 0(RX), 1(TX) &                  &                  &                  &                  \\
+\hline
+UNO R4 Minima, UNO R4 WiFi &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
+\hline
+Leonardo, Micro, Yún Rev2  &              & 0(RX), 1(TX)     &                  &                  &                  \\
+\hline
+Uno WiFi Rev.2             &              & 0(RX), 1(TX)     &                  &                  &                  \\
+\hline
+MKR boards                 &              & 13(RX), 14(TX)   &                  &                  &                  \\
+\hline
+Zero                       &              & 0(RX), 1(TX)     &                  &                  &                  \\
+\hline
+GIGA R1 WiFi               &              & 0(RX), 1(TX)     & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) \\
+\hline
+Due                        & 0(RX), 1(TX) & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) &                  \\
+\hline
+Mega 2560 Rev3             & 0(RX), 1(TX) & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) &                  \\
+\hline
+Nano 33 IoT                &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
+\hline
+Nano RP2040 Connect        &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
+\hline
+Nano BLE / BLE Sense       &              & 0(RX0), 1(TX0)   &                  &                  &                  
+\end{tabular}
+\caption{Последовательые порты на Arduino.}
+\label{table:i2c-pins}
+\end{table}
+
 У каждого последовательного порта есть ассоциированные с ним цифровые порты
 Arduino.  На большинстве плат Arduino для последовательного порта по-умолчанию
 используются порты 0 (RX) и 1 (TX.)  При передачи данных между компьютером и
