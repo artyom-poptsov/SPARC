@@ -93,4 +93,53 @@ Arduino используется именно этот \texttt{Serial}; таки
 значения дублируются на цифровых портах, связанных с данным последовательном
 портом.
 
+\subsubsection{Класс \texttt{SoftwareSerial}}
+
+Встроенная библиотека
+\texttt{SoftwareSerial}\footnote{\url{https://docs.arduino.cc/learn/built-in-libraries/software-serial/}}
+позволяет программно реализовать протокол последовательного порта на цифровых
+портах, отличных от тех, что указаны в таблице \ref{table:serial-ports--pins}.
+
+С помощью данной библиотеки можно реализовать несколько последовательных портов
+со скоростями до 115200 бод.
+
+Тем не менее, \texttt{SoftwareSerial} имеет ряд ограничений:
+\begin{itemize}
+\item Библиотека позволет в каждый момент времени либо передавать, либо
+  принимать данные -- одновременный приём и передача не возможны. Таким образом
+  можно сказать, что коммуникация выполняется в \emph{полу-дуплексном режиме}.
+\item Если используется несколько \texttt{SoftwareSerial}-портов, то только один
+  из них может принимать данные в каждый момент времени.
+\item Для \texttt{SoftwareSerial} подходят только те порты, которые поддерживают
+  прерывания.
+\item На платах Arduino и Genuino 101 максимальная скорость передачи данных
+  составляет 57600 бод.
+\item На платах Arduino и Genuino 101 порт номер 13 не может быть использован в
+  роли RX-порта.
+\end{itemize}
+
+Пример создания программного последовательно порта показан ниже.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <SoftwareSerial.h>
+
+    const byte RX_PIN = 2;
+    const byte TX_PIN = 3;
+
+    SoftwareSerial my_serial(RX_PIN, TX_PIN);
+
+    void setup() {
+      my_serial.println("Hello, World!");
+    }
+
+    void loop() {
+
+    }
+  \end{minted}
+  \label{listing:communication-serial-software}
+  \caption{Пример использования программного последовательного порта
+    (\texttt{SoftwareSerial}.)}
+\end{listing}
+
 \end{document}
