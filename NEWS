@@ -11,6 +11,19 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ** Расширения раздела "Платформа Arduino"
 Добавлены примеры Arduino с кратким описанием.  Добавлено краткое описание плат
 расширения.
+** Белый шум
+*** Последовательный порт: Дополнение раздела
+** Язык общения машин
+*** Введение: Дополнение раздела
+*** Последовательный порт: Новый раздел
+** Исправление стилистических и орфографических ошибок
+Ошибки были выявлены Van0Mask (https://github.com/V4n0M4sk) и описаны в
+следующих отчётах:
+- https://github.com/artyom-poptsov/SPARC/issues/3
+- https://github.com/artyom-poptsov/SPARC/issues/4
+- https://github.com/artyom-poptsov/SPARC/issues/5
+- https://github.com/artyom-poptsov/SPARC/issues/6
+- https://github.com/artyom-poptsov/SPARC/issues/7
 * Версия 2.0.0 (2024-01-04)
 ** Новая глава "Язык общения машин"
 В данном разделе рассматриваются протоколы коммуникации между микроконтроллером
