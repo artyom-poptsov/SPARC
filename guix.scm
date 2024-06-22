@@ -1,6 +1,6 @@
 ;; guix.scm --- GNU Guix package recipe    -*- coding: utf-8 -*-
 ;;
-;; Copyright (C) 2022-2023 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+;; Copyright (C) 2022-2024 Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ;;
 ;; Author: Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ;; Created: 17 November 2022
@@ -80,6 +80,7 @@
           texlive-acronym
           texlive-adjustbox
           texlive-bibtex
+          texlive-biblatex
           texlive-bibtexperllibs
           texlive-bigfoot
           texlive-circuitikz
