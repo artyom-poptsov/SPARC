@@ -25,6 +25,9 @@
 \usepackage{subfiles}
 \usepackage[printonlyused,withpage]{acronym}
 
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{references.bib}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setmainfont{Liberation Serif}
 \setmonofont{Liberation Mono}
@@ -172,6 +175,9 @@
 \addcontentsline{toc}{chapter}{Список примеров кода}
 \renewcommand\listoflistingscaption{Список примеров кода}
 \listoflistings
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\printbibliography[heading=bibintoc, title={Библиография}]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \appendix

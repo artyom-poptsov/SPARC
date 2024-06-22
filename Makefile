@@ -67,6 +67,12 @@ COMMIT = $(shell git rev-parse HEAD)
 SECTIONS_OUT = \
 	$(foreach section, $(SECTIONS), out/$(section))
 
+out/references.bib: references.bib
+	@echo "CP        $< -> $@" && cp $< $@
+
+out/sparc-blx.bib: out/references.bib out/sparc.aux
+	@cd out && echo "BIBTEX    $@" && bibtex sparc
+
 version.tex: version.tex.in
 	@echo "GEN       $@" && sed "s/@COMMIT@/${COMMIT}/g" $< > $@
 
@@ -98,7 +104,7 @@ out/sparc.aux: sparc.tex out/sparc.tex version.tex
 		&& xelatex --interaction=batchmode --draftmode --no-pdf --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
 		|| (echo "---- sparc.pdf.log.1 ----"; cat sparc.pdf.log.1; echo "---- sparc.log ----"; cat sparc.log) && exit 0
 
-out/sparc.pdf: out/sparc.aux make_glossary make_index
+out/sparc.pdf: out/sparc.aux make_glossary make_index out/sparc-blx.bib
 	@echo "XELATEX   out/sparc.tex -> out/sparc.pdf" \
 	  && cd out \
     && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
