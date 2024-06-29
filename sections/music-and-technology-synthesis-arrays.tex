@@ -76,7 +76,7 @@
   \begin{minted}{cpp}
     void loop() {
       const long BPM = 120;
-      const long MINUTE = 60 * 1000000;
+      const long MINUTE = 60000000;
       const long T = (MINUTE / BPM) * 4;
 
       for (int note_idx = 0; note_idx < 28; note_idx++) {
@@ -141,13 +141,13 @@ $\frac{1}{4}$, следовательно её длительность в ма�
 
     void loop() {
       const long BPM = 120;
-      const long MINUTE = 60 * 1000000;
+      const long MINUTE = 60000000;
       const long T = (MINUTE / BPM) * 4;
 
       for (int note_idx = 0; note_idx < 28; note_idx++) {
         play_tone(SPEAKER_PIN,
-        melody[note_idx],
-        T / melody_t[note_idx]);
+                  melody[note_idx],
+                  T / melody_t[note_idx]);
         delay(100);
       }
     }
