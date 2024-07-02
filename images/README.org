@@ -7,4 +7,5 @@
 | =lcd-16x2.png=                | CC-BY-SA 3.0 | Fritzing components library: https://github.com/adafruit/Fritzing-Library/blob/master/LICENSE.txt |
 | =lcd-20x4.png=                | CC-BY-SA 4.0 | https://commons.wikimedia.org/wiki/File:LCD_20x4_breadboard.svg                                   |
 | =I2C-PCF8574-LCD-ADAPTER.jpg= | CC-BY-NC 3.0 | https://www.14core.com/wiring-i2c-module-on-16x2-lcd-with-sclsda/                                 |
+| =photoresistor.jpg=           | CC-BY-SA 2.0 | https://commons.wikimedia.org/wiki/File:Photoresistor_2.jpg                                       |
 
