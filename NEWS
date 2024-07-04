@@ -7,7 +7,7 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
-* Unreleased
+* Версия 2.1.0 (2024-07-04)
 ** Расширения раздела "Платформа Arduino"
 Добавлены примеры Arduino с кратким описанием.  Добавлено краткое описание плат
 расширения.
@@ -26,6 +26,7 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ** Синтез музыки и технологии
 *** Реализация мелодии
 - Исправление ошибки в мелодии "Sweet Dreams".
+** Добавление библиографии
 ** =guix.scm=
 - Добавление "texlive-biblatex" в зависимости.
 ** Исправление стилистических и орфографических ошибок
@@ -36,6 +37,8 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 - https://github.com/artyom-poptsov/SPARC/issues/5
 - https://github.com/artyom-poptsov/SPARC/issues/6
 - https://github.com/artyom-poptsov/SPARC/issues/7
+
+Также Антон Шеффер (Agaffer) выявил несколько ошибок в тексте.
 * Версия 2.0.0 (2024-01-04)
 ** Новая глава "Язык общения машин"
 В данном разделе рассматриваются протоколы коммуникации между микроконтроллером
