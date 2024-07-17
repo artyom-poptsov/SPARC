@@ -104,14 +104,21 @@ out/src/ru/version.tex: src/ru/version.tex.in
 		&& sed "s/@COMMIT@/${COMMIT}/g" $< > $@
 
 out/src/ru/sections/%.tex: src/ru/sections/%.tex
-	@[ -d out/src/ru/sections ] || mkdir -p out/src/ru/sections
+	@[ -d $(abs_top_srcdir)/out/src/ru/sections ] \
+		|| mkdir -p $(abs_top_srcdir)/out/src/ru/sections
 	@echo "LILYPOND  $< -> $@" \
-		&& lilypond-book --output out/src/ru/sections/ --pdf $< > $@.log 2>&1 \
+		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/ru/ \
+			--output $(abs_top_srcdir)/out/src/ru/sections/ \
+			--pdf $< > $@.log 2>&1 \
 		|| (cat $@.log; exit 1)
 
 out/src/ru/sparc.tex: src/ru/sparc.tex $(SECTIONS_OUT) out/src/ru/version.tex
 	@echo "LILYPOND  sparc.tex -> out/sparc.tex" \
-		&& lilypond-book --include out/src/ru/ --output out/src/ru/ --pdf $(abs_top_srcdir)/src/ru/sparc.tex > sparc.tex.log 2>&1 \
+		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/ru/ \
+			--output $(abs_top_srcdir)/out/src/ru/ \
+			--pdf $(abs_top_srcdir)/src/ru/sparc.tex > sparc.tex.log 2>&1 \
 		|| (cat sparc.tex.log; exit 1)
 
 make_glossary: out/src/ru/sparc.aux
