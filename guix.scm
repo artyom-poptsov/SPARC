@@ -126,7 +126,7 @@
                            (let ((doc-dir (string-append #$output
                                                          "/share/doc/sparc/")))
                              (mkdir-p doc-dir)
-d                             (copy-file "sparc.pdf"
+                             (copy-file "sparc.pdf"
                                         (string-append doc-dir
                                                        "sparc.pdf"))))))))
    (home-page "https://github.com/artyom-poptsov/SPARC")
