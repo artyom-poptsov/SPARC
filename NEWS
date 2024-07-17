@@ -7,6 +7,8 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Unreleased
+** Migrate the project to GNU Autotools
 * Версия 2.1.0 (2024-07-04)
 ** Расширения раздела "Платформа Arduino"
 Добавлены примеры Arduino с кратким описанием.  Добавлено краткое описание плат
