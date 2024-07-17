@@ -90,16 +90,16 @@ COMMIT = $(shell git rev-parse HEAD)
 SECTIONS_OUT = \
 	$(foreach section, $(SECTIONS), out/$(section))
 
-out/references.bib: src/references.bib
+out/src/ru/references.bib: src/references.bib
 	@echo "CP        $< -> $@" \
 		&& cp $< $@
 
-out/sparc-blx.bib: out/references.bib out/src/ru/sparc.aux
+out/src/ru/sparc-blx.bib: out/src/ru/references.bib out/src/ru/sparc.aux
 	@echo "BIBTEX    $@" \
-		cd out \
-		&&  && bibtex sparc
+		&& cd out/src/ru/ \
+		&& bibtex sparc
 
-src/ru/version.tex: src/ru/version.tex.in
+out/src/ru/version.tex: src/ru/version.tex.in
 	@echo "GEN       $@" \
 		&& sed "s/@COMMIT@/${COMMIT}/g" $< > $@
 
@@ -109,7 +109,7 @@ out/src/ru/sections/%.tex: src/ru/sections/%.tex
 		&& lilypond-book --output out/src/ru/sections/ --pdf $< > $@.log 2>&1 \
 		|| (cat $@.log; exit 1)
 
-out/src/ru/sparc.tex: src/ru/sparc.tex $(SECTIONS_OUT) src/ru/version.tex
+out/src/ru/sparc.tex: src/ru/sparc.tex $(SECTIONS_OUT) out/src/ru/version.tex
 	@echo "LILYPOND  sparc.tex -> out/sparc.tex" \
 		&& lilypond-book --include out/src/ru/ --output out/src/ru/ --pdf $(abs_top_srcdir)/src/ru/sparc.tex > sparc.tex.log 2>&1 \
 		|| (cat sparc.tex.log; exit 1)
@@ -125,7 +125,7 @@ make_index: out/src/ru/sparc.aux
 		&& cd out/src/ru/ \
 		&& makeindex sparc > makeindex.log 2>&1
 
-out/src/ru/sparc.aux: src/ru/sparc.tex out/src/ru/sparc.tex src/ru/version.tex
+out/src/ru/sparc.aux: src/ru/sparc.tex out/src/ru/sparc.tex out/src/ru/version.tex
 	@echo "XELATEX   out/sparc.tex -> out/sparc.xdv" \
 		&& cd out/src/ru/ \
 		&& xelatex --interaction=batchmode --draftmode --no-pdf --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
