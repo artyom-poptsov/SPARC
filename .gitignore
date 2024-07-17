@@ -2,7 +2,6 @@ Makefile
 Makefile.in
 configure
 autom4te.cache
-build-aux
 
 *.log
 *.dvi
