@@ -1,0 +1,4 @@
+Normally a ChangeLog is generated at "make dist" time and available in
+source tarballs.
+
+If not, see the Git commit log at <https://github.com/artyom-poptsov/SPARC>.
