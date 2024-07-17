@@ -37,7 +37,8 @@
              (guix packages)
              (guix licenses)
              (guix git-download)
-             (guix build-system copy)
+             (guix build-system gnu)
+             (gnu packages autotools)
              (gnu packages base)
              (gnu packages bash)
              (gnu packages tex)
@@ -61,9 +62,11 @@
    (source (local-file %source-dir
                        #:recursive? #t
                        #:select? (git-predicate %source-dir)))
-   (build-system copy-build-system)
+   (build-system gnu-build-system)
    (native-inputs
-    (list python-pygments
+    (list autoconf
+          automake
+          python-pygments
           bash-minimal
           perl
           which
@@ -101,11 +104,9 @@
           texlive-transparent
           texlive-xetex))
    (arguments
-    (list #:install-plan #~'(("sparc.pdf" "share/doc/sparc/"))
+    (list #:tests? #f                   ; no tests
           #:phases #~(modify-phases %standard-phases
-                       (delete 'check)
-                       (delete 'configure)
-                       (add-before 'install 'build
+                       (add-before 'build 'configure-environment
                          (lambda* (#:key inputs make-flags parallel-build? #:allow-other-keys)
                            (use-modules (ice-9 regex)
                                         (srfi srfi-1))
@@ -119,12 +120,15 @@
                                          0
                                          (string->list src-hash))))
                              (setenv "RANDOMSEED" (number->string random-seed))
-                             (setenv "REPRODUCIBILITY" "yes"))
-                           (invoke "make"
-                                   "-j"
-                                   (if parallel-build?
-                                       (number->string (parallel-job-count))
-                                       "1")))))))
+                             (setenv "REPRODUCIBILITY" "yes"))))
+                       (replace 'install
+                         (lambda _
+                           (let ((doc-dir (string-append #$output
+                                                         "/share/doc/sparc/")))
+                             (mkdir-p doc-dir)
+d                             (copy-file "sparc.pdf"
+                                        (string-append doc-dir
+                                                       "sparc.pdf"))))))))
    (home-page "https://github.com/artyom-poptsov/SPARC")
    (synopsis "Book on combining art and technology")
    (description
