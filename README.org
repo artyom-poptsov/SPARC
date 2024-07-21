@@ -22,16 +22,22 @@
 - =lilypond=
 
 ** Сборка
-Сборка осуществляется через утилиту =make=:
+*** В ручном режиме
+Сборка осуществляется через GNU Autotools:
 
 #+BEGIN_EXAMPLE shell
-$ make
+$ git clone https://github.com/artyom-poptsov/SPARC.git
+$ cd SPARC
+$ autoreconf -vif
+$ ./configure
+$ make -j$(nproc)
 #+END_EXAMPLE
 
 Очистить каталог от сгенерированных файлов можно через команду:
 #+BEGIN_EXAMPLE shell
 $ make clean
 #+END_EXAMPLE
+
 *** GNU Guix
 Сборка и установка версии из репозитория (книга будет располагаться в
 =~/.guix-profile/share/doc/sparc/sparc.pdf=):
@@ -50,22 +56,15 @@ make -j$(nproc)
 #+BEGIN_EXAMPLE shell
 sudo apt update
 sudo apt install -yqq \
+    git \
+    automake \
     make \
-    python3-pygments \
-    tex-common \
-    texlive-base \
-    texlive-latex-base \
-    texlive-latex-extra \
-    texlive-xetex \
-    texlive-music \
-    texlive-extra-utils \
-    texlive-fonts-extra-links \
-    texlive-lang-cyrillic \
-    texlive-binaries \
-    inkscape \
     lilypond \
-    lilypond-data \
-    lilypond-fonts
+    biber \
+    fonts-liberation \
+    texlive-full \
+    python3-pygments \
+    inkscape
 #+END_EXAMPLE
 
 Установка пакета Lilyglyphs:
@@ -76,3 +75,5 @@ unzip lilyglyphs.zip
 sudo cp -r ./lilyglyphs/tex/* /usr/share/texmf/tex/latex/
 sudo mktexlsr
 #+END_EXAMPLE
+
+В остальном сборка может быть произведена в ручном режиме, как показано выше.
