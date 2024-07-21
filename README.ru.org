@@ -1,9 +1,5 @@
 * Автомато-программато-компарадио-кружок
 
-[[https://github.com/artyom-poptsov/SPARC/actions/workflows/pdf.yaml/badge.svg]]
-
-This =README= is also available in other languages: [[./README.ru.org][ru]]
-
 Книга, посвящённая соединению науки, программирования, искусства и
 радиоэлектроники в рамках самостоятельных занятий или же для ведения кружков и
 практик по программированию микроконтроллеров.
@@ -15,13 +11,6 @@ This =README= is also available in other languages: [[./README.ru.org][ru]]
 
 В книге используются изображения, созданные [[https://thenounproject.com/][The Noun Project]], которые находятся
 в общественном достоянии или под лицензией Creative Commons.
-
-** Зависимости
-- =latex=
-  - =CircuiTikz=
-- =inkscape=
-- =xelatex=
-- =lilypond=
 
 ** Сборка
 *** В ручном режиме
