@@ -1,0 +1,67 @@
+* Automation-programming-radioelectronics-artclub
+
+A book dedicated to the connection of science, programming, art and
+radio electronics as part of independent studies or for conducting clubs and
+practical sessions on microcontroller programming.
+
+** License
+This work is distributed under the terms of the Attribution-ShareAlike license «Attribution-ShareAlike» 4.0 Worldwide (CC BY-SA 4.0)
+(https://creativecommons.org/licenses/by-sa/4.0/deed.ru)
+
+The book uses images created by [[https://thenounproject.com/][The Noun Project]], which are located in the public domain or under a Creative Commons license.
+
+** Installation
+*** Manual Installation
+The Installation is done via GNU autotools:
+
+#+BEGIN_EXAMPLE shell
+$ git clone https://github.com/artyom-poptsov/SPARC.git
+$ cd SPARC
+$ autoreconf -vif
+$ ./configure
+$ make -j$(nproc)
+#+END_EXAMPLE
+
+You can clear the directory of generated files using the command:
+#+BEGIN_EXAMPLE shell
+$ make clean
+#+END_EXAMPLE
+
+*** GNU Guix
+Build and install the version from the repository (the book will be located in =~/.guix-profile/share/doc/sparc/sparc.pdf=):
+#+BEGIN_EXAMPLE shell
+guix package -f guix.scm
+#+END_EXAMPLE
+
+To generate the book, it is convenient to use Guix Shell:
+#+BEGIN_EXAMPLE shell
+guix shell --pure -D -f guix.scm
+make -j$(nproc)
+#+END_EXAMPLE
+
+*** Ubuntu GNU/Linux 22.04
+Installing dependencies from the repository:
+#+BEGIN_EXAMPLE shell
+sudo apt update
+sudo apt install -yqq \
+    git \
+    automake \
+    make \
+    lilypond \
+    biber \
+    fonts-liberation \
+    texlive-full \
+    python3-pygments \
+    inkscape
+#+END_EXAMPLE
+
+Installing the Lilyglyphs package:
+#+BEGIN_EXAMPLE shell
+cd /tmp/
+wget https://mirrors.ctan.org/macros/unicodetex/latex/lilyglyphs.zip
+unzip lilyglyphs.zip
+sudo cp -r ./lilyglyphs/tex/* /usr/share/texmf/tex/latex/
+sudo mktexlsr
+#+END_EXAMPLE
+
+The rest of the assembly can be done manually, as shown above.
