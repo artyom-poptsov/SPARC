@@ -1,0 +1,121 @@
+\documentclass[a4paper,twoside]{book}
+
+\emergencystretch=1em
+\usepackage[utf8]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{fontspec}
+\usepackage{graphicx}
+\renewcommand{\thefigure}{\thesection.\arabic{figure}}
+\usepackage{hyperref}
+\usepackage{multirow}
+\usepackage[absolute,overlay,showboxes]{textpos}
+\usepackage{etoolbox}
+\usepackage{longtable}
+\usepackage{tikz}
+\usepackage{lilyglyphs}
+\usepackage{tabularx}
+\usepackage{pgfplots}
+\usepackage{circuitikz}
+\usepackage{minted}
+\usepackage{glossaries}
+\usepackage{makeidx}
+\usepackage{expl3}
+\usepackage{chngcntr}
+\usepackage{svg}
+\usepackage{subfiles}
+\usepackage[printonlyused,withpage]{acronym}
+
+\usepackage[backend=bibtex]{biblatex}
+\addbibresource{references.bib}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setmainfont{Liberation Serif}
+\setmonofont{Liberation Mono}
+
+\makeindex
+\makeglossaries
+
+\urlstyle{same}
+
+\graphicspath{ {images/} {../../../images/} }
+
+\input{sections/commands.tex}
+
+\counterwithin{listing}{section}
+
+\newgetenv[\REPRODUCIBILITY]{REPRODUCIBILITY}%
+\newgetenv[\RANDOMSEED]{RANDOMSEED}
+
+\ifdefstring{\REPRODUCIBILITY}{yes}{%
+  \ifthenelse{\equal{\RANDOMSEED}{}}%
+  {%
+    \typeout{Setting the random seed to a fixed value.}%
+    \pgfmathsetseed{\number42}%
+  }{%
+    \typeout{Setting the random seed to a \RANDOMSEED .}%
+    \pgfmathsetseed{\number\RANDOMSEED}%
+  }%
+}{}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\title{}
+\author{Artyom ``avp'' Poptsov\\\href{https://memory-heap.org}{memory-heap.org}}
+\input{version.tex}
+
+\begin{document}
+
+\maketitle
+
+\tableofcontents
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter*{Introduction}
+\addcontentsline{toc}{chapter}{Introduction}
+
+%% TODO:
+
+%% \subfile{sections/introduction.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Electronics}
+\label{chapter:electronics}
+
+%% TODO:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Dialogues with a Computer}
+\label{chapter:dialogues-with-computer}
+
+%% TODO:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{White Noise}
+\label{chapter:white-noise}
+
+%% TODO:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Pulse-Width Modulation}
+\label{chapter:pwm}
+
+%% TODO:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Music and Technology Synthesis}
+\label{chapter:music-and-technology-synthesis}
+
+%% TODO:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Computer Language}
+\label{chapter:computer-language}
+
+%% TODO:
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{Game Development}
+\label{chapter:game-development}
+
+%% TODO:
+
+\end{document}
