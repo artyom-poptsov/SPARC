@@ -172,7 +172,7 @@ out/src/en/version.tex: src/en/version.tex.in
 	@[ -d $(abs_top_srcdir)/out/src/en/ ] \
 		|| mkdir -p $(abs_top_srcdir)/out/src/en/ \
 	@echo "GEN       $@" \
-		&& sed "s/@COMMIT@/${COMMIT}/g" $< > $@
+		&& sed "s/@COMMIT@/${COMMIT}/g;  s/@VERSION@/$(PACKAGE_VERSION)/g" $< > $@
 
 make_glossary_en: out/src/en/sparc.aux
 	@echo "GLOSSARY  sparc" \
