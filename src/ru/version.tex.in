@@ -1,5 +1,5 @@
 \ifdefstring{\REPRODUCIBILITY}{yes}{
-  \date{Версия 2.1.0\\\small{@COMMIT@}}
+  \date{Версия @VERSION@\\\small{@COMMIT@}}
 }{
-  \date{\today\\Версия 2.1.0\\\small{@COMMIT@}}
+  \date{\today\\Версия @VERSION@\\\small{@COMMIT@}}
 }
