@@ -1,0 +1,5 @@
+\ifdefstring{\REPRODUCIBILITY}{yes}{
+  \date{Version 2.1.0\\\small{@COMMIT@}}
+}{
+  \date{\today\\Version 2.1.0\\\small{@COMMIT@}}
+}
