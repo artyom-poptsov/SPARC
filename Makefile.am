@@ -21,7 +21,7 @@ ACLOCAL_AMFLAGS = -I build-aux
 
 SUBDIRS = .
 
-all: sparc.pdf
+all: sparc.pdf sparc.en.pdf
 
 SECTIONS = \
 	src/ru/sections/commands.tex	\
@@ -149,6 +149,85 @@ sparc.pdf: out/src/ru/sparc.pdf
 		&& [ -e out/src/ru/sparc.pdf ] && cp out/src/ru/sparc.pdf sparc.pdf \
 		|| ( echo "ERROR: File 'out/src/ru/sparc.pdf' not found" \
 	       && exit 1 )
+
+################################################################################
+### English version
+
+SECTIONS_EN = \
+	src/en/sections/commands.tex
+
+SECTIONS_OUT_EN = \
+	$(foreach section, $(SECTIONS_EN), out/$(section))
+
+out/src/en/references.bib: src/references.bib
+	@echo "CP        $< -> $@" \
+		&& cp $< $@
+
+out/src/en/sparc-blx.bib: out/src/en/references.bib out/src/en/sparc.aux
+	@echo "BIBTEX    $@" \
+		&& cd out/src/en/ \
+		&& bibtex sparc
+
+out/src/en/version.tex: src/en/version.tex.in
+	@[ -d $(abs_top_srcdir)/out/src/en/ ] \
+		|| mkdir -p $(abs_top_srcdir)/out/src/en/ \
+	@echo "GEN       $@" \
+		&& sed "s/@COMMIT@/${COMMIT}/g" $< > $@
+
+make_glossary_en: out/src/en/sparc.aux
+	@echo "GLOSSARY  sparc" \
+		&& cd out/src/en/ \
+		&& makeglossaries sparc > makeglossaries.log 2>&1 \
+		|| (cat makeglossaries.log; exit 1)
+
+make_index_en: out/src/en/sparc.aux
+	@echo "INDEX     sparc.en" \
+		&& cd out/src/en/ \
+		&& makeindex sparc > makeindex.log 2>&1
+
+out/src/en/sections/%.tex: src/en/sections/%.tex
+	@[ -d $(abs_top_srcdir)/out/src/en/sections ] \
+		|| mkdir -p $(abs_top_srcdir)/out/src/en/sections
+	@echo "LILYPOND  $< -> $@" \
+		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/en/ \
+			--output $(abs_top_srcdir)/out/src/en/sections/ \
+			--pdf $< > $@.log 2>&1 \
+		|| (cat $@.log; exit 1)
+
+out/src/en/sparc.tex: src/en/sparc.tex $(SECTIONS_OUT_EN) out/src/en/version.tex
+	@echo "LILYPOND  src/en/sparc.tex -> out/src/en/sparc.tex" \
+		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/en/ \
+			--output $(abs_top_srcdir)/out/src/en/ \
+			--pdf $(abs_top_srcdir)/src/en/sparc.tex > sparc.tex.log 2>&1 \
+	|| (cat sparc.tex.log; exit 1)
+
+out/src/en/sparc.aux: src/en/sparc.tex out/src/en/sparc.tex out/src/en/version.tex
+	@echo "XELATEX   out/en/sparc.tex -> out/en/sparc.xdv" \
+		&& cd out/src/en/ \
+		&& xelatex \
+			--interaction=batchmode \
+			--draftmode \
+			--no-pdf \
+			--shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
+		|| (echo "---- sparc.pdf.log.1 ----"; \
+			cat sparc.pdf.log.1; \
+			echo "---- sparc.log ----"; \
+			cat sparc.log) \
+		&& exit 0
+
+out/src/en/sparc.pdf: out/src/en/sparc.aux make_glossary make_index out/src/en/sparc-blx.bib
+	@echo "XELATEX   out/src/en/sparc.tex -> out/src/en/sparc.pdf" \
+		&& cd out/src/en/ \
+		&& xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
+		|| cat sparc.pdf.log.2 && exit 0
+
+sparc.en.pdf: out/src/en/sparc.pdf
+	@echo "COPY      sparc.en.pdf" \
+		&& [ -e out/src/en/sparc.pdf ] && cp out/src/en/sparc.pdf sparc.en.pdf \
+		|| ( echo "ERROR: File 'out/src/en/sparc.pdf' not found" \
+			&& exit 1 )
 
 .PHONY: clean-local
 
