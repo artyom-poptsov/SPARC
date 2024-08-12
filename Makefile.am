@@ -172,9 +172,9 @@ out/src/en/sparc-blx.bib: out/src/en/references.bib out/src/en/sparc.aux
 
 out/src/en/version.tex: src/en/version.tex.in
 	@[ -d $(abs_top_srcdir)/out/src/en/ ] \
-		|| mkdir -p $(abs_top_srcdir)/out/src/en/ \
+		|| mkdir -p $(abs_top_srcdir)/out/src/en/
 	@echo "GEN       $@" \
-		&& sed "s/@COMMIT@/${COMMIT}/g;  s/@VERSION@/$(PACKAGE_VERSION)/g" $< > $@
+		&& sed "s/[@]COMMIT[@]/${COMMIT}/g;  s/[@]VERSION[@]/$(PACKAGE_VERSION)/g" $< > $@
 
 make_glossary_en: out/src/en/sparc.aux
 	@echo "GLOSSARY  sparc" \
@@ -219,7 +219,7 @@ out/src/en/sparc.aux: src/en/sparc.tex out/src/en/sparc.tex out/src/en/version.t
 			cat sparc.log) \
 		&& exit 0
 
-out/src/en/sparc.pdf: out/src/en/sparc.aux make_glossary make_index out/src/en/sparc-blx.bib
+out/src/en/sparc.pdf: out/src/en/sparc.aux make_glossary_en make_index_en out/src/en/sparc-blx.bib
 	@echo "XELATEX   out/src/en/sparc.tex -> out/src/en/sparc.pdf" \
 		&& cd out/src/en/ \
 		&& xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
