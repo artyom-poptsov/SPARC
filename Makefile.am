@@ -155,6 +155,7 @@ sparc.pdf: out/src/ru/sparc.pdf
 
 SECTIONS_EN = \
 	src/en/sections/commands.tex \
+	src/en/sections/introduction.tex \
 	src/en/sections/electronics-introduction.tex
 
 SECTIONS_OUT_EN = \
