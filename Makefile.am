@@ -157,7 +157,8 @@ SECTIONS_EN = \
 	src/en/sections/commands.tex \
 	src/en/sections/introduction.tex \
 	src/en/sections/electronics-introduction.tex \
-	src/en/sections/electronics-voltage.tex
+	src/en/sections/electronics-voltage.tex \
+	src/en/sections/electronics-circuits.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
