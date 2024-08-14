@@ -156,7 +156,8 @@ sparc.pdf: out/src/ru/sparc.pdf
 SECTIONS_EN = \
 	src/en/sections/commands.tex \
 	src/en/sections/introduction.tex \
-	src/en/sections/electronics-introduction.tex
+	src/en/sections/electronics-introduction.tex \
+	src/en/sections/electronics-voltage.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
