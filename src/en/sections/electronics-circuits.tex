@@ -109,4 +109,34 @@ analogous to the one pictured on fig. \ref{fig:electronics-circuits-1}.
   \label{fig:electronics-simple-circuit}
 \end{figure}
 
+As can be seen on fig. \ref{fig:electronics-simple-circuit} a light-emitting
+diode (LED) is used as the functional component.  LEDs are widely used in modern
+devices and have variety of different forms and sizes.  But sooner or later you
+will likely find LEDs that looks like as shown on
+fig. \ref{fig:electronics-led}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw (0, 0) arc [
+      start angle=0,
+      end angle=180,
+      x radius=1cm,
+      y radius =1cm
+    ];
+    \draw (-2, 0) -- (-2, -1.5);
+    \draw (0, 0) -- (0, -1.5);
+    \draw (-2.25, -1.5) -- (0.25, -1.5) -- (0.25, -2.0) -- (-2.25, -2.0) -- (-2.25, -1.5);
+    \draw[line width=0.5mm] (-1.5, -2.0) -- (-1.5, -5) node[left] {Anode};
+    \draw[line width=0.5mm] (-0.5, -2.0) -- (-0.5, -4) node[right] {Cathode};
+  \end{tikzpicture}
+  \caption{Simplified depiction of an LED.}
+  \label{fig:electronics-led}
+\end{figure}
+
+Simple single-color LEDs commonly have two legs: one is anode (which is
+shortened to ``A'') and the second one is cathode (``C''.)  New LEDs usually
+have legs of different lengths: the long one is anode and the short one is
+cathode.
+
 \end{document}
