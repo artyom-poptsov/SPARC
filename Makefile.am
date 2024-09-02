@@ -160,7 +160,8 @@ SECTIONS_EN = \
 	src/en/sections/electronics-voltage.tex \
 	src/en/sections/electronics-circuits.tex \
 	src/en/sections/electronics-potential-difference.tex \
-	src/en/sections/electronics-resistance.tex
+	src/en/sections/electronics-resistance.tex \
+	src/en/sections/electronics-building-circuits.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
