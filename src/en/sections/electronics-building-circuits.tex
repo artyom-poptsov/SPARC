@@ -93,4 +93,42 @@ breadboard.
   \label{fig:breadboard}
 \end{figure}
 
+As you can see on fig. \ref{fig:breadboard} a breadboard is but a piece of
+plastic with metallic inserts that provide connections between electronic
+components of a circuit built upon a breadboard.
+
+Across the breadboard on each side you can find a pair of long lines that are
+marked on the front of the breadboard with symbols ``+'' and ``-'' -- they
+usually are used for providing common ground and power lines for a circuit.
+
+An example of an electric circuit built on a breadboard is shown on
+fig. \ref{fig:breadboard-simple-arduino-circuit}.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=12cm]{schematics/002-simple-arduino-circuit}
+  \caption{An example of an electric circuit with an LED and a resistor that
+    uses Arduino UNO as the power supply.}
+  \label{fig:breadboard-simple-arduino-circuit}
+\end{figure}
+
+Note that the resistance value for $R_1$ should be not less than 200 Ohms.
+
+Carefully check the circuit before powering up the Arduino.  First of all
+closely inspect the two wires that go from Arduino to the breadboard -- they must
+not be connected directly with each other.  You can see on
+fig. \ref{fig:breadboard-simple-arduino-circuit} that one wire connects Arduino
+5V port to one of the resistor legs and another wire goes from GND (GROUND) to a
+common ``-'' line on the breadboard marked by blue color where the LED cathode
+is connected.
+
+After the powering up the Arduino the LED should light up.  If this does not
+happen then you should power off the Arduino and check the schematics again.
+One of the common reasons why an LED is not working is mixed up anode and
+cathode connection of the LED; in that case all you need is to switch LED legs
+on the breadboard.
+
+\experiment{0}{Try to replace $R_1$ resistor with another one with higher
+  resistance (e.g. 500 Ohms.)  How the brightness of the LED is changed?}
+
 \end{document}
