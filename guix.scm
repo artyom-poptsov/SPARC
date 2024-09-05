@@ -103,6 +103,7 @@
           texlive-t1utils
           texlive-textpos
           texlive-transparent
+          texlive-upquote
           texlive-xetex))
    (arguments
     (list #:tests? #f                   ; no tests
