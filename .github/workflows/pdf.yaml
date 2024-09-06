@@ -40,7 +40,7 @@ jobs:
           guix package --install-from-file=guix.scm
       - name: Upload PDF to the workflow tab
         id: upload-workflow-tab
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v4
         with:
           name: avp-sparc-book-pdf
           path: "~/.guix-profile/share/doc/sparc/sparc.pdf"
