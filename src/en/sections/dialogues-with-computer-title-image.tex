@@ -1,0 +1,82 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    %% Display.
+    \node[rectangle,
+      rounded corners = 0.2,
+      draw = black,
+      minimum width = 3cm,
+      minimum height = 2cm] (r) at (1, 2) {Hello, World!};
+
+    \node[rectangle,
+      thick,
+      rounded corners = 0.25cm,
+      draw = black,
+      minimum width = 4cm,
+      minimum height = 3cm] (r) at (1.25, 2) {};
+
+    %% Display Knobs.
+    \node[circle, draw, radius = 0.1cm] (c) at (2.85, 2.0) {};
+    \node[circle, draw, radius = 0.1cm] (c) at (2.85, 1.6) {};
+    \node[circle, draw, radius = 0.1cm] (c) at (2.85, 1.2) {};
+
+    %% Display Legs.
+    \node[rectangle,
+      thick,
+      draw = black,
+      minimum width = 0.2cm,
+      minimum height = 0.19cm] (r) at (0, 0.38) {};
+
+    \node[rectangle,
+      thick,
+      draw = black,
+      minimum width = 0.2cm,
+      minimum height = 0.19cm] (r) at (2.25, 0.38) {};
+
+    %% System Case.
+    \node[rectangle,
+      thick,
+      rounded corners = 0.25cm,
+      draw = black,
+      minimum width = 5.5cm,
+      minimum height = 1.5cm] (r) at (0.75, -0.48) {};
+
+    %% Floppy Drives.
+    \node[rectangle,
+      draw = black,
+      minimum width = 2cm,
+      minimum height = 1.25cm] (r) at (2.25, -0.36) {};
+
+    \node[rectangle,
+      draw = black,
+      minimum width = 1.75cm,
+      minimum height = 0.5cm] (r) at (2.25, -0.1) {};
+
+    \node[rectangle,
+      draw = black,
+      minimum width = 1.75cm,
+      minimum height = 0.5cm] (r) at (2.25, -0.6) {};
+
+    \draw[very thick] (1.5, -0.15) -- (3, -0.15);
+
+    \draw[very thick] (1.8, -0.6) -- (2.7, -0.6);
+
+    %% Control buttons.
+    \node[rectangle,
+      draw = black,
+      minimum width = 1cm,
+      minimum height = 0.25cm] (r) at (-0.4, -0.25) {};
+
+    %% Ventilation holes in the case.
+    \foreach \offset in {0.1, 0.2, ..., 2.6} {
+      \draw[thick] (-1.8 + \offset, -1) -- (-1.8 + \offset, -0.5);
+    };
+
+  \end{tikzpicture}
+\end{figure}
+
+\end{document}
