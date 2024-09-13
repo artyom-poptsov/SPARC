@@ -4,10 +4,13 @@ on:
   push:
     branches:
       - master
+      - translation/en
     tags:
        - '*'
   pull_request:
-    branches: [ master ]
+    branches:
+      - master
+      - translation/en
 
 jobs:
   build_latex:
