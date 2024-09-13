@@ -1,0 +1,59 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Algorithms}
+\index{Programming!Algorithm}
+
+Long before computer was made people were already writing instructions to each
+other that allow to understand the sequence of steps to achieve some goal -- for
+example, ``how to make a fire'', ``how to sow grain'', ``how to harness a
+horse'' and so on.
+
+A sequence of instructions that allows to achieve desired results called an
+\emph{algorithm}.
+
+There were some (rather successful) attempts to build different mechanisms that
+did some sequence of operations to replace human labor.  But after inventing
+electronic computers the development of algorithms reach ``another level'' --
+now we can write an algorithm into computer memory so the computer will execute
+the instructions exactly as we wanted.  Modern computers don't understand human
+languages directly so we have to write down our algorithms in the form of
+special \emph{machine language}.  A machine language is a set of commands
+understood by a processor (the main computation device in a computer.)
+
+Writing programs in machine language is a quite hard and tedious task so soon
+after computers were invented people came up with the first programming
+languages that are more friendly to humans.  The first programming language was
+called \emph{assembler} that is but a set of mnemonics (that is, a set of short
+human-understandable names) for machine commands of a processor.
+
+But assembler was too simple and was not provided programmers with tools to easy
+express ideas that programmers wanted to implement in their algorithms in
+concise manner.  So high-level programming languages were invented that
+simplified and speed-up the process of writing programs.  ``C'' language which
+basics we will discuss in this chapter is one of the oldest programming language
+that are actively used to this day.
+
+To practice with composition of algorithms let's assume that we have an LED that
+is connected to a computer.  To explain to a computer how to blink this LED we
+have to formulate an algorithm.  This process is called \emph{formalization}.
+One of possible algorithms for this task could look as follows:
+
+\begin{enumerate}
+\item Turn on the LED.
+\item Turn off the LED.
+\item Repeat the algorithm.
+\end{enumerate}
+
+In this example we see not only the instructions to turn on/turn off the LED but
+also some kind of \emph{loop}, the cyclic nature of the process.
+
+\experiment{0} { Try to came up with algorithms for ordinary operations that you
+  do daily.  For example, you can try to formulate an algorithm of how to
+  prepare a tea, or an algorithm of house cleaning activities.  How precise can
+  you describe the sequence of actions for simple tasks?  How complicated is the
+  resulting algorithm? }
+
+\end{document}
