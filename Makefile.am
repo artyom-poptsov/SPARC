@@ -166,7 +166,8 @@ SECTIONS_EN = \
 	src/en/sections/dialogues-with-computer-introduction.tex \
 	src/en/sections/dialogues-with-computer-algorithms.tex \
   src/en/sections/dialogues-with-computer-arduino.tex \
-	src/en/sections/dialogues-with-computer-breadboard.tex
+	src/en/sections/dialogues-with-computer-breadboard.tex \
+	src/en/sections/dialogues-with-computer-multimeter.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
