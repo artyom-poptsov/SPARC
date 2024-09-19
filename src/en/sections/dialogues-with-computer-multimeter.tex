@@ -38,20 +38,34 @@ Overall, multimeters have four\cite{fluke:multimeter} main parameters:
 \item \textbf{Range} refers to the lower and upper limits of measurements.
 \end{itemize}
 
-Accuracy of a multimeter reflect the higher error value that can occur in
+Let's discuss each of the parameters in details.
+
+\emph{Accuracy} of a multimeter reflect the higher error value that can occur in
 specific operating conditions during device exploitation.  This parameter is set
 in percentage and shows how close is the resulting value of measurement to the
-factual (standard) value of the measured signal.
+factual (standard) value of the measured signal.  This parameter is set in
+percentage and the lower its value -- the better.
 
-Resolution of a multimeter sets the smaller step that the device can use to make
-measurements.  Let's suppose that we're trying to measure the voltage on a
-standard 1.5V battery.  If a digital multimeter has the resolution of 1mV in a
+\emph{Precision} refers to the ability of a multimeter to reproduce each time
+the measurements that are close to each other.  While a device with bad
+\emph{accuracy} will produce measurements that are differ from the actual
+values, when the \emph{precision} is good the scatter of readings will be
+minimal.
+
+When a device has good \emph{accuracy} and high \emph{precision} it produces
+measurements that are not only close to the actual measured values but the
+results will have very little scatter in repeated measurements of the same
+value.
+
+\emph{Resolution} of a multimeter sets the smaller step that the device can use
+to make measurements.  Let's suppose that we're trying to measure the voltage on
+a standard 1.5V battery.  If a digital multimeter has the resolution of 1mV in a
 range of 3V then we will be able to see the change in 1mV during the
 measurement.  Thus a user will be able to see a change in one-thousandth of a
 Volt or 0.001V in a range of 3V.
 
-The range parameter is often linked to the resolution and sometimes is described
-in the device specification.  Most of the multimeters have auto-range
+The \emph{range} parameter is often linked to the resolution and sometimes is
+described in the device specification.  Most of the multimeters have auto-range
 functionality that allows to set the proper range of measurement automatically.
 If the range is less than the measured value then digital multimeters usually
 indicate an overload in some way.  The most precise measurements are done in the
