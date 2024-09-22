@@ -16,7 +16,7 @@ You should have received a copy of the Creative Commons Attribution-ShareAlike
 <https://creativecommons.org/licenses/by-sa/4.0/>.
 ]])
 
-AC_INIT([SPARC], [2.1.0], [poptsov.artyom@gmail.com],
+AC_INIT([SPARC], [2.2.0], [poptsov.artyom@gmail.com],
         [sparc],
         [https://github.com/artyom-poptsov/SPARC])
 

@@ -7,8 +7,25 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
-* Unreleased
-** Migrate the project to GNU Autotools
+* Версия 2.2.0 (2024-09-22)
+** ru
+*** Диалоги с компьютером
+**** Добавление раздела про симулятор Wokwi
+**** Добавление описания оператора "switch..case"
+**** Улучшение описания операторов сравнения и присвоения
+*** Основы электроники
+**** Исправление ошибки в описании параметров мультиметра
+**** Добавление дополнительной таблицы с примерами разности потенциалов
+**** Улучшение изложения материала
+**** Исправление ошибок
+** Common
+*** Migrate the project to GNU Autotools
+*** Add English version of the =README=
+Use the English version as the main one, add a link to Russian version of the
+=README=.
+*** =guix.scm=
+- Add "texlive-fancyvrb" to the package inputs.
+- Add "texlive-upquote" to the package inputs.
 * Версия 2.1.0 (2024-07-04)
 ** Расширения раздела "Платформа Arduino"
 Добавлены примеры Arduino с кратким описанием.  Добавлено краткое описание плат
