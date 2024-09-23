@@ -41,6 +41,7 @@ SECTIONS = \
 	src/ru/sections/dialogues-with-computer-control-flow.tex \
 	src/ru/sections/dialogues-with-computer-arduino-ide.tex \
 	src/ru/sections/dialogues-with-computer-program-structure.tex \
+	src/ru/sections/dialogues-with-computer-wokwi.tex \
 	src/ru/sections/white-noise-introduction.tex \
 	src/ru/sections/white-noise-analog-ports.tex \
 	src/ru/sections/white-noise-serial-port.tex	\
@@ -101,7 +102,7 @@ out/src/ru/sparc-blx.bib: out/src/ru/references.bib out/src/ru/sparc.aux
 
 out/src/ru/version.tex: src/ru/version.tex.in
 	@echo "GEN       $@" \
-		&& sed "s/@COMMIT@/${COMMIT}/g; s/@VERSION@/$(PACKAGE_VERSION)/g" $< > $@
+		&& sed "s/[@]COMMIT[@]/${COMMIT}/g; s/[@]VERSION[@]/$(PACKAGE_VERSION)/g" $< > $@
 
 out/src/ru/sections/%.tex: src/ru/sections/%.tex
 	@[ -d $(abs_top_srcdir)/out/src/ru/sections ] \
