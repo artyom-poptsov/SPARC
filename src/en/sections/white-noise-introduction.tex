@@ -1,0 +1,28 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}[samples=200, domain=0:5*360]
+    \begin{axis}[
+        width=10cm, height=4cm,
+        enlarge x limits=false,
+        xtick=\empty,
+        axis lines*=middle,
+        hide y axis
+      ]
+      \addplot [no markers, smooth] {sin(x)+rand*2};
+    \end{axis}
+  \end{tikzpicture}
+\end{figure}
+
+Usually the most interesting part in working with micro-controllers is the
+possibility of interaction with physical world through the input/output ports
+that are located on the development board.
+
+In this chapter we will discuss how a micro-controller translates signals from
+the real world into the digital form that we can use in a program to control
+something.
+
+\end{document}
