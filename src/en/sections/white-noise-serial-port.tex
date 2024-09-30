@@ -1,0 +1,30 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Serial Port}
+\index{Electronics!Serial Port}
+\label{section:serial-port}
+
+Connection of Arduino to a computer is usually is done through a USB connector
+placed on the board.  On the Arduino Mega 2560 side USB-B is used for that
+purpose.
+
+The USB protocol is quite complicated and the most of the Arduino chips don't
+``speak'' USB protocol and need a ``translator'' to be understood by a computer.
+A translator is usually a separate chip called USB-UART converter soldered on an
+Arduino board.  We will discuss UART in a section
+\ref{section:communication-uart}.  Some compact Arduino such as Arduino Pro Mini
+does not have its own USB-UART converter and require a separate converter.
+
+An USB-UART converter emulates a simpler data transfer protocol than USB that is
+commonly known as ``Serial Port''.  On old computers this port (also known as
+COM-port) was represented as a separate interface on the main board and was used
+to connect such devices as computer mice.  COM-ports used to be widely used (for
+example they were popular on IBM PC AT computers.)  In the modern world
+COM-ports were replaced in most of the consumer electronics with other
+standards, mostly USB.  But COM-ports are still in use today on specialized
+equipment.
+
+\end{document}

@@ -170,7 +170,8 @@ SECTIONS_EN = \
 	src/en/sections/dialogues-with-computer-breadboard.tex \
 	src/en/sections/dialogues-with-computer-multimeter.tex \
 	src/en/sections/white-noise-introduction.tex \
-	src/en/sections/white-noise-signal-types.tex
+	src/en/sections/white-noise-signal-types.tex \
+	src/en/sections/white-noise-serial-port.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
