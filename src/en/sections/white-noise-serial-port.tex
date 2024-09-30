@@ -21,10 +21,21 @@ does not have its own USB-UART converter and require a separate converter.
 An USB-UART converter emulates a simpler data transfer protocol than USB that is
 commonly known as ``Serial Port''.  On old computers this port (also known as
 COM-port) was represented as a separate interface on the main board and was used
-to connect such devices as computer mice.  COM-ports used to be widely used (for
-example they were popular on IBM PC AT computers.)  In the modern world
-COM-ports were replaced in most of the consumer electronics with other
-standards, mostly USB.  But COM-ports are still in use today on specialized
-equipment.
+to connect such devices as computer mice.  COM-ports used to be quite widespread
+back in the days (for example they were popular on IBM PC AT computers.)  In the
+modern world COM-ports were replaced in most of the consumer electronics with
+other standards, mostly USB.  But COM-ports are still in use today on
+specialized equipment.
+
+One of the examples where serial ports are used to this day is working with
+microcontrollers.  USB-UART converter emulates a COM-port for a computer
+allowing to ``communicate'' with a microcontroller using a simpler language than
+USB.  Thus for a computer an Arduino looks like a COM-port despite that the
+physical connection is done through a USB.  Using this line of communication we
+can transfer data from a computer to an Arduino and vice versa.
+
+We will discuss serial ports in more detail in the section
+\ref{section:communication-serial-port}.  Currently we only need the basic
+knowledge on this topic in order to understand the examples in chapter.
 
 \end{document}
