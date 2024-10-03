@@ -38,4 +38,51 @@ We will discuss serial ports in more detail in the section
 \ref{section:communication-serial-port}.  Currently we only need the basic
 knowledge on this topic in order to understand the examples in chapter.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Basics of Serial Port Usage in Arduino}
+
+Before we start working with a serial port we need to configure it.  It can be
+done as follows: first we need to configure the speed of data transfer in
+\texttt{setup} function:
+
+\begin{minted}{cpp}
+  void setup() {
+    Serial.begin(9600);
+  }
+\end{minted}
+
+In this case we are allowing data transfer between a computer and an Arduino
+with the specified speed where 9600 is the speed set in \emph{bauds}.  A
+\emph{baud} is a unit of data transfer speed measurement that is equal to a bit
+per second.  Usually this parameter is set to one of the standard values: 300,
+600, 1200, 2400, 4800, 9600, 14400, 19200, 28800, 38400, 57600, 115200.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Transferring Data to a Computer}
+
+Now let's try to transfer some data to a computer.  As the first example we will
+send ``Hello, world!'' string through a serial port.  First we need to write
+down the serial port configuration in the \texttt{setup} function:
+
+\begin{minted}{cpp}
+  void setup() {
+    Serial.begin(9600); // Setting the speed of a serial port.
+  }
+\end{minted}
+
+And that's how our \texttt{loop} function looks like:
+
+\begin{minted}{cpp}
+  void loop() {
+    Serial.println("Hello World");
+    delay(1000); // Waiting 1000 ms before the next transfer
+  }
+\end{minted}
+
+To see the results of program execution we need to open the ``Serial Monitor''
+in the Arduino IDE from the ``Tools'' menu.
+
+Aside from that we can open ``Serial Monitor'' by \hotkey{Ctrl + Shift + M}
+hotkey.
+
 \end{document}
