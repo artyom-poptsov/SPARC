@@ -85,4 +85,50 @@ in the Arduino IDE from the ``Tools'' menu.
 Aside from that we can open ``Serial Monitor'' by \hotkey{Ctrl + Shift + M}
 hotkey.
 
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=10cm]{arduino-ide-serial-monitor}
+  \caption{``Serial Monitor'' in Arduino IDE 1.8.19.}
+  \label{fig:arduino-ide-serial-monitor}
+\end{figure}
+
+The overall view of the serial monitor is shown on fig.
+\ref{fig:arduino-ide-serial-monitor}.  In the window header we can see the name
+of the device that represents an connected Arduino.  This device is used by your
+computer to talk to the Arduino.
+
+Also you can see an input field below the window header that is used to send
+data to the Arduino board.
+
+The main area of the window is taken by the area that shows the data that is
+received from the Arduino.
+
+In the bottom of the window the configuration panel is located.
+
+The numbers on the fig. \ref{fig:arduino-ide-serial-monitor} show:
+\begin{enumerate}
+\item An input field for sending data from a computer to an Arduino.
+\item ``Send'' button that sends data from the input field on the left to an
+  Arduino.
+\item Timestamp that marks the moment when the data was received on the
+  computer.
+\item The data that was received from an Arduino.
+\item ``Autoscroll'' option.  If this option is enabled then the main area of
+  the window that shows the received data is scrolled automatically in such way
+  so it always shows the latest data tat was received.
+\item ``Show timestamp'' option that allows to enable timestamps (as is the
+  \textbf{3} on the picture.)
+\item An option that controls the line endings in the communication with an
+  Arduino.  This option controls which sequence of symbols the serial monitors
+  considers as a line ending.  You can choose from ``No line ending'',
+  ``Newline'', ``Carriage return'' and ``Both NL \& CR'' (when this mode is
+  enabled two symbols are used together -- a newline and a carriage return.)
+\item An option that controls the speed of data transfer in bauds (bits per
+  second.)  This is set to 9600 by default.  If the option value is not matching
+  the value in the program on an Arduino (through \texttt{Serial.begin}) then
+  the serial monitor will show garbage symbols instead of correct data.
+\item ``Clear output'' button that allows to clear the main area of the window
+  from the old data that was received from an Arduino.
+\end{enumerate}
+
 \end{document}
