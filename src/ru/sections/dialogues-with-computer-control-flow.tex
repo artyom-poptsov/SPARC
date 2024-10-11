@@ -372,9 +372,8 @@
 Исходя из свойства данного вида цикла можно заметить интересный момент: даже
 если условие ложно \emph{перед} началом цикла, тело цикла выполнится один раз.
 Таким образом можно сказать, что \emph{тело цикла с пост-условием всегда
-выполняется хотя бы один раз}.
-
-Возьмём для примера следующий код:
+выполняется хотя бы один раз}, как показано в примере
+\ref{listing:dialogues-with-computer-do-while-example}.
 
 \begin{listing}[ht]
   \begin{minted}{cpp}
@@ -385,11 +384,10 @@
       delay(200);
       digitalWrite(13, LOW);
       delay(200);
-      a = a + 1;
     } while (a < 1);
   \end{minted}
   \label{listing:dialogues-with-computer-do-while-example}
-  \caption{Пример использования цикла с постусловием \texttt{do..while}.}
+  \caption{Демонстрация особенности цикла с постусловием \texttt{do..while}.}
 \end{listing}
 
 В данном примере, несмотря на то, что изначально переменная \texttt{a} имеет
@@ -398,6 +396,51 @@
 
 Данный вид цикла достаточно редко используется, но в некоторых случаях он очень
 удобен.
+
+Более реалистичный пример показан на
+рис. \ref{listing:dialogues-with-computer-do-while-example-2}: пока кнопка на
+порту \texttt{BUTTON\_PIN} не нажата, цикл будет выполняться, мигая светодиодом.
+Если даже кнопка была нажата при старте была уже нажата, светодиод мигнёт один
+раз.  Но если кнопку нажать, программа выйдет из цикла и пойдёт дальше.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    do {
+      digitalWrite(13, HIGH);
+      delay(200);
+      digitalWrite(13, LOW);
+      delay(200);
+    } while (digitalRead(BUTTON_PIN) == LOW);
+  \end{minted}
+  \label{listing:dialogues-with-computer-do-while-example-2}
+  \caption{Практический пример использования цикла с постусловием
+    \texttt{do..while}.}
+\end{listing}
+
+Визуально можно представить порядок выполнения цикла из примера
+\ref{listing:dialogues-with-computer-do-while-example-2} как на
+рис. \ref{fig:control-flow-do-while-loop}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[-{Stealth[gray]}] (0, 0) -- (11, 0);
+    \foreach \x in {1, 2, ..., 10} {
+      \draw (\x, 0.1) -- (\x, -0.1) node[below] {$\x$};
+      \draw[dotted, red] (\x, 0.1) -- (\x, 0.5);
+    };
+    \draw (2.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Выполнение тела цикла}$}};
+    \draw (3.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Кнопка нажата?} \mapsto \mbox{Нет}$}};
+    \draw (4.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Выполнение тела цикла}$}};
+    \draw (5.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Кнопка нажата?} \mapsto \mbox{Нет}$}};
+    \draw (6.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Выполнение тела цикла}$}};
+    \draw (7.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Кнопка нажата?} \mapsto \mbox{Да}$}};
+    \draw (8.00, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Завершение цикла}$}};
+    \draw (11, 0) node[below] {$t$};
+  \end{tikzpicture}
+  \label{fig:control-flow-do-while-loop}
+  \caption{Визуальное представление цикла \texttt{do..while}.}
+\end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Зачем столько видов циклов?}
