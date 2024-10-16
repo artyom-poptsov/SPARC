@@ -169,6 +169,7 @@ SECTIONS_EN = \
   src/en/sections/dialogues-with-computer-arduino.tex \
 	src/en/sections/dialogues-with-computer-breadboard.tex \
 	src/en/sections/dialogues-with-computer-multimeter.tex \
+	src/en/sections/dialogues-with-computer-control-flow.tex \
 	src/en/sections/white-noise-introduction.tex \
 	src/en/sections/white-noise-signal-types.tex \
 	src/en/sections/white-noise-serial-port.tex
