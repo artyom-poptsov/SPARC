@@ -19,6 +19,30 @@ that are present in C++ and many other popular programming languages.
 \subsection{Conditionals}
 \index{Programming!Conditionals}
 
+Sometimes a program needs to decide what to do next in the runtime.  For a
+computer to choose the right way to go we (the programmers) need to describe a
+conditional statement in the program code: if a logical expression is true then
+we do one thing, if it is not -- we do something other.
+
+Conditional statements are described using special control flow statements.  In
+C++ we have two main statements.  The first one is \texttt{if} operator.
+
+Here's an example:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 42;
+    if (a > 10) {
+      // A code that is executed only when the value of "a'' variable
+      // is greater than 10.  In this case this code will always
+      // be executing because the variable is always equals to 42.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-more-than}
+  \caption{Example of (\texttt{if}) usage to check if}
+\end{listing}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Loops}
 \index{Programming!Loops}
