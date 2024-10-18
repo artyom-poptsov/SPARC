@@ -62,6 +62,31 @@ When we need to check if a variable value is equal to some other value we use
     equal to 10.}
 \end{listing}
 
+\note{ Don't mistake \emph{equality operator} ``=='' with \emph{assignment
+  operator} ``='' -- this is important!  The point is that in many cases C/C++
+  programming languages allow to use either of the operators in one place
+  interchangeably but the results will be completely different depending on the
+  used operator.  In C++ ``='' symbol has different roles but if we are talking
+  about working with variables then this operator is always changes the variable
+  that is on the left of assignment operator. }
+
+The easiest way to remember the difference between those two operations is that
+single ``='' sign means assignment and ``=='' is equality operator.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 42;
+    if (a = 10) {
+      // This sequence of commands will always be executed
+      // as the ``a = 10'' stores 10 in ``a'' variable so
+      // the value of the overall expression is 10 which means
+      // ``true'' in C/C++.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-equals-assignment}
+  \caption{An example of the error that is introduced into the code by using
+    ``='' instead of ``==''.}
+\end{listing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Loops}
