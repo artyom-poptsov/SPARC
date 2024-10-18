@@ -39,7 +39,27 @@ Here's an example:
     }
   \end{minted}
   \label{listing:dialogues-with-computer-if-more-than}
-  \caption{Example of (\texttt{if}) usage to check if}
+  \caption{Example of (\texttt{if}) usage to check if the variable value is
+    greater than 10.}
+\end{listing}
+
+When we need to check if a variable value is equal to some other value we use
+``=='' (strict equal) as shown on the listing
+\ref{listing:dialogues-with-computer-if-equals}.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 42;
+    if (a == 10) {
+      // A sequence of commands that will be executed if
+      // the 'a' value is equal to 10.  In this example this
+      // piece of code will never be executed as the variable
+      // value is always 42 and will never be 10.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-equals}
+  \caption{An example of usage of \texttt{if} to check if the variable value is
+    equal to 10.}
 \end{listing}
 
 
