@@ -88,6 +88,73 @@ single ``='' sign means assignment and ``=='' is equality operator.
     ``='' instead of ``==''.}
 \end{listing}
 
+In the listing \ref{listing:dialogues-with-computer-if-equals-assignment} the
+\texttt{if} body will always be executed a despite the fact that \texttt{a} is
+equal to 42 before \texttt{if} -- the reason for that is that the assignment
+operator inside the parenthesis \emph{changes} the value of \texttt{a} to 10.
+Then \texttt{a} variable is substituted with its value inside the parenthesis.
+In C/C++ Boolean values are just numbers: zero is ``false'', any other value is
+considered as ``true''.  Which means that the number 10 means ``true'' as well
+when is used as a value in logical expressions.
+
+Often you need to provide not only the code to be executed if the condition
+inside \texttt{if} parenthesis is true, but also some code that needs to be
+executed when the condition is false.  In such cases one can use
+\texttt{if..else} statement:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 42;
+    if (a > 10) {
+      // Some code that needs to be executed when
+      // the value of 'a' is greater than 10.
+    } else {
+      // Code that is executed when 'a' value is less
+      // or equal to 10.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-with-else}
+  \caption{An example of (\texttt{if}) usage with \texttt{else} block.}
+\end{listing}
+
+Another statement that is often used is \texttt{switch..case} also known as
+\emph{multiple choice operator}.  This statement is convenient when it comes to
+choosing from multiple cases of a variable value.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 42;
+    switch (a) {
+      case 10:
+      // A set of instructions to be executed
+      // when 'a' value equals to 10.
+      break;
+      case 42:
+      // A set of instructions to be executed
+      // when 'a' value equals to 42.
+      break;
+      case 20:
+      // A set of instructions to be executed
+      // when 'a' value equals to 20.
+      case 30:
+      // A set of instructions to be executed
+      // when 'a' value equals to either 20 or 30.
+      break;
+      case 1:
+      case 2:
+      // A set of instructions to be executed
+      // when 'a' value equals to 1 or 2.
+      break;
+      default:
+      // A set of instructions to be executed
+      // when 'a' does not match with any of the
+      // cases described above.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-switch-case}
+  \caption{An example of \texttt{switch..case} usage.}
+\end{listing}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Loops}
 \index{Programming!Loops}
