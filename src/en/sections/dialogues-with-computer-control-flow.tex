@@ -155,6 +155,68 @@ choosing from multiple cases of a variable value.
   \caption{An example of \texttt{switch..case} usage.}
 \end{listing}
 
+In the listing \ref{listing:dialogues-with-computer-switch-case} an example of
+\texttt{switch..case} statement is shown. As can be seen in this example the
+value of \texttt{a} variable is sequentially compared with the values described
+in \texttt{case} clauses.  The first \texttt{case} that will match the value of
+the variable is executed and on the first \texttt{break} instruction the
+\texttt{switch..case} exits.
+
+Note that the \texttt{break} keyword shows the exit point of the
+\texttt{switch..case}.  We can see in the example
+\ref{listing:dialogues-with-computer-switch-case} that there are two
+\texttt{case} instructions that go one after another -- the first one is for
+number 20 and the second one is for number 30.  But the \texttt{break}
+instruction is used only after the \texttt{case 30}.  It means that if
+\texttt{a} variable is equal to 20 then not only the sequence of instructions
+after \texttt{case 20} will be executed but the instructions after \texttt{case
+  30} as well, without any further checks.  The same situation can be seen in
+\texttt{case 1} and \texttt{case 2}, the difference is only that \texttt{case 1}
+does not have any instructions to execute on its own, and the code \texttt{case
+  2} will be executed instead.
+
+Another very important idea to consider is that when we are using conditionals
+in the code (also known as \emph{branching operators} for a good reason) they
+are executed without any looping.  Nevertheless sometimes there is a temptation
+to compare \emph{loop statements} with condition statements as they are both
+using some condition that controls their execution.  It shouldn't be a surprise
+as loops that we will discuss in \ref{Programming!Loops} are based on the
+condition statements and can be implemented with the \texttt{if} statement.  In
+the listing \ref{listing:dialogues-with-computer-if-based-loop} we provide an
+example of loop implementation based on the plain \texttt{if} statement and a
+global variable.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void setup() {
+      // Here we must configure ports 2..6 in OUTPUT
+      // mode through 'pinMode' procedure.
+    }
+
+    // Create a global 'p' variable
+    // that sets the number of LED.
+    int p = 2;
+
+    void loop() {
+      // Do a single LED blinking.
+      digitalWrite(p, HIGH);
+      delay(100);
+      digitalWrite(p, LOW);
+      delay(100);
+
+      p++; // Increment the variable.
+
+      // If 'p' is equal to 7 then...
+      if (p == 7) {
+        // ...set the variable value to 2.
+        p = 2;
+      }
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-if-based-loop}
+  \caption{An example of loop implementation through \texttt{if} operator.}
+\end{listing}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Loops}
 \index{Programming!Loops}
