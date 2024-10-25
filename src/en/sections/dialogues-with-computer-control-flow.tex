@@ -241,4 +241,68 @@ of the programming languages:
 \item Post-test loop.
 \end{itemize}
 
+Each of the loop type has its own implementation in the programming language
+that we are using here (C++.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Pre-Test Loop}
+\index{Programming!Loops!Pre-test loop (while)}
+
+The easiest type of a loop is the \emph{pre-test loop} that is implemented in
+C++ as \texttt{while} statement.  This type of a loop comes handy when we don't
+know the exact number of executions of a loop body that must be performed (in
+other words when we don't know the exact number of \emph{iterations}.)
+
+The overall structure of a \texttt{while} loop is shown in the listing
+\ref{listing:dialogues-with-computer-while}.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int t = 0;
+
+    while (t < 12) {
+      // Loop body.
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-while}
+  \caption{Pre-test loop (\texttt{while}) example.}
+\end{listing}
+
+Often visualization of information helps us better understand the essence of the
+matter.  One of the ways to visualize a loop is to draw a timeline that contains
+the sequence of events as shown on fig. \ref{fig:control-flow-while-loop}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[-{Stealth[gray]}] (0, 0) -- (11, 0);
+    \foreach \x in {1, 2, ..., 10} {
+      \draw (\x, 0.1) -- (\x, -0.1) node[below] {$\x$};
+      \draw[dotted, red] (\x, 0.1) -- (\x, 0.5);
+    };
+    \draw (1.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{int t = 0}$}};
+    \draw (2.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{t < 12}$}};
+    \draw (3.50, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Loop body}$}};
+    \draw (4.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{t < 12}$}};
+    \draw (5.50, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Loop body}$}};
+    \draw (6.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{t < 12}$}};
+    \draw (7.50, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Loop body}$}};
+    \draw (8.00, 0.5)  node[above, red] {$\mbox{...}$};
+    \draw (11, 0) node[below] {$t$};
+  \end{tikzpicture}
+  \label{fig:control-flow-while-loop}
+  \caption{A visualization of \texttt{while} loop.}
+\end{figure}
+
+As we can see here a loop is a process that spans over some period of time.
+This process can be divided in the following steps:
+
+\begin{enumerate}
+\item Declare a variable and set its value to 0.
+\item Check the condition of a loop.
+\item If the condition is true, go to the loop body.
+\item Checking the condition again (as on the step 2) -- if the condition is
+  still evaluating to true, go to the loop body etc.
+\end{enumerate}
+
 \end{document}
