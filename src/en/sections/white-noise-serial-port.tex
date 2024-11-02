@@ -150,4 +150,44 @@ representation of featureless numbers allows us to quickly and capaciously grasp
 the information with just one look.  And often this helps us to see regularities
 in the data that can be hidden from the eye in other cases.
 
+There are different ways to visualize the data; one of such possibilities that
+is available for us is ``Serial Plotter'' that allows us to get a graph from the
+incoming data right from the Arduino IDE.  We can access the plotter through
+``Tools'' menu wehre we have to select ``Serial Plotter'' (or we can use
+\hotkey{Ctrl + Shift + L} hotkey to access the plotter.)
+
+The overall appearance of the plotter is shown on
+fig. \ref{fig:arduino-ide-serial-plotter}.
+
+As for the serial monitor the header of the plotter shows the name of the device
+that represents an Arduino device connected to the computer.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=10cm]{arduino-ide-serial-plotter}
+  \caption{Плоттер по последовательному соединению (``Serial Plotter'') в
+    Arduino IDE 1.8.19.}
+  \label{fig:arduino-ide-serial-plotter}
+\end{figure}
+
+The numbers on fig. \ref{fig:arduino-ide-serial-plotter} show:
+
+\begin{enumerate}
+\item The area of graph view where the incoming data from an Arduino is shown.
+\item A drop-down menu that allows us to configure the speed of serial port in
+  bauds (bits per second.)  This is set to 9600 baud by default.  If this
+  parameter value differs from the serial port speed configured in the Arduino
+  program (through \texttt{Serial.begin}) then the plotter will not be able to
+  show the data.
+\item Data input line that allows us to send data from a computer to the
+  connected Arduino.
+\item ``Send'' button that when clicked initiates the data transfer from the
+  input line one the left to the button to the connected Arduino.
+\item Line ending configuration for the Arduino communication.  There we can
+  choose one of the following modes: ``No line ending'', ``Newline'', ``Carriage
+  return'' and ``Both NL \& CR'' (the mode where both ``Newline'' and ``Carriage
+  return'' is used.)  This option configures which sequence of symbols is used
+  as the line eding.
+\end{enumerate}
+
 \end{document}
