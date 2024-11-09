@@ -257,4 +257,40 @@ Remember that \texttt{Serial.read} returns only one byte of data and if you, for
 example, have sent 4 symbols each 1 byte long then you have to call
 \texttt{Serial.read} four times to read all the symbols.
 
+Another option to read all the bytes is to call \texttt{Serial.readBytes} that
+returns an array of bytes as the result.
+
+\subsubsection{Reading Numbers}
+
+\texttt{Serial.parseInt} function reads the incoming data on Arduino and looks
+for symbols with codes from 48 to 57 (the range that represents the digits from
+0 to 9 respectively.)  When a sequence of such codes is found then the function
+converts it into a proper integer value.  Thus, if you transfer the number 72
+from the Serial Monitor in Arduino IDE to an Arduino board, it will be
+transferred to an Arduino board as a string ``72'' and then
+\texttt{Serial.parseInt} will read it as two bytes: 55 and 51.  Then those two
+bytes will be converted back into number 72.
+
+Let's write a small echo-program that will show us the way the
+\texttt{Serial.parseInt} function works.
+
+\begin{minted}{cpp}
+  int incoming_int = 0;
+
+  void setup()
+  {
+    Serial.begin(9600);
+    Serial.setTimeout(2000);
+  }
+
+  void loop()
+  {
+    if (Serial.available() > 0)
+    {
+      incoming_int = Serial.parseInt();
+      Serial.write(incoming_int);
+    }
+  }
+\end{minted}
+
 \end{document}
