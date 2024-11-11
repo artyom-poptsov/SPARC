@@ -5,12 +5,12 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Control Flow}
 
-Statements (or so called \emph{operators}) of a programming language that are
-responsible for the controlling the flow of program execution are called
-\emph{control flow statements}.  They include \emph{branching} statements,
-\emph{loop} statements and others alike.  Generally we can say that if a
-statement changes the sequential flow of execution of a program then this
-statement is one of the control flow statements group.
+Statements (or so called \emph{operators}) of a programming language, that are
+responsible for controlling the flow of program's execution, are called
+\emph{control flow statements}.  They include \emph{branching}, \emph{loop}
+statements and others alike.  Generally we can say that if a statement changes
+the sequential flow of execution of a program then this statement is one of the
+control flow statements group.
 
 In this section we will discuss the main types of the control flow statements
 that are present in C++ and many other popular programming languages.
@@ -25,7 +25,7 @@ conditional statement in the program code: if a logical expression is true then
 we do one thing, if it is not -- we do something other.
 
 Conditional statements are described using special control flow statements.  In
-C++ we have two main statements.  The first one is \texttt{if} operator.
+C++ we have two main statements.  The first one is the \texttt{if} operator.
 
 Here's an example:
 
@@ -33,7 +33,7 @@ Here's an example:
   \begin{minted}{cpp}
     int a = 42;
     if (a > 10) {
-      // A code that is executed only when the value of "a'' variable
+      // A code that is executed only when the value of 'a' variable
       // is greater than 10.  In this case this code will always
       // be executing because the variable is always equals to 42.
     }
@@ -58,16 +58,16 @@ When we need to check if a variable value is equal to some other value we use
     }
   \end{minted}
   \label{listing:dialogues-with-computer-if-equals}
-  \caption{An example of usage of \texttt{if} to check if the variable value is
+  \caption{An example of \texttt{if} usage to check if the variable value is
     equal to 10.}
 \end{listing}
 
 \note{ Don't confuse \emph{equality operator} ``=='' with \emph{assignment
   operator} ``='' -- this is important!  The point is that in many cases C/C++
-  programming languages allow us to to use either of the operators in one place
+  programming languages allow us to use either of the operators in one place
   interchangeably but the results will be completely different depending on the
   used operator.  In C++ ``='' symbol has different roles but if we are talking
-  about working with variables then this operator is always changes the variable
+  about working with variables then this operator always changes the variable
   that is on the left of assignment operator. }
 
 The easiest way to remember the difference between those two operations is that
@@ -89,7 +89,7 @@ single ``='' sign means assignment and ``=='' is equality operator.
 \end{listing}
 
 In the listing \ref{listing:dialogues-with-computer-if-equals-assignment} the
-\texttt{if} body will always be executed a despite the fact that \texttt{a} is
+\texttt{if} body will always be executed despite the fact that \texttt{a} is
 equal to 42 before \texttt{if} -- the reason for that is that the assignment
 operator inside the parenthesis \emph{changes} the value of \texttt{a} to 10.
 Then \texttt{a} variable is substituted with its value inside the parenthesis.
@@ -114,7 +114,7 @@ executed when the condition is false.  In such cases one can use
     }
   \end{minted}
   \label{listing:dialogues-with-computer-if-with-else}
-  \caption{An example of (\texttt{if}) usage with \texttt{else} block.}
+  \caption{An example of \texttt{if} usage with \texttt{else} block.}
 \end{listing}
 
 Another statement that is often used is \texttt{switch..case} also known as
