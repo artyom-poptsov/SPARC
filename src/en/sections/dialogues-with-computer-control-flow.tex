@@ -326,4 +326,52 @@ It is important to write a correct end condition for a loop otherwise you can
 end up making cakes not until the 12 o'clock of the current day but until the 12
 o'clock of the next day or you can even go down into an \emph{infinite loop}.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Loop with a Counter (for)}
+\index{Programming!Loops!Loop with a counter (for)}
+
+Another popular type of loop is the \emph{loop with a counter} that is
+implemented in C/C++ as \texttt{for} statement.  This loop allows us to create a
+special variable (a counter), set it to the initial value, describe a condition
+and specify the operation that changes the value of the counter -- all this
+inside the loop itself:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    //                5.
+    //        1.      2.        4.
+    for (int i = 0; i < 10; i = i + 1) {
+      // 3. (Loop body)
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-for}
+  \caption{The loop with a counter \texttt{for} with the numbered sequence of
+    steps of execution.}
+\end{listing}
+
+As in the case with \texttt{while} loop, we can visualize the \texttt{for} loop
+process as the sequence of operations:
+
+\begin{figure}[ht]
+  \centering
+  \begin{tikzpicture}
+    \draw[-{Stealth[gray]}] (0, 0) -- (11, 0);
+    \foreach \x in {1, 2, ..., 10} {
+      \draw (\x, 0.1) -- (\x, -0.1) node[below] {$\x$};
+      \draw[dotted, red] (\x, 0.1) -- (\x, 0.5);
+    };
+    \draw (1.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{int i = 0}$}};
+    \draw (2.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{t < 10}$}};
+    \draw (3.50, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Loop body}$}};
+    \draw (4.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i++}$}};
+    \draw (5.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i < 10}$}};
+    \draw (6.50, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Loop body}$}};
+    \draw (7.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i++}$}};
+    \draw (8.00, 0.5)  node[above, red] {$\mbox{...}$};
+    \draw (11, 0) node[below] {$t$};
+  \end{tikzpicture}
+  \label{fig:control-flow-for-loop}
+  \caption{A visual representation of \texttt{for} loop.}
+\end{figure}
+
 \end{document}
