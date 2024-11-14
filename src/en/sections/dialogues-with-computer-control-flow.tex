@@ -401,4 +401,74 @@ its value becomes 1.  After that we go back to the loop condition checking and
 observe that we have just one cake and it's less than 10.  After that we
 continue the loop.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Post-Test Loop}
+\index{Programming!Loops!Post-Test Loop (do..while)}
+
+Aside from the aforementioned types of loops there's the third type of loop
+where the condition check is performed after execution of the loop body.  This
+type of loop is implemented as the \texttt{do..while} statement in C/C++.
+
+The overall structure of the \texttt{do..while} is as follows:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int pin = 2;
+
+    do {
+      // Loop body.
+    } while (pin < 10);
+  \end{minted}
+  \label{listing:dialogues-with-computer-do-while}
+  \caption{Post-test loop \texttt{do..while}.}
+\end{listing}
+
+From the properties of this kind of loop we can notice an interesting thing:
+even if the loop condition is false on the first iteration, the loop body will
+be executed once.  Thus, we can conclude that \emph{the body of post-test loop
+is executed at least once} as is shown in example
+\ref{listing:dialogues-with-computer-do-while-example}.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 2;
+
+    do {
+      digitalWrite(13, HIGH);
+      delay(200);
+      digitalWrite(13, LOW);
+      delay(200);
+    } while (a < 1);
+  \end{minted}
+  \label{listing:dialogues-with-computer-do-while-example}
+  \caption{An example that shows the properties of \texttt{do..while} loop.}
+\end{listing}
+
+In this example, despite the \texttt{a} variable has value of 2 and the loop
+condition checks if \texttt{a} is less than 1, an LED on 13rd port will blink
+once in the loop.
+
+This type of loop is rarely used but in some situations it comes very handy.
+
+More realistic example is shown on the listing
+\ref{listing:dialogues-with-computer-do-while-example-2}: unless the button on
+\texttt{BUTTON\_PIN} is pressed the loop will be executing, blinking the LED.
+Even if a button is pressed right at the beginning the LED will blink once.  But
+if you press the button, the LED will stop blinking and the execution of the
+program will continue after the loop.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    do {
+      digitalWrite(13, HIGH);
+      delay(200);
+      digitalWrite(13, LOW);
+      delay(200);
+    } while (digitalRead(BUTTON_PIN) == LOW);
+  \end{minted}
+  \label{listing:dialogues-with-computer-do-while-example-2}
+  \caption{A practical example of post-test loop (\texttt{do..while})
+    application.}
+\end{listing}
+
 \end{document}
