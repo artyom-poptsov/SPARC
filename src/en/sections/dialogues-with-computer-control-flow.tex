@@ -375,5 +375,30 @@ process as the sequence of operations:
 \end{figure}
 
 This statement is executed as follows:
+\begin{enumerate}
+\item We declare a variable and set its value to 0 (1st step.)
+\item Then we check if the loop condition is true (2nd step.)
+\item After that if the check on the 2nd step is true then we go to the loop
+  body (3rd step.)
+\item After executing the loop body we go to the change the counter variable
+  value (4th step.)
+\item After the 4th step we go back to the 2nd step and if the loop condition is
+  true we go the 3rd step and so on.
+\end{enumerate}
+
+As in the case of \texttt{while} loop, we can imagine the process of making
+cakes as a loop example.  Let's assume that we need to make 10 cakes.  The
+process of making one cake is described as a an algorithm consisting of a
+sequence of instructions (a recipe.)  To make 10 cakes we need to repeat this
+algorithm 10 times.
+
+The loop starts with creating a counter variable to count the number of finished
+cakes.  In the beginning the value of that variable is zero.  Next we check if
+the loop condition is true (that is, the number of cakes is less than 10.)  Zero
+is less than 10 so we continue with the instructions to make the first cake
+(executing the loop body.)  After the loop body we increment the cake counter so
+its value becomes 1.  After that we go back to the loop condition checking and
+observe that we have just one cake and it's less than 10.  After that we
+continue the loop.
 
 \end{document}
