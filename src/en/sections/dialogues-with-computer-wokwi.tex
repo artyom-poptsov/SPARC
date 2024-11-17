@@ -1,0 +1,44 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wokwi Simulator}
+
+To program an Arduino you don't have to have a real Arduino board -- you can use
+a \emph{simulator} instead.  The goal of a simulator is to imitate a real system
+with minimal differences from the original.
+
+By the way, there are two similar terms: \emph{simulator} and \emph{emulator}.
+
+Let's look at the differences\cite{so:simulator-vs-emulator} between those two
+terms:
+
+\begin{itemize}
+\item The task of a \emph{emulator} is to imitate the outer observable behavior
+  of a system.  The state of inner workings of an emulation does not have to
+  mirror the internal state of an emulated system.
+\item The of a \emph{simulator} is to model the internal state of a simulated
+  system.  The end result of a good simulation is model that duplicates the
+  target system in the smallest details.  In an ideal case we have to be able to
+  look inside a simulation and observe all the aspects of inner workings that we
+  could observer in the same situation inside a simulated object.
+\end{itemize}
+
+Simulators can be divided between three categories:
+\begin{itemize}
+\item \emph{Offline simulators} are a standalone programs that we can download,
+  install and run on a computer.
+\item \emph{Online simulators} are special web sites (or rather web
+  applications) that allows us to simulate a hardware platform inside a web
+  browser (either by downloading all the required code inside a browser or by
+  doing some operations on a server.)
+\item \emph{Composite simulators} are standalone programs that however requires
+  an Internet connection to a server to run.
+\end{itemize}
+
+Online simulators are easier for beginners as they don't require installation to
+a computer.  However many of such simulators require registration which is not
+acceptable for some users.
+
+\end{document}
