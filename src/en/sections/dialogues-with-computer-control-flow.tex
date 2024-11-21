@@ -426,7 +426,7 @@ The overall structure of the \texttt{do..while} is as follows:
 From the properties of this kind of loop we can notice an interesting thing:
 even if the loop condition is false on the first iteration, the loop body will
 be executed once.  Thus, we can conclude that \emph{the body of post-test loop
-is executed at least once} as is shown in example
+is executed at least once} as it is shown in example
 \ref{listing:dialogues-with-computer-do-while-example}.
 
 \begin{listing}[ht]
@@ -444,17 +444,17 @@ is executed at least once} as is shown in example
   \caption{An example that shows the properties of \texttt{do..while} loop.}
 \end{listing}
 
-In this example, despite the \texttt{a} variable has value of 2 and the loop
-condition checks if \texttt{a} is less than 1, an LED on 13th port will blink
-once in the loop.
+In this example, despite the \texttt{a} variable value of 2 and that the loop
+condition checks if \texttt{a} is less than 1, an LED on the 13th port will
+blink once in the loop.
 
 This type of loop is rarely used but in some situations it comes very handy.
 
-More realistic example is shown on the listing
+A more realistic example is shown on the listing
 \ref{listing:dialogues-with-computer-do-while-example-2}: unless the button on
 \texttt{BUTTON\_PIN} is pressed the loop will be executing, blinking the LED.
-Even if a button is pressed right at the beginning the LED will blink once.  But
-if you press the button, the LED will stop blinking and the execution of the
+Even if a button is pressed right at the beginning, the LED will blink once.
+But if you press the button, the LED will stop blinking and the execution of the
 program will continue after the loop.
 
 \begin{listing}[ht]
@@ -524,7 +524,7 @@ with them it is easier to do so (the code becomes more ``sweet''.)
 \item Try to blink two LEDs at once in a loop so they chase one another.
 \item Modify the ``Chasing lights'' algorithm in such way that LEDs start to
   light up at the ends of a LED string and run towards the center of it.
-\item Modify the previous algorithm to make the LEDs blink slower the further
+\item Modify the previous algorithm to make the LEDs blink slower, the further
   from the center of the LED string they are.  In other words add a dependency
   between the blink speed and the number of a loop iteration.
 \end{enumerate}
