@@ -7,14 +7,14 @@
 \index{Electronics!Serial Port}
 \label{section:serial-port}
 
-Connection of Arduino to a computer is usually is done through a USB connector
-placed on the board.  On the Arduino Mega 2560 side USB-B is used for that
+Connection of an Arduino to a computer is usually done through a USB connector
+placed on the board.  On the Arduino Mega 2560 side, a USB-B is used for that
 purpose.
 
-The USB protocol is quite complicated and the most of the Arduino chips don't
+The USB protocol is quite complicated and most of the Arduino chips don't
 ``speak'' USB protocol and need a ``translator'' to be understood by a computer.
 A translator is usually a separate chip called USB-UART converter soldered on an
-Arduino board.  We will discuss UART in a section
+Arduino board.  We will discuss UART in section
 \ref{section:communication-uart}.  Some compact Arduino such as Arduino Pro Mini
 does not have its own USB-UART converter and require a separate converter.
 
@@ -79,8 +79,8 @@ And that's how our \texttt{loop} function looks like:
   }
 \end{minted}
 
-To see the results of program execution we need to open the ``Serial Monitor''
-in the Arduino IDE from the ``Tools'' menu.
+To see the results of the program execution we need to open the ``Serial
+Monitor'' in the Arduino IDE from the ``Tools'' menu.
 
 Aside from that we can open ``Serial Monitor'' by \hotkey{Ctrl + Shift + M}
 hotkey.
@@ -115,9 +115,9 @@ The numbers on the fig. \ref{fig:arduino-ide-serial-monitor} show:
 \item The data that was received from an Arduino.
 \item ``Autoscroll'' option.  If this option is enabled then the main area of
   the window that shows the received data is scrolled automatically in such way
-  so it always shows the latest data tat was received.
-\item ``Show timestamp'' option that allows us to enable timestamps (as is the
-  \textbf{3} on the picture.)
+  so it always shows the latest data that was received.
+\item ``Show timestamp'' option that allows us to enable timestamps (as is shown
+  by the the number \textbf{3} on the picture.)
 \item An option that controls the line endings in the communication with an
   Arduino.  This option controls which sequence of symbols the serial monitors
   considers as a line ending.  You can choose from ``No line ending'',
@@ -132,10 +132,10 @@ The numbers on the fig. \ref{fig:arduino-ide-serial-monitor} show:
 \end{enumerate}
 
 Data transfer between an Arduino and a computer can be used for many different
-tasks.  For example one of such tasks is the simple way to debug your programs
+tasks.  For example, one of such tasks is the simple way to debug your programs
 on the Arduino board by simply printing various information about the runtime
 program state through the serial port.  In other words instead of trying to
-figure out the what the program does we can instruct an Arduino board to tell us
+figure out what the program does we can instruct an Arduino board to tell us
 what it does.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -153,7 +153,7 @@ in the data that can be hidden from the eye in other cases.
 There are different ways to visualize the data; one of such possibilities that
 is available for us is ``Serial Plotter'' that allows us to get a graph from the
 incoming data right from the Arduino IDE.  We can access the plotter through
-``Tools'' menu wehre we have to select ``Serial Plotter'' (or we can use
+``Tools'' menu where we have to select ``Serial Plotter'' (or we can use
 \hotkey{Ctrl + Shift + L} hotkey to access the plotter.)
 
 The overall appearance of the plotter is shown on
