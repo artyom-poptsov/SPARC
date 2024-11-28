@@ -293,4 +293,25 @@ Let's write a small echo-program that will show us the way the
   }
 \end{minted}
 
+We intentionally used \texttt{Serial.setTimeout} to change the timeout of the
+serial port from 1000ms (the default value) to 2000ms to clearly demonstrate
+some aspects of serial port workings.
+
+Roughly the algorithm of this program is as follows:
+\begin{itemize}
+\item If we send the string ``72'' to an Arduino through the serial monitor on
+  our computer the serial monitor will send it as two bytes: 55 and 51.
+\item The function \texttt{Serial.parseInt} on Arduino waits for 2000
+  milliseconds.
+\item After that the method \texttt{Serial.parseInt} will detect the sent bytes
+  and convert them to an integer value of 72.
+\item The value is assigned to the variable \texttt{incoming\_int}.
+\item The program sends the value of \texttt{incoming\_int} (72 in our example)
+  back to the computer using \texttt{Serial.write} method.
+\item The serial monitor on a the computer reads the byte 72, converts it to a
+  symbol and shows the symbol ``H'' (which has the code 72.)
+\end{itemize}
+
+\subsection{Задачи}
+
 \end{document}
