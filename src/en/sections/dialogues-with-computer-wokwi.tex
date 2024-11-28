@@ -80,4 +80,114 @@ to run the project in the simulator.  ``+'' button allows us to select and add
 components into our schematics, and the button with three dots on it allows us
 to access the simulator options.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Components for building circuits}
+
+\begin{longtable}{|>{
+      \centering\arraybackslash
+    }p{3cm}|>{
+      \centering\arraybackslash}p{8cm}|
+  }
+  \hline
+  Image & Description \\ \hline
+  \endfirsthead
+
+  \hline
+  Image & Description \\ \hline
+  \endhead
+
+  \hline
+  \parbox[t][1.4cm][c]{2cm}{\centering \vspace{1cm}
+    \includegraphics[width=0.12\textwidth]{wokwi/wokwi-led.png}} &
+  \parbox[t][3cm][t]{8cm}{
+    \centering \textbf{Light-emitting diode (LED)}\\ \raggedright
+
+    An LED has to legs: the long one (``+'', an anode), that should be connected
+    to an Arduino through a resistor and a short one (``-'', a cathode) that
+    should be connected to the ground (GND.)  A resistor is required as without
+    it an LED can overheat and burn out as well as the Arduino board itself.
+
+  } \\  \hline
+
+  \parbox[t][0,5cm][c]{2cm}{\centering \vspace{1cm}
+    \includegraphics[width=0.12\textwidth]{wokwi/wokwi-resistor.png}} &
+  \parbox[t][2.6cm][t]{8cm}{
+    \centering \textbf{Resistor}\\ \raggedright
+
+    A resistor is a component that limits the electric current in a circuit and
+    keeps other components from an overload.  It is used to control the electric
+    current, to lower the voltage and thus for keeping other components from
+    burning out.
+
+  } \\  \hline
+
+  \parbox[t][2,3cm][c]{2cm}{\centering \vspace{0.8cm}
+    \includegraphics[width=0.12\textwidth]{wokwi/wokwi-breadboard.png}} &
+  \parbox[t][3.9cm][t]{8cm}{
+    \centering \textbf{Breadboard}\\ \raggedright
+
+    A breadboard is a tool that allows us quickly and conveniently build
+    electric circuits without the need of soldering.  It consists of a sequence
+    of ports connected with conductive lines.
+
+  } \\  \hline
+
+  \parbox[t][3,6cm][c]{2cm}{\centering \vspace{1cm}
+    \includegraphics[width=0.12\textwidth]{wokwi/wokwi-rgb-led.png}} &
+  \parbox[t][5.1cm][t]{8cm}{
+    \centering \textbf{RGB light-emitting diode (LED)}\\ \raggedright
+
+    An RGB LED is in fact three separate LEDs packed in one package, each one is
+    of different color: red, green and blue.  We can combine those colors to get
+    new color variants.  Usually an RGB LED has 4 legs: one leg is for common
+    anode (``+'') or cathode (``-''), and one leg for each color.  Each one of
+    color legs should be connected to an Arduino through a resistor to limit the
+    electric current, as with the regular LEDs.
+
+  } \\  \hline
+
+  \parbox[t][2,8cm][c]{2cm}{\centering \vspace{1cm}
+    \includegraphics[width=0.12\textwidth]{wokwi/wokwi-lcd2004.png}} &
+  \parbox[t][4.3cm][t]{8cm}{
+    \centering \textbf{Alphanumeric LCD}\\ \raggedright
+
+    An alphanumeric LCD is a display that allows us to show textual information
+    using liquid crystals.  It consists of a set of pixels, that can be enabled
+    or disabled to draw symbols.  To connect an LCD display to an Arduino we can
+    use several pins: two pins to transfer the data (SDA and SCL) and two pins
+    for power (VCC and GND.)
+
+  } \\  \hline
+
+  \parbox[t][2,5cm][c]{2cm}{\centering \vspace{1cm}
+    \includegraphics[width=0.12\textwidth]{wokwi/wokwi-potentiometer.png}} &
+  \parbox[t][4.3cm][t]{8cm}{
+    \centering \textbf{Potentiometer}\\ \raggedright
+
+    A potentiometer is a variable resistor that allows us to change its
+    resistance, and that in turn provides us with ability to control different
+    parameters of our systems (brightness, sound volume, speed etc.)  Usually it
+    has three pins: two for connecting power and ground and the middle pin for
+    connecting to analog inputs on an Arduino.  By turning the potentiometer
+    handle we can change the resistance between the middle pin and the other
+    ones.
+
+  } \\  \hline
+
+  \parbox[t][1,8cm][c]{2cm}{\centering \vspace{1cm}
+    \includegraphics[width=0.12\textwidth]{wokwi/wokwi-buzzer.png}} &
+  \parbox[t][3.6cm][t]{8cm}{
+    \centering \textbf{Buzzer}\\ \raggedright
+
+    A buzzer (or speaker) is a component that allows us to play sounds by
+    sending electric signals to it.  It has two pins: ``+'' should be connected
+    to an Arduino digital pin (configured in \texttt{OUTPUT} mode) and ``-'' pin
+    that should be connected to the ground (GND.)
+
+  } \\  \hline
+
+  \caption{Some components that are available in Wokwi.}
+\end{longtable}
+
 \end{document}
