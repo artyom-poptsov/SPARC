@@ -41,9 +41,15 @@ jobs:
       - name: Install the book
         run: |
           guix package --install-from-file=guix.scm
-      - name: Upload PDF to the workflow tab
+      - name: Upload the Russian version of the book as PDF
         id: upload-workflow-tab
         uses: actions/upload-artifact@v4
         with:
-          name: avp-sparc-book-pdf
+          name: avp-sparc-book-ru-pdf
           path: "~/.guix-profile/share/doc/sparc/sparc.ru.pdf"
+      - name: Upload the English version of the book as PDF
+        id: upload-workflow-tab
+        uses: actions/upload-artifact@v4
+        with:
+          name: avp-sparc-book-en-pdf
+          path: "~/.guix-profile/share/doc/sparc/sparc.en.pdf"
