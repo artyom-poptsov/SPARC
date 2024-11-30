@@ -21,7 +21,7 @@ ACLOCAL_AMFLAGS = -I build-aux
 
 SUBDIRS = .
 
-all: sparc.pdf sparc.en.pdf
+all: sparc.ru.pdf sparc.en.pdf
 
 SECTIONS = \
 	src/ru/sections/commands.tex	\
@@ -145,9 +145,9 @@ out/src/ru/sparc.pdf: out/src/ru/sparc.aux make_glossary make_index out/src/ru/s
     && xelatex --shell-escape sparc.tex > sparc.pdf.log.2 2>&1 \
 		|| cat sparc.pdf.log.2 && exit 0
 
-sparc.pdf: out/src/ru/sparc.pdf
-	@echo "COPY      sparc.pdf" \
-		&& [ -e out/src/ru/sparc.pdf ] && cp out/src/ru/sparc.pdf sparc.pdf \
+sparc.ru.pdf: out/src/ru/sparc.pdf
+	@echo "COPY      sparc.ru.pdf" \
+		&& [ -e out/src/ru/sparc.pdf ] && cp out/src/ru/sparc.pdf sparc.ru.pdf \
 		|| ( echo "ERROR: File 'out/src/ru/sparc.pdf' not found" \
 	       && exit 1 )
 

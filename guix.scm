@@ -128,9 +128,9 @@
                            (let ((doc-dir (string-append #$output
                                                          "/share/doc/sparc/")))
                              (mkdir-p doc-dir)
-                             (copy-file "sparc.pdf"
+                             (copy-file "sparc.ru.pdf"
                                         (string-append doc-dir
-                                                       "sparc.pdf"))))))))
+                                                       "sparc.ru.pdf"))))))))
    (home-page "https://github.com/artyom-poptsov/SPARC")
    (synopsis "Book on combining art and technology")
    (description
