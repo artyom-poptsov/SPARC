@@ -130,7 +130,10 @@
                              (mkdir-p doc-dir)
                              (copy-file "sparc.ru.pdf"
                                         (string-append doc-dir
-                                                       "sparc.ru.pdf"))))))))
+                                                       "sparc.ru.pdf"))
+                             (copy-file "sparc.en.pdf"
+                                        (string-append doc-dir
+                                                       "sparc.en.pdf"))))))))
    (home-page "https://github.com/artyom-poptsov/SPARC")
    (synopsis "Book on combining art and technology")
    (description
