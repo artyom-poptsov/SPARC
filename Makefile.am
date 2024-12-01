@@ -170,6 +170,7 @@ SECTIONS_EN = \
 	src/en/sections/dialogues-with-computer-breadboard.tex \
 	src/en/sections/dialogues-with-computer-multimeter.tex \
 	src/en/sections/dialogues-with-computer-control-flow.tex \
+	src/en/sections/dialogues-with-computer-program-structure.tex \
 	src/en/sections/dialogues-with-computer-wokwi.tex \
 	src/en/sections/dialogues-with-computer-arduino-ide.tex \
 	src/en/sections/white-noise-introduction.tex \

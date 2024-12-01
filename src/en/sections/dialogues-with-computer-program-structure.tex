@@ -1,0 +1,78 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{The program structure for Arduino}
+
+A program that is written for an Arduino board usually consists of two basic
+parts, also called \emph{functions}: \texttt{setup} and \texttt{loop}.  An
+example of a program that blinks an LED:
+
+\begin{minted}{cpp}
+  void setup() {
+    pinMode(2, OUTPUT);
+  }
+
+  void loop() {
+    digitalWrite(2, HIGH);
+    delay(500);
+    digitalWrite(2, LOW);
+    delay(500);
+  }
+\end{minted}
+
+
+The \texttt{setup} function performs the initialization of the micro-controller
+after the power-up.  We should put here all the commands that must be executed
+once after the system starts.
+
+A digital port (or, as it sometimes called, \emph{digital pin}) of an Arduino
+can be in one of the two states.  In the \emph{input} mode it reads the voltage
+value form some external source, and in the \emph{output} mode it allows to
+output voltage to some external circuit.
+
+Let's look closely on the aforementioned example.  In \texttt{setup} procedure
+the \texttt{pinMode} function is executed, that configures the operation mode of
+the specified port as \texttt{OUTPUT}.  The overall syntax of \texttt{pinMode}
+call looks like follows:
+
+\begin{minted}{cpp}
+  pinMode(port, mode);
+\end{minted}
+
+where \texttt{port} is the port number, and \texttt{mode} is the operation mode
+for that port (either \texttt{INPUT}, \texttt{INPUT\_PULLUP} or
+\texttt{OUTPUT}.)
+
+In \texttt{loop} function we use two functions: \texttt{digitalWrite} and
+\texttt{delay}.
+
+The \texttt{digitalWrite} function has the following call syntax:
+
+\begin{minted}{cpp}
+  digitalWrite(port, value);
+\end{minted}
+
+where \texttt{port} is the port number and \texttt{value} is the output voltage
+level: \texttt{HIGH} (usually corresponds to 5V) or \texttt{LOW} (outputs 0V.)
+
+The \texttt{delay} function allows us pause the program execution for the
+specified period of time in milliseconds.  The call syntax for this function is
+as follows:
+
+\begin{minted}{cpp}
+  delay(value);
+\end{minted}
+
+Where \texttt{value} is the time period in milliseconds.
+
+\subsection{Exercises}
+\begin{itemize}
+\item Build a ``Chasing lights'' project on a breadboard to make the LEDs should
+  blink in turn, one after another.  Use at least 5 LEDs.
+\item Modify the ``Chasing lights'' project to make the LEDs go in one
+  direction, and then in another.
+\end{itemize}
+
+\end{document}
