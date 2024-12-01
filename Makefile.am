@@ -168,6 +168,7 @@ SECTIONS_EN = \
 	src/en/sections/dialogues-with-computer-algorithms.tex \
   src/en/sections/dialogues-with-computer-arduino.tex \
 	src/en/sections/dialogues-with-computer-breadboard.tex \
+	src/en/sections/dialogues-with-computer-memory.tex \
 	src/en/sections/dialogues-with-computer-multimeter.tex \
 	src/en/sections/dialogues-with-computer-control-flow.tex \
 	src/en/sections/dialogues-with-computer-program-structure.tex \

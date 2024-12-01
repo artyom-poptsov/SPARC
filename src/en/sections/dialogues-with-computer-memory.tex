@@ -1,0 +1,33 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Variables}
+\index{Programming!Variable}
+
+A \emph{variable} is one of the key terms in the programming.  Any program works
+with some data.  For clearness let's take some program as an example -- a
+calculator that can add two numbers together.  To allow a micro-controller to
+work with those numbers we have to store them somewhere.  But where?  In the
+random-access memory (RAM) indeed.  All the data that is used by a
+micro-controller during its execution is stored there.  For our calculator to
+work we have to upload to the RAM two numbers that we want to add together -- for
+example, 15 and 3:
+
+\begin{tabular}{p{4cm}|p{6cm}}
+  Memory cell address & Memory cell value \\
+  \hline \hline
+  0000 & 15 \\
+  \hline
+  0001 & 3 \\
+  \hline
+  0003 & 0 \\
+  ... & ... \\
+\end{tabular}
+
+In other words, a \emph{variable} is a memory cell inside the random-access
+memory (RAM.)  To declare a variable is to ask a computer to allocate some
+memory for our purposes.
+
+\end{document}
