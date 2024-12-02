@@ -30,4 +30,96 @@ In other words, a \emph{variable} is a memory cell inside the random-access
 memory (RAM.)  To declare a variable is to ask a computer to allocate some
 memory for our purposes.
 
+A variable in C++ language has a concrete type and a unique name.  A declaration
+(and \emph{initialization}) of a variable looks like follows:
+
+\begin{listing}[ht]
+\begin{verbatim}
+  type name = value;
+\end{verbatim}
+\label{listing:dialogues-with-computer-variable-definition-structure}
+\caption{The overall structure of a variable declaration.}
+\end{listing}
+
+To load numbers 15 and 3 to the RAM we have to write the following:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int a = 15;
+    int b = 3;
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-definition-example}
+  \caption{An example of variable declaration.}
+\end{listing}
+
+The \texttt{int} word is the variable type; it means that this variable holds an
+integer value.
+
+Below we can see an example of addition of two variables (\texttt{a} and
+\texttt{b}) and storing the resulting value into the third variable
+\texttt{result} of the same integer type.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int result = a + b;
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-operations-example}
+  \caption{An example of applying an operation on two variables.}
+\end{listing}
+
+It's worth to be noted that the variable name should mirror its purpose, so it
+will be easier for us to read and understand the code.
+
+The variable name can consist of only English letters, digits and underscores,
+and moreover the name cannot be started with a digit.  We will use underscores
+between the words inside variable names throughout the book.  For example, if we
+want to specify the time of delay between switching on and switching off an LED
+in a ``Chasing lights'' program as a variable, it's logical to call the variable
+\texttt{delay\_value}:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int delay_value = 500;
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-names}
+  \caption{Separating the words inside a variable name with underscores.}
+\end{listing}
+
+Next we will substitute the value of the \texttt{delay\_value} variable into a
+program in the place of \texttt{delay} value:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      int delay_value = 500;
+      digitalWrite(2, HIGH);
+      delay(delay_value);
+      digitalWrite(2, LOW);
+      delay(delay_value);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-usage}
+  \caption{An example of variable usage in a program.}
+\end{listing}
+
+Thus, we will be able to change all the delay values just by adjusting the
+\texttt{delay\_value}:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+
+      int delay_value = 600; // <--
+
+      digitalWrite(2, HIGH);
+      delay(delay_value);
+      digitalWrite(2, LOW);
+      delay(delay_value);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-set-value}
+  \caption{If we change the variable value, it changes in all the places where
+    the variable is used.}
+\end{listing}
+
 \end{document}
