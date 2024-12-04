@@ -122,4 +122,49 @@ Thus, we will be able to change all the delay values just by adjusting the
     the variable is used.}
 \end{listing}
 
+If we want to specify the port number for an LED to blink, we can call the
+variable \texttt{port} and use it in \texttt{digitalWrite}:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      int delay_value = 600;
+      int port = 2;
+      digitalWrite(port, HIGH);
+      delay(delay_value);
+      digitalWrite(port, LOW);
+      delay(delay_value);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-set-value}
+  \caption{Using a variable to specify an LED to blink.}
+\end{listing}
+
+We can, for example, increase the \texttt{port} value by 1 after the first blink
+to set it to the next LED:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      int delay_value = 600;
+
+      int port = 2;
+
+      digitalWrite(port, HIGH);
+      delay(delay_value);
+      digitalWrite(port, LOW);
+      delay(delay_value);
+
+      port++;
+
+      digitalWrite(port, HIGH);
+      delay(delay_value);
+      digitalWrite(port, LOW);
+      delay(delay_value);
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-variable-set-value}
+  \caption{Incrementing a variable to blink the 2nd LED.}
+\end{listing}
+
 \end{document}
