@@ -163,8 +163,53 @@ to set it to the next LED:
       delay(delay_value);
     }
   \end{minted}
-  \label{listing:dialogues-with-computer-variable-set-value}
+  \label{listing:dialogues-with-computer-variable-increment-value}
   \caption{Incrementing a variable to blink the 2nd LED.}
+\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Scope}
+\index{Programming!Variable!Scope}
+
+Note that in the example
+\ref{listing:dialogues-with-computer-variable-increment} the value of variable
+\texttt{port} is reset to 2 each time \texttt{loop} function repeats.  It is
+because after the \texttt{loop} finishes, the variable \texttt{port} is
+destroyed, and when \texttt{loop} restarts, the variable is created again.
+
+Variables, as the other elements of a program, have so called \emph{scope} that
+limits the area of a program where the variable is available -- in other words,
+\emph{scope} specifies from what part of a program we can refer to a variable.
+
+In the example \ref{listing:dialogues-with-computer-variable-increment-value}
+the \texttt{port} is a \emph{local variable} in relation to the \texttt{loop}
+function.  Local variables exist while the function where they were declared is
+executing.
+
+\index{Programming!Variable!Global variables} If we want to keep the variable
+value between the \texttt{loop} function reloads, we have to turn the
+\texttt{port} into a \emph{global variable} -- that is, we have to move it
+outside the boundaries of any function.  We can accomplish this by placing
+\texttt{port} before the \texttt{loop} function.  But we have to be careful not
+to place the \texttt{port} variable inside other functions (such as
+\texttt{setup}), otherwise we won't be able to access it in \texttt{loop}
+function.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int port = 2;
+
+    void loop() {
+      digitalWrite(port, HIGH);
+      delay(delay_value);
+      digitalWrite(port, LOW);
+      delay(delay_value);
+
+      port++;
+    }
+  \end{minted}
+  \label{listing:dialogues-with-computer-global-variable}
+  \caption{An example of a global variable declaration.}
 \end{listing}
 
 \end{document}
