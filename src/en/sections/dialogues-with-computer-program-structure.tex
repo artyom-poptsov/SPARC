@@ -32,10 +32,10 @@ can be in one of the two states.  In the \emph{input} mode it reads the voltage
 value form some external source, and in the \emph{output} mode it allows to
 output voltage to some external circuit.
 
-Let's look closely on the aforementioned example.  In \texttt{setup} procedure
-the \texttt{pinMode} function is executed, that configures the operation mode of
-the specified port as \texttt{OUTPUT}.  The overall syntax of \texttt{pinMode}
-call looks like follows:
+Let's look closely on the aforementioned example.  In the \texttt{setup}
+function the \texttt{pinMode} function is executed, that configures the
+operation mode of the specified port as \texttt{OUTPUT}.  The overall syntax of
+\texttt{pinMode} call is as follows:
 
 \begin{minted}{cpp}
   pinMode(port, mode);
@@ -57,7 +57,7 @@ The \texttt{digitalWrite} function has the following call syntax:
 where \texttt{port} is the port number and \texttt{value} is the output voltage
 level: \texttt{HIGH} (usually corresponds to 5V) or \texttt{LOW} (outputs 0V.)
 
-The \texttt{delay} function allows us pause the program execution for the
+The \texttt{delay} function allows us to pause the program execution for the
 specified period of time in milliseconds.  The call syntax for this function is
 as follows:
 
@@ -69,8 +69,8 @@ Where \texttt{value} is the time period in milliseconds.
 
 \subsection{Exercises}
 \begin{itemize}
-\item Build a ``Chasing lights'' project on a breadboard to make the LEDs should
-  blink in turn, one after another.  Use at least 5 LEDs.
+\item Build a ``Chasing lights'' project on a breadboard to make the LEDs blink
+  in turn, one after another.  Use at least 5 LEDs.
 \item Modify the ``Chasing lights'' project to make the LEDs go in one
   direction, and then in another.
 \end{itemize}
