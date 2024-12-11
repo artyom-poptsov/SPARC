@@ -49,5 +49,47 @@ through ``VCC'' and ``GND'' pins.
   binary value ``1000000000'' which represents the number $2^9 = 512$ -- that can
   be read in the program running on a micro-controller. }
 
+The conversion of an analog signal to a digital form inside an ADC is done in
+three steps:
+
+\begin{enumerate}
+
+\item \textbf{Sampling.}  During this step ADC takes samples from the input
+  analog signal at regular intervals of time (see \ref{fig:discretization}.)
+
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=8cm]{discretization}
+    \caption{Sampling.}
+    \label{fig:discretization}
+  \end{figure}
+
+  The frequency of those intervals is called \emph{sampling rate}.
+
+\item \textbf{Quantization.}  Acquired values are replaced with the closest
+  values from the set of possible values -- \emph{quantization levels}.
+
+  \begin{figure}[h]
+    \includegraphics[width=8cm]{quantization}
+    \caption{Quantization.}
+    \label{fig:quantization}
+    \centering
+  \end{figure}
+
+\item \textbf{Encoding.}  Binary codes are assigned to the resulting values (see
+  \ref{fig:coding}.)
+
+  \begin{figure}[h]
+    \includegraphics[width=8cm]{coding}
+    \caption{Encoding.}
+    \label{fig:coding}
+    \centering
+  \end{figure}
+
+  The higher the sampling rate and the more quantization levels are available,
+  the more precise the analog-to-digital conversion.
+
+\end{enumerate}
+
 \end{document}
 
