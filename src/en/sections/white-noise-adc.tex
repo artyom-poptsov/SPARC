@@ -91,5 +91,28 @@ three steps:
 
 \end{enumerate}
 
+One of the main characteristics of the ADC is the \emph{resolution}.  It sets
+the range for values that the ADC can output.  Let's take a look on the graph on
+fig. \ref{fig:coding}: 3 bits is used for the encoding -- it means that the ADC
+described by this graph is using 3-bit resolution.  That is, the number of
+possible quantization levels is $2^3 = 8$.
+
+So that's the answer to the question why on Arduino ADC returns values in the
+range from 0 to 1023 -- it uses 10-bit ADC that gives us $2^{10} = 1024$ levels
+of quantization.
+
+The use of ADC is very widespread as it's used in audio/video cards, in
+measurement devices (such as oscilloscopes) and in many more areas.
+
+Also there's a different system that is called \emph{digital-to-analog
+converter} (DAC) which performs the inverse function of ADC -- that is, converts
+a digital signal to an analog signal.  We will discuss DAC in the next chapter.
+
+Many of us probably head of 8-bit music that is used mostly in old console
+games.  The name of the genre is based on the fact that the old consoles use
+8-bit ADC and DAC.
+
+%% TODO: Describe 8-bit music in detail here as an example of ADC.
+
 \end{document}
 
