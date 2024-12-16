@@ -35,16 +35,20 @@
 \begin{figure}[ht]
   \centering
   \begin{tikzpicture}
-    \draw[thick] (0, 0) -- (0, 5.5) -- (3, 5.5) -- (3, 0) -- (0, 0);
-    \draw (1.5, 2.75) node[right, above] {ADC};
-    \foreach \n/\y in {0/0.5, 1/1, 2/1.5, 3/2, 4/2.5, 5/3, 6/3.5, 7/4, 8/4.5, 9/5} {
-      \draw (3, \y) -- (4, \y) node[right, above] {OUTPUT \n};
+    \draw[thick] (0, 0) -- (0, 6.0) -- (3, 6.0) -- (3, 0) -- (0, 0);
+    \draw (1.5, 3.00) node[right, above] {ADC};
+    \draw (3, 0.5) node[anchor=south west] {CLOCK INPUT} -- (5, 0.5);
+    \foreach \n/\y in {0/1.0, 1/1.5, 2/2.0, 3/2.5, 4/3.0, 5/3.5, 6/4.0, 7/4.5, 8/5.0, 9/5.5} {
+      \draw (3, \y) node[anchor=south west] {OUTPUT \n} -- (5, \y);
     };
-    \draw (0, 2.75) -- (-1, 2.75) node[left, above, text width=2cm] {ANALOG INPUT};
-    \draw (1.5, 5.5) -- (1.5, 6.5) node[right, above] {VCC};
+    \draw (0, 3.00)
+    -- (-1, 3.00) node[left, above, text width=2cm] {ANALOG INPUT}
+    -- (-2, 3.00);
+    \draw (1.5, 6.0) -- (1.5, 7.0) node[right, above] {VCC};
     \draw (1.5, 0) -- (1.5, -1) node[right, below] {GND};
   \end{tikzpicture}
-  \caption{Схематическое изображение аналогово-цифрового преобразователя.}
+  \caption{Схематическое изображение 10-битного аналогово-цифрового
+    преобразователя.}
   \label{fig:adc-schematics}
 \end{figure}
 
