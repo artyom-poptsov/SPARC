@@ -231,15 +231,73 @@
   близко к исходному значению можно будет выставить значение по оси $y$ при
   квантировании.
 
-\item \textbf{Кодирование.} Квантованным значениям присваивается цифровой код
-  (\ref{fig:coding}.)
+\item \textbf{Кодирование.}  На данном этапе квантованным значениям
+  присваивается цифровой код.
 
   \begin{figure}[h]
-    \includegraphics[width=8cm]{coding}
-    \caption{Кодирование.}
-    \label{fig:coding}
     \centering
+    \begin{tikzpicture}
+      [
+        declare function={
+          step=0.625;
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+          q(\x)=mod(f(\x), step) == 0 ? f(\x) : ((int(round(f(\x) / step)) + 0) * step);
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          grid=both,
+          grid style={line width=.2pt, draw=gray!10},
+          major grid style={line width=.4pt,draw=gray!50},
+          xtick distance = 1,
+	        ytick distance = step,
+          /pgf/number format/precision=5,
+          yticklabels={
+            $000_2$ ($0_{10}$),
+            $000_2$ ($0_{10}$),
+            $001_2$ ($1_{10}$),
+            $010_2$ ($2_{10}$),
+            $011_2$ ($3_{10}$),
+            $100_2$ ($4_{10}$),
+            $101_2$ ($5_{10}$),
+            $110_2$ ($6_{10}$),
+            $111_2$ ($7_{10}$),
+          }
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      blue
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=q(\x); \xnext=\x + 1; \ynext=q(\x + 1)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, \y) (\xnext, \ynext)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Аналоговый сигнал,
+          Квантированные значения
+        }
+	    \end{axis};
+    \end{tikzpicture}
+    \caption{Кодирование аналогового сигнала в двоичной форме.}
+    \label{fig:encoding}
   \end{figure}
+
+  На рис. \ref{fig:encoding} показан пример трёхбитного кодирования.
 
   Чем выше частота дискретизации и чем больше уровней квантования, тем точнее
   преобразование.
