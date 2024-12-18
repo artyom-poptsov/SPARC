@@ -70,7 +70,46 @@
 
   \begin{figure}[h]
     \centering
-    \includegraphics[width=8cm]{discretization}
+    \begin{tikzpicture}
+      [
+        declare function={
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          xlabel={$t$},
+          ylabel={$U$}
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      blue,
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=f(\x)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, 0) (\x, \y)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Аналоговый сигнал,
+          Замеры значения
+        }
+	    \end{axis};
+    \end{tikzpicture}
     \caption{Дискретизация.}
     \label{fig:discretization}
   \end{figure}
@@ -78,16 +117,120 @@
   Характеристика, отражающая эти временные промежутки, называется \emph{частотой
   дискретизации}.
 
-\item \textbf{Квантование.} Полученные значения заменяются ближайшим значением из
-  набора фиксированных величин -- \emph{уровней квантования}
-  (\ref{fig:quantization}.)
-
   \begin{figure}[h]
-    \includegraphics[width=8cm]{quantization}
+    \centering
+    \begin{tikzpicture}
+      [
+        declare function={
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          xlabel={$t$},
+          ylabel={$U$},
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      cyan
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=f(\x); \xnext=\x + 1; \ynext=f(\x + 1)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, \y) (\xnext, \ynext)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Исходный сигнал,
+          Восстановленный сигнал
+        }
+	    \end{axis}
+    \end{tikzpicture}
+    \caption{Восстановление сигнала по точкам.}
+    \label{fig:discretization-1}
+  \end{figure}
+
+  Если восстановим исходный сигнал по записанным точкам, то получим график,
+  подобный рис. \ref{fig:discretization-1}.  Как можно видеть, часть данных
+  потерялась из-за слишком низкой частоты дискретизации -- график получился в
+  некоторых местах ``обрезанный''.
+
+\item \textbf{Квантование.} Полученные значения заменяются ближайшим значением из
+  набора фиксированных величин -- \emph{уровней квантования}.
+
+  
+  \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+      [
+        declare function={
+          step=0.625;
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+          q(\x)=mod(f(\x), step) == 0 ? f(\x) : ((int(round(f(\x) / step)) + 0) * step);
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          xlabel={$t$},
+          ylabel={$U$},
+          grid=both,
+          grid style={line width=.2pt, draw=gray!10},
+          major grid style={line width=.4pt,draw=gray!50},
+          xtick distance = 1,
+	        ytick distance = step,
+          /pgf/number format/precision=5
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      blue
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=q(\x); \xnext=\x + 1; \ynext=q(\x + 1)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, \y) (\xnext, \ynext)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Аналоговый сигнал,
+          Квантированные значения
+        }
+	    \end{axis}
+    \end{tikzpicture}
     \caption{Квантование.}
     \label{fig:quantization}
-    \centering
   \end{figure}
+
+  Визуально процесс квантования показан на рис. \ref{fig:quantization}.  Как
+  можно видеть на рисунке, в квантированных значениях точки ставятся строго на
+  пересечении линии сетки.  Чем больше в сетке горизонтальных линий, тем более
+  близко к исходному значению можно будет выставить значение по оси $y$ при
+  квантировании.
 
 \item \textbf{Кодирование.} Квантованным значениям присваивается цифровой код
   (\ref{fig:coding}.)
