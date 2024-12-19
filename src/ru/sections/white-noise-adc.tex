@@ -147,7 +147,7 @@
         \foreach \x [evaluate={\y=f(\x); \xnext=\x + 1; \ynext=f(\x + 1)}] in {1, 2, ..., 30} {
           \addplot[red]
           coordinates {
-            (\x, \y) (\xnext, \ynext)
+            (\x, \y) (\xnext, \y) (\xnext, \ynext)
           };
           \addplot[red, mark = *, mark size=1.0pt]
           coordinates { (\x, \y) };
@@ -209,7 +209,7 @@
         \foreach \x [evaluate={\y=q(\x); \xnext=\x + 1; \ynext=q(\x + 1)}] in {1, 2, ..., 30} {
           \addplot[red]
           coordinates {
-            (\x, \y) (\xnext, \ynext)
+            (\x, \y) (\xnext, \y) (\xnext, \ynext)
           };
           \addplot[red, mark = *, mark size=1.0pt]
           coordinates { (\x, \y) };
@@ -281,7 +281,7 @@
         \foreach \x [evaluate={\y=q(\x); \xnext=\x + 1; \ynext=q(\x + 1)}] in {1, 2, ..., 30} {
           \addplot[red]
           coordinates {
-            (\x, \y) (\xnext, \ynext)
+            (\x, \y) (\xnext, \y) (\xnext, \ynext)
           };
           \addplot[red, mark = *, mark size=1.0pt]
           coordinates { (\x, \y) };
