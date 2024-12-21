@@ -12,19 +12,15 @@
   description={Digital-to-Analog Converter}}
 
 As we could see in the section \ref{section:analog-ports}, values read from an
-analog port lie in range that spans from 0 to 1023.  The number 1023 is
+analog port lie in the range that spans from 0 to 1023.  The number 1023 is
 suspiciously close to the number 1024, which can be found very often in
 programming -- it's no wonder as it is a power of 2 ($2^{10}$.)
 
-If we track this trace down the road, we would see that an analog port somehow
-converts the input analog signal to the digital (binary) representation that we
-see in the program.
+Let's figure out why the values from an Arduino analog port have such range.  We
+begin from the fact that an analog port somehow converts an analog signal to the
+digital (binary) representation that we can read in a program.
 
-If we allocate 10 bits for storing the data, we can encode up to $2^{10} = 1024$
-combinations of zeroes and ones -- thus the maximal value 1023 as we must
-consider that we start from zero, which is the one of the possible values.
-
-The analog-to-digital conversion is performed by the component that is called
+The analog-to-digital conversion is performed by the component which is called
 \emph{analog-to-digital converter} (usually shortened to ``ADC''.)  The ADC role
 can be played by either a separate microchip or by the micro-controller itself.
 The ADC can be depicted schematically as is shown on the
@@ -33,13 +29,16 @@ fig. \ref{fig:adc-schematics}.
 \begin{figure}[ht]
   \centering
   \begin{tikzpicture}
-    \draw[thick] (0, 0) -- (0, 5.5) -- (3, 5.5) -- (3, 0) -- (0, 0);
-    \draw (1.5, 2.75) node[right, above] {ADC};
-    \foreach \n/\y in {0/0.5, 1/1, 2/1.5, 3/2, 4/2.5, 5/3, 6/3.5, 7/4, 8/4.5, 9/5} {
-      \draw (3, \y) -- (4, \y) node[right, above] {OUTPUT \n};
+    \draw[thick] (0, 0) -- (0, 6.0) -- (3, 6.0) -- (3, 0) -- (0, 0);
+    \draw (1.5, 3.00) node[right, above] {ADC};
+    \draw (3, 0.5) node[anchor=south west] {CLOCK INPUT} -- (5, 0.5);
+    \foreach \n/\y in {0/1.0, 1/1.5, 2/2.0, 3/2.5, 4/3.0, 5/3.5, 6/4.0, 7/4.5, 8/5.0, 9/5.5} {
+      \draw (3, \y) node[anchor=south west] {OUTPUT \n} -- (5, \y);
     };
-    \draw (0, 2.75) -- (-1, 2.75) node[left, above, text width=2cm] {ANALOG INPUT};
-    \draw (1.5, 5.5) -- (1.5, 6.5) node[right, above] {VCC};
+    \draw (0, 3.00)
+    -- (-1, 3.00) node[left, above, text width=2cm] {ANALOG INPUT}
+    -- (-2, 3.00);
+    \draw (1.5, 6.0) -- (1.5, 7.0) node[right, above] {VCC};
     \draw (1.5, 0) -- (1.5, -1) node[right, below] {GND};
   \end{tikzpicture}
   \caption{Schematic depiction of the analog-to-digital converted (ADC.)}
@@ -49,11 +48,16 @@ fig. \ref{fig:adc-schematics}.
 The ADC takes some analog signal into the input (``ANALOG INPUT'') and encodes
 it in each moment in time as the sequence of logical levels: ``HIGH'' (``1'')
 and ``LOW'' (``0''.)  The ADC itself requires the power supply which is provided
-through ``VCC'' and ``GND'' pins.
+through ``VCC'' and ``GND'' pins.  Also an ADC needs a clock signal (``CLOCK
+INPUT'') -- on the value change on this input, ADC reads the current value of the
+input analog signal and converts it to the digital representation on the
+outputs.  Thus, the clock signal sets the frequency of ADC (or, to put it
+differently, it controls the sampling frequency.)
 
-\example{ Let's suppose we supplied 2.5V to the ADC input.  The ADC outputs the
-  binary value ``1000000000'' which represents the number $2^9 = 512$ -- that can
-  be read in the program running on a micro-controller. }
+\example{ Let's suppose we supplied 2.5V to the ADC input.  On the ``CLOCK
+  INPUT'' toggle ADC forms a binary value ``1000000000'' on the outputs which
+  represents the number $2^9 = 512$ -- that can be read in the program running on
+  a micro-controller. }
 
 The conversion of an analog signal to a digital form inside an ADC is done in
 three steps:
@@ -61,62 +65,310 @@ three steps:
 \begin{enumerate}
 
 \item \textbf{Sampling.}  During this step ADC takes samples from the input
-  analog signal at regular intervals of time (see \ref{fig:discretization}.)
+  analog signal at regular intervals of time (see \ref{fig:adc-sampling}.)
+  \index{Electronics!ADC!Sampling}
 
   \begin{figure}[h]
     \centering
-    \includegraphics[width=8cm]{discretization}
+    \begin{tikzpicture}
+      [
+        declare function={
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          xlabel={$t$},
+          ylabel={$U$}
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      cyan
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=f(\x)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, 0) (\x, \y)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Source analog signal,
+          Sampling points
+        }
+	    \end{axis};
+    \end{tikzpicture}
     \caption{Sampling.}
-    \label{fig:discretization}
+    \label{fig:adc-sampling-00}
   \end{figure}
 
   The frequency of those intervals is called \emph{sampling rate}.
 
+    \begin{figure}[h]
+    \centering
+    \begin{tikzpicture}
+      [
+        declare function={
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          xlabel={$t$},
+          ylabel={$U$},
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      cyan
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=f(\x); \xnext=\x + 1; \ynext=f(\x + 1)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, \y) (\xnext, \y) (\xnext, \ynext)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Source analog signal,
+          Restored signal
+        }
+	    \end{axis}
+    \end{tikzpicture}
+    \caption{Rebuilding the source signal with recorded points.}
+    \label{fig:adc-sampling-01}
+  \end{figure}
+
+    If we try to rebuild the source analog signal using the recorded points, we
+    will get the graph similar to the one that is shown on
+    fig. \ref{fig:adc-sampling-01}.  As we can see, some data got lost due to
+    low sampling frequency -- that's why some parts of the graph were ``cut
+    away.''
+
 \item \textbf{Quantization.}  Acquired values are replaced with the closest
   values from the set of possible values -- \emph{quantization levels}.
+  \index{Electronics!ADC!Quantization}
 
-  \begin{figure}[h]
-    \includegraphics[width=8cm]{quantization}
-    \caption{Quantization.}
-    \label{fig:quantization}
+    \begin{figure}[h]
     \centering
+    \begin{tikzpicture}
+      [
+        declare function={
+          step=0.625;
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+          q(\x)=mod(f(\x), step) == 0 ? f(\x) : ((int(round(f(\x) / step)) + 0) * step);
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          xlabel={$t$},
+          ylabel={$U$},
+          grid=both,
+          grid style={line width=.2pt, draw=gray!10},
+          major grid style={line width=.4pt,draw=gray!50},
+          xtick distance = 1,
+	        ytick distance = step,
+          xtick = {0, 1, ..., 30},
+          xticklabels={0,,2,,4,,6,,8,,10,,12,,14,,16,,18,,20,,22,,24,,26,,28,,30},
+          /pgf/number format/precision=5
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      cyan
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=q(\x); \xnext=\x + 1; \ynext=q(\x + 1)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, \y) (\xnext, \y) (\xnext, \ynext)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Analog signal,
+          Quantified values
+        }
+	    \end{axis}
+    \end{tikzpicture}
+    \caption{Quantization.}
+    \label{fig:adc-quantization}
   \end{figure}
+
+    The visual representation of the quantization process is shown on the
+    fig. \ref{fig:adc-quantization}.  As we can see from the figure, in the
+    quantified values we put points strictly on the cross-sections of the grid.
+    The more horizontal lines in the grid, the closer we can set the value on
+    the $y$ axis to the original value.
 
 \item \textbf{Encoding.}  Binary codes are assigned to the resulting values (see
   \ref{fig:coding}.)
+  \index{Electronics!ADC!Encoding}
 
   \begin{figure}[h]
-    \includegraphics[width=8cm]{coding}
-    \caption{Encoding.}
-    \label{fig:coding}
     \centering
+    \begin{tikzpicture}
+      [
+        declare function={
+          step=0.625;
+          f(\x)=2 + exp(-\x/10)*( cos(deg(\x)) + sin(deg(\x))/10 ) * 2;
+          q(\x)=mod(f(\x), step) == 0 ? f(\x) : ((int(round(f(\x) / step)) + 0) * step);
+        }
+      ]
+
+      \begin{axis}[
+          width = \textwidth,
+	        xmin = 0, xmax = 30,
+	        ymin = 0, ymax = 5.0,
+          grid=both,
+          grid style={line width=.2pt, draw=gray!10},
+          major grid style={line width=.4pt,draw=gray!50},
+          xtick distance = 1,
+	        ytick distance = step,
+          xtick = {0, 1, ..., 30},
+          xticklabels={0,,2,,4,,6,,8,,10,,12,,14,,16,,18,,20,,22,,24,,26,,28,,30},
+          /pgf/number format/precision=5,
+          yticklabels={
+            $000_2$ ($0_{10}$),
+            $000_2$ ($0_{10}$),
+            $001_2$ ($1_{10}$),
+            $010_2$ ($2_{10}$),
+            $011_2$ ($3_{10}$),
+            $100_2$ ($4_{10}$),
+            $101_2$ ($5_{10}$),
+            $110_2$ ($6_{10}$),
+            $111_2$ ($7_{10}$),
+          }
+        ]
+
+	      \addplot[
+		      domain = 0:30,
+		      samples = 200,
+		      smooth,
+		      thick,
+		      cyan
+	      ] {
+          2 + exp(-x/10)*( cos(deg(x)) + sin(deg(x))/10 ) * 2
+        };
+
+        \foreach \x [evaluate={\y=q(\x); \xnext=\x + 1; \ynext=q(\x + 1)}] in {1, 2, ..., 30} {
+          \addplot[red]
+          coordinates {
+            (\x, \y) (\xnext, \y) (\xnext, \ynext)
+          };
+          \addplot[red, mark = *, mark size=1.0pt]
+          coordinates { (\x, \y) };
+        };
+
+        \legend{
+	        Source analog signal,
+          Encoded values
+        }
+	    \end{axis};
+    \end{tikzpicture}
+    \caption{Encoding an analog signal in the binary form.}
+    \label{fig:adc-encoding}
   \end{figure}
 
+  An example of the 3-bit encoding is shown on the the
+  fig. \ref{fig:adc-encoding}.
+
   The higher the sampling rate and the more quantization levels are available,
-  the more precise the analog-to-digital conversion.
+  the more precise is the analog-to-digital conversion.
 
 \end{enumerate}
 
 One of the main characteristics of the ADC is the \emph{resolution}.  It sets
-the range for values that the ADC can output.  Let's take a look on the graph on
-fig. \ref{fig:coding}: 3 bits is used for the encoding -- it means that the ADC
-described by this graph is using 3-bit resolution.  That is, the number of
-possible quantization levels is $2^3 = 8$.
+the range for values that the ADC can output.
 
-So that's the answer to the question why on Arduino ADC returns values in the
-range from 0 to 1023 -- it uses 10-bit ADC that gives us $2^{10} = 1024$ levels
-of quantization.
+\index{Programming!Binary numeral system}
 
-The use of ADC is very widespread as it's used in audio/video cards, in
-measurement devices (such as oscilloscopes) and in many more areas.
+Computers are operating on the binary numeral system -- that is, the minimum
+information storage unit, which is called \emph{bit}, can hold only one of the
+two values: one or zero.
+
+With two of such cells (bits) we can already store 4 combinations of the ones
+and zeroes: 00, 01, 10, 11.  If we take 3 bits they will provide us with 8
+combinations.  It's easy to see the pattern here: adding one additional bit
+doubles the number of combinations.
+
+We can calculate the number of combinations even easier: we don't have to put
+ones and zeroes in imaginary ``cells'' and count them.  We can use the following
+formula instead:
+
+\begin{equation}
+  \mbox{Number of combinations} = 2^{\mbox{n}}
+\end{equation}
+
+Where \texttt{n} is the number of available bits for storing some value.
+
+For example, if we take 8 bits to store some data it will give us $2^8 = 256$
+combinations of ones and zeroes.
+
+Let's take a look on the graph on fig. \ref{fig:coding}: for encoding the values
+we are using three bits -- thus, the ADC described by this graph, has the
+resolution of 3 bits.  That is, the number of quantization levels is equal to
+$2^3 = 8$.
+
+But we should not forget that the counting in the computer world is usually
+starts from zero, and the case when all the bits are set to zero, is the one of
+the possible values.  Let's suppose we have 8 bits and we have set them to ones:
+$11111111_2$.  If we convert this value into the decimal form we will get:
+
+\begin{equation}
+  11111111_2 = (2^7 * 1) + \mbox{...} + (2^2 * 1) + (2^1 * 1) + (2^0 * 1) = 255_{10}
+\end{equation}
+
+Thus we can see that the maximum positive value for 8 bits is equal to 255.
+
+From that it follows that if we take 10 bits to store some information, we can
+encode 1024 combinations of ones and zeroes, because $2^{10} = 1024$.  But the
+maximum positive value will be equal to 1023.  Thus in Arduino the ADC has the
+10-bits resolution.
 
 Also there's a different system that is called \emph{digital-to-analog
 converter} (DAC) which performs the inverse function of ADC -- that is, converts
-a digital signal to an analog signal.  We will discuss DAC in the next chapter.
+a digital signal to an analog signal.
 
-Many of us probably head of 8-bit music that is used mostly in old console
-games.  The name of the genre is based on the fact that the old consoles use
-8-bit ADC and DAC.
+The use of ADCs and DACs is very widespread: it is used in audio/video cards, in
+displays, in various audio equipment, in measurement devices (such as
+oscilloscopes) and in many more areas.
+
+We will discuss the DAC in the chapter \ref{chapter:pwm} titles ``Pulse-width
+modulation.''
 
 %% TODO: Describe 8-bit music in detail here as an example of ADC.
 
