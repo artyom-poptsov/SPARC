@@ -370,6 +370,140 @@ oscilloscopes) and in many more areas.
 We will discuss the DAC in the chapter \ref{chapter:pwm} titles ``Pulse-width
 modulation.''
 
+\subsection{Operation of ADC using temperature measurement as an example}
+\label{subsection:adc-temperature-example}
+
+Suppose we have to measure the air temperature outside our window to plot a
+graph afterwards.  For this task we have to organize a table in the following
+format:
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{p{3cm}|p{4cm}}
+    Measurement time & Temperature \\
+    \hline \hline
+    06:00 & -5 \\
+    \hline
+    12:00 & -7 \\
+    \hline
+    18:00 & -8 \\
+    \hline
+    00:00 & -10 \\
+    \hline
+  \end{tabular}
+  \caption{An example data about air temperature variation.}
+  \label{table:adc-temperature-data-example-1}
+\end{table}
+
+The measurements are taken in uniform time intervals and for each measurement
+the timestamp and the air temperature is written down.
+
+How can we improve the quality of our data?  There are two main parameters that
+we can adjust:
+
+\begin{itemize}
+\item We can increase the \emph{frequency of the measurements}: if we perform
+  measurements more often, it will allow us to register the dynamics of changes
+  more precise.
+\item We can increase the \emph{accuracy of measurements}: if we perform more
+  accurate measurements, it will allow us to register smaller changes in the
+  values.
+\end{itemize}
+
+An example of more frequent measurements (once in 3 hours) is shown in table
+\ref{table:adc-temperature-data-example-2}.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{p{3cm}|p{4cm}}
+    Measurement time & Temperature \\
+    \hline \hline
+    06:00 & -5 \\
+    \hline
+    09:00 & -4 \\
+    \hline
+    12:00 & -7 \\
+    \hline
+    15:00 & -8 \\
+    \hline
+    18:00 & -8 \\
+    \hline
+    21:00 & -9 \\
+    \hline
+    00:00 & -10 \\
+    \hline
+  \end{tabular}
+  \caption{An example data about air temperature variation with more frequent
+    measurements.}
+  \label{table:adc-temperature-data-example-2}
+\end{table}
+
+If we also increase the accuracy of measurements, we will get the table similar
+to подобную \ref{table:adc-temperature-data-example-3}.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{p{3cm}|p{4cm}}
+    Measurement time & Temperature \\
+    \hline \hline
+    06:00 & -5.2 \\
+    \hline
+    09:00 & -4.1 \\
+    \hline
+    12:00 & -7.2 \\
+    \hline
+    15:00 & -8.5 \\
+    \hline
+    18:00 & -8.9 \\
+    \hline
+    21:00 & -9.0 \\
+    \hline
+    00:00 & -10.7 \\
+    \hline
+  \end{tabular}
+  \caption{An example data about air temperature variation with more frequent
+    and more accurate measurements.}
+  \label{table:adc-temperature-data-example-3}
+\end{table}
+
+In case of ADC, the increase in the frequency of measurements is called the
+increase in sampling rate.  In this regard, the increase in recording accuracy
+is called the increase in resolution of the converter.
+
+In case of ADC a computer measures the voltage on the analog input (for example,
+from a temperature sensor.)  After that the analog-to-digital conversion takes
+place where each voltage value is assigned some digital value from the available
+range, set by the converter resolution.
+
+As the result, for example, in case of -5.2 degrees Celsius on a thermometer, a
+computer may read it as the value of 1.3 Volts.  Further, a digital value of
+$01110101_2$ ($117_{10}$) is assigned to this value (see
+\ref{table:adc-temperature-data-example-4}.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{p{3cm}|p{4cm}|p{4cm}}
+    Measurement time & Temperature & The ADC output value \\
+    \hline \hline
+    06:00 & -5.2  & 117 \\
+    \hline
+    09:00 & -4.1  & 121 \\
+    \hline
+    12:00 & -7.2  & 109 \\
+    \hline
+    15:00 & -8.5  & 104 \\
+    \hline
+    18:00 & -8.9  & 103 \\
+    \hline
+    21:00 & -9.0  & 102 \\
+    \hline
+    00:00 & -10.7 & 95 \\
+    \hline
+  \end{tabular}
+  \caption{An example of data with binary encoding.}
+  \label{table:adc-temperature-data-example-4}
+\end{table}
+
 %% TODO: Describe 8-bit music in detail here as an example of ADC.
 
 \end{document}
