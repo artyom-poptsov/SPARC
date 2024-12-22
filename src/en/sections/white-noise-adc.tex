@@ -504,6 +504,91 @@ $01110101_2$ ($117_{10}$) is assigned to this value (see
   \label{table:adc-temperature-data-example-4}
 \end{table}
 
+\subsection{Using ADC to record a sound}
+\index{Electronics!ADC!Sound recording}
+
+Sound recording is a good example that we can use to learn some practical
+application of ADC.  A sound wave receiver is usually a microphone that have a
+construction similar to a speaker, but has inverse functionality to it:
+
+\begin{itemize}
+\item In a speaker, changing electric current in a coil creates a magnetic field
+  that interacts with a permanent magnet which in turn makes a speaker membrane
+  to vibrate -- and that creates sound waves.
+\item In a microphone, sound waves make a membrane vibrate.  The membrane is
+  attached to a permanent magnet, that is enclosed inside a coil.  When the
+  permanent magnet moves inside a coil, it creates the electric current that can
+  be measured.
+\end{itemize}
+
+Sound recording is a regular measurement of voltage values on the microphone
+coil.  Each measurement is attached to the timestamp where this measurement was
+performed.
+
+As in the case with the temperature measurement in the section
+\ref{subsection:adc-temperature-example}, the quality of sound recording depends
+on the frequency of measurements (\emph{sampling rate}) and the ADC resolution.
+
+Some examples of the standard sampling rates for audio are shown in the table
+\ref{table:adc-sound-sampling-rate-1}.  Sampling rate directly affects the
+maximum frequency of the sound that can be recorded.  Theoretically the maximum
+frequency that can be recorded is the half of the sampling rate (so called the
+Nyquist frequency.)  But in reality this limit is slightly lower so the maximum
+sound frequency for the sampling rate of 44100Hz is a little bit higher than
+20000Hz, but lesser than 22050Hz. \cite{audacityteam:sample-rates}
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{p{2cm}|p{9cm}}
+    Sampling rate & Applications \\
+    \hline \hline
+
+    8000 Hz & Old telephone line, walkie-talkie.  Not good for the most of the
+    tasks, but can be useful for some sound effects and to recording the
+    infra-sound (sound frequencies that are lower than a human ear can hear.) \\
+
+    \hline
+
+    11025 Hz & This sampling rate is used to record some low-quality sound. \\
+
+    \hline
+
+    22050 Hz & Half of the sampling rate that is used on CDs.  Suitable for
+    digitization of old audio recordings from the 20th century.  Also used for
+    recording human speech where the quality of the sound is not important, but
+    the clearness of the speech have to be maintained. \\
+
+    \hline
+
+    32000 Hz & Suitable for the digitizing of tape recordings and for recording
+    human speech. \\
+
+    \hline
+
+    44100 Hz & The standard quality of audio recordings in CDs.  It allows us to
+    record sound frequencies up to 20KHz, which is considered the limit of human
+    hearing range for the most people. \\
+
+    \hline
+
+    48000 Hz & This standard is used for audio encoding on DVDs. \\
+
+    \hline
+
+    96000 Hz & Audio recordings on DVDs and Blu-ray disks. \\
+
+    \hline
+
+    192000 Hz & Used on DVDs and Blu-ray disks as well.  This quality is often
+    used in the professional audio recording equipment. \\
+
+    \hline
+
+  \end{tabular}
+  \caption{Some standard sampling rates for audio recording.}
+  \label{table:adc-sound-sampling-rate-1}
+\end{table}
+
 %% TODO: Describe 8-bit music in detail here as an example of ADC.
 
 \end{document}
