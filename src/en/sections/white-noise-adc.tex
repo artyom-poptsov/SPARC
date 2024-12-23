@@ -639,7 +639,38 @@ table \ref{table:adc-sound-bit-depth-1}.
   \label{table:adc-sound-bit-depth-1}
 \end{table}
 
-%% TODO: Describe 8-bit music in detail here as an example of ADC.
+Here we can mention 8-bit music.  Its name represents the 8-bit depth resolution
+of the ADC and DAC of the sound chips of those old game consoles for which this
+kind of music was made.  The main theme from the game ``Super Mario Bros.'' that
+was written for the Nintendo Entertainment System (NES) in the year 1985 is a
+good example of such music.  This low bit depth is the explanation for the
+characteristic sound of the old game consoles.
+
+\subsection{ADC in the digital photography and video-recording}
+\index{Electronics!ADC!Image digitization}
+
+\newglossaryentry{FPS}{name=FPS, description={Frames Per Second.}}
+
+Another example of \gls{ADC} application is the digital photography.  In a
+digital camera a lens focuses light onto a special matrix made from miniature
+solar cells (``pixels''), where each pixel captures beams of light and converts
+them into electric signals. \cite{expertphotography}
+
+In the black-and-white camera each pixel represents a light intensity detector.
+The more sensible the detector, the more levels of the signals we can get on the
+output.  In a color digital camera, as each pixel is sensible only to limited
+range of light spectrum, to catch images we need three kinds of pixels: red,
+green and blue.  Those pixels are organized in the pattern which is called
+``Bayer filter'' where three kinds of pixels are grouped together into bigger
+``cells'' from the four pixels: blue, green, green, red.
+
+For image digitization an ADC converts the input electric signals from the
+light-sensitive matrix into digital values, according to the resolution of the
+converter.  For example, the 8-bit resolution will give us 256 levels of light
+intensity of each parts of the spectrum.
+
+The acquired values then stored in the form of matrix into a file that is called
+\emph{an image}.
 
 \end{document}
 
