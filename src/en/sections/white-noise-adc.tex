@@ -599,6 +599,46 @@ sound frequency for the sampling rate of 44100Hz is a little bit higher than
   \label{table:adc-sound-sampling-rate-1}
 \end{table}
 
+Bit depth (also known as \emph{resolution}) determines how many bits will be
+used for encoding of each measured value.  Thus, this parameter sets the
+accuracy of the recorded signal.  The more bit depth we have, the more different
+discrete values we can use to store a value.  \cite{audacityteam:bit-depth}
+
+Some examples of the common bit depths for sound recording are shown in the
+table \ref{table:adc-sound-bit-depth-1}.
+
+\begin{table}[h]
+  \centering
+  \begin{tabular}{p{2cm}|p{9cm}}
+    Bit depth & Description \\
+    \hline \hline
+
+    8 bits & Low-quality sound, comparable to the sound quality of the old
+    analog telephone lines. \\
+
+    \hline
+
+    16 bits & CD-audio quality. \\
+
+    \hline
+
+    24 bits & This bit depths is used for the sound recording for the afterward
+    processing.  More bits are taken so even after all the processing the
+    quality will be good enough for producing the 16-bit CD-audio quality. \\
+
+    \hline
+
+    32 bits & This bit depth is used for maintaining the highest standards of
+    sound recording quality.  It is used for the situations where elaborate
+    sound processing is expected before exporting to other formats. \\
+
+    \hline
+
+  \end{tabular}
+  \caption{Some common bit depths used in sound recording.}
+  \label{table:adc-sound-bit-depth-1}
+\end{table}
+
 %% TODO: Describe 8-bit music in detail here as an example of ADC.
 
 \end{document}
