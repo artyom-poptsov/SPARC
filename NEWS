@@ -7,7 +7,7 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
-* Unreleased
+* Версия 2.3.0 (2024-12-22)
 ** ru
 *** Диалоги с компьютером
 **** Структура программы на Arduino
@@ -35,6 +35,8 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 - Добавление описания записи звука как примера АЦП.
 - Добавление описания цифровой фотографии и видео-съёмки как примеров АЦП.
 - Добавление в глоссарий аббревиатур "АЦП", "ЦАП" и их англоязычных версий.
+*** Язык общения машин
+- Косметическое улучшение форматирования.
 * Версия 2.2.0 (2024-09-22)
 ** ru
 *** Диалоги с компьютером
