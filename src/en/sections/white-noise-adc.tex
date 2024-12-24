@@ -670,7 +670,25 @@ converter.  For example, the 8-bit resolution will give us 256 levels of light
 intensity of each parts of the spectrum.
 
 The acquired values then stored in the form of matrix into a file that is called
-\emph{an image}.
+\emph{an image}.  If we take a black-and-white camera with the resolution of
+16x16 pixels it will give us an image of $16 * 16 = 256$ pixels in size.  If the
+ADC has the resolution of 8 bits then the amount of image data can be calculated using the following equation:
+
+\begin{equation}
+  \mbox{Amount of data} = 16 * 16 * 8 = 2048 \mbox{bits} = 256 \mbox{bytes}
+  \label{equation:adc-image-0}
+\end{equation}
+
+For colorful images the amount of stored data is bigger, because we need to
+store three color components: red, green and blue (in the RGB format.)  If we
+also take the 8-bits ADC then each pixel we need to store $8 * 3 = 24$ bits of
+information.  Let's take another look at the example with 16x16 pixels camera
+and substitute new values to the equation:
+
+\begin{equation}
+  \mbox{Amount of data} = 16 * 16 * 24 = 6144 \mbox{bits} = 768 \mbox{bytes}
+  \label{equation:adc-image-1}
+\end{equation}
 
 \end{document}
 
