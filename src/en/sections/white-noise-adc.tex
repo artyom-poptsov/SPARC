@@ -690,5 +690,65 @@ and substitute new values to the equation:
   \label{equation:adc-image-1}
 \end{equation}
 
+Here we have to note that we have yet to mention the sampling rate in the
+context of digital photography.  It's no wonder as the image capturing is a
+single operation that produces one image.  The \emph{frame rate} parameter
+(measured in frames per second, or \gls{FPS}) that controls the speed of image
+digitization, appears only when a sequential capturing of several images is
+performed -- which is usually used for capturing a \emph{video}.
+
+The more is frame rate in video capturing, the more information we can capture
+and thus the more precisely we can track fast objects movement that are in the
+focus of the camera.
+
+The standard frame rate is 24 \gls{FPS} that allows us to get sufficiently
+smooth movements in the video.  Another popular frame rate is 30 FPS and 60 FPS.
+For the high-speed video shooting that allows us to get the ``slow motion''
+effect, frame rates such as 120 FPS or more are used.
+
+If we assume that a colorful video camera has the resolution of 16x16 pixels and
+we use it to capture 10 seconds of video with 24 FPS, then the total number of
+frames in the video will be:
+
+\begin{equation}
+  \mbox{Frames} = 24 * 10 = 240 \mbox{frames}
+\end{equation}
+
+The size of one frame will be 768 bytes as is shown in the equation
+\ref{equation:adc-image-1}.
+
+Then the total size of output video data will be:
+
+\begin{align}
+  \mbox{Video-file size} & = 768 \mbox{bytes per frame} * 240 \mbox{frames} \\
+  & = 184320 \mbox{bytes} \\
+  & = 180 \mbox{Kb}
+  \label{equation:adc-image-2}
+\end{align}
+
+Now it is important to note that currently we consider only storing the ``raw''
+data (that is, data in the original form), without any compression.  Compression
+of digitized data is a separate topic and currently we will not discuss it the
+book in details.
+
+For the completeness sake we can say that there are two kinds of compression:
+\begin{itemize}
+\item \textbf{Lossless compression} -- the source data is compressed in such a
+  way that no parts of data is lost so after the de-compression all the original
+  data will be restored.  The compression rate usually is not very high.
+\item \textbf{Lossy compression} -- the source data is processed with specialized
+  algorithms aimed to remove ``extra'' (or ``not very important'') information
+  (from the point of human perception), thus allowing us to achieve way better
+  compression ratio that in the case of lossless compression algorithms.  But we
+  won't be able to fully restore the original data from the compressed data.  If
+  we take the compressed data and process it with the same compression algorithm
+  that is used to compress it in the first place we will make the quality of
+  data even worse.
+\end{itemize}
+
+For example, one of the lossless compression formats for images is ``Portable
+Network Graphics'' format (or PNG.)  On contrary, we can take the JPG format as
+an example of lossy compression.
+
 \end{document}
 
