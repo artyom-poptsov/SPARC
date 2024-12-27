@@ -1,0 +1,36 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Wavelength}
+
+\begin{figure}[ht]
+  \begin{tikzpicture}
+    \draw[thick, ->] (0, 0) -- (12, 0) node[anchor=north west] {t};
+    \draw[thick, ->] (0, 0) -- (0,  7) node[anchor=south west] {V};
+    \draw[lightgray] (0, 0) grid (10, 6);
+    \foreach \x in {0, 2, ..., 8} {
+      \draw[ultra thick, teal] (\x, 6) -- (\x + 1, 6);
+      \draw[ultra thick, teal] (\x + 1, 6) -- (\x + 1, 1);
+      \draw[ultra thick, teal] (\x + 1, 1) -- (\x + 2, 1);
+      \draw[ultra thick, teal] (\x + 2, 1) -- (\x + 2, 6);
+    }
+  \end{tikzpicture}
+  \caption{Graphical representation of a signal in relation to the time on a
+    digital port.}
+  \label{fig:blinking-led-graph}
+\end{figure}
+
+When we programmed our ``blinking lights'' project, we supplied to a digital
+port signals \texttt{HIGH} and \texttt{LOW} alternately, with a delay specified
+in microseconds.  If we take a look on the signal value in relation to the time
+on a digital port (e.g. using an oscilloscope) we will get a graph similar to
+fig. \ref{fig:blinking-led-graph}.
+
+Where \emph{period length} is the distance between the two adjacent points in
+time, where oscillations occur in the same phase.  If we know the period length
+we can calculate the \emph{oscillation frequency}, and vice versa -- if we know
+the frequency we can calculate the wavelength.
+
+\end{document}

@@ -179,7 +179,8 @@ SECTIONS_EN = \
 	src/en/sections/white-noise-serial-port.tex \
 	src/en/sections/white-noise-analog-ports.tex \
 	src/en/sections/white-noise-adc.tex \
-	src/en/sections/pwm-intro.tex
+	src/en/sections/pwm-intro.tex \
+	src/en/sections/pwm-wavelength.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
