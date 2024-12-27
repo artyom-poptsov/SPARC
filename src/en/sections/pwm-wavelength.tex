@@ -33,4 +33,36 @@ time, where oscillations occur in the same phase.  If we know the period length
 we can calculate the \emph{oscillation frequency}, and vice versa -- if we know
 the frequency we can calculate the wavelength.
 
+When we are working with \gls{PWM} we will be using the period length set in
+microseconds ($\mu\mbox{s}$.)  1 microseconds is one millionth of a second.  For
+the sake of brevity, we will be writing such small quantities of time in
+scientific notation: that is, using powers of 10.  The table
+\ref{table:timescale-units} shows various second fractions.  \footnote{The full
+list of multiplies and sub-multiplies can be found in the article
+\href{https://en.wikipedia.org/wiki/Second}{``Second''} in Wikipedia.}
+
+\begin{table}[H]
+  \begin{tabular}{p{3cm}|p{4cm}|p{3cm}}
+    Unit & Relation the second & Examples \\
+    \hline \hline
+    Second ($s$)
+    & $ 1 \mbox{s} $ or $ 10^0 \mbox{s} $
+    & $ 500 * 10^{0} = 500 \mbox{s} $ \\
+    \hline
+    Millisecond ($\mbox{ms}$)
+    & $ 0.001 \mbox{s} $ or $ 10^{-3} \mbox{s} $
+    & $ 500 * 10^{-3} = 500 \mbox{ms} $ \\
+    \hline
+    Microsecond ($\mu\mbox{s}$ or just ``us'')
+    & $ 0.000001 \mbox{s} $ or $ 10^{-6} \mbox{s} $
+    & $ 500 * 10^{-6} = 500 \mu\mbox{s} $ \\
+    \hline
+    Nanosecond ($\mbox{ns}$)
+    & $ 0.000000001 \mbox{s} $ or $ 10^{-9} \mbox{s} $
+    & $ 500 * 10^{-9} = 500 \mbox{ns} $
+  \end{tabular}
+  \caption{Units of time measurement.}
+  \label{table:timescale-units}
+\end{table}
+
 \end{document}
