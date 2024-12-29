@@ -84,4 +84,62 @@ We start from the fact that such procedure have to accept three parameters:
   \texttt{t} (as the shorthand of ``time''.)
 \end{enumerate}
 
+Let's write the same, but now in C++ language:
+
+\begin{minted}{cpp}
+  void pwm(int port, float dc, long t) {
+    // Procedure body.
+  }
+\end{minted}
+
+What is the \texttt{void} we will discuss later, for now we have to accept it as
+the fact that it means the start of declaring a procedure.  Likely we also have
+some questions about new variable types -- \texttt{float} and \texttt{long}.  Why
+can't we use the familiar \texttt{int}?  The reason is that a variable of type
+\texttt{int} cannot hold the fractional values, and also on Arduino has the
+range from $-2^{15}$ to $2^{15} - 1$.  To store the fractional values we have to
+use \texttt{float} (or \texttt{double}, which has twice as much space as
+\texttt{float}.)  And to store numbers that have wider range than the
+\texttt{int} has we have to use \texttt{long} type, that on Arduino has the
+range from $-2^{31}$ to $2^{31} - 1$.  Now it's time to think about the
+procedure body.
+
+Let's define the length of one period as the \texttt{T} constant, which is equal
+to 1000 $\mu\mbox{s}$
+
+\begin{minted}{cpp}
+  const int T = 1000; // microseconds
+\end{minted}
+
+It is important to note that we are using the \texttt{const} keyword to make the
+\texttt{T} a constant -- we are not going to change it anyways.  Also we added a
+commentary saying that the value of the constant is specified in microseconds --
+it makes reading the code easier.
+
+The next step is to calculate the values of variables \texttt{d1} and
+\texttt{d2}, using the \texttt{dc} value, which is specified as the second
+procedure parameter.
+
+The values of the \texttt{d1} and \texttt{d2} delays have to be calculated from
+the duty cycle which is specified as a fractional number (e.g. 0.5.)
+
+The formulas to calculate \texttt{d1} and \texttt{d2} are shown below.
+
+\begin{equation}
+  \mbox{d1} = \mbox{T} * \mbox{dc}
+  \label{A formula to calculate the time of ``HIGH'' value.}
+\end{equation}
+
+\begin{equation}
+  \mbox{d2} = \mbox{T} - \mbox{d1}
+  \label{A formula to calculate the time of ``LOW value.}
+\end{equation}
+
+In the program code it should look like this:
+
+\begin{minted}{cpp}
+  int d1 = T * dc;
+  int d2 = T - d1;
+\end{minted}
+
 \end{document}
