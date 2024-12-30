@@ -142,4 +142,55 @@ In the program code it should look like this:
   int d2 = T - d1;
 \end{minted}
 
+From this example we can see that it's easy to calculate \texttt{d2} after we
+know the \texttt{d1} value.  What is left is to calculate how many times we need
+to repeat the wave with period \texttt{T} to generate a signal lasting for
+\texttt{t} microseconds:
+
+\begin{minted}{cpp}
+  int count = t / T;
+\end{minted}
+
+Now we have everything we need to know to generate the needed signal.  Because
+we need to repeat the wave \texttt{count} times as we said above, it is
+convenient for us to use a \texttt{for} loop:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    for (int c = 0; c < count; c++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d1);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d2);
+    }
+  \end{minted}
+  \label{listing:pwm-cycle}
+  \caption{A loop that generates a PWM signal.}
+\end{listing}
+
+The whole \texttt{pwm} procedure should look like this:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void pwm(int port, float dc, long t) {
+      const int T = 1000; // microseconds
+      int d1 = T * dc;
+      int d2 = T - d1;
+      int count = t / T;
+      for (int c = 0; c < count; c++) {
+        digitalWrite(port, HIGH);
+        delayMicroseconds(d1);
+        digitalWrite(port, LOW);
+        delayMicroseconds(d2);
+      }
+    }
+  \end{minted}
+  \label{listing:pwm-procedure}
+  \caption{A procedure that generates a PWM signal with the specified
+    parameters.}
+\end{listing}
+
+And that's it!  Now we need to learn how to use this \texttt{pwm} procedure in
+our program.
+
 \end{document}
