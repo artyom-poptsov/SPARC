@@ -182,7 +182,8 @@ SECTIONS_EN = \
 	src/en/sections/pwm-intro.tex \
 	src/en/sections/pwm-wavelength.tex \
 	src/en/sections/pwm-duty-cycle.tex \
-	src/en/sections/pwm-tasks.tex
+	src/en/sections/pwm-tasks.tex \
+	src/en/sections/music-and-technology-synthesis-sound.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
