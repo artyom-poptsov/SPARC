@@ -61,4 +61,21 @@ fig. \ref{fig:sound-fig-1}.
   \label{fig:sound-fig-1}
 \end{figure}
 
+If we know that an oscillation can be fit 5 times on 1 second we say that the
+frequency of such wave has the frequency of 5 Hz.  If we want to calculate the
+period duration, we can divide 1 second (specified in microseconds) by the
+frequency:
+
+\begin{equation}
+  \frac{1000000 \mu\mbox{s}}{5 \mbox{Hz}} = 200000 \mu\mbox{s}
+\end{equation}
+
+Which means that the wave length is 200000 $\mu\mbox{s}$, or $ 200 * 10^3
+\mbox{ms}$.  If we know the wavelength and want to know the frequency we can
+divide 1 second (in microseconds) by the wavelength and by that we will get the
+frequency (in Hertz).  That's easy.
+
+The method of sound generation is similar to \gls{PWM}.  The main difference is
+that now we must change the wavelength, keeping the duty cycle constant.
+
 \end{document}
