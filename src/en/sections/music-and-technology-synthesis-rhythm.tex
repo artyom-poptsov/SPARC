@@ -1,0 +1,52 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Rhythm theory}
+\index{Music!Rhythm}
+
+Our way to the music starts from the discussion of the \emph{rhythm theory}.
+Most of us know that the rhythm is -- in many people it produces the reflex of
+head nodding to the rhythm, or mechanical finger tapping on a tabletop to the
+rhythm beats.
+
+To understand how a rhythm is created we need to know some basic things about
+the rhythm theory which will discuss below.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The \emph{musical bar}}
+\index{Music!Rhythm!Scale}
+
+Let's start with a musical joke: \footnote{A variation of the joke from
+\url{https://www.classicfm.com/discover-music/humour/long-bar-notes-joke/}}
+
+\begin{quotation}
+C, E-flat and G walk into a bar.  The bartender says, ``Sorry, but we don’t
+serve minors.''
+\end{quotation}
+
+Any musical composition is divided into time measures also known as \emph{bars}
+-- usually of the same length. \footnote{Music has great variety and compositors
+come up with the new tricks all the time that allow them to make the desired
+impression on the listeners.  So here we are discussing the topic with some
+assumptions.}
+
+On the fig. \ref{fig:music-six-bar} we can see how could a musical composition
+consisting of six bars look.
+
+\begin{tikzpicture}
+  \draw[thick, ->] (0, 0.5) -- (12, 0.5) node[anchor=north west] {t};
+  \foreach \x/\n in {0/1, 2/2, 4/3, 6/4, 8/5, 10/6} {
+    \draw (\x, 0) -- (\x, 1) -- (\x, 1) node[midway, above] {\n};
+  };
+  \label{fig:music-six-bar}
+\end{tikzpicture}
+
+The length of one bar in time is determined by the tempo of the rhythm, and we
+will discuss this later.  For now, we can imagine that one one bar always takes
+one abstract unit of time.  We can substitute this unit of time with any
+convenient time duration -- such as one second.
+
+\end{document}
