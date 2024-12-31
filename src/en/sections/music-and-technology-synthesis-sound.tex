@@ -75,7 +75,96 @@ Which means that the wave length is 200000 $\mu\mbox{s}$, or $ 200 * 10^3
 divide 1 second (in microseconds) by the wavelength and by that we will get the
 frequency (in Hertz).  That's easy.
 
-The method of sound generation is similar to \gls{PWM}.  The main difference is
-that now we must change the wavelength, keeping the duty cycle constant.
+The method of sound generation is similar to \gls{PWM}. The main difference is
+that now we must change the wavelength, keeping the duty cycle constant, equal
+to 0.5 (or 50\%.)  As the duty cycle is always constant, the duration of
+\texttt{HIGH} and \texttt{LOW} signals is equal and we only need to calculate
+the \texttt{d} delay.
+
+As with the case of PWM, we start from the writing a procedure that implements
+the aforementioned principles.  We call this procedure \texttt{play\_tone} and
+will allow us to generate a sound on a specified port with the specified
+frequency and length.
+
+Let's see what the procedure will accept as the parameters:
+\begin{enumerate}
+\item \texttt{port} -- the number of a digital port to which a speaker is
+  connected.
+\item \texttt{f} -- the frequency of the sound as the floating point value.
+\item \texttt{t} -- the sound length in microseconds.
+\end{enumerate}
+
+In C++ language it should look like this:
+\begin{minted}{cpp}
+  void play_tone(int port, float f, long t) {
+    // Procedure body.
+  }
+\end{minted}
+
+The first step here is to calculate the wave oscillation period (in
+microseconds) from by dividing a second (specified in microseconds) by the
+specified frequency:
+
+\begin{minted}{cpp}
+  const long T = 1000000 / f;
+\end{minted}
+
+Next we will calculate the duration of the delay \texttt{d} -- for that we have
+to divide the period \texttt{T} by 2 (or by multiplying it by 0.5) to get the
+half-period:
+
+\begin{minted}{cpp}
+  long d = T / 2;
+\end{minted}
+
+Now we can calculate how many periods we have to repeat to create a sound of the
+specified length \texttt{t}:
+
+\begin{minted}{cpp}
+  int count = t / T;
+\end{minted}
+
+We're almost done.  What's left is to write down a loop that will generate the
+specified acoustic wave -- \texttt{for} loop comes very handy in this situation:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  \end{minted}
+  \label{listing:play-tone-cycle}
+  \caption{The implementation of the loop for generating an acoustic wave with
+    the specified parameters on a digital \texttt{port}.}
+\end{listing}
+
+The whole procedure is shown below:
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void play_tone(int port, float f, long t) {
+      const long T = 1000000 / f;
+      long d = T / 2;
+      int count = t / T;
+      for (int i = 0; i < count; i++) {
+        digitalWrite(port, HIGH);
+        delayMicroseconds(d);
+        digitalWrite(port, LOW);
+        delayMicroseconds(d);
+      }
+    }
+  \end{minted}
+  \label{listing:play-tone-procedure}
+  \caption{A simple procedure for generating a sound on an Arduino.}
+\end{listing}
+
+Our first version of the procedure for sound generation is finished.  Now we
+have to connect a speaker to an Arduino and test it in action.
+
+\note{In many cases one task can be solved in many ways.  For example, our
+  \texttt{play\_tone} procedure can be implemented differently; our current
+  version is just one of the correct ones.}
 
 \end{document}
