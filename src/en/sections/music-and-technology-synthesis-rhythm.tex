@@ -257,4 +257,57 @@ the table \ref{table:music-notes-legths}.
   \label{table:music-notes-legths}
 \end{table}
 
+There are even shorter and longer notes, but they occur less frequent than those
+we listed in the table \ref{table:music-notes-legths}, so we won't discuss to
+make the material more concise.
+
+What conclusions we can make form the things we discussed above?  In the musical
+notation sounds that can be ``produced'' from a musical instrument, are written
+from left to right (as the regular English text.)
+
+We can place our musical sheet on the top of a graph to make it clearer for our
+understanding.  The $\mbox{X}$ axis represents the time going form left to
+right:
+
+\begin{figure}[ht]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      e,4 e4 e'2
+    }
+  \end{lilypond}
+  \begin{tikzpicture}
+    \draw[thick, ->] (0, 0.5) -- (12, 0.5) node[anchor=north east] {Time};
+  \end{tikzpicture}
+
+  \caption{A musical ``graph''.}
+  \label{fig:lilypond-queen-1}
+\end{figure}
+
+From the point of programming the source code for making such a rhythm can look
+like follows:
+
+\begin{minted}{cpp}
+  // Here we skipped the previous code that does
+  // the required preparations for making a sound,
+  // and the implementation of "play_tone".
+
+  void loop() {
+    // The bar length in microseconds
+    const long T = 1000000;
+
+    play_tone(SPEAKER, 50, T / 4); // Quarter
+    delay(100);
+    play_tone(SPEAKER, 50, T / 4); // Quarter
+    delay(100);
+    play_tone(SPEAKER, 100, T / 2); // Half
+    delay(100);
+  }
+\end{minted}
+
+Now we have to figure out how to properly calculate the length of the bar to get
+the lengths of its sub-divisions.
+
 \end{document}
