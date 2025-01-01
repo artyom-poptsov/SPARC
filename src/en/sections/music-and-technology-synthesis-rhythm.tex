@@ -109,6 +109,47 @@ produce a 50\gls{Hz} sound, and the last one will produce 100Hz sound:
   };
 \end{tikzpicture}
 
-Congratulations!  We just made a simple rhythm.
+Congratulations!  We just made a simple rhythm.  Let's program with the bar
+length \texttt{T} equal to 1 second, or 1000000 microseconds.
+
+Between the beats we should add a short delay (e.g. 100 ms) so the sounds of the
+same frequency that go one after another won't be glued together.
+
+\begin{minted}{cpp}
+  // The digital port number where a speaker is connected.
+  const int SPEAKER = 2;
+
+  void setup() {
+    pinMode(SPEAKER, OUTPUT);
+  }
+
+  // The procedure that generates a sound with the
+  // specified parameters.
+  void play_tone(int port, float f, long t) {
+    const int T = 1000000 / f;
+    int d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+
+  void loop() {
+    const long T = 1000000; // The length of the bar (1s)
+    play_tone(SPEAKER, 50,  T / 4); // A quarter
+    delay(100); // Задержка между звуками
+    play_tone(SPEAKER, 50,  T / 4); // A quarter
+    delay(100);
+    play_tone(SPEAKER, 50,  T / 4); // A quarter
+    delay(100);
+    play_tone(SPEAKER, 100, T / 4); // A quarter
+    delay(100);
+  }
+\end{minted}
+
+Now we can do something more complicated.
 
 \end{document}
