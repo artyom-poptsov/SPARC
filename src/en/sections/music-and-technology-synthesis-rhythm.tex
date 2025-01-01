@@ -203,4 +203,58 @@ And we end up with one in the end (see the equation
   \label{equation:queen-we-will-rock-you-rhythm-1}
 \end{equation}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Musical rhythm notation}
+
+From the point of the musical notation the rhythm from
+fig. \ref{fig:queen-we-will-rock-you-rhythm-1} can be written down as is shown
+on fig. \ref{fig:lilypond-queen-1}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      e,4 e4 e'2
+    }
+  \end{lilypond}
+  \caption{The rhythm of the melody ``We Will Rock You'' in the musical notation
+    (simplified version.)}
+  \label{fig:lilypond-queen-1}
+\end{figure}
+
+We haven't discussed the musical notation yet so the figure
+\ref{fig:lilypond-queen-1} can be completely obscure for us -- but don't worry,
+on this stage we just have to see that there are three symbols written on the
+lines.  Each symbol represents a sound of the specific length: ``\quarterNote''
+($\frac{1}{4}$), ``\quarterNote'' ($\frac{1}{4}$) и ``\halfNote''
+($\frac{1}{2}$).
+
+The order of those symbols (from left to right) shows the order of playing of
+those sounds, and the form of the symbol shows the length of the sound as per
+the table \ref{table:music-notes-legths}.
+
+\begin{table}[ht]
+  \centering
+  \def\arraystretch{2.5}%
+  \begin{tabular}{|m{3cm}|m{4cm}|m{3.5cm}|}
+    \hline
+    \textbf{Symbol} & \textbf{Length} & \textbf{Title} \\
+    \hline
+    {\Large \wholeNote} & {\Large $\frac{1}{1}$} & Whole note \\[2ex]
+    \hline
+    {\Large \halfNote}      & {\Large $\frac{1}{2}$}  & Half-note \\[2ex]
+    \hline
+    {\Large \quarterNote}   & {\Large $\frac{1}{4}$}  & Quarter-note \\[2ex]
+    \hline
+    {\Large \eighthNote}    & {\Large $\frac{1}{8}$}  & Eighth-note \\[2ex]
+    \hline
+    {\Large \sixteenthNote} & {\Large $\frac{1}{16}$} & Sixteenth-note \\[2ex]
+    \hline
+  \end{tabular}
+  \caption{Some of the possible lengths of the musical sounds (notes.)}
+  \label{table:music-notes-legths}
+\end{table}
+
 \end{document}
