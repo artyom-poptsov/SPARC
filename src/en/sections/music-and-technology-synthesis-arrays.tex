@@ -1,0 +1,186 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Arrays}
+\index{Programming!Array}
+
+An \emph{array} is a variable that holds a sequence of values of the same type.
+In an array we can store the notes of our melody.
+
+Visually we can imagine an array as the sequence of ``boxes'' (or cells), each
+of which has a serial number (that is called an \emph{index}) and can hold one
+element.
+
+If we lay down seven notes from our melody into an array, we get something like
+is shown on the fig. \ref{table:array-example-1}.
+
+\begin{tabular}{|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|p{1cm}|}
+  \hline
+  c4 & c4 & g4 & g4 & a4 & a4 & g4 \\
+  \hline
+  \multicolumn{1}{c}{0}
+  & \multicolumn{1}{c}{1}
+  & \multicolumn{1}{c}{2}
+  & \multicolumn{1}{c}{3}
+  & \multicolumn{1}{c}{4}
+  & \multicolumn{1}{c}{5}
+  & \multicolumn{1}{c}{6}
+  \label{table:array-example-1}
+\end{tabular}
+
+In this example the array holds seven elements, while the index of the first
+element is equal to zero (as people say, ``real programmers always start
+counting from zero''), and the last element of the array is the sixth.  If we
+try to get a non-existing element from an array (say, seventh element, or an
+element with the index -1) it will lead to an error.
+
+We need to create an array with the right amount of cells to hold our melody.
+To be precise, we need an array of 28 cells to hold toe ``Twinkle, Twinkle,
+Little Start'' melody in it.  We can put a value for each cell of the array
+right in the process of defining the array.
+
+The rest of the array definition is similar to definition of a variable: we must
+specify the type of the array, its name and its size (inside a square brackets),
+and then, after ``='' sign we can provide the list of values.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    float melody[28] = {
+      c4, c4, g4, g4,
+      a4, a4, g4,
+      f4, f4, e4, e4,
+      d4, d4, c4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+    };
+  \end{minted}
+  \label{listing:music-array-example-1}
+  \caption{An example of definition of an array with notes.}
+\end{listing}
+
+To address an element of the array we have to use its name with the number of
+the element inside the square brackets.  For example, if we want to change the
+zeroth element we can do it as follows:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    melody[0] = g4;
+  \end{minted}
+  \label{listing:music-array-example-2}
+  \caption{An example of changing a value inside an array.}
+\end{listing}
+
+It is reasonable to define the array \ref{listing:music-array-example-1} just
+before our \texttt{loop} procedure.  Inside the \texttt{loop} we can walk across
+the array inside a \texttt{for} loop and play a note from each array cell.  To
+do that we can use the counter variable from the \texttt{for} loop as the array
+index to address the elements.
+
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void loop() {
+      const long BPM = 120;
+      const long MINUTE = 60000000;
+      const long T = (MINUTE / BPM) * 4;
+
+      for (int note_idx = 0; note_idx < 28; note_idx++) {
+        play_tone(SPEAKER_PIN, melody[note_idx], T / 4);
+        delay(100);
+      }
+    }
+  \end{minted}
+  \label{listing:music-array-example-3}
+  \caption{Playing a melody from an array.}
+\end{listing}
+
+By now we should clearly see how short our melody implementation is became.  But
+we temporarily lost the ability to set the length of each individual note in our
+melody.
+
+To fix this we can use another array to hold the lengths of our notes -- let's
+call this second array \texttt{melody\_t}.  Each element of this array will hold
+the length of the pair note from the array \texttt{melody} as the fraction
+denominator, while the numerator is the bar length.
+
+For example, the zeroth note of our melody is ``C4'' has the length of
+$\frac{1}{4}$ -- so we need to put 4 in the zeroth cell of \texttt{melody\_t}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Array with notes (frequencies.)
+    float melody[28] = {
+      c4, c4, g4, g4,
+      a4, a4, g4,
+      f4, f4, e4, e4,
+      d4, d4, c4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+      g4, g4, f4, f4,
+      e4, e4, d4,
+    };
+
+    // Array with note lengths.
+    float melody_t[28] = {
+      4,  4,  4,  4,
+      4,  4,  2,
+      4,  4,  4,  4,
+      4,  4,  2,
+      4,  4,  4,  4,
+      4,  4,  2,
+      4,  4,  4,  4,
+      4,  4,  2,
+    };
+  \end{minted}
+  \label{listing:music-array-example-4}
+  \caption{An example of the additional array that holds the lengths of the
+    notes.}
+\end{listing}
+
+After that we have to update our code that plays the melody:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // ...
+
+    void loop() {
+      const long BPM = 120;
+      const long MINUTE = 60000000;
+      const long T = (MINUTE / BPM) * 4;
+
+      for (int note_idx = 0; note_idx < 28; note_idx++) {
+        play_tone(SPEAKER_PIN,
+                  melody[note_idx],
+                  T / melody_t[note_idx]);
+        delay(100);
+      }
+    }
+  \end{minted}
+  \label{listing:music-array-example-5}
+  \caption{Updated code for playing the melody.}
+\end{listing}
+
+The code \texttt{T / melody\_t[note\_idx]} calculates the length of the current
+note -- we take \texttt{T} as the fraction numerator and
+\texttt{melody\_t[note\_idx]} as the denominator.
+
+\begin{equation}
+  \mbox{Note length (in microseconds)} = \frac{\mbox{T}}{\mbox{melody\_t[note\_idx]}}
+\end{equation}
+
+With all this, the code with two arrays looks quite awkward as we need to pay
+attention that both arrays have the same sizes.
+
+To solve this problem we can use two-dimensional arrays that we will discuss in
+the next section.
+
+But for those who champing at the bit, wanting to hear the melody from the
+Arduino, we provided the full program code for the ``Twinkle, Twinkle, Little
+Start'' that uses two arrays, in the appendix
+\ref{app:twinkle-twinkle-little-star-02}.
+
+\end{document}
