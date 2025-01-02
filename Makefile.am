@@ -187,7 +187,8 @@ SECTIONS_EN = \
 	src/en/sections/music-and-technology-synthesis-speaker.tex \
 	src/en/sections/music-and-technology-synthesis-rhythm.tex \
 	src/en/sections/music-and-technology-synthesis-harmony.tex \
-	src/en/sections/music-and-technology-synthesis-octave-system.tex
+	src/en/sections/music-and-technology-synthesis-octave-system.tex \
+	src/en/sections/music-and-technology-synthesis-simple-melodies.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
