@@ -337,4 +337,151 @@ produces audible clicks according to the specified speed.
 
 The more beats per minute, the faster the tempo -- and the faster the rhythm.
 Some common examples of \gls{BPM} are: 60, 80 and 100 BPM.
+
+But how to link this tempo speed with the bar length?  It turns out that the
+uniform metronome beats set the quarter-note length ($\frac{1}{4}$.)
+
+Thus when the rhythm tempo set to 100 BPM it means that we have 100 quarters in
+one minute.
+
+\begin{tikzpicture}
+  \draw[thick] (0, 0.5) -- (10, 0.5) node[anchor=north west] {t};
+  \draw (0, -0.5) -- (0, 1.5);
+  \draw (10, -0.5) -- (10, 1.5);
+  \draw (1, 1.5) node[anchor=north west] {1 minute (60 seconds) / 100 beats};
+  \foreach \x in {0.0, 0.1, 0.2, ..., 10.0} {
+    \draw (\x, 0) -- (\x, 1);
+  };
+\end{tikzpicture}
+
+The distance between two beats can be calculated using the formula
+\ref{equation:bpm}.
+
+\begin{equation}
+  \frac{60 \mbox{s}}{100 \mbox{beats}} = 0.6 \mbox{s} = 60 \mbox{ms} = 60000 \mu\mbox{s}
+  \label{equation:bpm}
+\end{equation}
+
+From the formula \ref{equation:bpm} we got the length of one quarter which is
+0.6s.  But to make the further calculations easier we need to get the length of
+the whole bar instead of the quarter.  As a bar that we use in our examples
+holds four quarters we need to multiply the length of one quarter by four to get
+the whole bar length (see the formula \ref{equation:whole-note-calcualtion-1}.)
+
+\begin{equation}
+  \frac{1}{4} * 4 = \frac{4}{4} = \frac{1}{1} = 1
+  \label{equation:whole-note-calcualtion-1}
+\end{equation}
+
+Given that we can derive the basic formula
+\ref{equation:whole-note-calcualtion-2} for the calculation of the whole bar
+length.
+
+\begin{equation}
+  \mbox{Whole bar length} = \frac{60 \mbox{s}}{\mbox{BPM}} * 4
+  \label{equation:whole-note-calcualtion-2}
+\end{equation}
+
+Now we can musically precise calculate the length of our sounds that compose our
+rhythm -- including for the composition ``We Will Rock You'' that we discussed
+above.  For this composition tempo is set to 86 BPM. \footnote{In different
+sources the BPM for this composition may vary, but usually it's between 84 and
+88 BPM.}
+
+Let's try to program the melody.
+
+\begin{minted}{cpp}
+  // Port to which a speaker is connected.
+  const int SPEAKER = 2;
+
+  void setup() {
+    pinMode(SPEAKER, OUTPUT);
+  }
+
+  // The procedure to generate a sound with the
+  // specified parameters.
+  void play_tone(int port, float f, long t) {
+    const int T = 1000000 / f;
+    int d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+
+  void loop() {
+    const int BPM = 86;
+
+    // One minute in microseconds.
+    const long MINUTE = 60000000;
+
+    // The whole bar length in microseconds.
+    const long T = (MINUTE / BPM) * 4;
+
+    play_tone(SPEAKER, 50, T / 4); // Quarter
+    delay(100);
+    play_tone(SPEAKER, 50, T / 4); // Quarter
+    delay(100);
+    play_tone(SPEAKER, 100, T / 2); // Half
+    delay(100);
+  }
+\end{minted}
+
+But if we upload this project to an Arduino we can notice that the rhythm is too
+slow, comparing to the original melody.  That's because we haven't consider one
+important thing here -- in the composition we must squeeze the pattern ``two
+beats, one clap'' twice in one bar (as is shown on
+fig. \ref{fig:lilypond-queen-2}.)
+
+\begin{figure}[ht]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      e,8 e8 e'4 e,8 e8 e'4
+    }
+  \end{lilypond}
+  \caption{The rhythm of ``We Will Rock You'' song (the full version.)}
+  \label{fig:lilypond-queen-2}
+\end{figure}
+
+That's the reason why the original song feels faster -- not because the BPM is
+higher, but because the notes are shorter.
+
+Let's fix our code accordingly.
+
+\begin{minted}{cpp}
+  // ...
+
+  void loop() {
+    const int BPM = 80;
+
+    // One minute in microseconds.
+    const long MINUTE = 60000000;
+
+    // The whole bar length in microseconds.
+    const long T = (MINUTE / BPM) * 4;
+
+    play_tone(SPEAKER, 50, T / 8); // Eighth
+    delay(100);
+    play_tone(SPEAKER, 50, T / 8); // Eighth
+    delay(100);
+    play_tone(SPEAKER, 100, T / 4); // Quarter
+    delay(100);
+    play_tone(SPEAKER, 50, T / 8); // Eighth
+    delay(100);
+    play_tone(SPEAKER, 50, T / 8); // Eighth
+    delay(100);
+    play_tone(SPEAKER, 100, T / 4); // Quarter
+    delay(100);
+  }
+\end{minted}
+
+The rhythm is ready, but we are still choosing the frequencies for our
+``instruments'' arbitrarily.  It is time to fix that as well.
+
 \end{document}
