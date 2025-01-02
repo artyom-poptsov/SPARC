@@ -1,0 +1,89 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Octave system}
+\index{Music!Octave system}
+
+As you probably know the music is build from the notes -- there are just seven
+notes: ``Do'', ``Re'', ``Mi'', ``Fa'', ``Sol'', ``La'' and ``Si''.\footnote{In
+English-speaking countries people sometimes use ``Ti'' instead of
+``Si''.\cite{happynote}}
+
+Each note has its own frequency.  But if we take a look on a piano (or
+synthesizer) keyboard we will see that there are more than seven buttons there,
+more than notes.  Why is that?
+
+It turns out that notes are grouped together into groups called \emph{octaves}.
+One octave holds seven notes (from ``Do'' up to ``Si''), and there are nine
+octaves.
+
+For the convenience we will number all the octaves starting from 0 (the
+lowest-frequency octave) up to 8 (the highest-frequency octave.)
+
+This way we get $7 * 9 = 63$ different note frequencies \footnote{In fact there
+are more sounds in the octave system -- we will discuss it later.} in the octave
+system.
+
+But how to distinguish different notes if they are called the same even in
+different octaves?  It turns out there's a convenient \emph{scientific notation}
+for naming the notes.  In the table \ref{table:scientific-music-notation}
+classical note names (``Do'', ``Re'', ``Mi'', ``Fa'', ``Sol'', ``La'' and
+``Si'') are mapped to the scientific notation.
+
+\begin{tabular}{p{4cm}|p{4cm}}
+  The syllabic musical notation & Scientific notation \\
+  \hline \hline
+  Do   & С \\
+  \hline
+  Re   & D \\
+  \hline
+  Mi   & E \\
+  \hline
+  Fa   & F \\
+  \hline
+  Sol & G \\
+  \hline
+  La   & A \\
+  \hline
+  Si   & B (H) \\
+  \hline
+  \label{table:scientific-music-notation}
+\end{tabular}
+
+Note that the ``Si'' note can be named either ``B'' (English variant) or ``H''
+(German variant.)  We will be using only the English variant and write the
+``Si'' note as ``B''.
+
+The good part about the scientific notation not only in the concise note naming
+(which is convenient for the programming purposes), but also in the fact that
+after the note name we usually can write its octave number.  For example, ``C0''
+is the ``Do'' note of the octave number zero, and ``G5'' is the ``Sol'' of the
+fifth octave.
+
+Similar notes in different octaves differ in the frequency -- not in any
+arbitrary way, but according to the strict rule: they are multiplies of each
+other.  Take, for example, ``C0'' and ``C1'' -- ``C1'' has exactly two times
+higher frequency than ``C0''.  But it goes further: if we take ``C2'' it will
+have four times higher frequency than of ``C0''.
+
+Here it's a good time to remember that such frequencies that are multiplies of
+one another, sound pleasant for us while played together.  Bingo!  Now we get
+one piece of the musical theory.
+
+If we want calculate the frequency of notes in octaves that are not adjacent to
+each other, we can use special trick from our sleeve.  With each step up on
+octave ``ladder'' the note frequency is multiplied by 2, so we can get any note
+frequency from the octave number zero just by multiplying its frequency by the
+power of 2 (see formula \ref{equation:music-note-frequency-equation}.)
+
+\begin{equation}
+  f * 2^n
+  \label{equation:music-note-frequency-equation}
+\end{equation}
+
+Where ``f'' is the frequency of a note from the zero octave, and ``n'' is the
+number of octave, starting from zero.
+
+\end{document}
