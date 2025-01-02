@@ -86,4 +86,59 @@ power of 2 (see formula \ref{equation:music-note-frequency-equation}.)
 Where ``f'' is the frequency of a note from the zero octave, and ``n'' is the
 number of octave, starting from zero.
 
+To test our formula let's use the octave number zero and the octave number four
+-- the frequencies of notes are shown in the table \ref{table:fourth-octave}
+(full list of octaves can be found in \nameref{section:appendixA}.)
+
+\begin{tabular}{p{2cm}|p{3cm}|p{2cm}|p{3cm}}
+  Octave & Syllable notation & Scientific notation & Frequency (Hz) \\
+  \hline \hline
+
+  \multirow{7}{*}{0}
+  \musicnote{0}{C}{16.352}
+  \cline{2-4}
+  \musicnote{0}{D}{18.354}
+  \cline{2-4}
+  \musicnote{0}{E}{20.602}
+  \cline{2-4}
+  \musicnote{0}{F}{21.827}
+  \cline{2-4}
+  \musicnote{0}{G}{24.500}
+  \cline{2-4}
+  \musicnote{0}{A}{27.500}
+  \cline{2-4}
+  \musicnote{0}{B}{30.868}
+  \hline
+
+  \multirow{7}{*}{4}
+  \musicnote{4}{C}{261.630}
+  \cline{2-4}
+  \musicnote{4}{D}{293.660}
+  \cline{2-4}
+  \musicnote{4}{E}{329.630}
+  \cline{2-4}
+  \musicnote{4}{F}{349.230}
+  \cline{2-4}
+  \musicnote{4}{G}{392.000}
+  \cline{2-4}
+  \musicnote{4}{A}{440.000}
+  \cline{2-4}
+  \musicnote{4}{B}{493.880}
+  \hline
+  \label{table:fourth-octave}
+\end{tabular}
+
+As can be seen in the table, ``C0'' has the frequency 16.352 Hz.  If we
+substitute this value along with the fourth octave number to the formula
+\ref{equation:music-note-frequency-equation} we will get the frequency of ``C4''
+as is shown in \ref{equation:music-note-frequency-equation-example}.
+
+\begin{equation}
+  \mbox{C4} = f * 2^n = \mbox{C0} * 2^4 = 16.352\mbox{Hz} * 2^4 = 261.632\mbox{Hz}
+  \label{equation:music-note-frequency-equation-example}
+\end{equation}
+
+With the new knowledge we can program a simple melody -- and that's what we'll be
+doing in the next section.
+
 \end{document}
