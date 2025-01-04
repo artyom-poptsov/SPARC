@@ -1,0 +1,196 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Rest in the music}
+\index{Music!Rest}
+
+There's another thing what we kept out of focus to this moment -- and that's the
+so called \emph{rests} (or pauses) in music.  The right rests are as important
+as the regular notes themselves.
+
+In the music staff those rests are marked with special symbols (as is shown on
+fig. \ref{fig:lilypond-rest-example-1}.)
+
+\begin{figure}[ht]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      r1-"Whole rest."
+    }
+  \end{lilypond}
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      r2-"Half rest." r2
+    }
+  \end{lilypond}
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      r4-"Quarter rest." r4 r4 r4
+    }
+  \end{lilypond}
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      r8-"Eighth rest." r8 r8 r8 r8 r8 r8 r8
+    }
+  \end{lilypond}
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      r16-"Sixteenth rest." r16 r16 r16
+      r16 r16 r16 r16
+      r16 r16 r16 r16
+      r16 r16 r16 r16
+    }
+  \end{lilypond}
+  \caption{Rests in music.}
+  \label{fig:lilypond-rest-example-1}
+\end{figure}
+
+The whole rest is equal to two half-rests, one half-rest is equal to two
+quarter-rests and so on.  In other words we can use the same approach we use for
+the calculating the lengths of regular notes.
+
+The symbols for music rests are shown in the table
+\ref{table:music-rest-legths}.
+
+\begin{table}[ht]
+  \begin{tabular}{p{3cm}|p{4cm}|p{3.5cm}}
+    Symbol & Length & Name \\
+    \hline \hline
+    \wholeNoteRest  & $\frac{1}{1}$   & ``Whole rest'' \\
+    \hline
+    \halfNoteRest   & $\frac{1}{2}$   & ``Half rest'' \\
+    \hline
+    \crotchetRest   & $\frac{1}{4}$   & ``Quarter rest'' \\
+    \hline
+    \quaverRest     & $\frac{1}{8}$ & ``Eighth rest'' \\
+    \hline
+    \semiquaverRest & $\frac{1}{16}$ & ``Sixteenth rest'' \\
+    \hline
+  \end{tabular}
+  \caption{Some examples of possible music rests.}
+  \label{table:music-rest-legths}
+\end{table}
+
+For the rests to work in our program we have to create a special note with zero
+frequency.  We will be using ``R'' (for ``Rest'') as the name of the constant.
+
+\begin{verbatim}
+const float R = 0; // Rest
+\end{verbatim}
+
+Next we have to change the \texttt{play\_tone} procedure in such a way that it
+can handle ``play back'' rests.  For that we add a condition that checks the
+note frequency -- if it's greater than zero, then it will be used to generate a
+sound; otherwise the procedure will just wait for the ``note'' length (the
+\texttt{t} parameter of the procedure.)
+
+\begin{minted}{cpp}
+  // The procedure to generate a sound with the
+  // specified parameters.
+  void play_tone(int port, float f, long t) {
+    if (f > 0) {
+      const int T = 1000000 / f;
+      int d = T / 2;
+      int count = t / T;
+      for (int i = 0; i < count; i++) {
+        digitalWrite(port, HIGH);
+        delayMicroseconds(d);
+        digitalWrite(port, LOW);
+        delayMicroseconds(d);
+      }
+    } else {
+      delay(t / 1000); // Rest
+    }
+  }
+\end{minted}
+
+We should note that for the making the proper rest we use the following code:
+
+\begin{minted}{cpp}
+  delay(t / 1000); // Rest
+\end{minted}
+
+We cannot use \texttt{delayMicroseconds} here as unfortunately this procedure
+cannot wait for long periods of time; if we try to use it for, say, a 1000000
+microseconds delay, we will get unexpected results.  We can use plain old
+\texttt{delay} here, but it uses milliseconds instead of microseconds.  So we
+need to divide our \texttt{t} by 1000 to convert microseconds to milliseconds.
+
+To demonstrate the use of rests we will be using another musical composition --
+``If only there will be no winter'' (``Кабы не было зимы'' in Russian), from an
+old Soviet cartoon ``Prostokvashino'' (``Простоквашино'' in Russian.)
+
+\begin{figure}[ht]
+  \begin{lilypond}
+    \relative c' {
+      \key g \major
+      \numericTimeSignature
+      \time 4/4
+      b8 b b'8. fis16 a8 g e4 |
+      d8 d << b'8. d8. >> << c16 a >> << c8 a >> << b8 g8 >> r4
+      d'8 c a fis << a c >> << g b >> << g4 b >>
+      b,8 b << g'8. b8. >> << fis16 a >> << fis8 a >> << e8 g8 >> r4
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{Part of the melody ``If only there will be no winter'' from the old
+    Soviet cartoon ``Prostokvashino''.}
+  \label{fig:lilypond-melody-prostokvashino}
+\end{figure}
+
+In the musical score on the fig. \ref{fig:lilypond-melody-prostokvashino} only a
+part of the melody, that we will program in this section, is shown.  The full
+version of the musical score is provided in
+fig. \ref{fig:lilypond-melody-prostokvashino-full}.
+
+As we can see, there are two quarter rests (\crotchetRest), that we have to add
+to the array of notes, to make the composition sound as in the original version.
+
+Also there are ``double notes'' that are written one on top of the other -- which
+means that we have to play those notes simultaneously.  For the simplicity we
+will be taking only one note from pair, the higher one.
+
+Let's try to write down notes in the array and listen to the melody.  To make
+the code clear, we split the notes into groups according to bars, each bar on
+its own line.  In the commentaries above the lines we add a commentary with the
+bar number.
+
+\begin{minted}{cpp}
+  float prostokvashino[28][2] = {
+    // 1st bar.
+    {b3, 8}, {b3, 8}, {b4, 8}, {f4, 16}, {a4, 8}, {g4, 8}, {e4, 4},
+    // 2nd bar.
+    {d4, 8}, {d4, 8}, {d5, 8}, {c5, 16}, {c5, 8}, {b4, 8}, {R,  4},
+    // 3rd bar.
+    {d5, 8}, {c5, 8}, {a4, 8}, {f4, 8},  {c5, 8}, {b4, 8}, {b4, 4},
+    // 4th bar.
+    {b3, 8}, {b3, 8}, {b4, 8}, {a4, 16}, {a4, 8}, {g4, 8}, {R,  4},
+  };
+\end{minted}
+
+When we try to play this melody on Arduino we may note that there are some
+``inconsistencies'' when comparing to the original melody.  There are several
+sources of such inconsistencies.  For example, we calculate the length of some
+notes, marked with small dots on the right (like this: ``\eighthNoteDotted''),
+in the wrong way.  The length of such notes are longer than regular notes.
+
+Now it's time to discuss those ``marked'' notes and find out how to properly
+calculate their lengths.
+
+\end{document}

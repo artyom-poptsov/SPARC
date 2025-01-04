@@ -191,7 +191,8 @@ SECTIONS_EN = \
 	src/en/sections/music-and-technology-synthesis-simple-melodies.tex \
 	src/en/sections/music-and-technology-synthesis-arrays.tex \
   src/en/sections/music-and-technology-synthesis-two-dimensional-arrays.tex \
-	src/en/sections/music-and-technology-synthesis-staff.tex
+	src/en/sections/music-and-technology-synthesis-staff.tex \
+	src/en/sections/music-and-technology-synthesis-rest.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))
