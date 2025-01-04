@@ -1,0 +1,78 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dotted notes}
+
+In the musical notation a dot that is written to the right of a note, increases
+the length of its note on the half of its length.
+
+For example, if a dot is on the right of an eighth note (``\eighthNoteDotted'')
+it means that the half of its length is added to the length.  The half of an
+eighth note is sixteenth note.  To add up simple fractions we need to convert
+them to the common denominator:
+
+\begin{equation}
+  \mbox{\eighthNoteDotted} = \mbox{\eighthNote} + \mbox{\sixteenthNote}
+  = \frac{1}{8} + \frac{1}{16} = \frac{2}{16} + \frac{1}{16} = \frac{3}{16}
+\end{equation}
+
+The final number $\frac{3}{16}$ is not very convenient for us as we use 1 bar as
+the nominator of the fraction.  But in case of 3 in the nominator we would have
+to use 3 bars instead.  To solve this problem with the 3 in the nominator, we
+can divide both nominator and denominator by 3:
+
+\begin{equation}
+  \frac{3 / 3}{16 / 3} = \frac{1}{16 / 3}
+\end{equation}
+
+We end up with $1$ the nominator and $16 / 3$ in the denominator.  So we have to
+use $16 / 3$ as the length of the note.  $16 / 3$ is roughly equals to $5.3$ but
+we don't have to calculate it ourselves as the microcontroller can do it for us.
+All we need is to write $16.0 / 3.0$ to make sure that the fractional part is
+not lost in the process of the division.
+
+In the music sheet for ``If only there will be no winter'' on
+fig. \ref{fig:lilypond-melody-prostokvashino} the third note is exactly the
+dotted eighths note we just discussed.  So according to the aforementioned logic
+we must specify its length as $16.0 / 3.0$, like this:
+
+\begin{minted}{cpp}
+  {b4, 16.0 / 3.0}
+\end{minted}
+
+In the array it should look like is shown in the listing
+\ref{listing:music-dotted-notes}.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    float prostokvashino[28][2] = {
+      // 1st bar.
+      {b3, 8},  {b3, 8}, {b4, 16.0 / 3.0},
+      {f4, 16}, {a4, 8}, {g4,          8}, {e4, 4},
+      // 2nd bar.
+      {d4, 8},  {d4, 8}, {d5, 16.0 / 3.0},
+      {c5, 16}, {c5, 8}, {b4,          8}, {R,  4},
+      // 3rd bar.
+      {d5, 8},  {c5, 8}, {a4,          8},
+      {f4, 8},  {c5, 8}, {b4,          8}, {b4, 4},
+      // 4th bar.
+      {b3, 8},  {b3, 8}, {b4, 16.0 / 3.0},
+      {a4, 16}, {a4, 8}, {g4,          8}, {R,  4},
+    };
+  \end{minted}
+  \label{listing:music-dotted-notes}
+  \caption{An example of specifying of dotted notes in the melody.}
+\end{listing}
+
+Now our melody became a bit closer to the original.
+
+Here we have to note that sometimes in the music notation we can find notes with
+two dots on the right -- which means that this note have to be elongated by its
+half and half of the half.  But those double-dotted notes are rarely used as it
+complicates the reading of the score for a musician.  It's a different matter
+for us, programmers -- we can read the score in slow, relaxed pace, program it
+and then let the computer to the all complicated stuff!
+
+\end{document}
