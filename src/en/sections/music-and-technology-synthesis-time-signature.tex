@@ -1,0 +1,295 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Time signature}
+\index{Music!Time signature}
+
+As we may notice at the beginning of the musical staff, right near the treble
+clef, there's $\frac{4}{4}$ -- what does it mean?
+
+The $\frac{4}{4}$ marking (reads as ``four-four time'') describes the \emph{time
+signature} of the composition.  From the point of programming it does not affect
+neither the notes frequency, nor the lengths of notes.  But in the same time,
+this mark directly affects the sound of the composition, and without it musical
+compositions would sound quite boring.
+
+The time scale creates this curious effect by \emph{accents} on certain notes.
+
+Let's take another look at ``Twinkle, Twinkle, Little Star''
+(\ref{fig:lilypond-musical-scale-example-1}.)
+
+\begin{figure}[ht]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+      g'4 g f f
+      e e d2
+      g4 g f f
+      e e d2
+      c4 c g' g
+      a a g2
+      f4 f e e
+      d d c2
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 100\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' in the time signature of four-four
+    time.}
+  \label{fig:lilypond-musical-scale-example-1}
+\end{figure}
+
+As the composition is written in the ``four-four'' time signature it means that
+one bar holds exactly four quarter notes, or one whole note.  The denominator in
+the time signature $\frac{4}{4}$ indicates the note value which signature is
+counting; the upper value (numerator) in the signature indicates how many such
+note values constitute a bar.
+
+When a musical instrument is played the accent usually is placed on the first
+note in the bar -- so this note is played stronger.
+
+For clarity we can show the accent using the ``>'' symbol written below or above
+a note.  Let's put those markings on the musical staff, as is shown on the
+fig. \ref{fig:lilypond-musical-scale-example-2}.
+
+\begin{figure}[ht]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 4/4
+      c4-> c g'-> g
+      a-> a g2->
+      f4-> f e->  e
+      d-> d c2->
+      g'4-> g f-> f
+      e-> e d2->
+      g4-> g f-> f
+      e-> e d2->
+      c4-> c g'-> g
+      a-> a g2->
+      f4-> f e-> e
+      d-> d c2->
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 100\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' with accents marked by ``>''
+    symbols below the notes.}
+  \label{fig:lilypond-musical-scale-example-2}
+\end{figure}
+
+Musical time signature ``four-four'' also known as a \emph{complex} time
+signature, as it consisting of two \emph{simple} time signatures -- two of
+two-fours.
+
+Thus in the four-four time signature aside from the one accent on the 1st note
+there's another, weaker, accent on the 3rd note.
+
+As we can see from the fig. \ref{fig:lilypond-musical-scale-example-2}, the fist
+(main) accent is placed upon the first note in the bar -- in our case, the first
+quarter.  The secondary accent is placed upon the 3rd note in the bar -- or we
+can say, it is placed on the 1st note of the 2nd half of the bar.  The secondary
+accent is by definition weaker than the main accent.
+
+If we take other time signature -- for example two-four signature ($\frac{2}{4}$)
+then the composition will sound differently as the main accent is on the 1st
+note of each bar, and the 2nd accent is no more.
+
+\begin{figure}[ht]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 2/4
+      c4-> c
+      g'-> g
+      a-> a
+      g2->
+      f4-> f e->  e
+      d-> d c2->
+      g'4-> g f-> f
+      e-> e d2->
+      g4-> g f-> f
+      e-> e d2->
+      c4-> c g'-> g
+      a-> a g2->
+      f4-> f e-> e
+      d-> d c2->
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 100\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' in the two-four time signature.}
+  \label{fig:lilypond-musical-scale-example-3}
+\end{figure}
+
+The two-four time signature is used in such musical genres as, for example,
+polka.
+
+If we take three-four time signature then there will be three quarter notes in a
+bar (as is shown on fig. \ref{fig:lilypond-musical-scale-example-4}.)  Thus the
+accent will be placed on the 1st note in each bar.  With that, some half-notes
+($\frac{1}{2}$) are sliced by the vertical bar line into two quarters.
+
+\begin{figure}[h]
+  \centering
+  \begin{lilypond}
+    \relative c' {
+      \numericTimeSignature
+      \time 3/4
+      c4->  c g'
+      g->   a a
+      g2->  f4
+      f->   e e
+      d->   d c4~4->
+      g'4   g
+      f->   f e
+      e->   d2
+      g4->  g f
+      f->   e e
+      d2    c4
+      c->   g' g
+      a->   a g4~4->
+      f4    f
+      e->   e d
+      d->   c2
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 100\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{``Twinkle, Twinkle, Little Star'' in the three-four time signature.}
+  \label{fig:lilypond-musical-scale-example-4}
+\end{figure}
+
+Enforcing this time signature on ``Twinkle, Twinkle, Little Star'' feels
+unnatural and after such experiments we may expect visits from the musical
+inquisition.
+
+Nevertheless if we try to play this composition in this time signature, it will
+sound walzing, as such signature usually is used for waltz.
+
+But how can we bring those musical nuances into our programming code and the
+hardware to make our musical compositions more beautiful?  Changes can be done
+in several steps.
+
+Firstly the easiest way to make accents on some notes is to connect additional,
+less loud speaker, to our Arduino.  The notes that are not accented will be
+played by this speaker.  And those notes that are accented will be played by the
+loud speaker.
+
+Let's suppose we connected the loud speaker on the digital port number 2, and
+the quiet speaker to the port number 3.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const int LOUD_SPEAKER_PIN  = 2;
+    const int QUIET_SPEAKER_PIN = 3;
+
+    // ...
+
+    void setup() {
+      pinMode(LOUD_SPEAKER_PIN, OUTPUT);
+      pinMode(QUIET_SPEAKER_PIN, OUTPUT);
+    }
+  \end{minted}
+  \label{listing:adding-additional-speaker}
+  \caption{Adding another speaker to play notes with different sound volumes.}
+\end{listing}
+
+Secondly our two-dimensional array for storing the melody now has to have three
+columns instead of two -- to store the volume of the sound.  Judging from the 3rd
+column we will choose the speaker to play sound.  Our volume control is limited
+with two levels: quiet (0) and loud (1.)
+
+For the four-four time signature we have to make the first note in each bar
+louder than the others.
+
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    // ...
+
+    float twinkle_twinkle_little_star[][3] = {
+      {c4, 4, 1}, {c4, 4, 0}, {g4, 4, 0}, {g4, 4, 0},  // 0
+      {a4, 4, 1}, {a4, 4, 0}, {g4, 4, 0},              // 1
+      {f4, 4, 1}, {f4, 4, 0}, {e4, 4, 0}, {e4, 4, 0},  // 2
+      {d4, 4, 1}, {d4, 4, 0}, {c4, 4, 0},              // 3
+
+      {g4, 4, 1}, {g4, 4, 0}, {f4, 4, 0}, {f4, 4, 0},  // 4
+      {e4, 4, 1}, {e4, 4, 0}, {d4, 4, 0},              // 5
+      {g4, 4, 1}, {g4, 4, 0}, {f4, 4, 0}, {f4, 4, 0},  // 6
+      {e4, 4, 1}, {e4, 4, 0}, {d4, 4, 0},              // 7
+
+      {c4, 4, 1}, {c4, 4, 0}, {g4, 4, 0}, {g4, 4, 0},  // 8
+      {a4, 4, 1}, {a4, 4, 0}, {g4, 4, 0},              // 9
+      {f4, 4, 1}, {f4, 4, 0}, {e4, 4, 0}, {e4, 4, 0},  // 10
+      {d4, 4, 1}, {d4, 4, 0}, {c4, 4, 0},              // 11
+    };
+
+    // ...
+  \end{minted}
+  \label{listing:adding-musical-scale-to-array}
+  \caption{Adding accents to the notes according the time signature.}
+\end{listing}
+
+Next in the loop playing back our melody we have to choose the right speaker for
+each note, based on the 3rd column in the array.
+
+\begin{listing}[h]
+  \begin{minted}{cpp}
+    // ...
+
+    void loop() {
+      const long BPM = 120;
+      const long MINUTE = 60 * 1000000;
+      const long T = (MINUTE / BPM) * 4;
+
+      for (int note_idx = 0; note_idx < 28; note_idx++) {
+        if (melody[note_idx][2] == 1) {
+          // Accented note.
+          play_tone(LOUD_SPEAKER_PIN,
+                    melody[note_idx][0],
+                    T / melody[note_idx][1]);
+        } else {
+          // Regular note.
+          play_tone(QUIET_SPEAKER_PIN,
+                    melody[note_idx][0],
+                    T / melody[note_idx][1]);
+        }
+        delay(100);
+      }
+    }
+  \end{minted}
+  \label{listing:musical-scale-implementation}
+  \caption{Implementation of accents based on the time signature.}
+\end{listing}
+
+In the code listing \ref{listing:musical-scale-implementation} we added a
+condition in the loop body, so if for the current note (referenced by
+\texttt{note\_idx}) has the value 1 in the 2nd column, it means that this a the
+accented note -- so we have to play it louder than the others.  Such notes we
+send to the speaker, connected to \texttt{LOUD\_SPEAKER\_PIN} digital port.
+Other notes, as described in the \texttt{else} block, are sent to the speaker
+connected to the \texttt{QUIET\_SPEAKER\_PIN} port.
+
+\end{document}
