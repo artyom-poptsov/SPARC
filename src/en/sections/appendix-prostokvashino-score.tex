@@ -1,0 +1,44 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter{The musical score for "If only there will be no winter"}
+
+\begin{figure}[ht]
+  \begin{lilypond}
+    \relative c' {
+      \key g \major
+      \numericTimeSignature
+      \time 4/4
+      %% 0
+      (b'8 b cis dis e4-.) << g,8 b e >> r8 \bar ".|:"
+      %% 1
+      b,8 b b'8. fis16 a8 g e4 |
+      %% 2
+      d8 d << b'8. d8. >> << c16 a >> << c8 a >> << b8 g8 >> r4
+      %% 3
+      d'8 c a fis << a c >> << g b >> << g4 b >>
+      %% 4
+      b,8 b << g'8. b8. >> << fis16 a >> << fis8 a >> << e8 g8 >> r4
+      %% 5
+      b,8 b b'8. fis16 a8 g8 e4
+      %% 6
+      d8 d << b'8. d8. >> << a16 c >> << a8 c >> << g8 b8 >> r8 e4
+      %% 7
+      %%       e8)
+      %%       d8 d
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{The melody ``If only there will be no winter'' from the cartoon
+    ``Prostokvashino''. Author: Evgeniy Krylatov (Евгений Крылатов.)}
+  \label{fig:lilypond-melody-prostokvashino-full}
+\end{figure}
+
+\end{document}

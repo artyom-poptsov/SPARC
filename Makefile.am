@@ -197,7 +197,11 @@ SECTIONS_EN = \
 	src/en/sections/music-and-technology-synthesis-flats-and-sharps.tex \
 	src/en/sections/music-and-technology-synthesis-time-signature.tex \
 	src/en/sections/music-and-technology-synthesis-bass-clef.tex \
-	src/en/sections/music-and-technology-synthesis-music-band.tex
+	src/en/sections/music-and-technology-synthesis-music-band.tex \
+	src/en/sections/appendix-octaves.tex \
+	src/en/sections/appendix-prostokvashino-score.tex \
+	src/en/sections/appendix-twinkle-twinkle-little-star-01.tex \
+	src/en/sections/appendix-twinkle-twinkle-little-star-02.tex
 
 SECTIONS_OUT_EN = \
 	$(foreach section, $(SECTIONS_EN), out/$(section))

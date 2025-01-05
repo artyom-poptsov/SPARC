@@ -1,0 +1,144 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter{Melody "Twinkle Twinkle Little Star" (version 1.0)}
+\label{app:twinkle-twinkle-little-star-01}
+
+This example show the full code for the ``Twinkle Twinkle, Little Star'' melody
+for the Arduino.  As can be seen from the example, the code is turn out to be
+quite long -- in part because we don't use arrays here.
+
+\begin{minted}{cpp}
+  // Notes:
+  const float c4 = 261.630;
+  const float d4 = 293.660;
+  const float e4 = 329.630;
+  const float f4 = 349.230;
+  const float g4 = 392.000;
+  const float a4 = 440.000;
+  const float b4 = 493.880;
+
+  // The port number where the speaker
+  // is connected:
+  const int SPEAKER_PIN = 8;
+
+  // The procedure to play a sound T microsecond
+  // in length, with the frequency F on the PORT:
+  void play_tone(int port, float f, long t) {
+    const long T = 1000000 / f;
+    long d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+
+  void setup() {
+    pinMode(SPEAKER_PIN, OUTPUT);
+  }
+
+  void loop() {
+    const long BPM = 120;
+    const long MINUTE = 60000000; // 1 minute in microseconds
+    const long T = (MINUTE / BPM) * 4; // The bar length.
+    const byte D = 100; // Delay between notes.
+
+    // 1st bar.
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+
+    // 2nd bar.
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 2);
+    delay(D);
+
+    // 3rd bar.
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+
+    // 4th bar.
+    play_tone(SPEAKER_PIN, d4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, d4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, c4, T / 2);
+    delay(D);
+
+    // 5th bar.
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+
+    // 6th bar.
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, d4, T / 2);
+    delay(D);
+
+    // 7th bar.
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, f4, T / 4);
+    delay(D);
+
+    // 8th bar.
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, e4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, d4, T / 2);
+    delay(D);
+
+    // 9th bar.
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, c4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 4);
+    delay(D);
+
+    // 10th bar.
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, a4, T / 4);
+    delay(D);
+    play_tone(SPEAKER_PIN, g4, T / 2);
+    delay(D);
+  }
+\end{minted}
+
+\end{document}

@@ -1,0 +1,88 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter{Melody "Twinkle Twinkle Little Star" (version 2.0)}
+\label{app:twinkle-twinkle-little-star-02}
+
+In this example we provided the full example of ``Twinkle Twinkle, Little Star''
+that is written with one-dimensional arrays.  If we compare this code with the
+code from the appendix \ref{app:twinkle-twinkle-little-star-01} we can see that
+the code became shorter; but we can make it even shorter yet, and even make it
+simpler -- by using a two-dimensional array.
+
+\begin{minted}{cpp}
+  // Notes:
+  const float c4 = 261.630;
+  const float d4 = 293.660;
+  const float e4 = 329.630;
+  const float f4 = 349.230;
+  const float g4 = 392.000;
+  const float a4 = 440.000;
+  const float b4 = 493.880;
+
+  // The port number where the speaker
+  // is connected:
+  const int SPEAKER_PIN = 8;
+
+  // The procedure to play a sound T microsecond
+  // in length, with the frequency F on the PORT:
+  void play_tone(int port, float f, long t) {
+    const long T = 1000000 / f;
+    long d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+
+  void setup() {
+    pinMode(SPEAKER_PIN, OUTPUT);
+  }
+
+  // The array with notes.
+  float melody[28] = {
+    c4, c4, g4, g4,
+    a4, a4, g4,
+    f4, f4, e4, e4,
+    d4, d4, c4,
+    g4, g4, f4, f4,
+    e4, e4, d4,
+    g4, g4, f4, f4,
+    e4, e4, d4,
+  };
+
+  // The array with note lengths.
+  float melody_t[28] = {
+    4,  4,  4,  4,
+    4,  4,  2,
+    4,  4,  4,  4,
+    4,  4,  2,
+    4,  4,  4,  4,
+    4,  4,  2,
+    4,  4,  4,  4,
+    4,  4,  2,
+  };
+
+  void loop() {
+    const long BPM = 120;
+    const long MINUTE = 60000000; // 1 minute in microseconds
+    const long T = (MINUTE / BPM) * 4; // The bar length
+    const byte D = 100; // Delay between notes.
+
+    // The loop that plays the melody.
+    for (int note_idx = 0; note_idx < 28; note_idx++) {
+      play_tone(SPEAKER_PIN,
+                melody[note_idx],
+                T / melody_t[note_idx]);
+      delay(D);
+    }
+  }
+\end{minted}
+
+\end{document}
