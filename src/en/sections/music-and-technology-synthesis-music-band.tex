@@ -1,0 +1,564 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\section{Creating a music band}
+
+Now as we understand how rhythm works and can read the notes, we can start
+creating a music ``band'' from the two or more Arduinos.
+
+Many musical compositions as we might notice, include two or more musical
+tracks.  Often the second track is for the left hand when playing a piano, or
+several tracks for other musical instruments (e.g. guitar and vocals.)
+
+In this situation the easiest way to play this composition as the whole is to
+take several Arduino micro-controllers and ``teach'' them to play in tune.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Choosing the name for the band}
+
+First of all to make a musical band we have to come up with a good name for it.
+Let's use ``Second Hand Of Darkness'' (which can be shortened to ``SHOD'') for
+our Arduino band.  This name sounds appropriate for a rock-band, and simply
+sounds very cool.
+
+Then we have to stylize the name, so the other professional musicians accept us
+as one of their own. \footnote{For the title the ``Guttural'' font is used,
+which is distributed under Creative Commons Attribution license:
+\url{https://www.fontspace.com/guttural-font-f8257}.}
+
+\begin{figure}[ht]
+  \centering
+  \includesvg[width=10.00cm]{shod}
+  \caption{The logo for our music band.}
+  \label{fig:shod-band-logo}
+\end{figure}
+
+Preparatory stages have been completed.  Now we have to choose a musical
+composition and play it.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Selecting a debug composition}
+
+Many musical bands star their way on the big musical scene by performing covers
+on the famous songs.  Let out first composition will be an Arduino-cover on the
+song ``Sweet Dreams'' by Marilyn Manson (see
+fig. \ref{fig:lilypond-melody-sweet-dreams}.)\footnote{As the basis, we took the
+musical score \url{https://musescore.com/user/13484026/scores/5329623} by the
+user ``Instrumental Rock'' and licensed under CC-BY-NC
+(\url{https://creativecommons.org/licenses/by-nc/4.0/}.)}
+
+This composition has two main tracks -- the 1st one is the vocals, and the 2nd
+one is the guitar part.
+
+\newpage
+\begin{figure}[H]
+  \begin{lilypond}
+    <<
+    \new Staff \with { instrumentName = "Vocals" } {
+      \relative c' {
+        \tempo 4 = 93
+        \key es \major
+        \numericTimeSignature
+        \time 4/4
+        %% 01
+        \bar ".|:" r1 |
+        %% 02
+        r1 \bar ":|."
+        %% 03
+        r4 es'4 es4 c8 es8~ |
+        %% 04
+        es8 es4. d2 |
+        %% 05
+        es4 c8 es4. c4 |
+        %% 06
+        es8 f4. d4. c8 |
+        %% 07
+        es8 es8 c8 es4. c8 c8 |
+        %% 08
+        es8 es4. d2 |
+        %% 09
+        es4 c8 es4 c4. |
+        %% 10
+        es8 es8 f8 es8 d8 d4. |
+        %% 11
+        es8 es8 c4 es4 c8 es8~ |
+        %% 12
+        es8 c4. r2 |
+      }
+    }
+    \new Staff  \with { instrumentName = "Guitar" } {
+      \relative c' {
+        \key es \major
+        \numericTimeSignature
+        \time 4/4
+        %% 01
+        \bar ".|:" c8 c g'8 c,8 as'8 c,8 g'8 c,8 |
+        %% 02
+        as8 as es'8 f8 g,8 g8 d'8 es8 \bar ":|."
+        %% 03
+        c8 c g'8 c,8 as'8 c,8 g'8 c,8 |
+        %% 04
+        as8 as es'8 f8 g,8 g8 d'8 es8 |
+        %% 05
+        c8 c g'8 c,8 as'8 c,8 g'8 c,8 |
+        %% 06
+        as8 as es'8 f8 g,8 g8 d'8 es8 |
+        %% 07
+        c8 c g'8 c,8 as'8 c,8 g'8 c,8 |
+        %% 08
+        as8 as es'8 f8 g,8 g8 d'8 es8 |
+        %% 09
+        c8 c g'8 c,8 as'8 c,8 g'8 c,8 |
+        %% 10
+        as8 as es'8 f8 g,8 g8 d'8 es8 |
+        %% 11
+        c8 c g'8 c,8 as'8 c,8 g'8 c,8 |
+        %% 12
+        as8 as es'8 f8 g,8 g8 d'8 es8 |
+      }
+    }
+    >>
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{Marilyn Manson, Trent Reznor, ``Sweet Dreams''.}
+  \label{fig:lilypond-melody-sweet-dreams}
+\end{figure}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Implementation of the melody}
+
+To create the 1st track of our melody, we have to create a new project for the
+Arduno, as we did before.  Likewise, the playback is organized through our
+procedure \texttt{play\_tone}.
+
+We define both parts of the melody as two two-dimensional arrays.  The 1st array
+will store the guitar part.  As is seen from the listing
+\ref{listing:music-band-sweet-dreams-1}, the main theme of the melody is
+repeated several times.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    float sweet_dreams_guitar[28][2] = {
+      /* 01 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {c4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {c4,  8},
+      /* 02 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 03 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {c4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {c4,  8},
+      /* 04 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 05 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {c4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {c4,  8},
+      /* 06 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 07 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {c4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {c4,  8},
+      /* 08 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 09 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {c4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {c4,  8},
+      /* 10 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+      /* 11 */
+      {c4,  8}, {c4,  8}, {g4,  8}, {c4,  8},
+      {a4b, 8}, {c4,  8}, {g4,  8}, {c4,  8},
+      /* 12 */
+      {a3b, 8}, {a3b, 8}, {e4b, 8}, {f4,  8},
+      {g3,  8}, {g3,  8}, {d4,  8}, {e4b, 8}
+    };
+  \end{minted}
+  \caption{Guitar part of ``Sweet Dreams''.}
+  \label{listing:music-band-sweet-dreams-1}
+\end{listing}
+
+The 2nd part of the melody for the vocals will be implemented the same way.
+
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    float sweet_dreams_vocals[28][2] = {
+      /* 01 */
+      {R, 1},
+      /* 02 */
+      {R, 1},
+      /* 03 */
+      {R, 4}, {e5b, 4}, {e5b, 4}, {c5, 8}, {e5b, 4},
+      /* 04 */
+      {e5b, 8.0 / 3.0}, {d5, 2},
+      /* 05 */
+      {e5b, 4}, {c5, 8}, {e5b, 8.0 / 3.0}, {c5, 4},
+      /* 06 */
+      {e5b, 8}, {f5, 8.0 / 3.0}, {d5, 8.0 / 3.0}, {c5, 8},
+      /* 07 */
+      {e5b, 8}, {e5b, 8}, {c5, 8}, {e5b, 8.0 / 3.0},
+      /* 08 */
+      {e5b, 8}, {e5b, 8.0 / 3.0}, {d5, 2},
+      /* 09 */
+      {e5b, 4}, {c5, 8}, {e5b, 4}, {c5, 8.0 / 3.0},
+      /* 10 */
+      {e5b, 8}, {e5b, 8}, {f5, 8}, {e5b, 8}, {d5, 8}, {d5, 8.0 / 3.0},
+      /* 11 */
+      {e5b, 8}, {e5b, 8}, {c5, 4}, {e5b, 4}, {c5, 8}, {e5b, 4},
+      /* 12 */
+      {c5, 8.0 / 3.0}, {R, 2}
+    };
+  \end{minted}
+  \caption{Vocal part of ``Sweet Dreams''.}
+  \label{listing:music-band-sweet-dreams-2}
+\end{listing}
+
+While working with two Arduino boards a new problem occurs -- how to upload
+different melodies to each of them?  The first naive (but not very convenient)
+approach is to create a different project for each Arduino and upload them each
+time we change something in the code to each Arduino.  The inconvenience here is
+that we have to make sure that we uploading the right project into each Arduino.
+
+We can offer better approach -- to use the project for both Arduino boards, using
+a value from a digital port to determine in the code which melody should be
+played.  Using a regular Arduino wire we can connect \texttt{SWITCH\_PORT} to
+the ground, and Arduino will play the guitar part.  If the port is not connected
+to the ground, the Arduino will play the vocal part.
+
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    // The digital port where a speaker
+    // is connected.
+    const int SPEAKER     = 2;
+    // The port which allows us to select
+    // the melody part.
+    const int SWITCH_PORT = 10;
+
+    void setup() {
+      pinMode(SPEAKER, OUTPUT);
+      pinMode(SWITCH_PORT, INPUT_PULLUP);
+    }
+
+    void loop() {
+      const int BPM = 93;
+      const long MINUTE = 60000000;
+      const long T = (MINUTE / BPM) * 4;
+
+      // Judging from the SWITCH_PORT state
+      // we decide which part of the melody
+      // have to be played.
+      if (digitalRead(SWITCH_PORT) == LOW) {
+        int count = sizeof(sweet_dreams_guitar)
+        / sizeof(sweet_dreams_guitar[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+                    sweet_dreams_guitar[i][0],
+                    T / sweet_dreams_guitar[i][1]);
+          delay(10);
+        }
+      } else {
+        int count = sizeof(sweet_dreams_vocals)
+            / sizeof(sweet_dreams_vocals[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+                    sweet_dreams_vocals[i][0],
+                    T / sweet_dreams_vocals[i][1]);
+          delay(10);
+        }
+      }
+    }
+  \end{minted}
+  \caption{The code to play ``Sweet Dreams'' on two Arduino boards.}
+  \label{listing:music-band-sweet-dreams-3}
+\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\subsection{Synchronization of two melodies}
+
+To start both parts of the melody simultaneously, we have to press ``Reset''
+buttons on both Arduino boards and release them at the same time.
+
+Despite we now managed to play both parts of the melody, over time we may notice
+that our ``instruments'' getting out of sync.
+
+There are several causes of this unpleasant effect.  We discuss them according
+their degree of influence on the melody.
+
+The first cause of desyncronization is hidden in those lines:
+
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    for (int i = 0; i < count; i++) {
+      play_tone(SPEAKER,
+                sweet_dreams_vocals[i][0],
+                T / sweet_dreams_vocals[i][1]);
+
+      delay(10); // <----- Here's the problem.
+    }
+  \end{minted}
+  \label{listing:music-band-problem-with-delay}
+  \caption{One of the cause of the accumulating error in the composition.}
+\end{listing}
+
+Let's imagine that we play the first two bars of the melody (see
+fig. \ref{fig:lilypond-melody-sweet-dreams-part}.)
+
+\begin{figure}[!h]
+  \begin{lilypond}
+    <<
+    \new Staff \with { instrumentName = "Vocals" } {
+      \relative c' {
+        \tempo 4 = 93
+        \key es \major
+        \numericTimeSignature
+        \time 4/4
+        %% 01
+        \bar ".|:" r1 |
+        %% 02
+        r1 \bar ":|."
+      }
+    }
+    \new Staff  \with { instrumentName = "Guitar" } {
+      \relative c' {
+        \key es \major
+        \numericTimeSignature
+        \time 4/4
+        %% 01
+        \bar ".|:" c8 c g'8 c,8 as'8 c,8 g'8 c,8 |
+        %% 02
+        as8 as es'8 f8 g,8 g8 d'8 es8 \bar ":|."
+      }
+    }
+    >>
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{Marilyn Manson, Trent Reznor, ``Sweet Dreams'' (part.)}
+  \label{fig:lilypond-melody-sweet-dreams-part}
+\end{figure}
+
+Here we can see that in the two bars of the vocal part we have two whole rests --
+that's two silent notes.  Meanwhile in the guitar part in two bars we play $8 +
+8 = 16$ notes in total.  Currently after each note (that is, after each
+\texttt{play\_tone} execution) we have clearly defined a delay in fixed number
+of milliseconds.  Thus, if we add up all the delays, in the 1st bar the total
+delay will be:
+
+\begin{equation}
+  \mbox{Total delay}_{(\mu\mbox{s})} = 2 * 10 \mbox{ms} = 20 \mbox{ms}
+\end{equation}
+
+In the guitar part the total delay will be:
+
+\begin{equation}
+  \mbox{Total delay}_{(\mu\mbox{s})} = 16 * 10 \mbox{ms} = 160 \mbox{ms}
+\end{equation}
+
+That gives us 140ms of difference between two parts of the melody, and this
+error will accumulate over the time.  The longer the melody and more is the
+difference between the number of notes in each part of the melody, the greater
+error value will be.
+
+To solve this problem we have to get rid of the fixed \texttt{delay} in the
+favor of adding an adaptive delay after each note, according the note length.
+The most convenient way to do that is to implement the logic inside
+\texttt{play\_tone} procedure, as is shown in the listing
+\ref{listing:music-band-play-tone-with-delay}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // The procedure of generating a sound
+    // with the specified parameters.
+    void play_tone(int port, float f, long t) {
+      if (f > 0) {
+        const int T = 1000000 / f;
+        int d = T / 2;
+        int count = t / T;
+        for (int i = 0; i < count; i++) {
+          digitalWrite(port, HIGH);
+          delayMicroseconds(d);
+          digitalWrite(port, LOW);
+          delayMicroseconds(d);
+        }
+      } else {
+        delay(t / 1000); // Пауза
+      }
+      // The delay after a note is 10% percent of
+      // its length:
+      delayMicroseconds(t * 0.10);
+    }
+  \end{minted}
+  \caption{The modification of \texttt{play\_tone} with added adaptive delay
+    after notes.}
+  \label{listing:music-band-play-tone-with-delay}
+\end{listing}
+
+After those changes in the \texttt{play\_tone} procedure we have to change the
+\texttt{loop} procedure as well, and remove \texttt{delay} after
+\texttt{play\_tone} calls, as is shown in the listing
+\ref{listing:music-band-using-new-play-tone}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      const int BPM = 93;
+      const long MINUTE = 60000000;
+      const long T = (MINUTE / BPM) * 4;
+
+      if (digitalRead(SWITCH_PORT) == LOW) {
+        int count = sizeof(sweet_dreams_guitar)
+        / sizeof(sweet_dreams_guitar[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+                    sweet_dreams_guitar[i][0],
+                    T / sweet_dreams_guitar[i][1]);
+        }
+      } else {
+        int count = sizeof(sweet_dreams_vocals)
+        / sizeof(sweet_dreams_vocals[0]);
+        for (int i = 0; i < count; i++) {
+          play_tone(SPEAKER,
+                    sweet_dreams_vocals[i][0],
+                    T / sweet_dreams_vocals[i][1]);
+        }
+      }
+    }
+  \end{minted}
+  \caption{The modification of \texttt{play\_tone} without the fixed delays.}
+  \label{listing:music-band-using-new-play-tone}
+\end{listing}
+
+The second cause of desynchronization is the error that occurs during the
+calculation of acoustic wave period from the frequency in the
+\texttt{play\_tone} procedure.  Let's take C4 as an example -- its frequency
+equals to 261.63 Hz.  The code that calculates the period uses the formula
+\ref{equation:frequency-to-period}.
+
+\begin{equation}
+  T_{(\mu\mbox{s})} = 1_{(s)} / F_{(\mbox{Hz})}
+  \label{equation:frequency-to-period}
+\end{equation}
+
+In the program code it looks like this:
+
+\begin{minted}{cpp}
+  const int T = 1000000 / f;
+\end{minted}
+
+If we substitute the frequency of C4 in toe formula
+\ref{equation:frequency-to-period} we will get the formula
+\ref{equation:frequency-to-period-c4}.
+
+\begin{equation}
+  T_{(\mu\mbox{s})} = 1000000_{(\mu\mbox{s})} / 261.63 \mbox{Hz} = 3822.191644689 \mu\mbox{s}
+  \label{equation:frequency-to-period-c4}
+\end{equation}
+
+As can be seen from the formula \ref{equation:frequency-to-period-c4} the length
+of one wave period for C4 is not an integer number.  The fractional part will be
+lost during the calculations (as we store the result as the \texttt{int} type),
+and we end up with the value $3822 \mu\mbox{s}$.
+
+To get the number of iterations for the loop that creates the speaker membrane
+oscillations, we divide the length of the sound \texttt{t} by the period
+\texttt{T}, according to the formula
+\ref{equation:music-band-period-count-calculation}.
+
+\begin{equation}
+  \mbox{count} = t_{(\mu\mbox{s})} / T_{(\mu\mbox{s})}
+  \label{equation:music-band-period-count-calculation}
+\end{equation}
+
+Where \texttt{count} is the variable that stores the number of oscillations.
+The program code for the formula looks like follows:
+
+\begin{minted}{cpp}
+  int count = t / T;
+\end{minted}
+
+Let the length of our note will be 2s ($2000000 \mu\mbox{s}$.)  When we substitute
+the length of the wave period for C4 ($3822 \mu\mbox{s}$) we will get the
+following result:
+
+\begin{equation}
+  \mbox{Count} = 2000000 \mu\mbox{s} / 3822 \mbox{Hz} = 523.286237572
+\end{equation}
+
+Again, the fractional part will be lost -- so we end up with the value 523.  This
+is how many iterations the loop will have.  Each loop iteration has the length
+of around $3822 \mu\mbox{s}$, if we don't consider the overhead from the procedure
+calls.
+
+Thus if we repeat the loop 523 times, we will get the following time of loop
+execution:
+
+\begin{equation}
+  \mbox{Time}_{(\mu\mbox{s})} = 523 \mu\mbox{s} * 3822 \mu\mbox{s} = 1998906 \mu\mbox{s}
+\end{equation}
+
+So the error is:
+
+\begin{equation}
+  \mbox{Error}_{(\mu\mbox{s})} = 2000000 \mu\mbox{s} - 1998906 \mu\mbox{s} = 1094 \mu\mbox{s}
+\end{equation}
+
+Or around 1.1 ms.  This value is relatively small, and its role in the
+desynchronization can be insignificant.  Also the calls to \texttt{digitalWrite}
+and to \texttt{delayMicroseconds} also take some time.  Nevertheless, if we
+still want to compensate this error, we can add after the loop inside the
+\texttt{play\_tone} procedure additional delay calculated from the error as per
+the formula \ref{equation:music-band-error-calculation}.
+
+\begin{equation}
+  \mbox{Error}_{(\mu\mbox{s})} = \mbox{t}_{(\mu\mbox{s})} -
+  (\mbox{T}_{(\mu\mbox{s})} * \mbox{count})
+  \label{equation:music-band-error-calculation}
+\end{equation}
+
+The code of the \texttt{play\_tone} procedure with this error compensation can
+look like follows:
+
+\begin{listing}[!h]
+  \begin{minted}{cpp}
+    void play_tone(int port, float f, long t) {
+      if (f > 0) {
+        const int T = 1000000 / f;
+        int d = T / 2;
+        int count = t / T;
+        for (int i = 0; i < count; i++) {
+          digitalWrite(port, HIGH);
+          delayMicroseconds(d);
+          digitalWrite(port, LOW);
+          delayMicroseconds(d);
+        }
+
+        // Error compensation:
+        delayMicroseconds(t - (T * count));
+
+      } else {
+        delay(t / 1000); // Rest
+      }
+      delayMicroseconds(t * 0.10);
+    }
+  \end{minted}
+  \label{listing:music-band-play-tone-with-error-compensation}
+  \caption{The modification of \texttt{play\_tone} procedure with the additional
+    error compensation.}
+\end{listing}
+
+\end{document}
