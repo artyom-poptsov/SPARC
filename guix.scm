@@ -141,7 +141,7 @@
 explains how to combine the topics mentined in the title to build projects.  The
 book can be used to teach programming classes in colleges and to organize
 workshops in hackerspaces or other community-driven spaces.  Currently the book
-is available only in Russian.")
+is available in Russian and English.")
    (license cc-by-sa4.0)))
 
 book-sparc
