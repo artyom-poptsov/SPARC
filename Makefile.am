@@ -283,6 +283,7 @@ sparc.en.pdf: out/src/en/sparc.pdf
 .PHONY: clean-local
 
 clean-local:
-	rm -rf out
-	rm sparc.pdf
+	[ -d out ] && rm -rf out || exit 0
+	[ -f sparc.ru.pdf ] && rm sparc.ru.pdf || exit 0
+	[ -f sparc.en.pdf ] && rm sparc.en.pdf || exit 0
 
