@@ -28,6 +28,14 @@ $ ./configure
 $ make -j$(nproc)
 #+END_EXAMPLE
 
+This set command builds the English and the Russian version of the book.
+
+To build only the English version of the book, the following command can be
+used:
+#+BEGIN_EXAMPLE shell
+$ make -j$(nproc) en
+#+END_EXAMPLE
+
 You can clear the directory of generated files using the command:
 #+BEGIN_EXAMPLE shell
 $ make clean
