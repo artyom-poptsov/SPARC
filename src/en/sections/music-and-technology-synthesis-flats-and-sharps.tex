@@ -3,6 +3,7 @@
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
 \section{Half-tones, sharps and flats}
 
 All this chapter we were saying that there are eight notes in the octave and we
@@ -17,7 +18,7 @@ that allow us to spice up our music with additional sounds.
 The most convenient way to see those half-tones is to look on a piano keyboard,
 part of which is shown on fig. \ref{fig:piano-keyboard}.
 
-\begin{figure}[ht]
+\begin{figure}[H]
   \centering
   \begin{tikzpicture}
     \draw (0, 0) -- (7, 0);
@@ -147,7 +148,7 @@ code.\footnote{In the music notation you sometimes can find double-sharps or
 double-flats, which means that we have to raise the frequency of a note two of
 half-tones up, or lower the same number of steps down.}
 
-\begin{listing}[ht]
+\begin{listing}[H]
   \begin{minted}{cpp}
     const float d4  = 293.660;
     const float e4  = 329.630;
@@ -172,31 +173,33 @@ musical staff we should note that there'is ``\#'' symbol at the beginning, on
 the line that represents ``F5'' -- which means that all ``F'' notes must be
 sharps, unless otherwise noted.
 
-\begin{tikzpicture}
-  \node (image) at (4, 0) {
-    \begin{lilypond}
-      \relative c' {
-        \key g \major
-        \numericTimeSignature
-        \time 4/4
-        b8 b b'8. fis16 a8 g e4 |
-        d8 d << b'8. d8. >> << c16 a >> << c8 a >> << b8 g8 >> r4
-      }
-      \layout {
-        indent = 0\mm
-        line-width = 120\mm
-        ragged-last = ##t
-      }
-    \end{lilypond}
-  };
-  \draw[red, thick, ->] (0.0, 1.0) node[anchor=south west] {F5 Sharp}
-  -- (-0.5, 0.5);
-  \label{fig:lilypond-melody-prostokvashino-2}
-\end{tikzpicture}
+\begin{figure}[H]
+  \begin{tikzpicture}
+    \node (image) at (4, 0) {
+      \begin{lilypond}
+        \relative c' {
+          \key g \major
+          \numericTimeSignature
+          \time 4/4
+          b8 b b'8. fis16 a8 g e4 |
+          d8 d << b'8. d8. >> << c16 a >> << c8 a >> << b8 g8 >> r4
+        }
+        \layout {
+          indent = 0\mm
+          line-width = 120\mm
+          ragged-last = ##t
+        }
+      \end{lilypond}
+    };
+    \draw[red, thick, ->] (0.0, 1.0) node[anchor=south west] {F5 Sharp}
+    -- (-0.5, 0.5);
+    \label{fig:lilypond-melody-prostokvashino-2}
+  \end{tikzpicture}
+\end{figure}
 
 With this knowledge we can improve our programming code for the melody.
 
-\begin{listing}[ht]
+\begin{listing}[H]
   \begin{minted}{cpp}
     const float f4s = (f4 + g4) / 2;
 
