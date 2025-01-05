@@ -398,8 +398,8 @@ The most convenient way to do that is to implement the logic inside
       } else {
         delay(t / 1000); // Пауза
       }
-      // The delay after a note is 10% percent of
-      // its length:
+      // The delay after a note equals to
+      // 10% percent of its length:
       delayMicroseconds(t * 0.10);
     }
   \end{minted}
@@ -408,6 +408,7 @@ The most convenient way to do that is to implement the logic inside
   \label{listing:music-band-play-tone-with-delay}
 \end{listing}
 
+\newpage
 After those changes in the \texttt{play\_tone} procedure we have to change the
 \texttt{loop} procedure as well, and remove \texttt{delay} after
 \texttt{play\_tone} calls, as is shown in the listing
