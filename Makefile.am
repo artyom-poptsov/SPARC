@@ -1,6 +1,6 @@
 ## Makefile.am -- Config file for GNU Automake.
 ##
-## Copyright (C) 2024 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+## Copyright (C) 2024-2025 Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ##
 ## This file is part of SPARC book.
 ##
@@ -21,7 +21,11 @@ ACLOCAL_AMFLAGS = -I build-aux
 
 SUBDIRS = .
 
-all: sparc.ru.pdf sparc.en.pdf
+all: ru en
+
+ru: sparc.ru.pdf
+
+en: sparc.en.pdf
 
 SECTIONS = \
 	src/ru/sections/commands.tex	\
