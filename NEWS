@@ -7,6 +7,24 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Version 3.0.0 (2025-01-05)
+** en
+The first English version of the book.  Chapters 1-5 are translated, chapters 6
+and 7 are yet to be translated.
+** ru
+*** Синтез музыки и технологии
+**** Звук
+- Добавление недостающего графического отображения генерации звука.
+**** Октавная система
+- Исправление ошибок.
+**** Теория ритма
+- Улучшение изложения материала.
+**** Полутона, диезы и бемоли
+- Исправление ошибок.
+**** Массивы
+- Улучшение изложения материала.
+**** Создание музыкальной группы
+- Исправление ошибок, улучшение формул.
 * Версия 2.3.0 (2024-12-22)
 ** ru
 *** Диалоги с компьютером
