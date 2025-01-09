@@ -1,6 +1,6 @@
 ;; guix.scm --- GNU Guix package recipe    -*- coding: utf-8 -*-
 ;;
-;; Copyright (C) 2022-2024 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+;; Copyright (C) 2022-2025 Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ;;
 ;; Author: Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ;; Created: 17 November 2022
@@ -138,7 +138,7 @@
    (synopsis "Book on combining art and technology")
    (description
     "Science, Programming, Art and Radioelectronics Club (SPARC) is a book that
-explains how to combine the topics mentined in the title to build projects.  The
+explains how to combine the topics mentioned in the title to build projects.  The
 book can be used to teach programming classes in colleges and to organize
 workshops in hackerspaces or other community-driven spaces.  Currently the book
 is available in Russian and English.")
