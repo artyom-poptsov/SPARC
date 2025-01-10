@@ -89,11 +89,17 @@ SECTIONS = \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-01.tex \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-02.tex
 
+COMMON = \
+	src/common/figureSoundGraph.tex
+
 COMMIT = $(shell git rev-parse HEAD)
 
 
 SECTIONS_OUT = \
 	$(foreach section, $(SECTIONS), out/$(section))
+
+COMMON_OUT = \
+	$(foreach common, $(COMMON), out/$(common))
 
 out/src/ru/references.bib: src/references.bib
 	@echo "CP        $< -> $@" \
@@ -118,9 +124,20 @@ out/src/ru/sections/%.tex: src/ru/sections/%.tex
 			--pdf $< > $@.log 2>&1 \
 		|| (cat $@.log; exit 1)
 
-out/src/ru/sparc.tex: src/ru/sparc.tex $(SECTIONS_OUT) out/src/ru/version.tex
+out/src/common/%.tex: src/common/%.tex
+	@[ -d $(abs_top_srcdir)/out/src/common ] \
+		|| mkdir -p $(abs_top_srcdir)/out/src/common
+	@echo "LILYPOND  $< -> $@" \
+		&& lilypond-book \
+			--include $(abs_top_srcdir)/src/common/ \
+			--output $(abs_top_srcdir)/out/src/common/ \
+			--pdf $< > $@.log 2>&1 \
+		|| (cat $@.log; exit 1)
+
+out/src/ru/sparc.tex: $(COMMON_OUT) src/ru/sparc.tex $(SECTIONS_OUT) out/src/ru/version.tex
 	@echo "LILYPOND  sparc.tex -> out/sparc.tex" \
 		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/ \
 			--include $(abs_top_srcdir)/out/src/ru/ \
 			--output $(abs_top_srcdir)/out/src/ru/ \
 			--pdf $(abs_top_srcdir)/src/ru/sparc.tex > sparc.tex.log 2>&1 \
@@ -246,9 +263,10 @@ out/src/en/sections/%.tex: src/en/sections/%.tex
 			--pdf $< > $@.log 2>&1 \
 		|| (cat $@.log; exit 1)
 
-out/src/en/sparc.tex: src/en/sparc.tex $(SECTIONS_OUT_EN) out/src/en/version.tex
+out/src/en/sparc.tex: src/en/sparc.tex $(COMMON_OUT) $(SECTIONS_OUT_EN) out/src/en/version.tex
 	@echo "LILYPOND  src/en/sparc.tex -> out/src/en/sparc.tex" \
 		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/ \
 			--include $(abs_top_srcdir)/out/src/en/ \
 			--output $(abs_top_srcdir)/out/src/en/ \
 			--pdf $(abs_top_srcdir)/src/en/sparc.tex > sparc.tex.log 2>&1 \
