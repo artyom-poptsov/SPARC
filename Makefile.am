@@ -90,7 +90,8 @@ SECTIONS = \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-02.tex
 
 COMMON = \
-	src/common/figureSoundGraph.tex
+	src/common/figureSoundGraph.tex \
+	src/common/figurePWMGraph.tex
 
 COMMIT = $(shell git rev-parse HEAD)
 
