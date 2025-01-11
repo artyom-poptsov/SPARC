@@ -1,4 +1,19 @@
 \newcommand{\figureADC}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{en}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Схематическое изображение 10-битного аналогово-цифрового
+    преобразователя (АЦП.)
+  }
+  \fi
+  \if \lang\langEn
+  \def\figureCaption{
+    Schematic depiction of the 10-bit analog-to-digital converted (ADC.)
+  }
+  \fi
   \begin{figure}[ht]
     \centering
     \begin{tikzpicture}
@@ -20,7 +35,7 @@
         \draw (3, \y) node[anchor=south west] {OUTPUT \n} -- (5, \y);
       };
     \end{tikzpicture}
-    \caption{#1}
+    \caption{\figureCaption}
     \label{fig:adc-schematics}
   \end{figure}
 }
