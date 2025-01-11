@@ -92,7 +92,9 @@ SECTIONS = \
 COMMON = \
 	src/common/figureSoundGraph.tex \
 	src/common/figurePWMGraph.tex \
-	src/common/figureADC.tex
+	src/common/figureADC.tex \
+	src/common/figureAnalogSignalExample.tex \
+	src/common/figureDigitalSignalExample.tex
 
 COMMIT = $(shell git rev-parse HEAD)
 
