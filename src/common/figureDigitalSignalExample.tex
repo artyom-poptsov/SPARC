@@ -1,4 +1,18 @@
 \newcommand{\figureDigitalSignalExample}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{en}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Пример цифрового сигнала.
+  }
+  \fi
+  \if \lang\langEn
+  \def\figureCaption{
+    Digital signal example.
+  }
+  \fi
   \begin{figure}[ht]
     \begin{tikzpicture}
       \draw[thick, ->] (0, 0) -- (12, 0) node[anchor=north west] {t};
@@ -11,7 +25,7 @@
         \draw[ultra thick, red] (\x + 2, 1) -- (\x + 2, 6);
       }
     \end{tikzpicture}
-    \caption{#1}
+    \caption{\figureCaption}
     \label{fig:adc-digital-signal-example}
   \end{figure}
 }
