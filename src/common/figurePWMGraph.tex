@@ -1,4 +1,21 @@
 \newcommand{\figurePWMGraph}[2]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{en}
+  \def\figureCaption{XXX: No translation.}
+  \def\figureUnit{$\mu\mbox{s}$}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Графическое отображение процесса генерации ШИМ-сигнала.
+  }
+  \def\figureUnit{мкс}
+  \fi
+  \if \lang\langEn
+  \def\figureCaption{
+    A graphical representation of the PWM signal generation.
+  }
+  \def\figureUnit{$\mu\mbox{s}$}
+  \fi
   \begin{figure}[ht]
     \begin{tikzpicture}
       \draw[thick, ->] (0, 0) -- (12, 0) node[anchor=north west] {t};
@@ -17,10 +34,10 @@
       \draw[thick, orange] (0,  0) -- (0,   -2);
       \draw[thick, orange] (2,  1) -- (2,   -1);
       \draw[thick, orange] (10, 1) -- (10,  -2);
-      \draw[thick, orange, <->] (0, -0.5) -- (2,  -0.5)  node[midway, below] {T=1000 #2};
+      \draw[thick, orange, <->] (0, -0.5) -- (2,  -0.5)  node[midway, below] {T=1000 \figureUnit};
       \draw[thick, orange, <->] (0, -1.5) -- (10,  -1.5) node[midway, below] {t=?};
     \end{tikzpicture}
-    \caption{#1}
+    \caption{\figureCaption}
     \label{fig:pwm-graph}
   \end{figure}
 }
