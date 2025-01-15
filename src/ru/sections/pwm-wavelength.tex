@@ -13,22 +13,7 @@
 между двумя ближайшими друг к другу точками в пространстве, в которых колебания
 происходят в одинаковой фазе.
 
-\begin{figure}[ht]
-  \begin{tikzpicture}
-    \draw[thick, ->] (0, 0) -- (12, 0) node[anchor=north west] {t};
-    \draw[thick, ->] (0, 0) -- (0,  7) node[anchor=south west] {V};
-    \draw[lightgray] (0, 0) grid (10, 6);
-    \foreach \x in {0, 2, ..., 8} {
-      \draw[ultra thick, teal] (\x, 6) -- (\x + 1, 6);
-      \draw[ultra thick, teal] (\x + 1, 6) -- (\x + 1, 1);
-      \draw[ultra thick, teal] (\x + 1, 1) -- (\x + 2, 1);
-      \draw[ultra thick, teal] (\x + 2, 1) -- (\x + 2, 6);
-    }
-  \end{tikzpicture}
-  \caption{Графическое отображение сигнала, меняющегося во времени, на цифровом
-    порту.}
-  \label{fig:blinking-led-graph}
-\end{figure}
+\figureBlinkinLEDGraph{ru}
 
 Зная длительность периода, можно рассчитать \emph{частоту колебаний}, и наоборот
 -- зная частоту, можно рассчитать длину волны.
