@@ -13,12 +13,12 @@ As it is commonly known, \emph{sound} is a mechanical disturbance from a state
 of equilibrium that propagates through some medium (such as the air) in a form
 of an acoustic wave. \cite{britannica:sound}
 
-As a wave it one of the main parameters of the sound is its \emph{frequency}.
+One of the main parameters of the sound is its \emph{frequency}.
 
 Frequencies are measured in \emph{Hertz} (\gls{Hz}), and one Hertz (1 Hz) means
 one oscillation per second.  10 oscillations per seconds gives us 10 Hz, 100
 oscillations per second gives us 100 Hz and so on.  When we are talking about
-1000 Hz or more, it is more convenient to use standard multiples of a Hertz:
+1000 Hz or more, it is more convenient to use the standard multiples of a Hertz:
 ``Kilo-'' (\gls{kHz}), ``Mega-'' (\gls{MHz}) and ``Giga-'' (\gls{GHz}).
 
 Some of the common multiples of a Hertz are shown in the table below.
@@ -48,10 +48,10 @@ Some of the common multiples of a Hertz are shown in the table below.
   \label{table:sound-hertz-scale}
 \end{table}
 
-Thus we need to know the sound frequency to an acoustic wave with proper wave
-length to make that sound.  And vice versa, when we know the wave length, we can
-calculate the sound frequency from it.  This can be visualized as is shown on
-fig. \ref{fig:sound-fig-1}.
+Thus we need to know the sound frequency to make an acoustic wave with proper
+wave length to make that sound.  And vice versa, when we know the wave length,
+we can calculate the sound frequency from it.  This can be visualized as is
+shown on fig. \ref{fig:sound-fig-1}.
 
 \begin{figure}[h]
   \centering
@@ -61,10 +61,9 @@ fig. \ref{fig:sound-fig-1}.
   \label{fig:sound-fig-1}
 \end{figure}
 
-If we know that an oscillation can be fit 5 times on 1 second we say that the
-frequency of such wave has the frequency of 5 Hz.  If we want to calculate the
-period duration, we can divide 1 second (specified in microseconds) by the
-frequency:
+If we know that an oscillation can be fit 5 times in 1 second we say that the
+frequency of such wave is 5 Hz.  If we want to calculate the period duration, we
+can divide 1 second (specified in microseconds) by the frequency:
 
 \begin{equation}
   \frac{1000000 \mu\mbox{s}}{5 \mbox{Hz}} = 200000 \mu\mbox{s}
@@ -84,7 +83,7 @@ that now we must change the wavelength, keeping the duty cycle constant, equal
 to 0.5 (or 50\%.)  As the duty cycle is always constant, the duration of
 \texttt{HIGH} and \texttt{LOW} signals is equal and we only need to calculate
 the \texttt{d} delay.  The process of sound generation is visualized as a graph
-on the fig. \ref{fig:sound-graph}.
+on fig. \ref{fig:sound-graph}.
 
 As with the case of PWM, we start from the writing a procedure that implements
 the aforementioned principles.  We call this procedure \texttt{play\_tone} and
