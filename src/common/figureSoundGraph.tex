@@ -1,4 +1,19 @@
 \newcommand{\figureSoundGraph}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{en}
+  \def\figureCaption{XXX: No translation.}
+  \def\figureUnit{$\mu\mbox{s}$}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Графическое отображение процесса генерации звука.
+  }
+  \fi
+  \if \lang\langEn
+  \def\figureCaption{
+    Graphical representation of the sound generation process.
+  }
+  \fi
   \begin{figure}[H]
     \begin{tikzpicture}
       \draw[thick, ->] (0, 0) -- (12, 0) node[anchor=north west] {t};
@@ -22,7 +37,7 @@
       \draw[thick, orange, <->] (0, -1.5)
       -- (10,  -1.5) node[midway, below, red] {t=?};
     \end{tikzpicture}
-    \caption{#1}
+    \caption{\figureCaption}
     \label{fig:sound-graph}
   \end{figure}
 }
