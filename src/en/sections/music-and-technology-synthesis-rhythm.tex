@@ -36,13 +36,7 @@ assumptions.}
 On the fig. \ref{fig:music-six-bar} we can see how could a musical composition
 consisting of six bars look.
 
-\begin{tikzpicture}
-  \draw[thick, ->] (0, 0.5) -- (12, 0.5) node[anchor=north west] {t};
-  \foreach \x/\n in {0/1, 2/2, 4/3, 6/4, 8/5, 10/6} {
-    \draw (\x, 0) -- (\x, 1) -- (\x, 1) node[midway, above] {\n};
-  };
-  \label{fig:music-six-bar}
-\end{tikzpicture}
+\figureMusicSixBars{en}
 
 The length of one bar in time is determined by the tempo of the rhythm, and we
 will discuss this later.  For now, we can imagine that one one bar always takes
