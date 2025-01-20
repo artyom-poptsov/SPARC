@@ -54,16 +54,7 @@ length.  We will talk about it later.}
 
 If we divide a bar into four equal parts, we will get the following structure:
 
-\begin{tikzpicture}
-  \draw[thick, ->] (0, 0.5) -- (12, 0.5) node[anchor=north west] {t};
-  \foreach \x/\n in {0/1, 2/2, 4/3, 6/4, 8/5, 10/6} {
-    \draw (\x, 0) -- (\x, 1) -- (\x, 1) node[midway, above] {\n};
-  };
-
-  \foreach \x/\n in {0, 0.5, ..., 10} {
-    \draw (\x, 0) -- (\x, 0.5);
-  };
-\end{tikzpicture}
+\figureMusicSixBarsFourFour{en}
 
 Let's take one of the bars and investigate it closely:
 
