@@ -63,20 +63,7 @@ $\frac{4}{4}$ или, по-другому называемый ``четыре ч
 он будет музыкальный. Допустим, что три четверти будут звучать с частотой 50Гц,
 и одна часть -- с частотой 100Гц:
 
-\begin{tikzpicture}
-  \draw[thick] (0, 0.5) -- (8, 0.5) node[anchor=north west] {t};
-  \foreach \x/\n in {0/1, 8/2} {
-    \draw (\x, 0) -- (\x, 1) -- (\x, 1) node[midway, above] {\n};
-  };
-
-  \foreach \x in {0, 2, ..., 6} {
-    \draw (\x, 0) -- (\x, 0.5) node[pos=0.25, right] {$ \frac{1}{4} $};
-  };
-
-  \foreach \x/\freq in {0/50, 2/50, 4/50, 6/100} {
-    \draw (\x, 0) -- (\x, 0.5) node[pos=1.5, right] {\freq Гц};
-  };
-\end{tikzpicture}
+\figureMusicBarFourFourWithFrequencies{ru}
 
 Поздравляю -- мы только что получили простой ритм. Попробуем запрограммировать
 его, беря за длину такта \texttt{T} одну секунду, или 1000000 (миллион)

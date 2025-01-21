@@ -1,0 +1,16 @@
+\newcommand{\figureMusicBarFourFourWithFrequencies}[1]{
+  \begin{tikzpicture}
+    \draw[thick] (0, 0.5) -- (8, 0.5) node[anchor=north west] {t};
+    \foreach \x/\n in {0/1, 8/2} {
+      \draw (\x, 0) -- (\x, 1) -- (\x, 1) node[midway, above] {\n};
+    };
+
+    \foreach \x in {0, 2, ..., 6} {
+      \draw (\x, 0) -- (\x, 0.5) node[pos=0.25, right] {$ \frac{1}{4} $};
+    };
+
+    \foreach \x/\freq in {0/50, 2/50, 4/50, 6/100} {
+      \draw (\x, 0) -- (\x, 0.5) node[pos=1.5, right] {\freq Hz};
+    };
+  \end{tikzpicture}
+}
