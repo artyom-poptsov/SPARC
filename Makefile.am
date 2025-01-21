@@ -97,7 +97,8 @@ COMMON = \
 	src/common/figureDigitalSignalExample.tex \
 	src/common/figureBlinkinLEDGraph.tex \
 	src/common/figureMusicSixBars.tex \
-	src/common/figureMusicSixBarsFourFour.tex
+	src/common/figureMusicSixBarsFourFour.tex \
+	src/common/figureMusicBarFourFour.tex
 
 COMMIT = $(shell git rev-parse HEAD)
 
