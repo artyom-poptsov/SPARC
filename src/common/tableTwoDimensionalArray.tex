@@ -1,0 +1,56 @@
+\newcommand{\tableTwoDimensionalArray}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{
+    № строки
+  }
+  \def\tableSecondColumn{
+    № столбца
+  }
+  \def\tableCaption{
+    Графическое отображение двумерного массива.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{
+    Row number
+  }
+  \def\tableSecondColumn{
+    Column number
+  }
+  \def\tableCaption{
+    Graphical representation of a two-dimensional array.
+  }
+  \fi
+  \begin{table}[ht]
+    \centering
+    \begin{tabular}{r|l|l|l}
+      \multicolumn{1}{l}{\tableFirstColumn}
+      & \multicolumn{2}{l}{\tableSecondColumn}
+      & \\
+      \multicolumn{1}{l}{}         & \multicolumn{1}{l}{0} & \multicolumn{1}{l}{1} &   \\
+      \cline{2-3}
+      0                            & с4                    & 4                     &   \\
+      \cline{2-3}
+      1                            & с4                    & 4                     &   \\
+      \cline{2-3}
+      2                            & g4                    & 4                     &   \\
+      \cline{2-3}
+      3                            & g4                    & 4                     &   \\
+      \cline{2-3}
+      4                            & a4                    & 4                     &   \\
+      \cline{2-3}
+      5                            & a4                    & 4                     &   \\
+      \cline{2-3}
+      6                            & g4                    & 2                     &   \\
+      \cline{2-3}
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:array-example-2}
+  \end{table}
+}

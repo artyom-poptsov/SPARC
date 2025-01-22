@@ -14,29 +14,7 @@ lengths in one array?  Luckily we have an option to do that: using a
 Schematic representation of a two-dimensional array is shown as the table
 \ref{table:array-example-2}.
 
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{r|l|l|l}
-    \multicolumn{1}{l}{Row} & \multicolumn{2}{l}{Column}                         &   \\
-    \multicolumn{1}{l}{}         & \multicolumn{1}{l}{0} & \multicolumn{1}{l}{1} &   \\
-    \cline{2-3}
-    0                            & с4                    & 4                     &   \\
-    \cline{2-3}
-    1                            & с4                    & 4                     &   \\
-    \cline{2-3}
-    2                            & g4                    & 4                     &   \\
-    \cline{2-3}
-    3                            & g4                    & 4                     &   \\
-    \cline{2-3}
-    4                            & a4                    & 4                     &   \\
-    \cline{2-3}
-    5                            & a4                    & 4                     &   \\
-    \cline{2-3}
-    6                            & g4                    & 2                     &   \\
-    \cline{2-3}
-  \end{tabular}
-  \label{table:array-example-2}
-\end{table}
+\tableTwoDimensionalArray{en}
 
 Each row of the array stores a description of one note.  The zeroth column holds
 the note frequency and the first column holds its length as the fraction
