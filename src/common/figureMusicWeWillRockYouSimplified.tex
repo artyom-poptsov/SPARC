@@ -2,15 +2,16 @@
   \def\lang{\detokenize{#1}}
   \def\langRu{\detokenize{ru}}
   \def\langEn{en}
+  \def\figureUnit{Hz}
   \def\figureCaption{XXX: No translation.}
   \ifx \lang\langRu
-  \def\figureHzUnit{Гц}
+  \def\figureUnit{Гц}
   \def\figureCaption{
     Ритм мелодии ``We Will Rock You'' группы Queen (упрощенная версия.)
   }
   \fi
   \if \lang\langEn
-  \def\figureHzUnit{Hz}
+  \def\figureUnit{Hz}
   \def\figureCaption{
     The rhythm of the melody ``We Will Rock You'' by Queen (simplified
     version.)
@@ -31,9 +32,9 @@
       \draw (4, 0) -- (4, 0.5) node[pos=0.25, right] {$ \frac{1}{2} $};
 
       \foreach \x/\freq in {0/50, 2/50} {
-        \draw (\x, 0) -- (\x, 0.5) node[pos=1.5, right] {\freq \figureHzUnit};
+        \draw (\x, 0) -- (\x, 0.5) node[pos=1.5, right] {\freq \figureUnit};
       };
-      \draw (4, 0) -- (4, 0.5) node[pos=1.5, right] {100 \figureHzUnit};
+      \draw (4, 0) -- (4, 0.5) node[pos=1.5, right] {100 \figureUnit};
     \end{tikzpicture}
     \caption{\figureCaption}
     \label{fig:queen-we-will-rock-you-rhythm-1}
