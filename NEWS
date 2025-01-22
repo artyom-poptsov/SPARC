@@ -7,6 +7,15 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Unreleased
+** en
+*** Music and technology synthesis
+**** Arrays
+New subsection "Getting the size of an array".
+** ru
+*** Синтез музыки и технологии
+**** Массивы
+Новый подраздел "Получение размера массива".
 * Version 3.0.0 (2025-01-05)
 ** en
 The first English version of the book.  Chapters 1-5 are translated, chapters 6

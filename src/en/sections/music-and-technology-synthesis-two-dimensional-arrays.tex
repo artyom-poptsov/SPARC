@@ -68,4 +68,86 @@ complicated melodies than ``Twinkle, Twinkle, Little Star''.
 At this stage we have to discuss how the \emph{musical staff}, that holds the
 music notes, works.  We need this to be able to read the notes on our own.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Getting the size of an array}
+\index{Programming!Array!Getting the size of an array}
+
+Our implementation of the melody has a very important drawback: we are
+calculating the number of the notes in the melody ourselves and setting the size
+of an array at the time of its declaration.  For example, the melody we was
+discussing in the previous section, has 28 notes.  The more notes the melody
+has, the more tedious becomes the task of the array size calculation.
+
+In fact, we can skip the number in the first pair of square brackets in the
+array declaration -- as we are setting the array elements right at the time of
+its initialization, the c computer can calculate the amount of memory it
+requires on its own.  Thus we can declare the array as follows:
+
+\begin{minted}{cpp}
+  float melody[][2] = {
+    {c4, 4}, {c4, 4}, {g4, 4}, {g4, 4},
+    {a4, 4}, {a4, 4}, {g4, 2},
+    {f4, 4}, {f4, 4}, {e4, 4}, {e4, 4},
+    {d4, 4}, {d4, 4}, {c4, 2},
+    {g4, 4}, {g4, 4}, {f4, 4}, {f4, 4},
+    {e4, 4}, {e4, 4}, {d4, 2},
+    {g4, 4}, {g4, 4}, {f4, 4}, {f4, 4},
+    {e4, 4}, {e4, 4}, {d4, 2},
+  };
+\end{minted}
+
+As we can see, the number of rows in the array is not specified.
+
+Unfortunately that does not help us to avoid the task of notes calculation as we
+have to use this value to enumerate the notes in the array:
+
+\begin{minted}{cpp}
+  void loop() {
+    const long BPM = 120;
+    const long MINUTE = 60000000;
+    const long T = (MINUTE / BPM) * 4;
+
+    for (int note_idx = 0; note_idx < 28; note_idx++) {
+      play_tone(SPEAKER_PIN,
+                melody[note_idx][0],
+                T / melody[note_idx][1]);
+      delay(100);
+    }
+  }
+\end{minted}
+
+But we can put this task on the shoulders of a computer as well -- we can do this
+by using the \texttt{sizeof} procedure.  The procedure returns the number of
+bytes that an object, passed as an argument, occupies in the memory.
+
+To calculate the number of the elements in an array, we have to get its size (in
+bytes) using \texttt{sizeof} and then divide this value by the size of the first
+element of the array.  We will be using the zeroth element of an array for this
+purpose:
+
+\begin{minted}{cpp}
+  int n = sizeof(melody) / sizeof(melody[0]);
+\end{minted}
+
+Then we can use the resulting value in a loop:
+
+\begin{minted}{cpp}
+  void loop() {
+    const long BPM = 120;
+    const long MINUTE = 60000000;
+    const long T = (MINUTE / BPM) * 4;
+
+    int n = sizeof(melody) / sizeof(melody[0]);
+    for (int note_idx = 0; note_idx < n; note_idx++) {
+      play_tone(SPEAKER_PIN,
+                melody[note_idx][0],
+                T / melody[note_idx][1]);
+      delay(100);
+    }
+  }
+\end{minted}
+
+Now the computer will calculate the number of notes automatically and that frees
+us from manual calculations, so we can focus on the melodies programming.
+
 \end{document}
