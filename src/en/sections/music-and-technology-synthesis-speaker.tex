@@ -14,8 +14,8 @@ material under an electric field. \footnote{See the ``Piezoelectric speaker''
 article in the Wikipedia.}
 
 The circuit for a regular speaker and a piezoelectric speaker is similar; for
-the our tasks even simple piezoelectric speaker ``for Arduino'' is good enough.
-Or we can use s simple beeper from a PC system board.
+our tasks even simple piezoelectric speaker ``for Arduino'' is good enough. Or
+we can use a simple beeper from a PC system board.
 
 The schematic for the speaker connection is shown on the
 fig. \ref{fig:sound-fig-2}.
@@ -32,21 +32,21 @@ generation to the Arduino.  Don't forget to configure a digital port for the
 speaker in \texttt{OUTPUT} mode and add a call to our \texttt{play\_tone}
 procedure in the \texttt{loop}.
 
-For the convenience we will specify our port for the speaker as the
+For our convenience we will specify our port for the speaker as the
 \texttt{SPEAKER\_PIN} constant at the top of our program (before the
 \texttt{setup} procedure.)
 
 Now we can generate a simple sound with the specified frequency.  But if we want
 to generate something more interesting (a melody, for example) we have to use
 sounds from the musical range.  In this case we have to get to know at least
-some basics of the musical theory.
+some basics of the music theory.
 
 \subsection{Exercises}
 \begin{enumerate}
 \item Generate a sound with the frequency of 261.63 Hz.
 \item Try to make the sound switch between 261.63 Hz and 349.23 Hz once a
   second.
-\item Modify your program in such a way that to allow to change the sound
+\item Modify your program in such a way that it will allow to change the sound
   frequency with a potentiometer.
 \item Allow to switch the sound on and off by pressing a button connected to an
   Arduino.
