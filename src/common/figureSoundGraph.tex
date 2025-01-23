@@ -1,7 +1,7 @@
 \newcommand{\figureSoundGraph}[1]{
   \def\lang{\detokenize{#1}}
   \def\langRu{\detokenize{ru}}
-  \def\langEn{en}
+  \def\langEn{\detokenize{en}}
   \def\figureCaption{XXX: No translation.}
   \def\figureUnit{$\mu\mbox{s}$}
   \ifx \lang\langRu
@@ -9,7 +9,7 @@
     Графическое отображение процесса генерации звука.
   }
   \fi
-  \if \lang\langEn
+  \ifx \lang\langEn
   \def\figureCaption{
     Graphical representation of the sound generation process.
   }
