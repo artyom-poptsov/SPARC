@@ -101,7 +101,8 @@ COMMON = \
 	src/common/figureMusicBarFourFour.tex \
 	src/common/figureMusicBarFourFourWithFrequencies.tex \
 	src/common/figureMusicWeWillRockYouSimplified.tex \
-	src/common/tableTwoDimensionalArray.tex
+	src/common/tableTwoDimensionalArray.tex \
+	src/common/tableMusicNoteLengths.tex
 
 COMMIT = $(shell git rev-parse HEAD)
 

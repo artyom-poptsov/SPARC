@@ -1,0 +1,64 @@
+\newcommand{\tableMusicNoteLength}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \def\tableThirdColumn{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \def\tableWholeNote{XXX: No translation.}
+  \def\tableHalfNote{XXX: No translation.}
+  \def\tableQuarterNote{XXX: No translation.}
+  \def\tableEighthNote{XXX: No translation.}
+  \def\tableSixteenthNote{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{Начертание}
+  \def\tableSecondColumn{Длительность}
+  \def\tableThirdColumn{Название}
+  \def\tableCaption{
+    Некоторые возможные длительности нот.
+  }
+  \def\tableWholeNote{Целая}
+  \def\tableHalfNote{Половина}
+  \def\tableQuarterNote{Четверть}
+  \def\tableEighthNote{Восьмая}
+  \def\tableSixteenthNote{Шестнадцатая}
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{Symbol}
+  \def\tableSecondColumn{Length}
+  \def\tableThirdColumn{Title}
+  \def\tableCaption{
+    Some of the possible lengths of the musical sounds (notes.)
+  }
+  \def\tableWholeNote{Whole note}
+  \def\tableHalfNote{Half-note}
+  \def\tableQuarterNote{Quarter-note}
+  \def\tableEighthNote{Eighth-note}
+  \def\tableSixteenthNote{Sixteenth-note}
+  \fi
+
+  \begin{table}[ht]
+    \centering
+    \def\arraystretch{2.5}%
+    \begin{tabular}{|m{3cm}|m{4cm}|m{3.5cm}|}
+      \hline
+      \textbf{\tableFirstColumn}
+      & \textbf{\tableSecondColumn}
+      & \textbf{\tableThirdColumn} \\
+      \hline
+      {\Large \wholeNote} & {\Large $\frac{1}{1}$} & \tableWholeNote \\[2ex]
+      \hline
+      {\Large \halfNote}      & {\Large $\frac{1}{2}$}  & \tableHalfNote \\[2ex]
+      \hline
+      {\Large \quarterNote}   & {\Large $\frac{1}{4}$}  & \tableQuarterNote \\[2ex]
+      \hline
+      {\Large \eighthNote}    & {\Large $\frac{1}{8}$}  & \tableEighthNote \\[2ex]
+      \hline
+      {\Large \sixteenthNote} & {\Large $\frac{1}{16}$} & \tableSixteenthNote \\[2ex]
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:music-notes-legths}
+  \end{table}
+}
