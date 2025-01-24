@@ -136,7 +136,7 @@ chosen by us arbitrarily.
 As we can see from the fig. \ref{fig:queen-we-will-rock-you-rhythm-1}, division
 of a bar don't have to be uniform -- here we have two quarters and one half.  To
 add simple fractions together we have to convert them to the common denominator.
-And we end up with one in the end (see the equation
+And we will end up with one in the end (see the equation
 \ref{equation:queen-we-will-rock-you-rhythm-1}.)
 
 \begin{equation}
@@ -169,7 +169,7 @@ We haven't discussed the musical notation yet so the figure
 \ref{fig:lilypond-queen-1} can be completely obscure for us -- but don't worry,
 on this stage we just have to see that there are three symbols written on the
 lines.  Each symbol represents a sound of the specific length: ``\quarterNote''
-($\frac{1}{4}$), ``\quarterNote'' ($\frac{1}{4}$) и ``\halfNote''
+($\frac{1}{4}$), ``\quarterNote'' ($\frac{1}{4}$) and ``\halfNote''
 ($\frac{1}{2}$).
 
 The order of those symbols (from left to right) shows the order of playing of
@@ -179,15 +179,15 @@ the table \ref{table:music-notes-legths}.
 \tableMusicNoteLength{en}
 
 There are even shorter and longer notes, but they occur less frequent than those
-we listed in the table \ref{table:music-notes-legths}, so we won't discuss to
-make the material more concise.
+we listed in the table \ref{table:music-notes-legths}, so we won't discuss them
+to make the material more concise.
 
-What conclusions we can make form the things we discussed above?  In the musical
+What conclusions can we make from the things we discussed above?  Musical
 notation sounds that can be ``produced'' from a musical instrument, are written
 from left to right (as the regular English text.)
 
-We can place our musical sheet on the top of a graph to make it clearer for our
-understanding.  The $\mbox{X}$ axis represents the time going form left to
+We can place our musical sheet on top of a graph to make it clearer for our
+understanding.  The $\mbox{X}$ axis represents the time going from left to
 right:
 
 \begin{figure}[ht]
@@ -207,8 +207,8 @@ right:
   \label{fig:lilypond-queen-1}
 \end{figure}
 
-From the point of programming the source code for making such a rhythm can look
-like follows:
+From the programming perspective, the source code for making such a rhythm can
+look as follows:
 
 \begin{minted}{cpp}
   // Here we skipped the previous code that does
@@ -237,7 +237,7 @@ the lengths of its sub-divisions.
 \newglossaryentry{BPM}{name=BPM, description={Beats Per Minute}}
 
 To put it simply, the \emph{tempo} is the speed of performing a music
-composition.  In the modern music the tempo is measured in \emph{beats per
+composition.  In the modern music, the tempo is measured in \emph{beats per
 minute}, or \emph{BPM}.
 
 The stable music tempo can be maintained with the help of a special pendulum
@@ -252,7 +252,7 @@ each swing.  Such a pendulum called a \emph{metronome}.
   \label{fig:sound-metronome}
 \end{figure}
 
-In the modern world the role of the mechanical pendulum is usually played a
+In the modern world the role of the mechanical pendulum is usually played by a
 special compact electronic device, or even an application for a smartphone, that
 produces audible clicks according to the specified speed.
 
@@ -262,8 +262,8 @@ Some common examples of \gls{BPM} are: 60, 80 and 100 BPM.
 But how to link this tempo speed with the bar length?  It turns out that the
 uniform metronome beats set the quarter-note length ($\frac{1}{4}$.)
 
-Thus when the rhythm tempo set to 100 BPM it means that we have 100 quarters in
-one minute.
+Thus, when the rhythm tempo is set to 100 BPM it means that we have 100 quarters
+in one minute.
 
 \begin{tikzpicture}
   \draw[thick] (0, 0.5) -- (10, 0.5) node[anchor=north west] {t};
@@ -284,10 +284,10 @@ The distance between two beats can be calculated using the formula
 \end{equation}
 
 From the formula \ref{equation:bpm} we got the length of one quarter which is
-0.6s.  But to make the further calculations easier we need to get the length of
-the whole bar instead of the quarter.  As a bar that we use in our examples
-holds four quarters we need to multiply the length of one quarter by four to get
-the whole bar length (see the formula \ref{equation:whole-note-calcualtion-1}.)
+0.6s.  But to make further calculations easier we need to get the length of the
+whole bar instead of the quarter.  As a bar that we use in our examples holds
+four quarters we need to multiply the length of one quarter by four to get the
+whole bar length (see the formula \ref{equation:whole-note-calcualtion-1}.)
 
 \begin{equation}
   \frac{1}{4} * 4 = \frac{4}{4} = \frac{1}{1} = 1
@@ -303,11 +303,11 @@ length.
   \label{equation:whole-note-calcualtion-2}
 \end{equation}
 
-Now we can musically precise calculate the length of our sounds that compose our
-rhythm -- including for the composition ``We Will Rock You'' that we discussed
-above.  For this composition tempo is set to 86 BPM. \footnote{In different
-sources the BPM for this composition may vary, but usually it's between 84 and
-88 BPM.}
+Now we can calculate, with musical precision, the length of our sounds that
+compose our rhythm -- including for the composition ``We Will Rock You'' that we
+discussed above.  For this composition tempo is set to 86 BPM. \footnote{In
+different sources the BPM for this composition may vary, but usually it's
+between 84 and 88 BPM.}
 
 Let's try to program the melody.
 
