@@ -1,7 +1,7 @@
 \newcommand{\figureMusicWeWillRockYouSimplified}[1]{
   \def\lang{\detokenize{#1}}
   \def\langRu{\detokenize{ru}}
-  \def\langEn{en}
+  \def\langEn{\detokenize{en}}
   \def\figureUnit{Hz}
   \def\figureCaption{XXX: No translation.}
   \ifx \lang\langRu
@@ -10,7 +10,7 @@
     Ритм мелодии ``We Will Rock You'' группы Queen (упрощенная версия.)
   }
   \fi
-  \if \lang\langEn
+  \ifx \lang\langEn
   \def\figureUnit{Hz}
   \def\figureCaption{
     The rhythm of the melody ``We Will Rock You'' by Queen (simplified
