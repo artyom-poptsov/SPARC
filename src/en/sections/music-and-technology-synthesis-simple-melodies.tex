@@ -12,34 +12,7 @@ we can find a melody written in a simplified form that is using the scientific
 notation.  Let's take a melody ``Twinkle, Twinkle, Little
 Star'' \footnote{\url{https://ru.wikipedia.org/wiki/Twinkle,_Twinkle,_Little_Star}}, the English lullaby, as the example.
 
-\begin{figure}[ht]
-  \centering
-  \begin{lilypond}
-    \relative c' {
-      \numericTimeSignature
-      \time 4/4
-      c4 c g' g
-      a a g2
-      f4 f e e
-      d d c2
-      g'4 g f f
-      e e d2
-      g4 g f f
-      e e d2
-      c4 c g' g
-      a a g2
-      f4 f e e
-      d d c2
-    }
-    \layout {
-      indent = 0\mm
-      line-width = 100\mm
-      ragged-last = ##t
-    }
-  \end{lilypond}
-  \caption{``Twinkle, Twinkle, Little Star''}
-  \label{fig:sound-fig-3}
-\end{figure}
+\figureMusicTwinkleTwinkleLittleStar{en}
 
 We already know from the table \ref{table:music-notes-legths} how to distinguish
 musical ``squiggles'' to understand their lengths.  But we yet to discuss how to

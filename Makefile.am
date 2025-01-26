@@ -101,6 +101,7 @@ COMMON = \
 	src/common/figureMusicBarFourFour.tex \
 	src/common/figureMusicBarFourFourWithFrequencies.tex \
 	src/common/figureMusicWeWillRockYouSimplified.tex \
+	src/common/figureMusicTwinkleTwinkleLittleStar.tex \
 	src/common/tableTwoDimensionalArray.tex \
 	src/common/tableMusicNoteLengths.tex
 
@@ -131,6 +132,7 @@ out/src/ru/sections/%.tex: src/ru/sections/%.tex
 		|| mkdir -p $(abs_top_srcdir)/out/src/ru/sections
 	@echo "LILYPOND  $< -> $@" \
 		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/common/ \
 			--include $(abs_top_srcdir)/out/src/ru/ \
 			--output $(abs_top_srcdir)/out/src/ru/sections/ \
 			--pdf $< > $@.log 2>&1 \
@@ -142,6 +144,7 @@ out/src/common/%.tex: src/common/%.tex
 	@echo "LILYPOND  $< -> $@" \
 		&& lilypond-book \
 			--include $(abs_top_srcdir)/src/common/ \
+			--include $(abs_top_srcdir)/out/src/common/ \
 			--output $(abs_top_srcdir)/out/src/common/ \
 			--pdf $< > $@.log 2>&1 \
 		|| (cat $@.log; exit 1)
@@ -149,6 +152,7 @@ out/src/common/%.tex: src/common/%.tex
 out/src/ru/sparc.tex: $(COMMON_OUT) src/ru/sparc.tex $(SECTIONS_OUT) out/src/ru/version.tex
 	@echo "LILYPOND  sparc.tex -> out/sparc.tex" \
 		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/common/ \
 			--include $(abs_top_srcdir)/out/src/ \
 			--include $(abs_top_srcdir)/out/src/ru/ \
 			--output $(abs_top_srcdir)/out/src/ru/ \
@@ -270,6 +274,7 @@ out/src/en/sections/%.tex: src/en/sections/%.tex
 		|| mkdir -p $(abs_top_srcdir)/out/src/en/sections
 	@echo "LILYPOND  $< -> $@" \
 		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/common/ \
 			--include $(abs_top_srcdir)/out/src/en/ \
 			--output $(abs_top_srcdir)/out/src/en/sections/ \
 			--pdf $< > $@.log 2>&1 \
@@ -278,6 +283,7 @@ out/src/en/sections/%.tex: src/en/sections/%.tex
 out/src/en/sparc.tex: src/en/sparc.tex $(COMMON_OUT) $(SECTIONS_OUT_EN) out/src/en/version.tex
 	@echo "LILYPOND  src/en/sparc.tex -> out/src/en/sparc.tex" \
 		&& lilypond-book \
+			--include $(abs_top_srcdir)/out/src/common/ \
 			--include $(abs_top_srcdir)/out/src/ \
 			--include $(abs_top_srcdir)/out/src/en/ \
 			--output $(abs_top_srcdir)/out/src/en/ \

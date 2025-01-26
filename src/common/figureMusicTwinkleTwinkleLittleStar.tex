@@ -1,0 +1,44 @@
+\newcommand{\figureMusicTwinkleTwinkleLittleStar}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Мелодия ``Twinkle, Twinkle, Little Star''.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    ``Twinkle, Twinkle, Little Star'' melody.
+  }
+  \fi
+  \begin{figure}[ht]
+    \centering
+    \begin{lilypond}
+      \relative c' {
+        \numericTimeSignature
+        \time 4/4
+        c4 c g' g
+        a a g2
+        f4 f e e
+        d d c2
+        g'4 g f f
+        e e d2
+        g4 g f f
+        e e d2
+        c4 c g' g
+        a a g2
+        f4 f e e
+        d d c2
+      }
+      \layout {
+        indent = 0\mm
+        line-width = 100\mm
+        ragged-last = ##t
+      }
+    \end{lilypond}
+    \caption{\figureCaption}
+    \label{fig:sound-fig-3}
+  \end{figure}
+}
