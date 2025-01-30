@@ -8,8 +8,16 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   notice and this notice are preserved.
 
 * Unreleased
+** common
+*** Move some common code into separate files
+Some common code for Russian and English versions of the book is moved to
+separate files.
 ** en
 *** Music and technology synthesis
+**** Sound
+Fix errors and typos in the section.
+
+Thanks to Edino Tavares Moniz (https://github.com/onidemon37) for proofreading.
 **** Arrays
 New subsection "Getting the size of an array".
 ** ru
@@ -29,6 +37,8 @@ New subsection "Getting the size of an array".
 *** Синтез музыки и технологии
 **** Массивы
 Новый подраздел "Получение размера массива".
+**** Паузы
+Улучшение форматирования.
 * Version 3.0.0 (2025-01-05)
 ** en
 The first English version of the book.  Chapters 1-5 are translated, chapters 6
