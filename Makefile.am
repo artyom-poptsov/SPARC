@@ -103,7 +103,8 @@ COMMON = \
 	src/common/figureMusicWeWillRockYouSimplified.tex \
 	src/common/figureMusicTwinkleTwinkleLittleStar.tex \
 	src/common/tableTwoDimensionalArray.tex \
-	src/common/tableMusicNoteLengths.tex
+	src/common/tableMusicNoteLengths.tex \
+	src/common/tableMusicTwinkleTwinkleLittleStar.tex
 
 COMMIT = $(shell git rev-parse HEAD)
 

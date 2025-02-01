@@ -53,45 +53,7 @@ more readable form.  Each row of the table represents one bar of the melody.
 Using our knowledge of the musical ``squiggles'', let's try to set the length
 for each note by adding it into the brackets next to the note.
 
-\begin{table}[ht]
-  \centering
-  \begin{tabular}{|*{5}{c|}}
-    \hline
-    \textbf{Bar number} & \multicolumn{4}{c|}{\textbf{Notes}} \\
-    \hline
-    0 & C4 ($\frac{1}{4}$) & C4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$)
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    1 & A4 ($\frac{1}{4}$) & A4 ($\frac{1}{4}$) & G4 ($\frac{1}{2}$) &
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    2 & F4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$)
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    3 & D4 ($\frac{1}{4}$) & D4 ($\frac{1}{4}$) & C4 ($\frac{1}{2}$) &
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    4 & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$)
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    5 & E4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$) & D4 ($\frac{1}{2}$) &
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    6 & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$) & F4 ($\frac{1}{4}$)
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    7 & E4 ($\frac{1}{4}$) & E4 ($\frac{1}{4}$) & D4 ($\frac{1}{2}$) &
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    8 & C4 ($\frac{1}{4}$) & C4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$) & G4 ($\frac{1}{4}$)
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-    9 & A4 ($\frac{1}{4}$) & A4 ($\frac{1}{4}$) & G4 ($\frac{1}{2}$) &
-    \rule[-2ex]{0pt}{5ex}\\
-    \hline
-  \end{tabular}
-  \label{table:twinkle-twinkle-little-star-notes-lengths}
-\end{table}
+\tableMusicTwinkleTwinkleLittleStar{en}
 
 To program this melody it is convenient to define all the required notes at the
 beginning of the program as constants.  Each constant will store the frequency
