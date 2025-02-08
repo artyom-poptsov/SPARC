@@ -57,4 +57,51 @@ also some kind of \emph{loop}, the cyclic nature of the process.
   you describe the sequence of actions for simple tasks?  How complicated is the
   resulting algorithm? }
 
+When we are composing algorithms we have to consider the fact that computers
+mostly have two important properties:
+\begin{enumerate}
+\item On one hand, computers are very fast at solving some tasks.  Even the CPU
+  of the Arduino Mega 2560 microcontroller platform has the frequency of
+  16MHz\footnote{\url{https://docs.arduino.cc/hardware/mega-2560/}} which gives
+  us around 16 millions operations per second.\footnote{In reality this value is
+  lesser than that indeed as different processor instructions take different
+  number of processor cycles.}  Modern computers greatly surpass humans in the
+  speed of computation and the amounts of the stored information.
+\item On the other hand, computers are mostly ``dumb'' -- in the sense that they
+  only do that was written in the instructions.  Here we don't talk about more
+  ``intellectual'' systems, such as large language models or other systems with
+  complex behavior.
+\end{enumerate}
+
+From this we can say that a computer will diligently and quickly do what a
+programmer specified in a program, even if the instructions are wrong (with one
+rule that they must be properly written -- in other words, without syntax
+errors.)
+
+Thus, even the process of formulating algorithms for seemingly simple tasks
+require great attention to the details.
+
+For example, the algorithm for blinking one LED that we formulated above, has
+one important drawback: it does not specify the explicit time span for
+operations.  Although the LED blinking operation implies some delay after
+turning LED on and off (as intuition tells us), the algorithm does not specify
+it -- therefore the computer will do those operations as quickly as the system
+allows it to do.  In the result, the LED will appear for us as constantly turned
+on.
+
+Let's improve our algorithm by adding the required half-second delays (500ms) to
+it:
+
+\begin{enumerate}
+\item Turn on the LED.
+\item Wait for 500ms.
+\item Turn off the LED.
+\item Wait for 500ms.
+\item Repeat the algorithm.
+\end{enumerate}
+
+In order for this algorithm to be executed in principle, we have to translate it
+into some kind of intermediate language that is understood both by a human and a
+computer (given that we have the right translator -- a \emph{compiler}.)
+
 \end{document}
