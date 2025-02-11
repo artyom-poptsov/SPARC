@@ -5,9 +5,47 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{The program structure for Arduino}
 
-A program that is written for an Arduino board usually consists of two basic
-parts, also called \emph{functions}: \texttt{setup} and \texttt{loop}.  An
-example of a program that blinks an LED:
+Our language for describing algorithms will be a general-purpose language called
+C++.  This is one of the popular programming language (at the time of writing of
+this book) and it has a bunch of interesting applications.  One of such
+applications is the micro-controller programming.
+
+A programming language provides for a programmer the basis for expressing ides,
+while allows us to implement missing parts, thus expanding its toolkit.  In our
+case the integrated development environment for developing programs for Arduino
+(called Arduino IDE) includes the set of required libraries that makes it easier
+to develop programs for the platform.
+
+Aside from that, to make our job easier, Arduino IDE generates a stub for our
+code when we are creating an empty project.  An Arduino program usually consists
+of two basic parts, that also called \emph{functions}: \texttt{setup} and
+\texttt{loop}.  The stub looks like the following:
+
+\begin{minted}{cpp}
+  void setup() {
+    // put your setup code here, to run once:
+  }
+
+  void loop() {
+    // put your main code here, to run repeatedly:
+  }
+\end{minted}
+
+The lines starting with double slash (``//'') are considered by computer as
+commentaries and ignored.  Usually we can add or remove those lines without
+affecting the program logic, as the comments are for humans.
+
+The \texttt{setup} procedure performs initialization of the micro-controller
+when it starts.  Here we should put all the commands that must be done once on
+the system start.
+
+The \texttt{loop} procedure executes after the finishing of \texttt{setup}
+execution and automatically re-started by the system as soon as it finishes.
+Thus, \texttt{loop} is enclosed in some kind of internal loop as the function
+title suggest -- until the micro-controller is powered off.
+
+In the previous subsection we formulated an algorithm for blinking one LED.
+Let's try to implement the algorithm for Arduino.
 
 \begin{minted}{cpp}
   void setup() {
