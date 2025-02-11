@@ -47,6 +47,40 @@ title suggest -- until the micro-controller is powered off.
 In the previous subsection we formulated an algorithm for blinking one LED.
 Let's try to implement the algorithm for Arduino.
 
+To control an LED we have to connect it to a \emph{digital port}.  A
+\emph{digital port} (or \emph{pin}, for short) is called this way, because it
+operates on a digital signal -- that is, it works only with two logical levels of
+voltage, that represent ones and zeroes.
+
+Also a digital port on Arduino can be configured in one of the two main
+\emph{modes}:
+\begin{enumerate}
+\item In the \emph{input} mode (\texttt{INPUT}) a pin can read the voltage from
+  some external source.
+\item IN the \emph{output} mode (\texttt{OUTPUT}) a pin can output voltage to
+  some external circuit.
+\end{enumerate}
+
+Thus to implement the blinking effect on an LED we have to configure the pin to
+the \texttt{OUTPUT} mode first, for the pin to which we connected our LED.  It
+is reasonable to do this in the \texttt{setup} procedure, as this configuration
+can be done just once, at the system start.
+
+Then in the \texttt{loop} procedure we can proceed to the implementation of the
+LED blinking algorithm that we have formulated in the previous section.  With
+that said, we have to replace our natural language description of the algorithm
+steps with the commands that our computer can understand:
+
+\begin{enumerate}
+\item \texttt{digitalWrite(2, HIGH);} // Turn the LED on.
+\item \texttt{delay(500);} // Wait for 500 ms.
+\item \texttt{digitalWrite(2, LOW);} // Turn the LED off.
+\item \texttt{delay(500);} // Wait for 500 ms.
+\item Repeat the algorithm.
+\end{enumerate}
+
+One of the possible implementations is shown below:
+
 \begin{minted}{cpp}
   void setup() {
     pinMode(2, OUTPUT);
@@ -59,16 +93,6 @@ Let's try to implement the algorithm for Arduino.
     delay(500);
   }
 \end{minted}
-
-
-The \texttt{setup} function performs the initialization of the micro-controller
-after the power-up.  We should put here all the commands that must be executed
-once after the system starts.
-
-A digital port (or, as it sometimes called, \emph{digital pin}) of an Arduino
-can be in one of the two states.  In the \emph{input} mode it reads the voltage
-value form some external source, and in the \emph{output} mode it allows to
-output voltage to some external circuit.
 
 Let's look closely on the aforementioned example.  In the \texttt{setup}
 function the \texttt{pinMode} function is executed, that configures the
