@@ -12,11 +12,23 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 *** Dialogues with a computer
 **** Algorithms
 - Move the subsection down in the chapter.
-- Extend the subsection.
+- Fix some errors and typos (thanks to Edino Tavares Moniz.)
+- Extend the section.
+**** The program structure for Arduino
+- Extend the section.
+*** Music and Technology Synthesis
+**** Rhythm
+- Fix some errors and typos (thanks to Edino Tavares Moniz.)
+**** Octave system
+- Fix some errors and typos (thanks to Edino Tavares Moniz.)
+**** Programming of simple melodies
+- Fix some errors and typos (thanks to Edino Tavares Moniz.)
 ** ru
 *** Диалоги с компьютером
 **** Алгоритмы
 - Перенос раздела ниже в главе.
+- Дополнение раздела.
+**** Структура программы на Arduino
 - Дополнение раздела.
 * Version 3.0.1 (2025-02-01)
 ** common
