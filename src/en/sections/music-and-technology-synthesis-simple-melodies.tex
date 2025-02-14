@@ -15,10 +15,11 @@ Star'' \footnote{\url{https://ru.wikipedia.org/wiki/Twinkle,_Twinkle,_Little_Sta
 \figureMusicTwinkleTwinkleLittleStar{en}
 
 We already know from the table \ref{table:music-notes-legths} how to distinguish
-musical ``squiggles'' to understand their lengths.  But we yet to discuss how to
-read the frequencies form this notation.  Thus the full list of notes from the
-melody is shown in the table \ref{table:twinkle-winkle-little-star-notes} in
-more readable form.  Each row of the table represents one bar of the melody.
+musical ``squiggles'' to understand their lengths.  But we are yet to discuss
+how to read the frequencies form this notation.  Thus the full list of notes
+from the melody is shown in the table
+\ref{table:twinkle-winkle-little-star-notes} in a more readable form.  Each row
+of the table represents one bar of the melody.
 
 \begin{table}[ht]
   \centering
@@ -60,8 +61,8 @@ beginning of the program as constants.  Each constant will store the frequency
 of a sound for that note.
 
 The names of the constants are usually written in capital letters, so it would
-be more correct to write those constants as ``C4'', ``D4'', ``E4'' and so on.
-But we are using regular letters here to avoid naming conflicts with the
+be more appropriate to write those constants as ``C4'', ``D4'', ``E4'' and so
+on.  But we are using regular letters here to avoid naming conflicts with the
 constants that are already defined in the Arduino (e.g. ``A4''.)
 
 Currently we need only the notes from the fourth octave.  It is reasonable to
@@ -89,9 +90,9 @@ which our speaker is connected.
 Also we have to know the melody tempo -- that is, \gls{BPM}.  For ``Twinkle,
 Twinkle, Little Star'' this parameter is equal to 120 BPM.
 
-As soon as we defined all the required constants and found out the BPM value, it
-is not a big deal to program our melody.  Let's write down the program code for
-our \texttt{loop} procedure:
+As soon as we defined all the required constants and determined the BPM value,
+programming our melody will be easy.  Let's write down the program code for our
+\texttt{loop} procedure:
 
 \begin{minted}{cpp}
   void loop() {
