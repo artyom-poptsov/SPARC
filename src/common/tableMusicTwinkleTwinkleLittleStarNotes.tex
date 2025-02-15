@@ -1,0 +1,53 @@
+\newcommand{\tableMusicTwinkleTwinkleLittleStarNotes}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{№ такта}
+  \def\tableSecondColumn{Ноты}
+  \def\tableCaption{
+    Ноты мелодии ``Twinkle, Twinkle, Little Star'' (без длительностей.)
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{Bar number}
+  \def\tableSecondColumn{Notes}
+  \def\tableCaption{
+    Notes of ``Twinkle, Twinkle, Little Star'' melody (without the lengths.)
+  }
+  \fi
+
+  \begin{table}[H]
+    \centering
+    \begin{tabular}{|p{2cm}|p{2cm}|p{2cm}|p{2cm}|p{2cm}|}
+      \hline
+      \textbf{\tableFirstColumn}
+      & \multicolumn{4}{|c|}{\tableSecondColumn} \\
+      \hline
+      0 & C4 & C4 & G4 & G4 \\
+      \hline
+      1 & A4 & A4 & G4 & \\
+      \hline
+      2 & F4 & F4 & E4 & E4 \\
+      \hline
+      3 & D4 & D4 & C4 & \\
+      \hline
+      4 & G4 & G4 & F4 & F4 \\
+      \hline
+      5 & E4 & E4 & D4 & \\
+      \hline
+      6 & G4 & G4 & F4 & F4 \\
+      \hline
+      7 & E4 & E4 & D4 & \\
+      \hline
+      8 & C4 & C4 & G4 & G4 \\
+      \hline
+      9 & A4 & A4 & G4 & \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:twinkle-twinkle-little-star-notes}
+  \end{table}
+}
