@@ -31,6 +31,10 @@ them in the desired circuit (see fig. \ref{fig:breadboard-led}.)
   \ref{section:electronics-resistance} a resistor allows us to limit the current
   in a circuit thus protecting electronic components from premature failures. }
 
+In the example on fig. \ref{fig:breadboard-led} the LED will turn on an stay
+that way as soon as we power up the Arduino, as the positive pin of the LED is
+always connected to 5V.
+
 \section{Connecting an Arduino to a Computer}
 To connect an Arduino board to a computer you'll need the board itself (in most
 of our examples we will use Arduino Mega 2560) and a USB-B standard cable.
@@ -43,5 +47,12 @@ the Arduino board.  To do that we need to open ``Tools'' in the window menu and
 there open ``Boards'' sub-menu -- here we need to select the Arduino board model
 that you're using right now.  Then we need to open ``Tools'' again and in
 ``Port'' sub-menu select the serial port to which your Arduino is connected.
+
+\experiment{1}{Let's try to connect the positive contact of the LED (anode) to
+  the ground (\texttt{GND}.  The LED should switch off.  Why?}
+
+\experiment{1}{Now let's replace the resistor in our circuit with another one
+  with greater resistance (say, 500Ohm.)  How and why the LED brightness
+  changed?}
 
 \end{document}
