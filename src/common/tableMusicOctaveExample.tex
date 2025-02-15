@@ -1,0 +1,88 @@
+\newcommand{\tableMusicOctaveExample}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \def\tableThirdColumn{XXX: No translation.}
+  \def\tableFourthColumn{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{
+    № октавы
+  }
+  \def\tableSecondColumn{
+    Слоговое обозначение
+  }
+  \def\tableThirdColumn{
+    Научное обознечение
+  }
+  \def\tableFourthColumn{
+    Частота (Гц)
+  }
+  \def\tableCaption{
+    Пример двух октав.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{
+    Octave
+  }
+  \def\tableSecondColumn{
+    Syllable notation
+  }
+  \def\tableThirdColumn{
+    Scientific notation
+  }
+  \def\tableFourthColumn{
+    Frequency (Hz)
+  }
+  \def\tableCaption{
+    An example of two octaves.
+  }
+  \fi
+  \begin{table}[ht]
+    \centering
+    \begin{tabular}{|p{1.5cm}|p{3cm}|p{3cm}|p{2.5cm}|}
+      \hline
+      \textbf{\tableFirstColumn}
+      & \textbf{\tableSecondColumn}
+      & \textbf{\tableThirdColumn}
+      & \textbf{\tableFourthColumn} \\
+      \hline
+      \multirow{7}{*}{0}
+      \musicnote{0}{C}{16.352}
+      \cline{2-4}
+      \musicnote{0}{D}{18.354}
+      \cline{2-4}
+      \musicnote{0}{E}{20.602}
+      \cline{2-4}
+      \musicnote{0}{F}{21.827}
+      \cline{2-4}
+      \musicnote{0}{G}{24.500}
+      \cline{2-4}
+      \musicnote{0}{A}{27.500}
+      \cline{2-4}
+      \musicnote{0}{B}{30.868}
+      \hline
+
+      \multirow{7}{*}{4}
+      \musicnote{4}{C}{261.630}
+      \cline{2-4}
+      \musicnote{4}{D}{293.660}
+      \cline{2-4}
+      \musicnote{4}{E}{329.630}
+      \cline{2-4}
+      \musicnote{4}{F}{349.230}
+      \cline{2-4}
+      \musicnote{4}{G}{392.000}
+      \cline{2-4}
+      \musicnote{4}{A}{440.000}
+      \cline{2-4}
+      \musicnote{4}{B}{493.880}
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:fourth-octave}
+  \end{table}
+}
