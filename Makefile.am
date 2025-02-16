@@ -90,6 +90,7 @@ SECTIONS = \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-02.tex
 
 COMMON = \
+	src/common/common.tex \
 	src/common/figureSoundGraph.tex \
 	src/common/figurePWMGraph.tex \
 	src/common/figureADC.tex \
