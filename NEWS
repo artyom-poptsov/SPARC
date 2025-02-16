@@ -43,6 +43,10 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 Мелодия “Twinkle, Twinkle, Little Star” (версия 1.0):
 - Добавление недостающих запятых в название мелодии.
 - Улучшение оформления
+** Приложение D
+Мелодия “Twinkle, Twinkle, Little Star” (версия 2.0):
+- Добавление недостающих запятых в название мелодии.
+- Улучшение оформления.
 * Version 3.0.1 (2025-02-01)
 ** common
 *** Move some common code into separate files
