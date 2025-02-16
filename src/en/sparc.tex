@@ -29,6 +29,17 @@
 \addbibresource{references.bib}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% Set the Minted style.
+
+\definecolor{friendlybg}{HTML}{f0f0f0}
+\setminted[cpp]
+          {
+            style=friendly,
+            bgcolor=friendlybg,
+            linenos
+          }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setmainfont{Liberation Serif}
 \setmonofont{Liberation Mono}
 

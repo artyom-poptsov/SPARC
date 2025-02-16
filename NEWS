@@ -8,6 +8,9 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   notice and this notice are preserved.
 
 * Unreleased
+** common
+*** Change the Minted style for code examples
+- Add light-gray background and line numbers for Minted code blocks.
 ** en
 *** Dialogues with a computer
 **** Algorithms
