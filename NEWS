@@ -7,12 +7,15 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
-* Unreleased
+* Version 3.0.2 (2025-02-16)
 ** common
 *** Change the Minted style for code examples
 - Add light-gray background and line numbers for Minted code blocks.
 ** en
 *** Dialogues with a computer
+**** Working with a Breadboard
+- Fix a n error in the LED connection scheme: change the color of the wire that
+  goes to the "GND" from blue to black.
 **** Algorithms
 - Move the subsection down in the chapter.
 - Fix some errors and typos (thanks to Edino Tavares Moniz.)
@@ -28,11 +31,18 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 - Fix some errors and typos (thanks to Edino Tavares Moniz.)
 ** ru
 *** Диалоги с компьютером
+**** Работа с макетной платой
+- Исправление схемы подключения светодиодиода: цвет провода, идущего к "GND",
+  исправлен с синего на чёрный.
 **** Алгоритмы
 - Перенос раздела ниже в главе.
 - Дополнение раздела.
 **** Структура программы на Arduino
 - Дополнение раздела.
+** Приложение C
+Мелодия “Twinkle, Twinkle, Little Star” (версия 1.0):
+- Добавление недостающих запятых в название мелодии.
+- Улучшение оформления
 * Version 3.0.1 (2025-02-01)
 ** common
 *** Move some common code into separate files
