@@ -37,9 +37,9 @@ try to get a non-existing element from an array (say, seventh element, or an
 element with the index -1) it will lead to an error.
 
 We need to create an array with the right amount of cells to hold our melody.
-To be precise, we need an array of 28 cells to hold toe ``Twinkle, Twinkle,
-Little Start'' melody in it.  We can put a value for each cell of the array
-right in the process of defining the array.
+To be precise, we need an array of 28 cells to hold the ``Twinkle, Twinkle,
+Little Star'' melody in it.  We can put a value for each cell of the array right
+in the process of defining the array.
 
 The rest of the array definition is similar to definition of a variable: we must
 specify the type of the array, its name and its size (inside a square brackets),
@@ -75,10 +75,10 @@ zeroth element we can do it as follows:
 \end{listing}
 
 It is reasonable to define the array \ref{listing:music-array-example-1} just
-before our \texttt{loop} procedure.  Inside the \texttt{loop} we can walk across
-the array inside a \texttt{for} loop and play a note from each array cell.  To
-do that we can use the counter variable from the \texttt{for} loop as the array
-index to address the elements.
+before our \texttt{loop} procedure.  Inside the \texttt{loop} procedure we can
+iterate over the array, using a nested \texttt{for} loop and play a note from
+each array cell.  To do that we can use the counter variable from the
+\texttt{for} loop as the array index to address the elements.
 
 
 \begin{listing}[ht]
@@ -98,9 +98,9 @@ index to address the elements.
   \caption{Playing a melody from an array.}
 \end{listing}
 
-By now we should clearly see how short our melody implementation is became.  But
-we temporarily lost the ability to set the length of each individual note in our
-melody.
+By now, we should clearly see how short our melody implementation has become.
+But we temporarily lost the ability to set the length of each individual note in
+our melody.
 
 To fix this we can use another array to hold the lengths of our notes -- let's
 call this second array \texttt{melody\_t}.  Each element of this array will hold
@@ -179,8 +179,8 @@ To solve this problem we can use two-dimensional arrays that we will discuss in
 the next section.
 
 But for those who champing at the bit, wanting to hear the melody from the
-Arduino, we provided the full program code for the ``Twinkle, Twinkle, Little
-Start'' that uses two arrays, in the appendix
+Arduino, we have provided the full program code for the ``Twinkle, Twinkle,
+Little Star'' that uses two arrays, in the appendix
 \ref{app:twinkle-twinkle-little-star-02}.
 
 \end{document}

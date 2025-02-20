@@ -19,8 +19,8 @@ Schematic representation of a two-dimensional array is shown as the table
 Each row of the array stores a description of one note.  The zeroth column holds
 the note frequency and the first column holds its length as the fraction
 denominator, where the numerator is the length of the bar.  For example, the
-zeroth note (``C4'') has the length of $\frac{1}{4}$, so the in the array the
-length is specified as 4.
+zeroth note (``C4'') has the length of $\frac{1}{4}$, so in the array the length
+is specified as 4.
 
 In the program code we can write down this table as the following array:
 
@@ -37,10 +37,10 @@ In the program code we can write down this table as the following array:
   };
 \end{minted}
 
-As can be seen from this example, each element of our array in fact just an
+As can be seen from this example, each element of our array is in fact just a
 one-dimensional array, surrounded with curly brackets.  For example, the element
-with the index 0 of our array stores an one-dimensional array \texttt{\{c4,
- 4\}}, that in turn holds the note (``c4'') and its length (4.)
+with the index 0 of our array stores a one-dimensional array \texttt{\{c4, 4\}},
+that in turn holds the note (``c4'') and its length (4.)
 
 Now we can adapt the code that plays the melody for using the two-dimensional
 array:
@@ -80,8 +80,8 @@ has, the more tedious becomes the task of the array size calculation.
 
 In fact, we can skip the number in the first pair of square brackets in the
 array declaration -- as we are setting the array elements right at the time of
-its initialization, the c computer can calculate the amount of memory it
-requires on its own.  Thus we can declare the array as follows:
+its initialization, the computer can calculate the amount of memory it requires
+on its own.  Thus we can declare the array as follows:
 
 \begin{minted}{cpp}
   float melody[][2] = {
