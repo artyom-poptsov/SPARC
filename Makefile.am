@@ -67,6 +67,7 @@ SECTIONS = \
 	src/ru/sections/music-and-technology-synthesis-staff.tex \
 	src/ru/sections/music-and-technology-synthesis-rest.tex \
 	src/ru/sections/music-and-technology-synthesis-dotted-notes.tex	\
+	src/ru/sections/music-and-technology-synthesis-triplet.tex \
 	src/ru/sections/music-and-technology-synthesis-flats-and-sharps.tex	\
 	src/ru/sections/music-and-technology-synthesis-musical-scale.tex	\
 	src/ru/sections/music-and-technology-synthesis-bass-clef.tex \
@@ -103,6 +104,7 @@ COMMON = \
 	src/common/figureMusicBarFourFourWithFrequencies.tex \
 	src/common/figureMusicWeWillRockYouSimplified.tex \
 	src/common/figureMusicTwinkleTwinkleLittleStar.tex \
+	src/common/figureMusicTripletExample.tex \
 	src/common/tableTwoDimensionalArray.tex \
 	src/common/tableMusicNoteLengths.tex \
 	src/common/tableMusicTwinkleTwinkleLittleStar.tex \

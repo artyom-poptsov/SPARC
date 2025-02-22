@@ -1,0 +1,50 @@
+\newcommand{\figureMusicTripletExample}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Часть песни ``Hey You'' под авторством Pink Floyd.  Составлено на основе
+    партитуры от Sam Anderson, опубликованной на Musescore:
+    \url{https://musescore.com/user/33543481/scores/8040807}.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    A part of ``Hey You'' song by Pink Floyd.  Based on the music sheet by
+    Sam Anderson, published on Musescore:
+    \url{https://musescore.com/user/33543481/scores/8040807}
+  }
+  \fi
+  \begin{figure}[ht]
+    \centering
+    \begin{lilypond}
+      <<
+      \new Staff {
+        \relative g' {
+          \tempo 4 = 112
+          \numericTimeSignature
+          \time 4/4
+          \tuplet 3/2 {a4 b c} b8 a4 g8
+        }
+      }
+      \new Staff {
+        \clef "bass"
+        \relative f {
+          \numericTimeSignature
+          \time 4/4
+          d2 d2
+        }
+      }
+      >>
+      \layout {
+        indent = 0\mm
+        line-width = 100\mm
+        ragged-last = ##t
+      }
+    \end{lilypond}
+    \caption{\figureCaption}
+    \label{fig:music-triplet-example}
+  \end{figure}
+}
