@@ -237,6 +237,7 @@ SECTIONS_EN = \
 	src/en/sections/music-and-technology-synthesis-staff.tex \
 	src/en/sections/music-and-technology-synthesis-rest.tex \
 	src/en/sections/music-and-technology-synthesis-dotted-notes.tex \
+	src/en/sections/music-and-technology-synthesis-triplet.tex \
 	src/en/sections/music-and-technology-synthesis-flats-and-sharps.tex \
 	src/en/sections/music-and-technology-synthesis-time-signature.tex \
 	src/en/sections/music-and-technology-synthesis-bass-clef.tex \
