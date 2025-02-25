@@ -59,7 +59,7 @@ fig. \ref{fig:lilypond-rest-example-1}.)
 
 The whole rest is equal to two half-rests, one half-rest is equal to two
 quarter-rests and so on.  In other words we can use the same approach we use for
-the calculating the lengths of regular notes.
+calculating the lengths of regular notes.
 
 The symbols for music rests are shown in the table
 \ref{table:music-rest-legths}.
@@ -116,7 +116,7 @@ sound; otherwise the procedure will just wait for the ``note'' length (the
   }
 \end{minted}
 
-We should note that for the making the proper rest we use the following code:
+We should note that for making the proper rest we use the following code:
 
 \begin{minted}{cpp}
   delay(t / 1000); // Rest
@@ -163,8 +163,8 @@ As we can see, there are two quarter rests (\crotchetRest), that we have to add
 to the array of notes, to make the composition sound as in the original version.
 
 Also there are ``double notes'' that are written one on top of the other -- which
-means that we have to play those notes simultaneously.  For the simplicity we
-will be taking only one note from pair, the higher one.
+means that we have to play those notes simultaneously.  For simplicity we will
+be taking only one note from pair, the higher one.
 
 Let's try to write down notes in the array and listen to the melody.  To make
 the code clear, we split the notes into groups according to bars, each bar on
