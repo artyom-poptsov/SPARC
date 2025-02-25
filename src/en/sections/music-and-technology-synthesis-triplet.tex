@@ -55,4 +55,29 @@ length inside the triplet.
   \mbox{The length of a note} = \frac{1}{4 * 1.5} = \frac{1}{6}
 \end{equation}
 
+Thus if we take three $\frac{1}{6}$ notes instead of three $\frac{1}{4}$ their
+total length will be exactly $\frac{2}{4}$.
+
+\begin{equation}
+  \mbox{Triplet length} = \frac{1}{6} * 3 = \frac{3}{6} = \frac{1}{2}
+  = \frac{2}{4}
+\end{equation}
+
+In turn, the sum of all the notes in the bar will be equal to one:
+
+\begin{equation}
+  \mbox{Bar length} = \frac{1}{6} + \frac{1}{6}
+  + \frac{1}{6} + \frac{1}{8} + \frac{1}{4} + \frac{1}{8}
+  = \frac{1}{1} = 1
+\end{equation}
+
+The melody in the treble clef with the properly calculated triples can be
+written as follows:
+
+\begin{minted}{cpp}
+  float melody1[][2] = {
+    {a4, 6}, {b4, 6}, {c5, 6}, {b4, 8}, {a4, 4}, {g4, 8}
+  };
+\end{minted}
+
 \end{document}
