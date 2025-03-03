@@ -92,25 +92,25 @@ SECTIONS = \
 
 COMMON = \
 	src/common/common.tex \
-	src/common/figureSoundGraph.tex \
-	src/common/figurePWMGraph.tex \
 	src/common/figureADC.tex \
 	src/common/figureAnalogSignalExample.tex \
-	src/common/figureDigitalSignalExample.tex \
 	src/common/figureBlinkinLEDGraph.tex \
-	src/common/figureSerialPortDiagram.tex \
-	src/common/figureMusicSixBars.tex \
-	src/common/figureMusicSixBarsFourFour.tex \
+	src/common/figureDigitalSignalExample.tex \
 	src/common/figureMusicBarFourFour.tex \
 	src/common/figureMusicBarFourFourWithFrequencies.tex \
-	src/common/figureMusicWeWillRockYouSimplified.tex \
-	src/common/figureMusicTwinkleTwinkleLittleStar.tex \
+	src/common/figureMusicSixBars.tex \
+	src/common/figureMusicSixBarsFourFour.tex \
 	src/common/figureMusicTripletExample.tex \
-	src/common/tableTwoDimensionalArray.tex \
+	src/common/figureMusicTwinkleTwinkleLittleStar.tex \
+	src/common/figureMusicWeWillRockYouSimplified.tex \
+	src/common/figurePWMGraph.tex \
+	src/common/figureSerialPortDiagram.tex \
+	src/common/figureSoundGraph.tex \
 	src/common/tableMusicNoteLengths.tex \
+	src/common/tableMusicOctaveExample.tex \
 	src/common/tableMusicTwinkleTwinkleLittleStar.tex \
 	src/common/tableMusicTwinkleTwinkleLittleStarNotes.tex \
-	src/common/tableMusicOctaveExample.tex
+	src/common/tableTwoDimensionalArray.tex
 
 COMMIT = $(shell git rev-parse HEAD)
 
