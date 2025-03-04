@@ -170,44 +170,7 @@ $T$ (в секундах) связаны отношением \ref{equation:uart
 ними цифровых портов можно найти в таблице \ref{table:serial-ports--pins} (данные
 взяты из описания \texttt{Serial} в \cite{arduino:reference}.)
 
-\begin{table}[h]
-\centering
-\begin{tabular}{|m{9em}|m{3.5em}|m{3.5em}|m{3.5em}|m{3.5em}|m{3.5em}|}
-  \hline
-  \multirow{2}{2em}{\textbf{Плата}} & \multicolumn{5}{c|}{\textbf{Цифровые порты}} \\
-  \cline{2-6}
-   & \textbf{Serial}  & \textbf{Serial1}     & \textbf{Serial2}     & \textbf{Serial3}     & \textbf{Serial4}     \\
-\hline
-UNO R3, UNO R3 SMD Mini    & 0(RX), 1(TX) &                  &                  &                  &                  \\
-\hline
-Nano (classic)             & 0(RX), 1(TX) &                  &                  &                  &                  \\
-\hline
-UNO R4 Minima, UNO R4 WiFi &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
-\hline
-Leonardo, Micro, Yún Rev2  &              & 0(RX), 1(TX)     &                  &                  &                  \\
-\hline
-Uno WiFi Rev.2             &              & 0(RX), 1(TX)     &                  &                  &                  \\
-\hline
-MKR boards                 &              & 13(RX), 14(TX)   &                  &                  &                  \\
-\hline
-Zero                       &              & 0(RX), 1(TX)     &                  &                  &                  \\
-\hline
-GIGA R1 WiFi               &              & 0(RX), 1(TX)     & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) \\
-\hline
-Due                        & 0(RX), 1(TX) & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) &                  \\
-\hline
-Mega 2560 Rev3             & 0(RX), 1(TX) & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) &                  \\
-\hline
-Nano 33 IoT                &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
-\hline
-Nano RP2040 Connect        &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
-\hline
-Nano BLE / BLE Sense       &              & 0(RX0), 1(TX0)   &                  &                  & \\
-\hline
-\end{tabular}
-\caption{Последовательные порты на Arduino.}
-\label{table:serial-ports--pins}
-\end{table}
+\tableCommunicationSerialPorts{ru}
 
 На большинстве плат Arduino для последовательного порта по-умолчанию
 используются порты 0 (RX) и 1 (TX.)  При передачи данных между компьютером и

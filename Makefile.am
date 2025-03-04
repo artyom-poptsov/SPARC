@@ -106,6 +106,7 @@ COMMON = \
 	src/common/figurePWMGraph.tex \
 	src/common/figureSerialPortDiagram.tex \
 	src/common/figureSoundGraph.tex \
+	src/common/tableCommunicationSerialPorts.tex \
 	src/common/tableMusicNoteLengths.tex \
 	src/common/tableMusicOctaveExample.tex \
 	src/common/tableMusicTwinkleTwinkleLittleStar.tex \

@@ -1,0 +1,78 @@
+\newcommand{\tableCommunicationSerialPorts}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{Плата}
+  \def\tableSecondColumn{Цифровые порты}
+  \def\tableCaption{
+    Последовательные порты на Arduino.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{Board}
+  \def\tableSecondColumn{Digital ports}
+  \def\tableCaption{
+    Serial ports on Arduino.
+  }
+  \fi
+
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{|m{9em}|m{3.5em}|m{3.5em}|m{3.5em}|m{3.5em}|m{3.5em}|}
+      \hline
+      \multirow{2}{2em}{\textbf{\tableFirstColumn}}
+      & \multicolumn{5}{c|}{\textbf{\tableSecondColumn}} \\
+      \cline{2-6}
+      & \textbf{Serial}
+      & \textbf{Serial1}
+      & \textbf{Serial2}
+      & \textbf{Serial3}
+      & \textbf{Serial4} \\
+      \hline
+      UNO R3, UNO R3 SMD Mini
+      & 0(RX), 1(TX) &                  &                  &                  &                  \\
+      \hline
+      Nano (classic)
+      & 0(RX), 1(TX) &                  &                  &                  &                  \\
+      \hline
+      UNO R4 Minima, UNO R4 WiFi
+      &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
+      \hline
+      Leonardo, Micro, Yún Rev2
+      &              & 0(RX), 1(TX)     &                  &                  &                  \\
+      \hline
+      Uno WiFi Rev.2
+      &              & 0(RX), 1(TX)     &                  &                  &                  \\
+      \hline
+      MKR boards
+      &              & 13(RX), 14(TX)   &                  &                  &                  \\
+      \hline
+      Zero
+      &              & 0(RX), 1(TX)     &                  &                  &                  \\
+      \hline
+      GIGA R1 WiFi
+      &              & 0(RX), 1(TX)     & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) \\
+      \hline
+      Due
+      & 0(RX), 1(TX) & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) &                  \\
+      \hline
+      Mega 2560 Rev3
+      & 0(RX), 1(TX) & 19(RX1), 18(TX1) & 17(RX2), 16(TX2) & 15(RX3), 14(TX3) &                  \\
+      \hline
+      Nano 33 IoT
+      &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
+      \hline
+      Nano RP2040 Connect
+      &              & 0(RX0), 1(TX0)   &                  &                  &                  \\
+      \hline
+      Nano BLE / BLE Sense
+      &              & 0(RX0), 1(TX0)   &                  &                  & \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:serial-ports--pins}
+  \end{table}
+}
