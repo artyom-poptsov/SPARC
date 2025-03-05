@@ -103,6 +103,7 @@ COMMON = \
 	src/common/figureMusicTripletExample.tex \
 	src/common/figureMusicTwinkleTwinkleLittleStar.tex \
 	src/common/figureMusicWeWillRockYouSimplified.tex \
+	src/common/figureProtocolClassification.tex \
 	src/common/figurePWMGraph.tex \
 	src/common/figureSerialPortDiagram.tex \
 	src/common/figureSoundGraph.tex \

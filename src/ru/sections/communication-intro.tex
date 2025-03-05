@@ -40,31 +40,7 @@
   более линий.
 \end{itemize}
 
-\begin{figure}[H]
-  \centering
-  \begin{tikzpicture}[
-      level distance=15mm,
-      level 1/.style={sibling distance=30mm},
-      level 2/.style={sibling distance=10mm},
-      level 3/.style={sibling distance=15mm},
-      every node/.style={rectangle,draw,inner sep=2pt},
-    ]
-    \node {Передача данных}
-      child {node {Параллельная}
-        child {node {LPT}}
-      }
-      child {node {Последовательная}
-        child {node {UART}
-          child {node {RS-232}}
-          child {node {RS-485}}
-        }
-        child {node {SPI}}
-        child {node {I2C}}
-      };
-  \end{tikzpicture}
-  \caption{Классификация методов передачи данных.}
-  \label{fig:communication-data-transfer-categories}
-\end{figure}
+\figureProtocolClassification{ru}
 
 Примером параллельной передачи данных является \emph{параллельный порт} (англ.
 ``parallel port''.) Обычно он в компьютерном мире ассоциируется с интерфейсом
