@@ -64,11 +64,18 @@
   }%
 }
 
-\newcommand{\note}[1]{
+\newcommand{\note}[2]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\noteText{Note}
+  \ifx \lang\langRu
+  \def\noteText{Примечание}
+  \fi
   \vspace{8pt}
   \begin{tabularx}{\textwidth}{m{1cm} m{9cm}}
     \includesvg[width=1cm]{the-noun-project/note}
-    & \textbf{Примечание:} #1 \\
+    & \textbf{\noteText:} #2 \\
   \end{tabularx}
 }
 
