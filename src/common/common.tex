@@ -72,3 +72,11 @@
   \end{tabularx}
 }
 
+%% Taken from:
+%%   <https://tex.stackexchange.com/questions/184923/how-to-include-a-second-file-only-if-environment-variable-is-set>
+\newcommand{\newgetenv}[2][]{%
+ \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1\relax}%
+ \if\relax\detokenize{#1}\relax\temp\else\edef#1{\temp}\fi%
+}%
+
+%% common.tex ends here.
