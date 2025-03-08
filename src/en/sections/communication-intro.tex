@@ -1,0 +1,25 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\newglossaryentry{UART}{name=UART, description={Universal Asynchronous
+    Receiver-Transmitter}}
+
+So now finally time has come for us to talk about the communication between a
+micro-controller and auxiliary devices, and the language that will be used for
+that.  ``Sure!'' -- we can exclaim, -- ``The language of communication between
+machines are the ones and zeroes, the machine code!''  And we will be right, the
+communication between machines usually boils down to the transferring of ones
+and zeroes.  But aside from this ``alphabet'' there are other important terms
+such as the \emph{transmission medium} and the \emph{transmission protocol}.
+
+Very often the transmission medium is represented by one of the three mediums: a
+wire (like in case of USB cable), radio (Wi-Fi, Bluetooth) or the light (fiber
+optic.)  Computers can even use sound waves as the means of communication but
+that's more like an exception.
+
+A transmission protocol sets the data transferring format itself -- where the
+beginning and the end of a ``sentence'' and what is considered as ``words''
+during the communication.  One of the well-known protocol examples is USB.
+
+\end{document}
