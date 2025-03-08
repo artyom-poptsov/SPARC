@@ -22,4 +22,24 @@ A transmission protocol sets the data transferring format itself -- where the
 beginning and the end of a ``sentence'' and what is considered as ``words''
 during the communication.  One of the well-known protocol examples is USB.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Classification of data transferring methods}
+
+\newglossaryentry{LPT}{name=LPT, description={Line Print Terminal}}
+
+Data transferring between devices can be divided into two big categories:
+
+\begin{itemize}
+\item \textbf{Parallel data transferring} -- all the bits of a message are
+  transferred simultaneously (in parallel manner.)  For that the devices must be
+  connected with a bus that has the same number of lines as the number of bits
+  in the message.
+\item \textbf{Serial data transferring} -- bits are transferred one after
+  another, using time encoding.  For that even one data line (one wire) is
+  enough.  But in fact most of serial data transferring methods use two or more
+  lines.
+\end{itemize}
+
+\figureProtocolClassification{en}
+
 \end{document}
