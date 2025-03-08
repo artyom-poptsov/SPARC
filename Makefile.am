@@ -96,6 +96,7 @@ COMMON = \
 	src/common/figureAnalogSignalExample.tex \
 	src/common/figureBlinkinLEDGraph.tex \
 	src/common/figureDigitalSignalExample.tex \
+	src/common/figureIICSchematics.tex \
 	src/common/figureMusicBarFourFour.tex \
 	src/common/figureMusicBarFourFourWithFrequencies.tex \
 	src/common/figureMusicSixBars.tex \
