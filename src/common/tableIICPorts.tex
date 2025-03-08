@@ -1,0 +1,53 @@
+\newcommand{\tableIICPorts}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{
+    Плата
+  }
+  \def\tableSecondColumn{
+    Порты I2C
+  }
+  \def\tableCaption{
+    I2C-порты на разных платформах Arduino.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{
+    Board
+  }
+  \def\tableSecondColumn{
+    I2C Ports
+  }
+  \def\tableCaption{
+    I2C ports on different Arduino boards.
+  }
+  \fi
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{ | c | c | c | }
+      \hline
+      \multirow{2}{8em}{\textbf{\tableFirstColumn}}
+      & \multicolumn{2}{c|}{\textbf{\tableSecondColumn}} \\
+      \cline{2-3}
+      & \textbf{SDA} & \textbf{SCL} \\
+      \hline
+      Nano & A4 & A5 \\
+      \hline
+      UNO R3 & A4 & A5 \\
+      \hline
+      Leonardo & D2 & D3 \\
+      \hline
+      Mega 2560 Rev3 & D20 & D21 \\
+      \hline
+      Due & D20 & D21 \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:i2c-pins}
+  \end{table}
+}
