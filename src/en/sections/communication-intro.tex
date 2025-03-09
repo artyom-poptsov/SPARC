@@ -4,6 +4,7 @@
 
 \newglossaryentry{UART}{name=UART, description={Universal Asynchronous
     Receiver-Transmitter}}
+\newglossaryentry{I2C}{name=I2C, description={Inter-Integrated Circuit}}
 
 So now finally time has come for us to talk about the communication between a
 micro-controller and external devices, and the language that is used for that.
@@ -82,5 +83,33 @@ the direction of data flow:
 
 \gls{UART} -- one of the serial interfaces that we will look at next -- allows us
 to implement quite easily either simplex or duplex mode of communication.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Synchronous and asynchronous communication}
+
+The last way of protocol classification that we now discuss is
+\emph{synchronous} and \emph{asynchronous} communication.
+
+\begin{itemize}
+\item \textbf{Synchronous} communication implies the presence of the special
+  clock signal that synchronizes two devices.  It is like a metronome in music
+  that synchronizes parts of one composition to prevent, for example, a drummer
+  from outrunning an electric guitar player.  When members of a musical band
+  practicing before a show, often a metronome allows them to achieve performing
+  coherency.  In electronics a special line in the data bus is used for the
+  clock signal.  Usually it is labeled as ``SCK'', ``CLK'', ``CLOCK'' or simply
+  clock signal.
+\item \textbf{Asynchronous} communication allows devices to exchange data
+  without the clock signal, but they must come to agreement among themselves
+  about the speed of the transmitter/receiver.  Drawing an analogy from music we
+  can say that if musicians agreed on the overall composition speed and had
+  enough practice together then they can maintain the required tempo of the
+  composition without using a metronome.
+\end{itemize}
+
+In this book we will discuss examples of both protocol types: \gls{UART} is an
+asynchronous protocol, while \gls{I2C} is a synchronous protocol.
+
+%% TODO: SPI is synchronous too.
 
 \end{document}
