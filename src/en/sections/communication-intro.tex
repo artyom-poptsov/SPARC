@@ -42,4 +42,24 @@ Data transferring between devices can be divided into two big categories:
 
 \figureProtocolClassification{en}
 
+One of the examples of parallel data transferring is \emph{parallel port}.
+Usually in the computer world it is associated with Line Print Terminal
+interface (\gls{LPT}.)  Back in the period between 1970-2000 such ports were
+used for connecting printers to computers and were very popular.  In the modern
+world LPT ports almost pushed out of use as they are replaced with such
+interfaces as USB.
+
+One of the advantages of a parallel port (as follows from its name) is the
+ability to transfer several bits of information simultaneously, which speeds up
+the data transferring.  For example, in LPT ports eight lines are used for the
+data transfer (aside from the auxiliary lines such as the power supply, common
+ground and the clock signal), thus allowing us to transfer 8 bits (1 byte) of
+information in one clock tick.  Also we can consider the simplicity of the
+implementation as one of the advantages of the parallel port as well.
+Nevertheless it has an important (and usually critical) drawback: the interface
+between devices is very clumsy as it requires many wires.  That's why we will
+discuss in details only serial data transferring interfaces: \gls{UART} and I2C.
+
+%% TODO: Add SPI.
+
 \end{document}
