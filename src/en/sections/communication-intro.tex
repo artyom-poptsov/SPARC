@@ -62,4 +62,25 @@ discuss in details only serial data transferring interfaces: \gls{UART} and I2C.
 
 %% TODO: Add SPI.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Direction of data transferring}
+
+Data transferring systems can also be divided into three categories according to
+the direction of data flow:
+
+\begin{itemize}
+\item \textbf{Simplex} -- Uni-directional communication.  A simplex channel
+  transfers data only in one direction.
+\item \textbf{Half-duplex} -- Bi-directional communication.  Connected devices
+  can transfer data in both directions, but only either transmitter or receiver
+  can be active at the time.  A walkie-talkie is an example of such devices.
+\item \textbf{Duplex} -- Bi-directional communication.  Connected devices can
+  transmit and receive data simultaneously.  A telephone connection is a good
+  example of such communication: both interlocutors can talk to each other and
+  listen to each other at the same time.
+\end{itemize}
+
+\gls{UART} -- one of the serial interfaces that we will look at next -- allows us
+to implement quite easily either simplex or duplex mode of communication.
+
 \end{document}
