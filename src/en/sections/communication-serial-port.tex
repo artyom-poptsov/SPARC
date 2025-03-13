@@ -44,4 +44,26 @@ replacement for a dot.
 
 That the origin of such shorthands as ``Rx'' and ``Tx''.\autocite{so:krisw}
 
+One drawback of the serial port is a lower data transfer speed comparing to the
+\emph{parallel port}, where you can transfer eight bit simultaneously.  But to
+transfer 8 bits once over the parallel port we have to have 8 wires connecting
+the transmitter and the receiver, while the serial port only requires one wire
+for data transfer.  Thus the serial data transfer bus is more compact.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Universal Asynchronous Receiver-Transmitter (UART)}
+\label{section:communication-uart}
+
+The universal asynchronous receiver-transmitter, widely known as \emph{UART} --
+is a special device or a logical circuit for asynchronous serial data transfer.
+In fact UART is one of the implementations of the serial port that is commonly
+used for data exchange between devices.
+
+On the transmitting side, UART receives data and sequentially transmits them as
+separate bits over the bus, one after another, with equal periods of time.  On
+the receiver the second UART assembles received bits into the original bytes.
+Both the transmitter and the receiver has a special chip called \emph{shift
+register} which provides a fundamental way to convert the data between the
+serial and the parallel representation.
+
 \end{document}
