@@ -66,4 +66,23 @@ Both the transmitter and the receiver has a special chip called \emph{shift
 register} which provides a fundamental way to convert the data between the
 serial and the parallel representation.
 
+%% TODO: Insert an image of a shift register (parallel-to-serial and
+%% serial-to-parallel.)
+
+An example of 1 byte of information transfer is visualized as a diagram on fig.
+\ref{fig:communication-serial-port-diagram}.  The diagram shows the change of
+voltage in time on the line Rx-Tx between two devices.
+
+\figureSerialPortDiagram{en}
+
+The speed of data transfer is determined by the parameter called \emph{bit rate}
+or \emph{baud rate}, which is measured in bauds (bits per second.  The speed $S$
+(in bauds) and the length of one bit $T$ (in seconds) are linked together by the
+relation \ref{equation:uart-speed}.
+
+\begin{equation}
+  T = \frac{1}{S}
+  \label{equation:uart-speed}
+\end{equation}
+
 \end{document}

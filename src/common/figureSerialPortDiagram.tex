@@ -1,4 +1,4 @@
-\newcommand{\figureSerialPortDiagram}[2]{
+\newcommand{\figureSerialPortDiagram}[1]{
   \def\lang{\detokenize{#1}}
   \def\langRu{\detokenize{ru}}
   \def\langEn{\detokenize{en}}
@@ -9,12 +9,11 @@
     \texttt{01000001}) по последовательному порту.
   }
   \fi
-  \if \lang\langEn
+  \ifx \lang\langEn
   \def\figureCaption{
     Transferring of 'A' symbol (code point 65 in the ASCII table, represented by
     the binary code \texttt{01000001} through a serial port.
   }
-  \def\figureUnit{$\mu\mbox{s}$}
   \fi
   \begin{figure}[ht]
     \begin{tikzpicture}
