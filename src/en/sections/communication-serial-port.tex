@@ -85,4 +85,69 @@ relation \ref{equation:uart-speed}.
   \label{equation:uart-speed}
 \end{equation}
 
+Where $T$ is the length of one bit and it depends on the speed of data transfer
+(see the fig. \ref{fig:communication-serial-port-diagram}.)
+
+Common baud rates are: 300, 1200, 2400, 4800, 9600, 19200, 38400, 57600, 115200,
+230400, 460800 и 921600 baud.
+
+If we substitute 9600 baud in the equation \ref{equation:uart-speed} we get:
+
+\begin{equation}
+  T = \frac{1}{9600} \approx 0.00010416 \mbox{s} \approx 104.16 \mu\mbox{s}
+\end{equation}
+
+Thus for the 9600 baud the time to transfer one bit is roughly $104.16
+\mu\mbox{s}$.  For comparison, the minimal blink time for human eyes is $\approx100
+\mbox{us}$\cite{chudler}, which is $\approx960$ times slower than the one bit
+transferring time with that speed.
+
+It should be noted that for successful communication both transmitter and
+receiver must have the same serial port speed, otherwise data will not be read
+correctly.  This is due to the fact that the transmitter and the receiver don't
+have the clock signal that synchronizes data transfer.
+
+Sometimes it is more convenient to operate not with bits per second, but rather
+with bytes with seconds, as in common situations we specifically measure the
+amount of information in bytes.  In the most cases one byte contains 8 bits.
+
+At the first glance it is logical to conclude that we can get the number of
+bytes per second by using the equation
+\ref{equation:uart-bauds-to-bytes-per-sec-1}.
+
+\begin{equation}
+  S_{\mbox{bytes/s}} = \frac{S_{\mbox{bits/s}}}{8}
+  \label{equation:uart-bauds-to-bytes-per-sec-1}
+\end{equation}
+
+But we have to take into account that each byte sent is preceded by the start
+bit and followed by the end bit.  Thus the actual speed of data transfer is
+lower (see the equation \ref{equation:uart-bauds-to-bytes-per-sec-2}.)
+
+\begin{equation}
+  S_{\mbox{bytes/s}} = \frac{S_{\mbox{bits/s}}}{8 + 1 \mbox{start bit} + 1 \mbox{stop bit}}
+  \label{equation:uart-bauds-to-bytes-per-sec-2}
+\end{equation}
+
+\example { One of the popular data transferring speeds is 9600 bauds.  Using the
+  equation \ref{equation:uart-bauds-to-bytes-per-sec-2} we can calculate how
+  many bytes we can transfer in one second between a computer and an Arduino:
+
+  \begin{equation}
+    S_{\mbox{bytes/s}} = \frac{9600_{\mbox{bits/s}}}{10} = 960 \mbox{bytes/s} \approx 0.93 \mbox{KB/s}
+  \end{equation}
+
+  Let's assume that one musical composition is 5MB in size on average.  If we
+  would want to transfer this file from the computer to the Arduino with 9600
+  baud speed, we can calculate how much time would be required for that:
+
+  \begin{align*}
+    5 MB = 5242880 bytes\\
+    T = \frac{5242880 bytes}{960 bytes} \approx 5461.33 s \approx 91 minutes
+  \end{align*}
+
+  Thus we calculated that for transferring of 5MB of data we need at least 91
+  minutes -- that is, around 1.5 hours.
+}
+
 \end{document}
