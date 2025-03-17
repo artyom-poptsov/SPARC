@@ -181,4 +181,51 @@ is duplicated on the digital ports connected to this serial port.
   ports 0 and 1 before uploading a new program.  That's why it is better not to
   use those ports without a good reason.}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Data transferring}
+
+To transfer data to a computer, we need to configure the speed of data transfer.
+It is reasonable to to this in \texttt{setup} procedure, as the speed is usually
+set once and does not changes throughout the period of serial port use.
+
+The setting of serial port speed is done using the \texttt{begin} method from
+the \texttt{Serial} class.  In the following example we're setting the speed
+equal to 9600 baud:
+
+\begin{minted}{cpp}
+  void setup() {
+    Serial.begin(9600);
+  }
+\end{minted}
+
+Next we can transfer some data to a computer.  For that there are methods
+\texttt{print} and \texttt{println} in \texttt{Serial} class.  The main
+difference between \texttt{println} and \texttt{print} methods is that
+\texttt{println} sends a newline symbol at the end of data.
+
+%% TODO: Add "write" description; add the description of data format for
+%% "print"/"println".
+
+An example of data transferring to a computer:
+
+\begin{minted}{cpp}
+  void loop() {
+    Serial.println("Hello World");
+  }
+\end{minted}
+
+It should be noted that the methods for data transferring allow us to work with
+data of different types.  Thus, for example, we can transfer not only strings,
+but also numbers using \texttt{println} -- a computer will ``figure out'' the
+right way of preparing the data for the transfer:
+
+\begin{minted}{cpp}
+  void loop() {
+    Serial.println(42);
+  }
+\end{minted}
+
+All the data is converted into a string before the transfer, which then is sent
+though the serial port.
+
 \end{document}
