@@ -267,4 +267,64 @@ An example of data reading can be found in the listing below:
   }
 \end{minted}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Software implementation of a serial port}
+
+An embedded library
+\texttt{SoftwareSerial}\footnote{\url{https://docs.arduino.cc/learn/built-in-libraries/software-serial/}}
+bundled with Arduino IDE allows us to implement a serial port in software, using
+custom digital ports that are different from the ones listed in the table
+\ref{table:serial-ports--pins}.
+
+With this library, we can implement several serial ports with speeds up to
+115200 baud.
+
+Nevertheless, \texttt{SoftwareSerial} has a bunch of serious drawbacks:
+\begin{itemize}
+\item The library allows only to transfer or to receive data in each moment --
+  that is, simultaneous transmitting and receiving is not possible. Thus we can
+  say that such communication is performed in the \emph{half-duplex mode}.
+\item If several \texttt{SoftwareSerial} are used then only one can receive data
+  in each moment. This is due to the fact that data receiving is implemented
+  through interrupts.
+\item For receiving the data we have to use only those ports that support
+  interrupts.
+\item On Arduino and Genuino 101 boards the maximum data transfer speed is
+  limited to 57600 baud.
+\item On Arduino and Genuino 101 boards the 13th pin cannot be used as the RX
+  port.
+\end{itemize}
+
+An example of software serial port usage is shown below.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <SoftwareSerial.h>
+
+    const byte RX_PIN = 2;
+    const byte TX_PIN = 3;
+
+    SoftwareSerial my_serial(RX_PIN, TX_PIN);
+
+    void setup() {
+      my_serial.begin(9600);
+      my_serial.println("Hello, World!");
+    }
+
+    void loop() {
+
+    }
+  \end{minted}
+  \label{listing:communication-serial-software}
+  \caption{An example of software serial port usage (\texttt{SoftwareSerial}.)}
+\end{listing}
+
+As this implementation of the serial port is based on the interrupt mechanism,
+with high receiving speeds we can observe an effect called ``interrupt
+starvation'' -- which means that an micro-controller spends most of its CPU time
+handling interrupts and processing the incoming data, giving a minimal amount of
+time to the rest of the tasks.  In t his case, for example, the \texttt{loop}
+procedure will practically never be called, and the other interrupts (like ones
+from external buttons) won't be processed as well.
+
 \end{document}
