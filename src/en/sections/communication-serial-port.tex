@@ -228,4 +228,43 @@ right way of preparing the data for the transfer:
 All the data is converted into a string before the transfer, which then is sent
 though the serial port.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Receiving the data}
+
+\texttt{Serial} class provides a set of methods for reading data from the serial
+port.
+
+The data which is coming from a computer is buffered on the Arduino side.  The
+size of the buffer is 64 bytes (see the documentation for the method
+\texttt{available} of \texttt{Serial} class in \cite{arduino:reference}.)  Among
+other methods \texttt{Serial} provides \texttt{available} method that returns
+the number of bytes in the buffer that are available for reading.  Usually this
+method is used right before the data reading.
+
+The reading can be done using several methods, depending on the data type.  The
+most primitive way is to read bytes with the \texttt{read} method.  Each call to
+\texttt{read} returns the next available byte from the input buffer.  When there
+is no data in the buffer, \texttt{read} returns -1 as the value.
+
+\note{en}{ It should be noted that \texttt{read} returns \texttt{int} type
+  instead of \texttt{byte} or \texttt{char}.  That is due to the fact that if
+  \texttt{read} would return \texttt{byte} (which does not have the negative
+  part), then it wouldn't be able to return -1, and without it we would not have
+  a way to signal the end of data with the returned value.  On the other hand,
+  if \texttt{read} would return \texttt{char}, this problem would be solved (as
+  \texttt{char} has the range from -128 to 127), but at the same time we would
+  have problems with receiving values from 128 to 255 (the maximal value, that
+  can be written in one byte.) }
+
+An example of data reading can be found in the listing below:
+
+\begin{minted}{cpp}
+  void loop() {
+    if (Serial.available() > 0) {
+      int incoming_byte = Serial.read();
+      // ... Handling the data ...
+    }
+  }
+\end{minted}
+
 \end{document}
