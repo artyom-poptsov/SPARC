@@ -327,4 +327,34 @@ time to the rest of the tasks.  In t his case, for example, the \texttt{loop}
 procedure will practically never be called, and the other interrupts (like ones
 from external buttons) won't be processed as well.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Example: Transferring data between two Arduino boards}
+
+Now we discuss a more complex example where we will see not only the usage of
+the hardware serial port, but the software serial port as well.  For this we
+need two Arduino boards between which we will transfer the data.
+
+For data transferring we will use \texttt{SoftwareSerial} with digital ports
+number 10 (RX) and 11 (TX.)  The first Arduino will transfer symbols
+\texttt{'1'} and \texttt{'0'} alternately through the serial port to the second
+Arduino.  In turn, the second Arduino will turn on an LED on receiving
+\texttt{'1'} and turn it off on receiving \texttt{'0'}.
+
+We must connect the digital port number 11 (TX) on the Arduino-transmitter to
+the port number 10 (RX) on the Arduino-receiver.  Also we must connect ground
+pins (\texttt{GND}) on both Arduino boards to ensure that they have the same
+logical level for zero.  On fig. \ref{fig:arduino-serial-communication-1} we can
+see an example of how to connect two Arduino Mega 2560 boards for this project.
+We also can use other Arduino boards, given that we made required modifications
+to the code.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{schematics/arduino-serial-communication-1}
+  \caption{Connection of two Arduino Mega 2560 boards through UART in simplex
+    (one-directional) data transfer mode.  The upper Arduino is the transmitter,
+    the lower arduino is the receiver.}
+  \label{fig:arduino-serial-communication-1}
+\end{figure}
+
 \end{document}
