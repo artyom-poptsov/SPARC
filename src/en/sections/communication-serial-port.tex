@@ -353,8 +353,22 @@ to the code.
   \includegraphics[width=10cm]{schematics/arduino-serial-communication-1}
   \caption{Connection of two Arduino Mega 2560 boards through UART in simplex
     (one-directional) data transfer mode.  The upper Arduino is the transmitter,
-    the lower arduino is the receiver.}
+    the lower Arduino is the receiver.}
   \label{fig:arduino-serial-communication-1}
 \end{figure}
+
+The program code is the same for the both Arduino, the switch to the receiver
+mode is done by connecting digital port 4 to the ground; if this port is not
+connected, then the Arduino works in the transmitter mode. The full code is
+shown in the listing \ref{listing:communication-serial-two-arduino-example}.
+
+It should be noted that instead of a wire connecting RX-TX of two Arduino boards
+we can use more sophisticated way of communication: a laser.  If we connect a
+laser module (akin to the one that is shown on fig.
+\ref{fig:arduino-laser-module}) to the TX of the first Arduino and point the
+laser beam to a photoresistor connected to the RX pin of the second Arduino,
+then we can transmit the data over the laser beam.  In this case we can clearly
+see how the serial data transfer works: when we transmit the logical one, the
+laser shines, when we transmit the logical zero that laser switches off.
 
 \end{document}
