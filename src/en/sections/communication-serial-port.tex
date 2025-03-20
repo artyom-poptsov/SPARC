@@ -371,4 +371,97 @@ then we can transmit the data over the laser beam.  In this case we can clearly
 see how the serial data transfer works: when we transmit the logical one, the
 laser shines, when we transmit the logical zero that laser switches off.
 
+One interesting ``side effect'' of data transfer over the laser beam is that the
+power supply of the receiver and the transmitter are decoupled, thus they can
+use different voltage values for logical levels.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=8cm]{arduino-laser-module}
+  \caption{A laser module for Arduino.}
+  \label{fig:arduino-laser-module}
+\end{figure}
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=8cm]{photoresistor}
+  \caption{Photoresistor.}
+  \label{fig:photoresistor}
+\end{figure}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{schematics/arduino-serial-communication-2}
+  \caption{Connection of two Arduino Mega 2560 boards through UART using the
+    laser beam as the data transfer medium.}
+  \label{fig:arduino-serial-communication-2}
+\end{figure}
+
+The biggest problem when laser is used for such data transfer is to adjust the
+light-sensitive sensor (a photoresistor) so an Arduino can distinguish ones from
+zeroes.  The easiest way to do this is to use a voltage divider circuit where
+$R_1$ is the photoresistor and $R_2$ is a potentiometer.  It will allow us to
+adjust relation of $R_1$ to $R_2$ to change the voltage level that the Arduino
+will receive when $R_1$ change.  By manual adjusting of the $R_2$ potentiometer
+we can achieve the balance where the photoresistor $R_1$ will give us the
+voltage level that is represents logical zero when it is not illuminated with
+the laser; and when the laser beam illuminates the photoresistor, the
+photoresistor will give us voltage level of logical one (see the
+fig. \ref{fig:arduino-serial-communication-2}.)
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <SoftwareSerial.h>
+    const byte RX_PIN = 10;
+    const byte TX_PIN = 11;
+    SoftwareSerial software_serial(RX_PIN, TX_PIN);
+
+    const byte SWITCH_PIN = 4;
+    const byte LED_PIN = 13;
+
+    void setup() {
+      pinMode(SWITCH_PIN, INPUT_PULLUP);
+      pinMode(LED_PIN, OUTPUT);
+      Serial.begin(9600);
+      software_serial.begin(600);
+    }
+
+    void transmit() {
+      software_serial.print(1);
+      delay(1000);
+      software_serial.print(0);
+      delay(1000);
+    }
+
+    void receive() {
+      if (software_serial.available() > 0) {
+        byte value = software_serial.read();
+        Serial.print("VALUE: ");
+        Serial.println(value);
+        if (value == '1') {
+          digitalWrite(LED_PIN, HIGH);
+          Serial.println("ON");
+          delay(1000);
+        } else if (value == '0') {
+          digitalWrite(LED_PIN, LOW);
+          Serial.println("OFF");
+          delay(1000);
+        }
+      }
+    }
+
+    void loop() {
+      if (digitalRead(SWITCH_PIN) == HIGH) {
+        transmit();
+      } else {
+        receive();
+      }
+    }
+  \end{minted}
+  \label{listing:communication-serial-two-arduino-example}
+  \caption{An example of simplex (one-directional) connection of two Arduino
+    boards through the serial port.}
+\end{listing}
+
+
 \end{document}
