@@ -188,7 +188,7 @@ unnatural and after such experiments we may expect visits from the musical
 inquisition.
 
 Nevertheless if we try to play this composition in this time signature, it will
-sound walzing, as such signature usually is used for waltz.
+sound waltzing, as such signature usually is used for waltz.
 
 But how can we bring those musical nuances into our programming code and the
 hardware to make our musical compositions more beautiful?  Changes can be done
@@ -220,8 +220,8 @@ the quiet speaker to the port number 3.
 
 Secondly our two-dimensional array for storing the melody now has to have three
 columns instead of two -- to store the volume of the sound.  Judging from the 3rd
-column we will choose the speaker to play sound.  Our volume control is limited
-with two levels: quiet (0) and loud (1.)
+column we will choose the speaker to play the sound.  Our volume control is
+limited to the two levels: quiet (0) and loud (1.)
 
 For the four-four time signature we have to make the first note in each bar
 louder than the others.
@@ -287,8 +287,8 @@ each note, based on the 3rd column in the array.
 
 In the code listing \ref{listing:musical-scale-implementation} we added a
 condition in the loop body, so if for the current note (referenced by
-\texttt{note\_idx}) has the value 1 in the 2nd column, it means that this a the
-accented note -- so we have to play it louder than the others.  Such notes we
+\texttt{note\_idx}) has the value 1 in the 2nd column, it means that this is a
+the accented note -- so we have to play it louder than the others.  Such notes we
 send to the speaker, connected to \texttt{LOUD\_SPEAKER\_PIN} digital port.
 Other notes, as described in the \texttt{else} block, are sent to the speaker
 connected to the \texttt{QUIET\_SPEAKER\_PIN} port.
