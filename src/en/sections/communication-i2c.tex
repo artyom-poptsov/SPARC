@@ -1,0 +1,55 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{I2C bus}
+\label{section:i2c}
+\index{Electronics!I2C bus}
+
+\newglossaryentry{I2C}{
+  name=I2C,
+  description={Inter-Integrated Circuit}
+}
+\newglossaryentry{USB}{
+  name=USB,
+  description={Universal Serial Bus}
+}
+\newglossaryentry{PCI}{
+  name=PCI,
+  description={Peripheral component interconnect}
+}
+\newglossaryentry{I/O}{
+  name=I/O,
+  description={I/O -- ``Input/Output''}
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{General information}
+
+\textit{\gls{I2C}} also sometimes called $I^{2}C$ (should be read as
+``I-squared-C'') is a data transfer bus that is used for connection between
+integrated circuit inside electronic devices.  Let's discuss first what a ``data
+bus'' is.  To put it simply a \textit{bus} in the context of the computer
+architecture is some connection that is used for data transferring between
+functional parts of a computer.
+
+We can put data transfer buses roughly into two categories -- \textit{external}
+buses and \textit{internal} buses.
+
+External buses include \gls{USB} which is already familiar for many of us -- this
+bus is used for connection of external devices (such as Arduino, a keyboard, a
+computer mouse, a printer and so on) to a computer.  Such buses usually have
+some standardized connector and fairly big length of the cable.
+
+Internal buses include \gls{I2C} (already mentioned above) and \gls{PCI}/PCI
+Express (used for example for connection of a network card to the computer
+system board.)  Internal buses are usually designed for transferring data across
+short distances, and don't allow hot-plugging of devices; thus some of the
+internal buses don't even have a special connector and bus wires are soldered
+down right to the boards.
+
+The maximum length of connection between devices on \gls{I2C} bus should not
+exceed 30 centimeters, otherwise data transfer will be unreliable.
+
+\end{document}

@@ -249,6 +249,7 @@ SECTIONS_EN = \
 	src/en/sections/music-and-technology-synthesis-music-band.tex \
 	src/en/sections/communication-intro.tex \
 	src/en/sections/communication-serial-port.tex \
+	src/en/sections/communication-i2c.tex \
 	src/en/sections/appendix-octaves.tex \
 	src/en/sections/appendix-prostokvashino-score.tex \
 	src/en/sections/appendix-twinkle-twinkle-little-star-01.tex \
