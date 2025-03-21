@@ -67,4 +67,39 @@ controller device and others (labeled as ``Targets'') are the target devices.
 
 \figureIICSchematics{en}
 
+The standard library for working with I2C protocol is called
+\href{https://www.arduino.cc/reference/en/language/functions/communication/wire/}{Wire}.
+The library allows us to work with I2C devices.
+
+\tableIICPorts{en}
+
+Due to hardware differences between Arduino boards, I2C ports on different
+Arduino boards may vary.  Table \ref{table:i2c-pins} shows some examples of I2C
+ports.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Additional materials}
+
+A good introduction to the I2C bus is given in the ``I2C
+bus''\footnote{\url{https://www.youtube.com/watch?v=_4KD29qnhNM}} lecture by
+Glazov Anatoliy Borisovich from the YouTube channel ``Electronics for the
+programmers''.  The lecture is in Russian but YouTube provides auto-generated
+English subtitles as well.
+
+%% TODO: Add native English references here.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{I2C-scanner}
+\label{section:i2c-scanner}
+\index{Electronics!I2C bus!I2C-scanner}
+
+There are programs called ``I2C-scanners'' that allow us to discover devices
+connected to an I2C bus.  An example of such program can be found on the official Arduino site.\footnote{\url{https://playground.arduino.cc/Main/I2cScanner/}}
+
+Also more advanced I2C-scanner called ``I2C\_Scanner'' can be installed through
+the Arduino IDE library manager.
+
+Such scanners usually print a list of addresses to the serial port for devices
+connected to an micro-controller through an I2C bus.
+
 \end{document}
