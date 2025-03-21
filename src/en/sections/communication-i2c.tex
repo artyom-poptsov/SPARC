@@ -52,4 +52,19 @@ down right to the boards.
 The maximum length of connection between devices on \gls{I2C} bus should not
 exceed 30 centimeters, otherwise data transfer will be unreliable.
 
+\gls{I2C} has quite low data transfer speed (no more than 5MBit/s) between
+devices.  Each device has its own \textit{address} on the bus -- in other words,
+its serial number.  We can connect up to 127 devices with unique addresses.
+With that said, we must note that only one device on the bus is the controller
+while the rest of the devices are targets.
+
+On the fig. \ref{fig:i2c-schematics} the \gls{I2C} bus schematic is shown.  As
+we can see on the figure, the bus uses only two lines for data transferring --
+``Serial Data Line'' (\textbf{SDL}) and ``Serial Clock Line'' (\textbf{SCL}.)
+Both lines are pulled up through resistors \textbf{$R_p$} to the voltage of
+power supply (\textbf{Vdd}.)  On the schematics, ``$\mu$C\\Controller'' is the
+controller device and others (labeled as ``Targets'') are the target devices.
+
+\figureIICSchematics{en}
+
 \end{document}
