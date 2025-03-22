@@ -102,4 +102,30 @@ the Arduino IDE library manager.
 Such scanners usually print a list of addresses to the serial port for devices
 connected to an micro-controller through an I2C bus.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{I2C device example: PCF8574}
+\index{Electronics!I2C bus!PCF8574}
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{I2C-PCF8574-LCD-ADAPTER}
+  \caption{I2C-adapter for an LCD display LCM1602-I2C based on the PCF8574 I/O
+    expander.}
+  \label{fig:i2c-pcf8574-lcd-adapter}
+\end{figure}
+
+There are lots of device examples that can be connected to a micro-controller
+through an \gls{I2C} bus.  One of such devices is the I/O ports expander
+PCF8574.  This is a special chip that allows us to set and read digital values
+from its 8 digital pins through I2C bus and thus providing a way to control up
+to 8 digital devices.  In other words, PCF8574 is a eight-channel I/O expander.
+
+There is a special adapter based on PCF8574 (see
+fig. \ref{fig:i2c-pcf8574-lcd-adapter}) for connecting a liquid-crystal display
+(LCD) to a micro-controller through the I2C bus.  Many of such LCDs have
+pre-soldered I2C module on them, or it is possible to buy such module separately
+for soldering.  Some LCD models have an embedded I2C interface and don't require
+a special I2C adapter at all, as all the required circuitry is already present
+on the LCD board.
+
 \end{document}
