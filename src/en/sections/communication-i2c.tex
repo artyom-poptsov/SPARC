@@ -128,4 +128,19 @@ for soldering.  Some LCD models have an embedded I2C interface and don't require
 a special I2C adapter at all, as all the required circuitry is already present
 on the LCD board.
 
+In this section we are going to use the same I/O port expander as is shown on
+fig. \ref{fig:i2c-pcf8574-lcd-adapter} to blink LEDs and thus to understand the
+I2C bus.  Although there is an Arduino library for working with
+PCF8574\footnote{\url{https://www.arduino.cc/reference/en/libraries/pcf8574/}},
+we will be using only the
+``Wire''\footnote{\url{https://www.arduino.cc/reference/en/language/functions/communication/wire/}}
+library that is embedded in Arduino IDE.
+
+It should be noted that the PCF8574 module (see
+fig. \ref{fig:i2c-pcf8574-lcd-adapter}) has the area with groups of three
+contact pads (``A0'', ``A1'' and ``A2'') marked on the figure as ``Select I2C
+Address'' -- by adding jumpers between those contacts we can change the I2C
+address of the I2C device.  Having three places for jumpers we get $2^3 = 8$
+combinations of them, and thus 8 possible addresses.
+
 \end{document}
