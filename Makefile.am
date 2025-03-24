@@ -114,6 +114,7 @@ COMMON = \
 	src/common/tableMusicTwinkleTwinkleLittleStar.tex \
 	src/common/tableMusicTwinkleTwinkleLittleStarNotes.tex \
 	src/common/tableIICPorts.tex \
+	src/common/tableLCM.tex \
 	src/common/tableTwoDimensionalArray.tex
 
 COMMIT = $(shell git rev-parse HEAD)
