@@ -150,4 +150,19 @@ the jumpers and respective I2C addresses of the module are
 shown.\footnote{Source:
 \url{https://static.chipdip.ru/lib/807/DOC015807788.pdf}}
 
+As we discussed above, in fact eight bits are used to encode the I2C device
+address, where the seven upper bits (\texttt{A6-A0}) encode the address itself,
+and the lower bit encodes the direction of data transmission -- either from the
+controller to a target or vice versa.  Changing the values on A0-A2 pins (the
+first three rows in the table \ref{table:i2c-lcm1602-addressing}) change the
+device address: $V_{DD}$ means the voltage of power supply and $V_{SS}$ means
+the ground.  Bits from A3 through A6 have fixed values.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{schematics/lcm1602-i2c-leds}
+  \caption{LCM1602 I2C module based on PCF8574 chip with eight connected LEDs.}
+  \label{fig:lcm1602-i2c-leds}
+\end{figure}
+
 \end{document}
