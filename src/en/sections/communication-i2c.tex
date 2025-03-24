@@ -165,4 +165,17 @@ the ground.  Bits from A3 through A6 have fixed values.
   \label{fig:lcm1602-i2c-leds}
 \end{figure}
 
+Let's use the same module as is shown on the fig.
+\ref{fig:i2c-pcf8574-lcd-adapter} for our project and connect one LED to each of
+the eight I/O pins of the module.  Bits that we write into the module will
+directly affect the state of LEDs.  On fig. \ref{fig:lcm1602-i2c-leds} one of
+the possible variants of the circuit for the project is shown.  All the
+resistors are rated at 220 Ohm.
+
+It should be noted that all the LED anodes on the schematics
+\ref{fig:lcm1602-i2c-leds} are connected through a resistors to the 5V bus and
+the cathodes are connected to I2C module, thus the LEDs control will be
+inverted.  The reason for this is that pulling down is more effective for
+controlling LEDs.
+
 \end{document}
