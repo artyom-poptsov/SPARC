@@ -47,21 +47,21 @@
         | c
         | }
       \hline
-      \multicolumn{3}{|c|}{\textbf{Подключение пинов}}
-      & \multicolumn{8}{c|}{\textbf{Конфигурация адреса}}
-      & \multirow{2}{2em}{\textbf{Адрес I2C}} \\
+      \multicolumn{3}{|c|}{\textbf{\tableFirstColumn}}
+      & \multicolumn{8}{c|}{\textbf{\tableSecondColumn}}
+      & \multirow{2}{3.5em}{\textbf{\tableThirdColumn}} \\
       \cline{1-11}
-      \textbf{A2}
-      & \textbf{A1}
-      & \textbf{A0}
-      & \textbf{A6}
-      & \textbf{A5}
-      & \textbf{A4}
-      & \textbf{A3}
-      & \textbf{A2}
-      & \textbf{A1}
-      & \textbf{A0}
-      & \textbf{R/W}
+      \textbf{\small{A2}}
+      & \textbf{\small{A1}}
+      & \textbf{\small{A0}}
+      & \textbf{\small{A6}}
+      & \textbf{\small{A5}}
+      & \textbf{\small{A4}}
+      & \textbf{\small{A3}}
+      & \textbf{\small{A2}}
+      & \textbf{\small{A1}}
+      & \textbf{\small{A0}}
+      & \textbf{\small{R/W}}
       &   \\
       \hline
       $V_{SS}$ & $V_{SS}$ & $V_{SS}$ & 0 & 1 & 0 & 0 & 0 & 0 & 0 & -- & \texttt{0x20} \\
@@ -81,7 +81,7 @@
       $V_{DD}$ & $V_{DD}$ & $V_{DD}$ & 0 & 1 & 0 & 0 & 1 & 1 & 1 & -- & \texttt{0x27} \\
       \hline
     \end{tabular}
-    \caption{Адресация модуля LCM1602-I2C.}
+    \caption{\tableCaption}
     \label{table:i2c-lcm1602-addressing}
   \end{table}
 }
