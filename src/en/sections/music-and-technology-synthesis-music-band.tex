@@ -7,7 +7,7 @@
 \section{Creating a music band}
 
 Now as we understand how rhythm works and can read the notes, we can start
-creating a music ``band'' from the two or more Arduinos.
+creating a music ``band'' from two or more Arduinos.
 
 Many musical compositions as we might notice, include two or more musical
 tracks.  Often the second track is for the left hand when playing a piano, or
@@ -43,7 +43,7 @@ composition and play it.
 \subsection{Selecting the debut composition}
 
 Many musical bands star their way on the big musical scene by performing covers
-on the famous songs.  Let out first composition will be an Arduino-cover on the
+on the famous songs.  Let out first composition will be an Arduino-cover of the
 song ``Sweet Dreams'' by Marilyn Manson (see
 fig. \ref{fig:lilypond-melody-sweet-dreams}.)\footnote{As the basis, we took the
 musical score \url{https://musescore.com/user/13484026/scores/5329623} by the
@@ -136,7 +136,7 @@ one is the guitar part.
 \subsection{Implementation of the melody}
 
 To create the 1st track of our melody, we have to create a new project for the
-Arduno, as we did before.  Likewise, the playback is organized through our
+Arduino, as we did before.  Likewise, the playback is organized through our
 procedure \texttt{play\_tone}.
 
 We define both parts of the melody as two two-dimensional arrays.  The 1st array
@@ -228,11 +228,12 @@ While working with two Arduino boards a new problem occurs -- how to upload
 different melodies to each of them?  The first naive (but not very convenient)
 approach is to create a different project for each Arduino and upload them each
 time we change something in the code to each Arduino.  The inconvenience here is
-that we have to make sure that we uploading the right project into each Arduino.
+that we have to make sure that we are uploading the right project into each
+Arduino.
 
-We can offer better approach -- to use the project for both Arduino boards, using
-a value from a digital port to determine in the code which melody should be
-played.  Using a regular Arduino wire we can connect \texttt{SWITCH\_PORT} to
+We can offer a better approach -- to use the project for both Arduino boards,
+using a value from a digital port to determine in the code which melody should
+be played.  Using a regular Arduino wire we can connect \texttt{SWITCH\_PORT} to
 the ground, and Arduino will play the guitar part.  If the port is not connected
 to the ground, the Arduino will play the vocal part.
 
@@ -288,13 +289,13 @@ to the ground, the Arduino will play the vocal part.
 \subsection{Synchronization of two melodies}
 
 To start both parts of the melody simultaneously, we have to press ``Reset''
-buttons on both Arduino boards and release them at the same time.
+button on both Arduino boards and release them at the same time.
 
-Despite we now managed to play both parts of the melody, over time we may notice
-that our ``instruments'' getting out of sync.
+Despite the fact that we now managed to play both parts of the melody, over time
+we may notice that our ``instruments'' are getting out of sync.
 
 There are several causes of this unpleasant effect.  We discuss them according
-their degree of influence on the melody.
+to their degree of influence on the melody.
 
 The first cause of desyncronization is hidden in those lines:
 

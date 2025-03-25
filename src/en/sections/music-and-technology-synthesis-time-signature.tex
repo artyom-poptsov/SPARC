@@ -253,8 +253,8 @@ louder than the others.
   \caption{Adding accents to the notes according the time signature.}
 \end{listing}
 
-Next in the loop playing back our melody we have to choose the right speaker for
-each note, based on the 3rd column in the array.
+Next in the loop, while playing back our melody we have to choose the right
+speaker for each note, based on the 3rd column in the array.
 
 \begin{listing}[h]
   \begin{minted}{cpp}
@@ -287,10 +287,10 @@ each note, based on the 3rd column in the array.
 
 In the code listing \ref{listing:musical-scale-implementation} we added a
 condition in the loop body, so if for the current note (referenced by
-\texttt{note\_idx}) has the value 1 in the 2nd column, it means that this is a
-the accented note -- so we have to play it louder than the others.  Such notes we
-send to the speaker, connected to \texttt{LOUD\_SPEAKER\_PIN} digital port.
-Other notes, as described in the \texttt{else} block, are sent to the speaker
+\texttt{note\_idx}) has the value 1 in the 2nd column, it means that this is the
+accented note -- so we have to play it louder than the others.  Such notes we
+send to the speaker connected to \texttt{LOUD\_SPEAKER\_PIN} digital port. Other
+notes, as described in the \texttt{else} block, are sent to the speaker
 connected to the \texttt{QUIET\_SPEAKER\_PIN} port.
 
 \end{document}
