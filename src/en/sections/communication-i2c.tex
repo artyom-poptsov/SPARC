@@ -173,9 +173,12 @@ the possible variants of the circuit for the project is shown.  All the
 resistors are rated at 220 Ohm.
 
 It should be noted that all the LED anodes on the schematics
-\ref{fig:lcm1602-i2c-leds} are connected through a resistors to the 5V bus and
-the cathodes are connected to I2C module, thus the LEDs control will be
+\ref{fig:lcm1602-i2c-leds} are connected through resistors to the 5V bus and the
+cathodes are connected to the I2C module, which means that the LEDs control is
 inverted.  The reason for this is that pulling down is more effective for
-controlling LEDs.
+controlling LEDs.  When the I2C module pulls an LED cathode down to the ground
+then current flows from 5V through the resistor, then through the LED and the
+I2C module to the ground.  This configuration is recommended by the manufacturer
+of the chip.\footnote{\url{https://static.chipdip.ru/lib/205/DOC000205430.pdf}}
 
 \end{document}
