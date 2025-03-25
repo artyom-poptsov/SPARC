@@ -181,4 +181,21 @@ then current flows from 5V through the resistor, then through the LED and the
 I2C module to the ground.  This configuration is recommended by the manufacturer
 of the chip.\footnote{\url{https://static.chipdip.ru/lib/205/DOC000205430.pdf}}
 
+There is another peculiarity that we will have to consider when connecting and
+controlling the LEDs.  As PCF8574 chip has only 8 I/O ports, ``LCM1602'' module
+has in fact the same number of ports.  Other ports on the module have either
+fixed values or just not connected at all.  It's interesting that the third bit
+in our data sequence for ``LCM1602'' is the LCD back-light control (that we
+don't have in the schematics.)  To make this port work we have to connect the
+LED jumper on the module.  On fig. \ref{fig:lcm1602-i2c-leds} all control bits
+are numbered and thus we can see that LEDs in this schematics are ``shuffled''
+and we have to consider it during the programming of LED effects.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=12cm]{schematics/i2c-pcf8574-lcd-adapter}
+  \caption{A schematics LCD connection through the I2C module based on PCF8574.}
+  \label{fig:i2c-pcf8574-lcd-adapter-schematics}
+\end{figure}
+
 \end{document}
