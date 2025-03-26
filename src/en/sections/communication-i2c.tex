@@ -199,4 +199,72 @@ and we have to consider it during the programming of LED effects.
   \label{fig:i2c-pcf8574-lcd-adapter-schematics}
 \end{figure}
 
+Let's take a look on the fig. \ref{fig:i2c-pcf8574-lcd-adapter-schematics} to
+get better understanding of module inner workings.  On the left side of the
+schematics we can see the I2C connection interface for a micro-controller: it is
+a four-pin connector ``J2'' consisting of ``GND'', ``VCC'', ``SDA'' and ``SCL''.
+
+LCD connects to the ``J1'' connector.  As we can see, pins from 7 through 10 are
+not used.
+
+The ``J3'' connector is the jumper that enables the back-light on the module.
+We should shorten those pins if we want to use 16th pin (``BL-'') of the ``J1''
+connector to control an LED.
+
+In the center of the schematic we can see the PCF8574 chip, where pins P0-P7 are
+controlled from a micro-controller through the I2C interface.
+
+Now, when we understood the circuit, let's include the \texttt{Wire} library to
+our Arduino program, right on the top:
+
+\begin{minted}{cpp}
+  #include <Wire.h>
+\end{minted}
+
+This library will be used for working with I2C bus.
+
+Then we define the address of PCF8574 module on I2C bus as a constant.  On
+Chinese I2C adapters for LCDs usually the address is set to \texttt{0x27} by
+default (according to the table \ref{table:i2c-lcm1602-addressing}):
+
+\begin{minted}{cpp}
+  const byte ADDRESS = 0x27;
+\end{minted}
+
+Introducing a constant in this case is useful for two reasons: firstly, it
+allows us to work with a human-readable name for the value instead of some
+nameless number; secondly, we will be using the device address in the program
+several times, thus when we referring to a constant it lowers the risk of errors
+in the code.
+
+In the \texttt{setup} procedure we have to initialize the I2C bus:
+
+\begin{minted}{cpp}
+  void setup() {
+    Wire.begin(ADDRESS);
+  }
+\end{minted}
+
+In the \texttt{loop} procedure we have to initiate the data transmission before
+actually transmitting the data into the module over the I2C bus.  It is done by
+calling \texttt{beginTransmission} procedure from the \texttt{Wire} library:
+
+\begin{minted}{cpp}
+  Wire.beginTransmission(ADDRESS);
+\end{minted}
+
+After that we can transfer data to the device -- in our example we transfer the
+value \texttt{0b11111110}:
+
+\begin{minted}{cpp}
+  Wire.write(0b11111110);
+\end{minted}
+
+Now we have to finish the data transfer by calling \texttt{endTransmission}
+procedure from the \texttt{Wire} library:
+
+\begin{minted}{cpp}
+  Wire.endTransmission();
+\end{minted}
+
 \end{document}
