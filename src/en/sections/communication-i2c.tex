@@ -94,7 +94,8 @@ English subtitles as well.
 \index{Electronics!I2C bus!I2C-scanner}
 
 There are programs called ``I2C-scanners'' that allow us to discover devices
-connected to an I2C bus.  An example of such program can be found on the official Arduino site.\footnote{\url{https://playground.arduino.cc/Main/I2cScanner/}}
+connected to an I2C bus. An example of such program can be found on the official
+Arduino site.\footnote{\url{https://playground.arduino.cc/Main/I2cScanner/}}
 
 Also more advanced I2C-scanner called ``I2C\_Scanner'' can be installed through
 the Arduino IDE library manager.
@@ -266,5 +267,50 @@ procedure from the \texttt{Wire} library:
 \begin{minted}{cpp}
   Wire.endTransmission();
 \end{minted}
+
+This way we enabled one LED connected to the PCF8574 module.  To enable the LED
+again and therefore to implement the blinking effect we have to write the value
+\texttt{0b11111111} into the PCF8574 memory:
+
+\begin{minted}{cpp}
+  Wire.beginTransmission(ADDRESS);
+  Wire.write(0b11111111);
+  Wire.endTransmission()
+\end{minted}
+
+To prevent the blinking from being too fast, let's add a delay between turning
+the LED on and turning it off.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <Wire.h>
+
+    const byte ADDRESS = 0x27;
+
+    void setup() {
+      Wire.begin(ADDRESS);
+    }
+
+    void loop() {
+      Wire.beginTransmission(ADDRESS);
+      Wire.write(0b11111110);
+      Wire.endTransmission();
+
+      delay(1000);
+
+      Wire.beginTransmission(ADDRESS);
+      Wire.write(0b11111111);
+      Wire.endTransmission()
+
+      delay(1000);
+    }
+  \end{minted}
+  \label{listing:communication-pcf8574}
+  \caption{An example of LED control through the PCF8574 module and Wire
+    library.}
+\end{listing}
+
+In the code example \ref{listing:communication-pcf8574} we implemented the
+blinking effect on the one of the eight LEDs, connected to the PCF8574 module.
 
 \end{document}
