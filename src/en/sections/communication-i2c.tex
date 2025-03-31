@@ -313,4 +313,25 @@ the LED on and turning it off.
 In the code example \ref{listing:communication-pcf8574} we implemented the
 blinking effect on the one of the eight LEDs, connected to the PCF8574 module.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Bitwise operators}
+\index{Programming!Bitwise operators}
+
+There are special \emph{bitwise operators} in C language that allow us to
+conveniently handle individual bits.  They include: bitwise ``AND'' (denoted by
+``\&'' symbol), bitwise ``OR'' (denoted by ``|'' symbol), bitwise ``NOT''
+(denoted by ``$\sim$'' symbol), left shift (``<<'') and right shift (``>>''.)
+
+We will use an I2C device to clearly see those operators in action.
+
+For example, to set the fifth from the right bit in a byte to one, we can use
+the following code:
+
+\begin{minted}{cpp}
+  int a = 0b10000000;
+  a = a | 0b00010000;
+  // Result:
+  //      0b10010000;
+\end{minted}
+
 \end{document}
