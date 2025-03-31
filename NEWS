@@ -7,6 +7,23 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Unreleased
+** en
+*** Machine communication language
+New section.
+*** Music and technology synthesis
+**** Rest
+Fix some errors (thanks to Edino Tavares Moniz.)
+**** Dotted notes
+Fix some errors (thanks to Edino Tavares Moniz.)
+**** Irrational rhythms
+New section.
+** ru
+*** Синтез музыки и технологии
+**** Иррациональные ритмы
+Новый раздел.
+**** Диезы и бемоли
+Улучшение форматирования.
 * Version 3.0.2 (2025-02-16)
 ** common
 *** Change the Minted style for code examples
