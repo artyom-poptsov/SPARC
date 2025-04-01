@@ -233,9 +233,10 @@ Arduino.
 
 We can offer a better approach -- to use the project for both Arduino boards,
 using a value from a digital port to determine in the code which melody should
-be played.  Using a regular Arduino wire we can connect \texttt{SWITCH\_PORT} to
-the ground, and Arduino will play the guitar part.  If the port is not connected
-to the ground, the Arduino will play the vocal part.
+be played.  Using a regular Arduino wire we can connect the
+\texttt{SWITCH\_PORT} to the ground, and the Arduino will play the guitar part.
+If the port is not connected to the ground, the Arduino will play the vocal
+part.
 
 \begin{listing}[!h]
   \begin{minted}{cpp}
@@ -371,14 +372,14 @@ In the guitar part the total delay will be:
 \end{equation}
 
 That gives us 140ms of difference between two parts of the melody, and this
-error will accumulate over the time.  The longer the melody and more is the
-difference between the number of notes in each part of the melody, the greater
-error value will be.
+error will accumulate over the time.  The longer the melody, the bigger the
+difference between the number of notes in each part of the melody, and the
+greater the error value will be.
 
-To solve this problem we have to get rid of the fixed \texttt{delay} in the
-favor of adding an adaptive delay after each note, according the note length.
-The most convenient way to do that is to implement the logic inside
-\texttt{play\_tone} procedure, as is shown in the listing
+To solve this problem we have to get rid of the fixed \texttt{delay} in favor of
+adding an adaptive delay after each note, according the note length.  The most
+convenient way to do that is to implement the logic inside \texttt{play\_tone}
+procedure, as is shown in the listing
 \ref{listing:music-band-play-tone-with-delay}.
 
 \begin{listing}[H]
@@ -397,7 +398,7 @@ The most convenient way to do that is to implement the logic inside
           delayMicroseconds(d);
         }
       } else {
-        delay(t / 1000); // Пауза
+        delay(t / 1000); // Pause
       }
       // The delay after a note equals to
       // 10% percent of its length:
@@ -462,7 +463,7 @@ In the program code it looks like this:
   const int T = 1000000 / f;
 \end{minted}
 
-If we substitute the frequency of C4 in toe formula
+If we substitute the frequency of C4 in the formula
 \ref{equation:frequency-to-period} we will get the formula
 \ref{equation:frequency-to-period-c4}.
 
@@ -487,15 +488,15 @@ oscillations, we divide the length of the sound \texttt{t} by the period
 \end{equation}
 
 Where \texttt{count} is the variable that stores the number of oscillations.
-The program code for the formula looks like follows:
+The program code for the formula look as follows:
 
 \begin{minted}{cpp}
   int count = t / T;
 \end{minted}
 
-Let the length of our note will be 2s ($2000000 \mu\mbox{s}$.)  When we substitute
-the length of the wave period for C4 ($3822 \mu\mbox{s}$) we will get the
-following result:
+Let the length of our note be 2s ($2000000 \mu\mbox{s}$.)  When we substitute the
+length of the wave period for C4 ($3822 \mu\mbox{s}$) we will get the following
+result:
 
 \begin{equation}
   \mbox{Count} = 2000000 \mu\mbox{s} / 3822 \mbox{Hz} = 523.286237572
@@ -533,7 +534,7 @@ the formula \ref{equation:music-band-error-calculation}.
 \end{equation}
 
 The code of the \texttt{play\_tone} procedure with this error compensation can
-look like follows:
+look as follows:
 
 \begin{listing}[!h]
   \begin{minted}{cpp}
