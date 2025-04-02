@@ -8,22 +8,32 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   notice and this notice are preserved.
 
 * Unreleased
+** common
+*** Move some common code into separate files
 ** en
 *** Machine communication language
 New section.
 *** Music and technology synthesis
 **** Rest
-Fix some errors (thanks to Edino Tavares Moniz.)
+Fix some errors and typos (thanks to Edino Tavares Moniz.)
 **** Dotted notes
-Fix some errors (thanks to Edino Tavares Moniz.)
+Fix some errors and typos (thanks to Edino Tavares Moniz.)
 **** Irrational rhythms
 New section.
+**** Flats and sharps
+Fix some errors and typos (thanks to Edino Tavares Moniz.)
+**** Creating a music band
+Fix some errors and typos (thanks to Edino Tavares Moniz.)
 ** ru
 *** Синтез музыки и технологии
 **** Иррациональные ритмы
 Новый раздел.
 **** Диезы и бемоли
 Улучшение форматирования.
+**** Музыкальный размер
+Исправление ошибки в коде Arduino.
+*** Язык общения машин
+Исправление ошибок.
 * Version 3.0.2 (2025-02-16)
 ** common
 *** Change the Minted style for code examples
