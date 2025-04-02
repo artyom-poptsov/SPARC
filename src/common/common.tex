@@ -17,16 +17,30 @@
 %% This procedure allows to insert a music note.
 %% Syntax:
 %%   \musicnote{<octave>}{<note-name>}{<frequency>}
-\newcommand{\musicnote}[3]{
+\newcommand{\musicnote}[4]{
   &
-  \ifstrequal{#2}{C}{До   & C#1}{}
-  \ifstrequal{#2}{D}{Ре   & D#1}{}
-  \ifstrequal{#2}{E}{Ми   & E#1}{}
-  \ifstrequal{#2}{F}{Фа   & F#1}{}
-  \ifstrequal{#2}{G}{Соль & G#1}{}
-  \ifstrequal{#2}{A}{Ля   & A#1}{}
-  \ifstrequal{#2}{B}{Си   & B#1 (H#1)}{}
-  & #3 \\
+  \ifstrequal{#3}{C}{
+    \ifstrequal{#1}{en}{Do}{До}   & C#2
+  }{}
+  \ifstrequal{#3}{D}{
+    \ifstrequal{#1}{en}{Re}{Ре}   & D#2
+  }{}
+  \ifstrequal{#3}{E}{
+    \ifstrequal{#1}{en}{Mi}{Ми}   & E#2
+  }{}
+  \ifstrequal{#3}{F}{
+    \ifstrequal{#1}{en}{Fa}{Фа}   & F#2
+  }{}
+  \ifstrequal{#3}{G}{
+    \ifstrequal{#1}{en}{Sol}{Соль} & G#2
+  }{}
+  \ifstrequal{#3}{A}{
+    \ifstrequal{#1}{en}{La}{Ля}   & A#2
+  }{}
+  \ifstrequal{#3}{B}{
+    \ifstrequal{#1}{en}{Si}{Си}   & B#2 (H#2)
+  }{}
+  & #4 \\
 }
 
 \newcommand\esymbol[1]{%
