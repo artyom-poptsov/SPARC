@@ -9,24 +9,7 @@
 Let's imagine that we have some vessel filled with water (see figure
 \ref{fig:electronics-current-0}.)
 
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}[
-      declare function={f1(\x) = 0.15 * sin(8.0 * deg(\x));
-    }]
-
-    \draw[thick] (0, 0) -- (0, 4);
-    \draw[thick] (2, 0) -- (2, 4);
-    \draw[thick] (0, 0) -- (2, 0);
-
-    \begin{scope}[yshift=3cm, color=blue]
-      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
-    \end{scope}
-
-  \end{tikzpicture}
-  \caption{An example of a vessel with water.}
-  \label{fig:electronics-current-0}
-\end{figure}
+\figureElectronicsVoltage{en}
 
 The water in the vessel has some \emph{potential energy} that can be spent to
 achieve some goal.  For example, if we make a hole in the bottom of the vessel
