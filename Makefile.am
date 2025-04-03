@@ -96,6 +96,7 @@ COMMON = \
 	src/common/figureAnalogSignalExample.tex \
 	src/common/figureBlinkinLEDGraph.tex \
 	src/common/figureDigitalSignalExample.tex \
+	src/common/figureElectronicsResistance.tex \
 	src/common/figureElectronicsVoltage.tex \
 	src/common/figureElectronicsVoltageWithCurrent.tex \
 	src/common/figureIICSchematics.tex \
