@@ -1,0 +1,44 @@
+\newcommand{\figureElectronicsVoltageWithCurrent}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Пример ёмкости с водой и отверстием снизу.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    An example of a vessel with a hole in the bottom.
+  }
+  \fi
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}[
+        declare function={
+          f1(\x) = 0.15 * sin(8.0 * deg(\x));
+      }]
+
+      \draw[thick] (0, 0) -- (0, 4);
+      \draw[thick] (2, 0.5) -- (2, 4);
+      \draw[thick] (0, 0) -- (2, 0);
+
+      \draw[thick, color=blue] (1, 1) -- (1, 0.25);
+      \draw[thick, color=blue] (1, 0.25) -- (3, 0.25);
+      \draw[thick, color=blue, ->] (3, 0.25) -- (3, -0.25);
+
+      \begin{scope}[yshift=3cm, color=blue]
+        \draw (0, 0) plot[
+          domain=0:2,
+          variable=\x,
+          samples=200,
+          smooth
+        ] ({\x}, {f1(\x)});
+      \end{scope}
+
+    \end{tikzpicture}
+    \caption{\figureCaption}
+    \label{fig:electronics-current-1}
+  \end{figure}
+}
