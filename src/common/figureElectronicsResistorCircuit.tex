@@ -1,0 +1,32 @@
+\newcommand{\figureElectronicsResistorCircuit}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Схема со светодиодом и резистором $R_1$, ограничивающим ток.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    An electric circuit with an LED and a $R_1$ resistor that limits the
+    current.
+  }
+  \fi
+  \begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+      \draw
+      (0, 0) to[battery, l=Battery]
+      (0, 4) to[short]
+      (1, 4) to[resistor, l=$R_1$] (3, 4)
+      (3, 4) to[full led, l=LED] (7, 4)
+      (7, 4) to[short]
+      (7, 0) to[short]
+      (0, 0);
+    \end{circuitikz}
+    \caption{\figureCaption}
+    \label{fig:electronics-circuit-resistors}
+  \end{figure}
+}
