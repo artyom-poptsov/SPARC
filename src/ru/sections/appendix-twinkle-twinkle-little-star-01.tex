@@ -43,10 +43,14 @@ Little Star''.  Как можно видеть, пример получился 
   }
 
   void loop() {
-    const long BPM = 120; // Удары в минуту.
-    const long MINUTE = 60000000; // 1 минута в микросекундах.
-    const long T = (MINUTE / BPM) * 4; // Длина целой ноты.
-    const byte D = 100; // Задержка между нотами.
+    // Удары в минуту.
+    const long BPM = 120;
+    // 1 минута в микросекундах.
+    const long MINUTE = 60000000;
+    // Длина целой ноты.
+    const long T = (MINUTE / BPM) * 4;
+    // Задержка между нотами.
+    const byte D = 100;
 
     // 0-й такт.
     play_tone(SPEAKER_PIN, c4, T / 4);

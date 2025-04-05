@@ -44,10 +44,14 @@ quite long -- in part because we don't use arrays here.
   }
 
   void loop() {
+    // Beats per minute.
     const long BPM = 120;
-    const long MINUTE = 60000000; // 1 minute in microseconds
-    const long T = (MINUTE / BPM) * 4; // The bar length.
-    const byte D = 100; // Delay between notes.
+    // 1 minute in microseconds.
+    const long MINUTE = 60000000;
+    // The bar length.
+    const long T = (MINUTE / BPM) * 4;
+    // Delay between notes.
+    const byte D = 100;
 
     // 1st bar.
     play_tone(SPEAKER_PIN, c4, T / 4);
