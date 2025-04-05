@@ -66,17 +66,14 @@
    (native-inputs
     (list autoconf
           automake
-          python-pygments
           bash-minimal
-          perl
-          which
-          fontconfig))
-   (inputs
-    (list font-liberation
+          fontconfig
           git
           gnu-make
           inkscape
           lilypond
+          perl
+          python-pygments
           texlive-acronym
           texlive-adjustbox
           texlive-biblatex
@@ -105,7 +102,9 @@
           texlive-transparent
           texlive-trimspaces
           texlive-upquote
-          texlive-xetex))
+          texlive-xetex
+          which))
+   (inputs (list font-liberation))
    (arguments
     (list #:tests? #f                   ; no tests
           #:phases #~(modify-phases %standard-phases
