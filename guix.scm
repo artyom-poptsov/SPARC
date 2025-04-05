@@ -77,24 +77,23 @@
           gnu-make
           inkscape
           lilypond
-          texlive-fancyvrb
-          texlive-fontspec
-          texlive-koma-script
-          texlive-trimspaces
-          texlive-csquotes
           texlive-acronym
           texlive-adjustbox
-          texlive-bibtex
           texlive-biblatex
+          texlive-bibtex
           texlive-bibtexperllibs
           texlive-bigfoot
+          texlive-chngcntr
           texlive-circuitikz
           texlive-collection-langcyrillic
+          texlive-csquotes
+          texlive-fancyvrb
+          texlive-fontspec
           texlive-glossaries
           texlive-glossaries-english
           texlive-glossaries-extra
+          texlive-koma-script
           texlive-lilyglyphs
-          texlive-chngcntr
           texlive-minted
           texlive-multirow
           texlive-pgf
@@ -104,6 +103,7 @@
           texlive-t1utils
           texlive-textpos
           texlive-transparent
+          texlive-trimspaces
           texlive-upquote
           texlive-xetex))
    (arguments
