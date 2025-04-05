@@ -9,8 +9,6 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 
 * Unreleased
 ** common
-*** Replace =minted= with =minted2=
-Now the book depends on =minted2= package.
 *** Move some common code into separate files
 *** =common.tex=
 **** =\musicnote= now translates the note syllable names
