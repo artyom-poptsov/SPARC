@@ -9,10 +9,14 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 
 * Unreleased
 ** common
+*** Replace =minted= with =minted2=
+Now the book depends on =minted2= package.
 *** Move some common code into separate files
+*** =common.tex=
+**** =\musicnote= now translates the note syllable names
 ** en
 *** Machine communication language
-New section.
+New chapter.
 *** Music and technology synthesis
 **** Rest
 Fix some errors and typos (thanks to Edino Tavares Moniz.)
