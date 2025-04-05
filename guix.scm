@@ -81,6 +81,7 @@
           texlive-fontspec
           texlive-koma-script
           texlive-trimspaces
+          texlive-csquotes
           texlive-acronym
           texlive-adjustbox
           texlive-bibtex
