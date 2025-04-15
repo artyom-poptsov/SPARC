@@ -111,6 +111,7 @@ COMMON = \
 	src/common/figureProtocolClassification.tex \
 	src/common/figurePWMGraph.tex \
 	src/common/figureSerialPortDiagram.tex \
+	src/common/figureSmallLCD.tex \
 	src/common/figureSmallLCDSchematics.tex \
 	src/common/figureSoundGraph.tex \
 	src/common/tableCommunicationSerialPorts.tex \

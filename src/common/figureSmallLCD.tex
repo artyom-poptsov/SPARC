@@ -1,0 +1,24 @@
+\newcommand{\figureSmallLCD}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Схематическое изображение внешнего вида ЖК-дисплея 16x2 (источник
+    изображения: набор электронных компонентов программы Fritzing.)
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    A schematic representation of an 16x2 LCD (source of the image:
+    Fritzing electronic components library.)
+  }
+  \fi
+  \begin{figure}[h]
+    \centering
+    \includegraphics[width=10cm]{lcd-16x2}
+    \caption{\figureCaption}
+    \label{fig:lcd-16x2}
+  \end{figure}
+}
