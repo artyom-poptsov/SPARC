@@ -1,0 +1,30 @@
+\newcommand{\figureBigLCDShematics}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Схематическое изображение дисплея 20x4 (20 столбцов, 4 строки.)
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    A schematic representation of an 20x4 LCD (20 columns, 4 rows.)
+  }
+  \fi
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      \draw[gray, step=0.5] (0, 0) grid (10, 2);
+      \foreach [count=\i from 0] \x in {0.0, 0.5, 1.0, ..., 9.5} {
+        \draw (\x, 2.5) node[anchor=north west] {\i};
+      }
+      \foreach [count=\i from 0] \y in {1.5, 1.0, ..., 0.0} {
+        \draw (-0.5, \y) node[anchor=south west] {\i};
+      }
+    \end{tikzpicture}
+    \caption{\figureCaption}
+    \label{fig:lcd-20x4-schematics}
+  \end{figure}
+}
