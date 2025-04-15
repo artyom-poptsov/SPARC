@@ -158,16 +158,16 @@ lower (see the equation \ref{equation:uart-bauds-to-bytes-per-sec-2}.)
 In Arduino, there is a class for working with a serial port named
 \texttt{Serial}, that allows us to configure \gls{UART} parameters, to transmit
 and to receive the data.  We already worked with the serial port in the section
-\ref{section:serial-port}, and now we discuss it in more depth.
+\ref{section:serial-port}, and now we will discuss it in more depth.
 
-On all Arduino boards there at least one serial port, and some boards we have
+On all Arduino boards there is at least one serial port, and some boards we have
 more than one.  A list of serial ports and digital ports associated with them
 can be found in the table \ref{table:serial-ports--pins} (the data is taken from
 the description of \texttt{Serial} class from the \cite{arduino:reference}.)
 
 \tableCommunicationSerialPorts{en}
 
-On most of Arduino boards digital ports 0 (RX) and 1 (TX) is used by default for
+On most Arduino boards digital ports 0 (RX) and 1 (TX) is used by default for
 the serial port.  Specifically this serial port (\texttt{Serial}) is used for
 data transferring between a computer and an Arduino; thus the transferred data
 is duplicated on the digital ports connected to this serial port.
@@ -186,7 +186,7 @@ is duplicated on the digital ports connected to this serial port.
 
 To transfer data to a computer, we need to configure the speed of data transfer.
 It is reasonable to to this in \texttt{setup} procedure, as the speed is usually
-set once and does not changes throughout the period of serial port use.
+set once and does not change throughout the period of serial port use.
 
 The setting of serial port speed is done using the \texttt{begin} method from
 the \texttt{Serial} class.  In the following example we're setting the speed
@@ -253,7 +253,7 @@ is no data in the buffer, \texttt{read} returns -1 as the value.
   a way to signal the end of data with the returned value.  On the other hand,
   if \texttt{read} would return \texttt{char}, this problem would be solved (as
   \texttt{char} has the range from -128 to 127), but at the same time we would
-  have problems with receiving values from 128 to 255 (the maximal value, that
+  have problems with receiving values from 128 to 255 (the maximum value, that
   can be written in one byte.) }
 
 An example of data reading can be found in the listing below:
@@ -321,17 +321,17 @@ An example of software serial port usage is shown below.
 
 As this implementation of the serial port is based on the interrupt mechanism,
 with high receiving speeds we can observe an effect called ``interrupt
-starvation'' -- which means that an micro-controller spends most of its CPU time
+starvation'' -- which means that a micro-controller spends most of its CPU time
 handling interrupts and processing the incoming data, giving a minimal amount of
-time to the rest of the tasks.  In t his case, for example, the \texttt{loop}
+time to the rest of the tasks.  In this case, for example, the \texttt{loop}
 procedure will practically never be called, and the other interrupts (like ones
-from external buttons) won't be processed as well.
+the from external buttons) won't be processed as well.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Example: Transferring data between two Arduino boards}
 
-Now we discuss a more complex example where we will see not only the usage of
-the hardware serial port, but the software serial port as well.  For this we
+Now we will discuss a more complex example where we will see not only the usage
+of the hardware serial port, but the software serial port as well.  For this we
 need two Arduino boards between which we will transfer the data.
 
 For data transferring we will use \texttt{SoftwareSerial} with digital ports
