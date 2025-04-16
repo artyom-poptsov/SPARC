@@ -103,6 +103,7 @@ COMMON = \
 	src/common/figureElectronicsVoltage.tex \
 	src/common/figureElectronicsVoltageWithCurrent.tex \
 	src/common/figureIICSchematics.tex \
+	src/common/figureLCDConnection.tex \
 	src/common/figureMusicBarFourFour.tex \
 	src/common/figureMusicBarFourFourWithFrequencies.tex \
 	src/common/figureMusicSixBars.tex \

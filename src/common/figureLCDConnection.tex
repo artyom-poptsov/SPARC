@@ -1,0 +1,24 @@
+\newcommand{\figureLCDConnection}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Схема подключения ЖК-дисплея 16x2 по интерфейсу I2C к Arduino Mega
+    2560.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    A connection schematics for 16x2 LCD through I2C interface to an Arduino
+    Mega 2560.
+  }
+  \fi
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{schematics/lcd-00}
+    \caption{\figureCaption}
+    \label{fig:lcd-00}
+  \end{figure}
+}
