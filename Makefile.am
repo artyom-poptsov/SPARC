@@ -97,6 +97,7 @@ COMMON = \
 	src/common/figureBigLCD.tex \
 	src/common/figureBigLCDSchematics.tex \
 	src/common/figureBlinkinLEDGraph.tex \
+	src/common/figureButtonCircuit.tex \
 	src/common/figureDigitalSignalExample.tex \
 	src/common/figureElectronicsResistance.tex \
 	src/common/figureElectronicsResistorCircuit.tex \
