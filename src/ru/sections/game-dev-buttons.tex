@@ -140,7 +140,7 @@ Arduino считает это значение единицей.
     }
   \end{minted}
   \caption{Пример использования режима \texttt{INPUT\_PULLUP}.}
-  \label{listing:play-tone-procedure}
+  \label{listing:game-dev-input-pullup-example}
 \end{listing}
 
 При таком использовании работа с кнопкой ``инвертируется'' -- когда она нажата,
@@ -154,32 +154,40 @@ Arduino считает это значение единицей.
 в виде именованной константы \texttt{BUTTON\_R} (``R'' от слова ``Right'',
 ``Вправо''.)
 
-\begin{minted}{cpp}
-  #include <LiquidCrystal_I2C.h>
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
 
-  LiquidCrystal_I2C lcd(0x27,  16, 2);
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
 
-  // Кнопки управления.
-  const char BUTTON_R = 2;      // Кнопка ``Вправо''
+    // Кнопки управления.
+    const char BUTTON_R = 2;      // Кнопка ``Вправо''
 
-  const char PLAYER = '@';
+    const char PLAYER = '@';
 
-  int player_x = 0;
-  int player_y = 0;
-\end{minted}
+    int player_x = 0;
+    int player_y = 0;
+  \end{minted}
+  \caption{Задание констант для кнопок управления.}
+  \label{listing:game-dev-button-constants}
+\end{listing}
 
 Далее в \texttt{setup} необходимо настроить режим работы порта для кнопки через
 \texttt{pinMode}, как мы делали это в предыдущих примерах.
 
-\begin{minted}{cpp}
-  void setup() {
-    lcd.init();
-    lcd.backlight();
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      lcd.init();
+      lcd.backlight();
 
-    // Настройка кнопок управления.
-    pinMode(BUTTON_R, INPUT_PULLUP);
-  }
-\end{minted}
+      // Настройка кнопок управления.
+      pinMode(BUTTON_R, INPUT_PULLUP);
+    }
+  \end{minted}
+  \caption{Настройка режима работы \texttt{INPUT\_PULLUP} цифрового порта.}
+  \label{listing:game-dev-input-pullup-mode}
+\end{listing}
 
 После этого следует определиться, как мы будем обрабатывать нажатия кнопок.
 Сейчас самым простым для нас способом обработки нажатий является поочерёдный
@@ -189,50 +197,58 @@ Arduino считает это значение единицей.
 подключена кнопка, используя уже знакомый нам \texttt{digitalRead}, и если
 значение будет \texttt{LOW}, то менять позицию персонажа.
 
-\begin{minted}{cpp}
-  void loop() {
-    if (digitalRead(BUTTON_R) == LOW) {
-      player_x++;
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
     }
-    lcd.setCursor(player_x, player_y);
-    lcd.print(PLAYER);
-  }
-\end{minted}
+  \end{minted}
+  \caption{Изменение позиции персонажа игры по нажатию кнопки ``ВПРАВО''.}
+  \label{listing:game-dev-button-right}
+\end{listing}
 
 Таким образом, при нажатии кнопки ``ВПРАВО'' мы будем получать смещение
 персонажа вправо.
 
 В общем виде, код нашей игры на текущий момент выглядит так:
 
-\begin{minted}{cpp}
-  #include <LiquidCrystal_I2C.h>
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
 
-  LiquidCrystal_I2C lcd(0x27,  16, 2);
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
 
-  // Кнопки управления.
-  const char BUTTON_R = 2;      // Кнопка ``Вправо''
+    // Кнопки управления.
+    const char BUTTON_R = 2;      // Кнопка ``Вправо''
 
-  const char PLAYER = '@';
+    const char PLAYER = '@';
 
-  int player_x = 0;
-  int player_y = 0;
+    int player_x = 0;
+    int player_y = 0;
 
-  void setup() {
-    lcd.init();
-    lcd.backlight();
+    void setup() {
+      lcd.init();
+      lcd.backlight();
 
-    // Настройка кнопок управления.
-    pinMode(BUTTON_R, INPUT_PULLUP);
-  }
-
-  void loop() {
-    if (digitalRead(BUTTON_R) == LOW) {
-      player_x++;
+      // Настройка кнопок управления.
+      pinMode(BUTTON_R, INPUT_PULLUP);
     }
-    lcd.setCursor(player_x, player_y);
-    lcd.print(PLAYER);
-  }
-\end{minted}
+
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+    }
+  \end{minted}
+  \caption{Полный пример реализации движения игрока вправо по кнопке.}
+  \label{listing:game-dev-button-right-full-example}
+\end{listing}
 
 Здесь, однако же, кроется проблема -- при единичном (на наш взгляд) нажатии
 кнопки, игрок может пробежать до конца карты, или даже скрыться за её пределами.
@@ -245,61 +261,68 @@ Arduino считает это значение единицей.
 Для борьбы с этой проблемой необходимо добавить короткую задержку (например, в
 100мс) в конце \texttt{loop}:
 
-\begin{minted}{cpp}
-  void loop() {
-    if (digitalRead(BUTTON_R) == LOW) {
-      player_x++;
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      // Задержка, чтобы избежать слишком быстрого
+      // считывания нажатий на кнопки.
+      delay(100);
     }
-    lcd.setCursor(player_x, player_y);
-    lcd.print(PLAYER);
-
-    // Задержка, чтобы избежать слишком быстрого считывания
-    // нажатий на кнопки.
-    delay(100);
-  }
-\end{minted}
-
+  \end{minted}
+  \caption{Добавление задержки в \texttt{loop} для улучшения считывания кнопки.}
+  \label{listing:game-dev-button-delay}
+\end{listing}
 
 Точно таким же образом мы можем добавить кнопку движения влево, слегка дополнив
 код нашего примера.  Поскольку исходный код нашей игры будет дальше расти, для
 краткости будем сокращать уже написанные части, акцентируя внимание на том, что
 поменялось.
 
-\begin{minted}{cpp}
-  // ... Код подключения библиотеки и создания
-  //     переменной "lcd". ...
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // ... Код подключения библиотеки и создания
+    //     переменной "lcd". ...
 
-  // Кнопки управления.
-  const char BUTTON_R = 2;      // Кнопка "Вправо"
-  const char BUTTON_L = 3;      // Кнопка "Влево"
+    // Кнопки управления.
+    const char BUTTON_R = 2;      // Кнопка "Вправо"
+    const char BUTTON_L = 3;      // Кнопка "Влево"
 
-  const char PLAYER = '@';
+    const char PLAYER = '@';
 
-  // ... Код задания переменных позиции игрока. ...
+    // ... Код задания переменных позиции игрока. ...
 
-  void setup() {
-    // ... Код настройки дисплея. ...
+    void setup() {
+      // ... Код настройки дисплея. ...
 
-    // Настройка кнопок управления.
-    pinMode(BUTTON_R, INPUT_PULLUP);
-    pinMode(BUTTON_L, INPUT_PULLUP);
-  }
-
-  void loop() {
-    if (digitalRead(BUTTON_R) == LOW) {
-      player_x++;
+      // Настройка кнопок управления.
+      pinMode(BUTTON_R, INPUT_PULLUP);
+      pinMode(BUTTON_L, INPUT_PULLUP);
     }
-    if (digitalRead(BUTTON_L) == LOW) {
-      player_x--;
-    }
-    lcd.setCursor(player_x, player_y);
-    lcd.print(PLAYER);
 
-    // Задержка, чтобы избежать слишком быстрого считывания
-    // нажатий на кнопки.
-    delay(100);
-  }
-\end{minted}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      if (digitalRead(BUTTON_L) == LOW) {
+        player_x--;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      // Задержка, чтобы избежать слишком быстрого
+      // считывания нажатий на кнопки.
+      delay(100);
+    }
+  \end{minted}
+  \caption{Обработка нажатия кнопки ``ВЛЕВО''.}
+  \label{listing:game-dev-button-left}
+\end{listing}
 
 Запустите эту программу, попробуйте походить влево-вправо.  В скором времени вы
 заметите, что есть серьёзная проблема -- игрок может выйти за пределы дисплея
@@ -318,63 +341,72 @@ Arduino считает это значение единицей.
 нашего дисплея -- 16 столбцов, то мы можем ограничить движение вправо 15-й
 клеткой.
 
-\begin{minted}{cpp}
-  // ... Код, который мы писали до этого ...
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // ... Код, который мы писали до этого ...
 
-  void loop() {
-    if (digitalRead(BUTTON_R) == LOW) {
-      // Делаем ограничение движения игрока вправо.
-      // Если игрок уже на 15-й клетке, то дальше двигаться
-      // ему нельзя.
-      if (player_x < 15) {
-        player_x++;
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        // Делаем ограничение движения игрока вправо.
+        // Если игрок уже на 15-й клетке, то дальше
+        // двигаться ему нельзя.
+        if (player_x < 15) {
+          player_x++;
+        }
       }
-    }
-    if (digitalRead(BUTTON_L) == LOW) {
-      player_x--;
-    }
-    lcd.setCursor(player_x, player_y);
-    lcd.print(PLAYER);
+      if (digitalRead(BUTTON_L) == LOW) {
+        player_x--;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
 
-    // Задержка, чтобы избежать слишком быстрого считывания
-    // нажатий на кнопки.
-    delay(100);
-  }
-\end{minted}
+      // Задержка, чтобы избежать слишком быстрого
+      // считывания нажатий на кнопки.
+      delay(100);
+    }
+  \end{minted}
+  \caption{Ограничение движения игрока вправо.}
+  \label{listing:game-dev-player-right--constrain}
+\end{listing}
 
 С движением влево нужна подобная же проверка, с разницей в том, что крайняя
 левая точка у нас -- это нулевая клетка.
 
-\begin{minted}{cpp}
-  // ... Код, который мы писали до этого ...
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    // ... Код, который мы писали до этого ...
 
-  void loop() {
-    if (digitalRead(BUTTON_R) == LOW) {
-      // Делаем ограничение движения игрока вправо.
-      // Если игрок уже на 15-й клетке, то дальше двигаться
-      // ему нельзя.
-      if (player_x < 15) {
-        player_x++;
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        // Делаем ограничение движения игрока вправо.
+        // Если игрок уже на 15-й клетке, то дальше
+        // двигатьсяему нельзя.
+        if (player_x < 15) {
+          player_x++;
+        }
       }
-    }
-    if (digitalRead(BUTTON_L) == LOW) {
-      // Делаем ограничение движения игрока влево.
-      // Если игрок уже на нулевой клетке, то левее
-      // двигаться ему уже некуда.
-      if (player_x > 0) {
-        player_x--;
+      if (digitalRead(BUTTON_L) == LOW) {
+        // Делаем ограничение движения игрока влево.
+        // Если игрок уже на нулевой клетке, то левее
+        // двигаться ему уже некуда.
+        if (player_x > 0) {
+          player_x--;
+        }
       }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      // Задержка, чтобы избежать слишком быстрого
+      // считывания нажатий на кнопки.
+      delay(100);
     }
-    lcd.setCursor(player_x, player_y);
-    lcd.print(PLAYER);
+  \end{minted}
+  \caption{Ограничение движения игрока влево и вправо.}
+  \label{listing:game-dev-player-left-constrain}
+\end{listing}
 
-    // Задержка, чтобы избежать слишком быстрого считывания
-    // нажатий на кнопки.
-    delay(100);
-  }
-\end{minted}
-
-Таким образом мы обработали оба случая, когда игрок мог выйти за нашу игровую
-карту.
+В листинге \ref{listing:game-dev-player-left-constrain} показана реализация
+ограничений движения игрока вправо и влево.  Таким образом мы обработали оба
+случая, когда игрок мог выйти за нашу игровую карту.
 
 \end{document}
