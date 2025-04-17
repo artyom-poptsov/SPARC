@@ -1,7 +1,7 @@
 \newcommand{\figureBlinkinLEDGraph}[1]{
   \def\lang{\detokenize{#1}}
   \def\langRu{\detokenize{ru}}
-  \def\langEn{en}
+  \def\langEn{\detokenize{en}}
   \def\figureCaption{XXX: No translation.}
   \ifx \lang\langRu
   \def\figureCaption{
@@ -9,7 +9,7 @@
     порту.
   }
   \fi
-  \if \lang\langEn
+  \ifx \lang\langEn
   \def\figureCaption{
     Graphical representation of a signal in relation to the time on a
     digital port.
