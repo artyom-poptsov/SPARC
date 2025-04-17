@@ -112,31 +112,7 @@ Arduino считает это значение единицей.
 при нажатии на кнопку замыкаться не на \texttt{5V}, а на \texttt{GND}
 (см. рис. \ref{fig:game-dev-button-with-pull-up-resistor}.)
 
-\begin{figure}[H]
-  \centering
-  \begin{circuitikz}
-    \draw (3.5, 0) node[
-      dipchip,
-      num pins=2,
-      external pins width=0.0,
-      no topmark,
-      hide numbers,
-      xscale = 2.5,
-      yscale = 2.5](C1){Arduino};
-    \node [above left, font=\small] at (C1.bpin 1) {GND};
-    \node [above right, font=\small] at (C1.bpin 2) {2};
-    \draw
-    (C1.bpin 1) to[short]
-    (0, 0) to[short]
-    (0, 4) to[push button, l=Тактовая кнопка] (7, 4)
-    (7, 4) to[short]
-    (7, 0) to[short]
-    (C1.bpin 2);
-  \end{circuitikz}
-  \caption{Схема подключения кнопки к Arduino при использовании встроенного
-    подтягивающего резистора к 5V.}
-  \label{fig:game-dev-button-with-pull-up-resistor}
-\end{figure}
+\figureButtonPullupResistorCircuit{ru}
 
 Настройка порта в этом случае должна производиться на режим
 \texttt{INPUT\_PULLUP}.  В остальном же код нашего примера остаётся без

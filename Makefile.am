@@ -99,6 +99,7 @@ COMMON = \
 	src/common/figureBlinkinLEDGraph.tex \
 	src/common/figureButtonCircuit.tex \
 	src/common/figureButtonPulldownResistorCircuit.tex \
+	src/common/figureButtonPullupResistorCircuit.tex \
 	src/common/figureDigitalSignalExample.tex \
 	src/common/figureElectronicsResistance.tex \
 	src/common/figureElectronicsResistorCircuit.tex \
