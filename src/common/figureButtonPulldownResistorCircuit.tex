@@ -1,0 +1,54 @@
+\newcommand{\figureButtonPulldownResistorCircuit}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \def\figureButtonTitle{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Схема подключения кнопки к Arduino с подтягивающим резистором.
+  }
+  \def\figureButtonTitle{
+    Тактовая кнопка.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    One of the possible ways to connect a button with a pull-down resistor an
+    Arduino.
+  }
+  \def\figureButtonTitle{
+    A push button.
+  }
+  \fi
+  \begin{figure}[H]
+    \centering
+    \begin{circuitikz}
+      \draw (3.5, 0) node[
+        dipchip,
+        num pins=3,
+        external pins width=0.0,
+        no topmark,
+        hide numbers,
+        xscale = 2.5,
+        yscale = 2.5](C1){Arduino};
+      \node [above left, font=\small] at (C1.bpin 1) {5V};
+      \node [above right, font=\small] at (C1.bpin 2) {2};
+      \node [above right, font=\small] at (C1.bpin 3) {GND};
+      \draw
+      (C1.bpin 1) to[short]
+      (0, 0.35) to[short]
+      (0, 4) to[push button, l=\figureButtonTitle] (9, 4)
+      (9, 4) to[short]
+      (9, -0.35) to[short]
+      (C1.bpin 2);
+      \draw
+      (C1.bpin 3) to [short]
+      (7, 1) to [european resistor, l=$R_1$]
+      (8, 1) to [short]
+      (9, 1);
+    \end{circuitikz}
+    \caption{\figureCaption}
+    \label{fig:game-dev-button-with-pull-down-resistor}
+  \end{figure}
+}
