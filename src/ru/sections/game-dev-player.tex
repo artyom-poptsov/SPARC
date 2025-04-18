@@ -4,6 +4,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Отображение игрового персонажа}
+\label{section:player}
 \index{Разработка игр!Игровой персонаж}
 
 В большинстве жанров компьютерных игр существует некоторый персонаж, который
@@ -14,41 +15,53 @@
 
 Зададим ``изображение'' в виде символьной константы где-то в начале программы:
 
-\begin{minted}{cpp}
-const char PLAYER = '@';
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const char PLAYER = '@';
+  \end{minted}
+  \caption{Объявление константы, хранящей отображение игрока.}
+  \label{listing:game-dev-player-image}
+\end{listing}
 
 Далее нам необходимо задать позицию персонажа в двумерном пространстве нашей
 игровой ``карты'':
 
-\begin{minted}{cpp}
-int player_x = 0;
-int player_y = 0;
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int player_x = 0;
+    int player_y = 0;
+  \end{minted}
+  \caption{Объявление переменных, задающих позицию игрока на карте.}
+  \label{listing:game-dev-player-position}
+\end{listing}
 
 После этого мы можем отобразить персонажа на экране.  Полный код программы будет
 выглядеть примерно так, как показано ниже.
 
-\begin{minted}{cpp}
-  #include <LiquidCrystal_I2C.h>
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
 
-  LiquidCrystal_I2C lcd(0x27,  16, 2);
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
 
-  const char PLAYER = '@';
+    const char PLAYER = '@';
 
-  int player_x = 0;
-  int player_y = 0;
+    int player_x = 0;
+    int player_y = 0;
 
-  void setup() {
-    lcd.init();
-    lcd.backlight();
-  }
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+    }
 
-  void loop() {
-    lcd.setCursor(player_x, player_y);
-    lcd.print(PLAYER);
-  }
-\end{minted}
+    void loop() {
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+    }
+  \end{minted}
+  \caption{Пример кода, отображающего игрового персонажа на экране ЖК-дисплея.}
+  \label{listing:game-dev-player-example}
+\end{listing}
 
 После загрузки данной программы в Arduino, на экране на нулевой строке в первом
 столбце должен появиться символ ``@''.
