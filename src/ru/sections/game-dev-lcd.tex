@@ -96,13 +96,17 @@
 
 Установив библиотеку, мы сможем использовать её функционал.
 
-Первым делом в коде нам необходимо подключить библиотеку
+Первым делом в коде нам необходимо подключить библиотеку \\
 ``LiquidCrystal\_I2C.h'' -- это делается через специальную команду
 \texttt{\#include}.
 
-\begin{minted}{cpp}
-#include <LiquidCrystal_I2C.h>
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
+  \end{minted}
+  \caption{Подключение заголовочного файла для работы с дисплеем.}
+  \label{listing:game-dev-lcd-include}
+\end{listing}
 
 В глобальной области кода (до функции \texttt{setup} и \texttt{loop}) необходимо
 создать специальную переменную, через которую мы будем работать с дисплеем. Эта
@@ -118,9 +122,13 @@
 Назовём переменную \texttt{lcd}, по сокращению \gls{LCD} -- ``Liquid Crystal
 Display'':
 
-\begin{minted}{cpp}
-LiquidCrystal_I2C lcd(0x27,  16, 2);
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
+  \end{minted}
+  \caption{Создание объекта для работы с ЖК-дисплеем.}
+  \label{listing:game-dev-lcd-object}
+\end{listing}
 
 В круглых скобках задаются параметры создаваемого объекта.  Посмотрим на них
 подробнее.
@@ -141,10 +149,14 @@ I2C-модуля перемычек.  Самый младший бит (вось
 С особенностями задания параметров дисплея разобрались, теперь пришло время в
 функции \texttt{setup} выполнить настройку дисплея.
 
-\begin{minted}{cpp}
-lcd.init();
-lcd.backlight();
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    lcd.init();
+    lcd.backlight();
+  \end{minted}
+  \caption{Код инициализации ЖК-дисплея.}
+  \label{listing:game-dev-lcd-init}
+\end{listing}
 
 Поскольку переменная \texttt{lcd} хранит в себе сложный объект, со своими
 свойствами и возможными действиями (\emph{методами}), то работа с ней может показаться
@@ -171,36 +183,48 @@ lcd.backlight();
 которое будет ``впечатан'' текст.  Для этого существует специальный метод
 \texttt{setCursor}.
 
-\begin{minted}{cpp}
-lcd.setCursor(0, 0);
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    lcd.setCursor(0, 0);
+  \end{minted}
+  \caption{Код установки позиции курсора ЖК-дисплея.}
+  \label{listing:game-dev-lcd-set-cursor}
+\end{listing}
 
 Первый параметр \texttt{setCursor} задаёт позицию курсора по оси X, второй
 параметр задаёт позицию по оси Y.
 
 После этого наконец-то мы можем вывести текст с помощью метода \texttt{print}:
 
-\begin{minted}{cpp}
-lcd.print("Hello, World!");
-\end{minted}
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    lcd.print("Hello, World!");
+  \end{minted}
+  \caption{Код вывода строки на ЖК-дисплей.}
+  \label{listing:game-dev-lcd-print}
+\end{listing}
 
 Полностью код будет выглядеть примерно так, как показано ниже.
 
-\begin{minted}{cpp}
-#include <LiquidCrystal_I2C.h>
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
 
-LiquidCrystal_I2C lcd(0x27,  16, 2);
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
 
-void setup() {
-  lcd.init();
-  lcd.backlight();
-}
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+    }
 
-void loop() {
-  lcd.setCursor(0, 0);
-  lcd.print("Hello, World!");
-}
-\end{minted}
+    void loop() {
+      lcd.setCursor(0, 0);
+      lcd.print("Hello, World!");
+    }
+  \end{minted}
+  \caption{Пример простой программы, выводящей текст на ЖК-дисплей.}
+  \label{listing:game-dev-lcd-example-00}
+\end{listing}
 
 При необходимости очистить экран можно ``затереть'' текст, впечатав поверх
 пробелы, или же воспользоваться методом \texttt{clear}, который позволяет
