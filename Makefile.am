@@ -95,6 +95,7 @@ COMMON = \
 	src/common/figureADC.tex \
 	src/common/figureAnalogSignalExample.tex \
 	src/common/figureArray.tex \
+	src/common/figureArrayOfPointers.tex \
 	src/common/figureBigLCD.tex \
 	src/common/figureBigLCDSchematics.tex \
 	src/common/figureBlinkinLEDGraph.tex \
