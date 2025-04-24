@@ -345,7 +345,7 @@ the port number 10 (RX) on the Arduino-receiver.  Also we must connect ground
 pins (\texttt{GND}) on both Arduino boards to ensure that they have the same
 logical level for zero.  On fig. \ref{fig:arduino-serial-communication-1} we can
 see an example of how to connect two Arduino Mega 2560 boards for this project.
-We also can use other Arduino boards, given that we made required modifications
+We can also use other Arduino boards, given that we made required modifications
 to the code.
 
 \begin{figure}[H]
@@ -357,8 +357,8 @@ to the code.
   \label{fig:arduino-serial-communication-1}
 \end{figure}
 
-The program code is the same for the both Arduino, the switch to the receiver
-mode is done by connecting digital port 4 to the ground; if this port is not
+The program code is the same for both Arduino, the switch to the receiver mode
+is done by connecting digital port 4 to the ground; if this port is not
 connected, then the Arduino works in the transmitter mode. The full code is
 shown in the listing \ref{listing:communication-serial-two-arduino-example}.
 
@@ -397,15 +397,15 @@ use different voltage values for logical levels.
   \label{fig:arduino-serial-communication-2}
 \end{figure}
 
-The biggest problem when laser is used for such data transfer is to adjust the
-light-sensitive sensor (a photoresistor) so an Arduino can distinguish ones from
-zeroes.  The easiest way to do this is to use a voltage divider circuit where
-$R_1$ is the photoresistor and $R_2$ is a potentiometer.  It will allow us to
-adjust relation of $R_1$ to $R_2$ to change the voltage level that the Arduino
-will receive when $R_1$ change.  By manual adjusting of the $R_2$ potentiometer
-we can achieve the balance where the photoresistor $R_1$ will give us the
-voltage level that is represents logical zero when it is not illuminated with
-the laser; and when the laser beam illuminates the photoresistor, the
+The biggest problem when the laser is used for such data transfer is to adjust
+the light-sensitive sensor (a photoresistor) so an Arduino can distinguish ones
+from zeroes.  The easiest way to do this is to use a voltage divider circuit
+where $R_1$ is the photoresistor and $R_2$ is a potentiometer.  It will allow us
+to adjust relation of $R_1$ to $R_2$ to change the voltage level that the
+Arduino will receive when $R_1$ change.  By manual adjusting of the $R_2$
+potentiometer we can achieve the balance where the photoresistor $R_1$ will give
+us the voltage level that is represents logical zero when it is not illuminated
+with the laser; and when the laser beam illuminates the photoresistor, the
 photoresistor will give us voltage level of logical one (see the
 fig. \ref{fig:arduino-serial-communication-2}.)
 
