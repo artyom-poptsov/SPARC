@@ -94,18 +94,23 @@
 
 Пример отрисовки человечка:
 
-\begin{minted}{cpp}
-  byte player_image[8] = {
-    0b01110,
-    0b01110,
-    0b00100,
-    0b01110,
-    0b10101,
-    0b01110,
-    0b01010,
-    0b01010
-  };
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    byte player_image[8] = {
+      0b01110,
+      0b01110,
+      0b00100,
+      0b01110,
+      0b10101,
+      0b01110,
+      0b01010,
+      0b01010
+    };
+  \end{minted}
+  \caption{Символ для текстового ЖК-дисплея, заданный через одномерный массив
+    байт.}
+  \label{listing:game-dev-lcd-custom-char}
+\end{listing}
 
 Визуальное представление данного символа:
 
@@ -153,42 +158,54 @@
 удобно использовать константы типа \texttt{char}, поэтому мы создадим константу
 \texttt{PLAYER} для нашего игрока:
 
-\begin{minted}{cpp}
-  const char PLAYER = 0; // Код символа
-  // Визуальное представление символа.
-  byte player_image[8] = {
-    0b01110,
-    0b01110,
-    0b00100,
-    0b01110,
-    0b10101,
-    0b01110,
-    0b01010,
-    0b01010
-  };
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const char PLAYER = 0; // Код символа
+    // Визуальное представление символа.
+    byte player_image[8] = {
+      0b01110,
+      0b01110,
+      0b00100,
+      0b01110,
+      0b10101,
+      0b01110,
+      0b01010,
+      0b01010
+    };
+  \end{minted}
+  \caption{Задание константы для хранения кода собственного символа.}
+  \label{listing:game-dev-lcd-custom-char-const}
+\end{listing}
 
 Затем в \texttt{setup} пропишем символ в память дисплея:
 
-\begin{minted}{cpp}
-  void setup() {
-    lcd.init();
-    lcd.backlight();
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      lcd.init();
+      lcd.backlight();
 
-    // Запись символа в память дисплея:
-    lcd.createChar(PLAYER, player_image);
-  }
-\end{minted}
+      // Запись символа в память дисплея:
+      lcd.createChar(PLAYER, player_image);
+    }
+  \end{minted}
+  \caption{Запись собственного символа в память ЖК-дисплея.}
+  \label{listing:game-dev-lcd-create-char}
+\end{listing}
 
 После этого мы можем вывести символ на ЖК-дисплей просто вызвав функцию
 \texttt{print}, передав в неё нашу константу \texttt{PLAYER}:
 
-\begin{minted}{cpp}
-  void loop() {
-    lcd.setCursor(0, 0);
-    lcd.print(PLAYER);
-  }
-\end{minted}
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      lcd.setCursor(0, 0);
+      lcd.print(PLAYER);
+    }
+  \end{minted}
+  \caption{Вывод собственного символа на экран ЖК-дисплея.}
+  \label{listing:game-dev-lcd-print}
+\end{listing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Задачи}
