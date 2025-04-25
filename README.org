@@ -1,6 +1,7 @@
 * Science, Programming, Art and Radioelectronics Club (SPARC) book
 
 [[https://github.com/artyom-poptsov/SPARC/actions/workflows/pdf.yaml/badge.svg]]
+[[https://github.com/artyom-poptsov/SPARC/actions/workflows/ubuntu.yaml/badge.svg]]
 
 This =README= is also available in other languages: [[./README.ru.org][ru]]
 
