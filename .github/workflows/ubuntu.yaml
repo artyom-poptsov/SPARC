@@ -19,7 +19,7 @@ jobs:
               make \
               lilypond \
               biber \
-              fonts-liberation =
+              fonts-liberation \
               texlive-full \
               python3-pygments \
               inkscape
