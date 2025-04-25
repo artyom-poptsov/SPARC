@@ -50,29 +50,20 @@ guix shell --pure -D -f guix.scm
 make -j$(nproc)
 #+END_EXAMPLE
 
-*** Ubuntu GNU/Linux 22.04
+*** Ubuntu GNU/Linux 24.04
 Установка зависимостей из репозитория:
 #+BEGIN_EXAMPLE shell
 sudo apt update
 sudo apt install -yqq \
-    git \
     automake \
-    make \
-    lilypond \
     biber \
     fonts-liberation \
-    texlive-full \
+    git \
+    inkscape \
+    lilypond \
+    make \
     python3-pygments \
-    inkscape
-#+END_EXAMPLE
-
-Установка пакета Lilyglyphs:
-#+BEGIN_EXAMPLE shell
-cd /tmp/
-wget https://mirrors.ctan.org/macros/unicodetex/latex/lilyglyphs.zip
-unzip lilyglyphs.zip
-sudo cp -r ./lilyglyphs/tex/* /usr/share/texmf/tex/latex/
-sudo mktexlsr
+    texlive-full
 #+END_EXAMPLE
 
 В остальном сборка может быть произведена в ручном режиме, как показано выше.
