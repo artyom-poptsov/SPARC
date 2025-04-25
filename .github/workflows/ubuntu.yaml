@@ -1,0 +1,37 @@
+name: Ubuntu
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt --force-yes -qy install \
+              git \
+              automake \
+              make \
+              lilypond \
+              biber \
+              fonts-liberation =
+              texlive-full \
+              python3-pygments \
+              inkscape
+
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Autoreconf
+        run: autoreconf -vif
+
+      - name: Configure
+        run: ./configure
+
+      - name: Build
+        run: make -j$(nproc)
