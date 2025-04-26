@@ -85,6 +85,7 @@ SECTIONS = \
 	src/ru/sections/game-dev-graphics.tex	\
 	src/ru/sections/game-dev-animation.tex	\
 	src/ru/sections/game-dev-logic.tex	\
+	src/ru/sections/interrupts-intro.tex \
 	src/ru/sections/appendix-octaves.tex	\
 	src/ru/sections/appendix-prostokvashino-score.tex \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-01.tex \
