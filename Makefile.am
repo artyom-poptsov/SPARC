@@ -86,6 +86,7 @@ SECTIONS = \
 	src/ru/sections/game-dev-animation.tex	\
 	src/ru/sections/game-dev-logic.tex	\
 	src/ru/sections/interrupts-intro.tex \
+	src/ru/sections/interrupts-types.tex \
 	src/ru/sections/appendix-octaves.tex	\
 	src/ru/sections/appendix-prostokvashino-score.tex \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-01.tex \
@@ -109,6 +110,7 @@ COMMON = \
 	src/common/figureElectronicsVoltage.tex \
 	src/common/figureElectronicsVoltageWithCurrent.tex \
 	src/common/figureIICSchematics.tex \
+	src/common/figureInterruptTypes.tex \
 	src/common/figureLCDChar.tex \
 	src/common/figureLCDCharAnimation.tex \
 	src/common/figureLCDCharPlayer.tex \
