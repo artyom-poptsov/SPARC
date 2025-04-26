@@ -107,7 +107,8 @@
 три параметра:
 \begin{enumerate}
 \item \texttt{<interrupt>} -- номер прерывания.
-\item \texttt{<procedure>} -- процедура, являющаяся обработчиком прерывания.
+\item \texttt{<procedure>} -- указатель на процедуру, являющуюся обработчиком
+  прерывания.
 \item \texttt{<mode>} -- условие срабатывания прерывания.
 \end{enumerate}
 
@@ -121,7 +122,7 @@
     }
 
     void setup() {
-      attachInterrupt();
+      attachInterrupt(0, toggle_led, RISING);
     }
   \end{minted}
   \caption{Процедура, выполняющая роль обработчика прерывания.}
