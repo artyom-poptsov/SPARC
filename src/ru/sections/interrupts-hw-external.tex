@@ -16,6 +16,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Номер прерывания}
+\label{subsection:interrupts-number}
 
 У каждого внешнего аппаратного прерывания есть свой \emph{номер}.  Нам
 необходимо знать номер прерывания, чтобы его обработать.  Важно отметить, что
@@ -30,7 +31,46 @@
 Узнать номер прерывания, зная номер цифрового порта, можно, используя таблицу
 \ref{table:interrupts-table}.  Как можно видеть, на одних платах доступны всего
 два цифровых порта для обработки прерываний, тогда как на других вариантов
-гораздо больше.
+гораздо больше (см. \cite{arduino:reference}, раздел про
+\texttt{attachInterrupt}.)
+
+Например, для Arduino Uno прерывание с номером ноль (``int.0'') соответствует
+цифровой порт номер 2.
+
+Чтобы не искать номер цифрового порта для прерывания по таблице, можно
+воспользоваться процедурой \texttt{digitalPinToInterrupt} из стандартной
+библиотеки Arduino.  Процедура принимает номер порта в качестве параметра и
+возвращает номер прерывания для этого порта.  В случае, если порт не может быть
+использован с прерыванием, то процедура возвращает -1 (см. описание процедуры
+\texttt{digitalPinToInterrupt} в \cite{arduino:reference}.)
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      Serial.begin(9600);
+      int pin = 2;
+      int interrupt_number = digitalPinToInterrupt(pin);
+
+      if (interrupt_number == -1) {
+        Serial.print("Неподдерживаемый порт: ");
+        Serial.println(pin);
+      } else {
+        Serial.print("Номер прерывания: ");
+        Serial.println(interrupt_pin);
+      }
+    }
+
+    void loop() {
+      // Намеренно оставлена пустой.
+    }
+  \end{minted}
+  \caption{Пример использования процедуры \texttt{digitalPinToInterrupt}.}
+  \label{listing:interrupts-digital-pin-to-interrupt}
+\end{listing}
+
+
+Пример использования \texttt{digitalPinToInterrupt} показан в листинге
+\ref{listing:interrupts-digital-pin-to-interrupt}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Обработчик прерывания}
@@ -94,7 +134,7 @@
 Для регистрации обработчика прерывания используется процедура
 \texttt{attachInterrupt}.
 
-\begin{listing}[ht]
+\begin{listing}[H]
   \begin{minted}{cpp}
     attachInterrupt(<interrupt>, <procedure>, <mode>);
   \end{minted}
@@ -112,22 +152,42 @@
 \item \texttt{<mode>} -- условие срабатывания прерывания.
 \end{enumerate}
 
-Как можно видеть, мы должны знать \emph{номер прерывания}, чтобы его обработать.
-Этот номен не является номером цифрового порта, хотя и связан с ним.
+Как узнать \emph{номер прерывания} мы уже обсуждали в
+\ref{subsection:interrupts-number}.  В данном случае мы будем использовать
+цифровой порт 2 для кнопки.
 
-\begin{listing}[ht]
+\begin{listing}[H]
   \begin{minted}{cpp}
+    const int LED_PIN = 13;
+    const int BUTTON_PIN = 2;
     void toggle_led() {
-      digitalWrite(13, ! digitalRead(13));
+      digitalWrite(LED_PIN, ! digitalRead(LED_PIN));
     }
 
     void setup() {
-      attachInterrupt(0, toggle_led, RISING);
+      int interrupt_number
+          = digitalPinToInterrupt(BUTTON_PIN);
+      attachInterrupt(interrupt_number,
+                      toggle_led,
+                      RISING);
+    }
+
+    void loop() {
+      // Намеренно оставлена пустой.
     }
   \end{minted}
-  \caption{Процедура, выполняющая роль обработчика прерывания.}
+  \caption{Обработка прерывания от кнопки.}
   \label{listing:interrupts-handler}
 \end{listing}
 
+В листинге \ref{listing:interrupts-handler} можно видеть, что мы оставили
+процедуру \texttt{loop} пустой -- ведь в нашем случае, переключение состояния
+светодиода выполняется в обработчике прерывания.  Вместо этого мы могли бы
+прописать в \texttt{loop} дополнительную логику программы.  При приходе сигнала
+от кнопки, \texttt{loop} приостанавливается и процессор переключается на
+обработку прерывания.  Таким образом, создаётся эффект \emph{параллельности}
+выполнения задач -- мы и \texttt{loop} выполняем, и обрабатываем нажатия кнопки.
+На самом деле, это \emph{псевдо-параллельность}, так как Arduino перключается
+между задачами, а не делает их одновременно.
 
 \end{document}
