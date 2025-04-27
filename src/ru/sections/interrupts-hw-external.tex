@@ -15,6 +15,40 @@
 работы с подобными прерываниями.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Подключение кнопки}
+\index{Прерывания!Подключение кнопки}
+\label{section:interrupts-button}
+
+Начнём с подключения кнопки к Arduino.  Мы уже детально рассматривали способы
+подключения кнопок в разделе \ref{section:game-dev-controls}.  Сейчас мы
+воспользуемся схемой подключения с подтяжкой к 5В.
+
+\figureButtonPullupResistorCircuit{ru}
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const int BUTTON_PIN = 2;
+
+    void setup() {
+      pinMode(BUTTON_PIN, INPUT_PULLUP);
+    }
+
+    void loop() {
+      // ...
+    }
+  \end{minted}
+  \caption{Настройка порта в режим \texttt{INPUT\_PULLUP}.}
+  \label{listing:interrupts-input-pullup}
+\end{listing}
+
+Цифровой порт, заданный константой \texttt{BUTTON\_PIN}, мы настраиваем в режим
+\texttt{INPUT\_PULLUP} (как показано в листинге
+\ref{listing:interrupts-input-pullup}), чтобы избежать необходимости
+использовать отдельный подтягивающий резистор.  При нажатии на кнопку напряжение
+на данном порту будет падать в ноль, и на это событие мы и будем регистрировать
+прерывание.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Номер прерывания}
 \label{subsection:interrupts-number}
 
@@ -46,14 +80,15 @@
 
 \begin{listing}[H]
   \begin{minted}{cpp}
+    const int BUTTON_PIN = 2;
+
     void setup() {
       Serial.begin(9600);
-      int pin = 2;
-      int interrupt_number = digitalPinToInterrupt(pin);
+      int interrupt_number = digitalPinToInterrupt(BUTTON_PIN);
 
       if (interrupt_number == -1) {
         Serial.print("Неподдерживаемый порт: ");
-        Serial.println(pin);
+        Serial.println(BUTTON_PIN);
       } else {
         Serial.print("Номер прерывания: ");
         Serial.println(interrupt_pin);
@@ -67,7 +102,6 @@
   \caption{Пример использования процедуры \texttt{digitalPinToInterrupt}.}
   \label{listing:interrupts-digital-pin-to-interrupt}
 \end{listing}
-
 
 Пример использования \texttt{digitalPinToInterrupt} показан в листинге
 \ref{listing:interrupts-digital-pin-to-interrupt}.
@@ -160,6 +194,7 @@
   \begin{minted}{cpp}
     const int LED_PIN = 13;
     const int BUTTON_PIN = 2;
+
     void toggle_led() {
       digitalWrite(LED_PIN, ! digitalRead(LED_PIN));
     }
