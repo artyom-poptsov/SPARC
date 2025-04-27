@@ -204,7 +204,7 @@
           = digitalPinToInterrupt(BUTTON_PIN);
       attachInterrupt(interrupt_number,
                       toggle_led,
-                      RISING);
+                      FALLING);
     }
 
     void loop() {
