@@ -84,7 +84,8 @@
 
     void setup() {
       Serial.begin(9600);
-      int interrupt_number = digitalPinToInterrupt(BUTTON_PIN);
+      int interrupt_number
+          = digitalPinToInterrupt(BUTTON_PIN);
 
       if (interrupt_number == -1) {
         Serial.print("Неподдерживаемый порт: ");
