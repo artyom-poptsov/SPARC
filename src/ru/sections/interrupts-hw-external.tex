@@ -309,4 +309,47 @@
   срабатывания.
 \end{itemize}
 
+Вариант программной защиты от дребезга контактов реализован в примере кода ниже.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const int LED_PIN = 13;
+    const int BUTTON_PIN = 2;
+
+    // Таймер отсчёта от последнего срабатывания кнопки:
+    const int  DEBOUNCE_TIMER = 100; // ms
+    // Отметка о времени последнего срабатывания кнопки:
+    volatile int timestamp = 0; // ms
+    // Статус нажатия кнопки:
+    volatile bool is_button_pressed = false;
+
+    void toggle_led() {
+      if ((millis() - timestamp) > DEBOUNCE_TIMER) {
+        is_button_pressed = true;
+      }
+      timestamp = millis();
+    }
+
+    void setup() {
+      Serial.begin(9600); // Для отладки
+      pinMode(BUTTON_PIN, INPUT_PULLUP);
+      int interrupt_number
+          = digitalPinToInterrupt(BUTTON_PIN);
+      attachInterrupt(interrupt_number,
+                      toggle_led,
+                      FALLING);
+    }
+
+    void loop() {
+      if (is_button_pressed) {
+        digitalWrite(LED_PIN, ! digitalRead(LED_PIN));
+        is_button_pressed = false;
+        Serial.println("Pressed"); // Для отладки
+      }
+    }
+  \end{minted}
+  \caption{Обработка прерывания от кнопки с защитой от дребезга контактов.}
+  \label{listing:interrupts-handler-button-debounce}
+\end{listing}
+
 \end{document}
