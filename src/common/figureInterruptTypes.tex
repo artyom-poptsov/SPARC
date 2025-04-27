@@ -33,7 +33,11 @@
         level 1/.style={sibling distance=30mm},
         level 2/.style={sibling distance=20mm},
         level 3/.style={sibling distance=30mm},
-        every node/.style={rectangle,draw,inner sep=4pt},
+        every node/.style={
+          minimum height=0.75cm,
+          rectangle,
+          draw
+        },
       ]
       \node {\figureInterrupt}
       child {node {\figureSoftware}
