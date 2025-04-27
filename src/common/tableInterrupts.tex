@@ -3,15 +3,29 @@
   \def\langRu{\detokenize{ru}}
   \def\langEn{\detokenize{en}}
   \def\tableCaption{XXX: No translation.}
+  \def\tableArduinoI{XXX: No translation.}
+  \def\tableArduinoII{XXX: No translation.}
   \def\tableFirstColumn{XXX: No translation.}
   \ifx \lang\langRu
   \def\tableFirstColumn{Плата}
+  \def\tableArduinoI{
+    Основанные на чипе 32u4 (такие, как Leonardo, Micro)
+  }
+  \def\tableArduinoII{
+    Uno WiFi Rev2, Due, Zero, семейство MKR и 101-е платы
+  }
   \def\tableCaption{
     Номера прерываний и связанных с ними цифровых портов.
   }
   \fi
   \ifx \lang\langEn
   \def\tableFirstColumn{Board}
+  \def\tableArduinoI{
+    Based on 32u4 chip (e.g. Leonardo, Micro)
+  }
+  \def\tableArduinoII{
+    Uno WiFi Rev2, Due, Zero, MKR family and 101 boards
+  }
   \def\tableCaption{
     Interrupt numbers and digital ports related to them.
   }
@@ -29,9 +43,17 @@
       & \textbf{\texttt{int.4}}
       & \textbf{\texttt{int.5}}\\
       \hline
-      Arduino Uno  & 2 & 3 &    &    &    &   \\[1.5ex]
+      Arduino Uno, Ethernet
+      & 2 & 3 &    &    &    &   \\[1.5ex]
       \hline
-      Arduino Mega & 2 & 3 & 21 & 20 & 19 & 18\\[1.5ex]
+      Arduino Mega
+      & 2 & 3 & 21 & 20 & 19 & 18\\[1.5ex]
+      \hline
+      \tableArduinoI
+      & 3 & 2 & 0  & 1  & 19 &   \\[1.5ex]
+      \hline
+      \tableArduinoII
+      & 0 & 1 & 2  & 3  & 4  & 5 \\[1.5ex]
       \hline
     \end{tabular}
     \caption{\tableCaption}
