@@ -85,6 +85,7 @@ SECTIONS = \
 	src/ru/sections/game-dev-graphics.tex	\
 	src/ru/sections/game-dev-animation.tex	\
 	src/ru/sections/game-dev-logic.tex	\
+	src/ru/sections/game-dev-structures.tex	\
 	src/ru/sections/interrupts-intro.tex \
 	src/ru/sections/interrupts-types.tex \
 	src/ru/sections/interrupts-hw-external.tex \
