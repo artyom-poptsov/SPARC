@@ -201,21 +201,22 @@ and we have to consider it during the programming of LED effects.
 \end{figure}
 
 Let's take a look on the fig. \ref{fig:i2c-pcf8574-lcd-adapter-schematics} to
-get better understanding of module inner workings.  On the left side of the
-schematics we can see the I2C connection interface for a micro-controller: it is
-a four-pin connector ``J2'' consisting of ``GND'', ``VCC'', ``SDA'' and ``SCL''.
+get a better understanding of the module inner workings.  On the left side of
+the schematics we can see the I2C connection interface for a micro-controller:
+it is a four-pin connector ``J2'' consisting of ``GND'', ``VCC'', ``SDA'' and
+``SCL''.
 
 LCD connects to the ``J1'' connector.  As we can see, pins from 7 through 10 are
 not used.
 
 The ``J3'' connector is the jumper that enables the back-light on the module.
-We should shorten those pins if we want to use 16th pin (``BL-'') of the ``J1''
-connector to control an LED.
+We should shorten those pins if we want to use the 16th pin (``BL-'') of the
+``J1'' connector to control an LED.
 
 In the center of the schematic we can see the PCF8574 chip, where pins P0-P7 are
 controlled from a micro-controller through the I2C interface.
 
-Not that we understand the circuit, let's include the \texttt{Wire} library to
+Now that we understand the circuit, let's include the \texttt{Wire} library to
 our Arduino program, right on the top:
 
 \begin{minted}{cpp}
@@ -225,7 +226,7 @@ our Arduino program, right on the top:
 This library will be used for working with I2C bus.
 
 Then we define the address of PCF8574 module on I2C bus as a constant.  On
-Chinese I2C adapters for LCDs usually the address is set to \texttt{0x27} by
+Chinese I2C adapters for LCDs, usually the address is set to \texttt{0x27} by
 default (according to the table \ref{table:i2c-lcm1602-addressing}):
 
 \begin{minted}{cpp}
@@ -311,7 +312,7 @@ the LED on and turning it off.
 \end{listing}
 
 In the code example \ref{listing:communication-pcf8574} we implemented the
-blinking effect on the one of the eight LEDs, connected to the PCF8574 module.
+blinking effect on one of the eight LEDs, connected to the PCF8574 module.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Bitwise operators}
