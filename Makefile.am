@@ -104,6 +104,7 @@ COMMON = \
 	src/common/figureBigLCD.tex \
 	src/common/figureBigLCDSchematics.tex \
 	src/common/figureBlinkinLEDGraph.tex \
+	src/common/figureButtonBounceGraph.tex \
 	src/common/figureButtonCircuit.tex \
 	src/common/figureButtonPulldownResistorCircuit.tex \
 	src/common/figureButtonPullupResistorCircuit.tex \
