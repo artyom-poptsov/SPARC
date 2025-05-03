@@ -1,0 +1,44 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Liquid crystal display (LCD)}
+\index{Game development!Display}
+
+We will be using a \emph{liquid crystal display} (LCD) connected to the Arduino
+for displaying the information.  The working principles of such displays are
+similar to the regular LCDs that display information on your computer.
+Specifically we will be using a \emph{text} LCD, which designation is to display
+text symbols.
+
+On text LCDs the screen is divided into cells, each of which can hold one symbol
+(a letter, a punctuation mark, a digit or some other image.)  There are one
+pixel-wide gap between the cells.  Such displays are not the best choice for
+displaying custom images, although we have some room for creativity here.
+
+Despite the properties of the display that look too restrictive at the first
+glance, we can use our mastery and creative approach to achieve quite
+interesting results in terms of game development.
+
+The working area of the 16x2 display (16 columns, 2 rows) schematically looks
+like is shown on fig. \ref{fig:lcd-16x2-schematics}.
+
+\figureSmallLCDShematics{en}
+
+The overall look of the 16x2 display is shown on fig. \ref{fig:lcd-16x2}.
+
+\figureSmallLCD{en}
+
+It is better to use a bigger 20x4 LCD (20 columns, 4 rows) for the projects
+discussed in this chapter.  The working area of this display is bigger (as is
+shown on fig. \ref{fig:lcd-20x4-schematics}) that allows us to build more
+complicated games.
+
+\figureBigLCDShematics{en}
+
+The overall look of the 20x4 display is shown on fig. \ref{fig:lcd-20x4}.
+
+\figureBigLCD{en}
+
+\end{document}
