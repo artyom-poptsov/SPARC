@@ -114,6 +114,7 @@ COMMON = \
 	src/common/figureElectronicsVoltage.tex \
 	src/common/figureElectronicsVoltageWithCurrent.tex \
 	src/common/figureIICSchematics.tex \
+	src/common/figureInterruptTimerOverflow.tex \
 	src/common/figureInterruptTypes.tex \
 	src/common/figureLCDChar.tex \
 	src/common/figureLCDCharAnimation.tex \
