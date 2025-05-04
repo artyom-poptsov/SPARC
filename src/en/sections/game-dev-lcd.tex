@@ -15,7 +15,7 @@ Specifically we will be using a \emph{text} LCD, which designation is to display
 text symbols.
 
 On text LCDs the screen is divided into cells, each of which can hold one symbol
-(a letter, a punctuation mark, a digit or some other image.)  There are one
+(a letter, a punctuation mark, a digit or some other image.)  There is one
 pixel-wide gap between the cells.  Such displays are not the best choice for
 displaying custom images, although we have some room for creativity here.
 
@@ -34,7 +34,7 @@ The overall look of the 16x2 display is shown on fig. \ref{fig:lcd-16x2}.
 
 It is better to use a bigger 20x4 LCD (20 columns, 4 rows) for the projects
 discussed in this chapter.  The working area of this display is bigger (as is
-shown on fig. \ref{fig:lcd-20x4-schematics}) that allows us to build more
+shown on fig. \ref{fig:lcd-20x4-schematics}), that allows us to build more
 complicated games.
 
 \figureBigLCDShematics{en}
@@ -50,8 +50,8 @@ The overall look of the 20x4 display is shown on fig. \ref{fig:lcd-20x4}.
 To make our work easier we will be using an LCD with the connection interface
 called \gls{I2C}. We've already discussed I2C in the section \ref{section:i2c}.
 
-Now then we've discussed I2C we can just say that such connection requires only
-4 wires: power, ground and two data transfer lines.
+Now that we have discussed I2C, we can just say that such connection requires
+only 4 wires: power, ground and two data transfer lines.
 
 Very often an I2C module is already soldered down to the display, but in other
 cases it can be sold as a separate part. In this case the module connection
@@ -131,13 +131,13 @@ shortening special jumper pads on our I2C module.  The higher four address bits
 changed, but the last three bits the ones that can be configured by the jumper
 pads on the module.  The most less-significant eighth bit in the address is not
 mentioned here as it affects the data transfer direction, and this bit is
-controlled by the \mintinline{cpp}{LiquidCrystal\_I2C} library.
+controlled by the \mintinline{cpp}{LiquidCrystal_I2C} library.
 
 The numbers 16 and 2 set the size of the display (its width and height
 respectively.)  If our display is 20x4 then we have to replace those numbers by
 20 and 4.
 
-Now then we discussed the nuances of the LCD configuration we can initialize the
+Now that we discussed the nuances of the LCD configuration we can initialize the
 display in \mintinline{cpp}{setup} procedure.
 
 \begin{listing}[ht]
@@ -227,7 +227,7 @@ screen.
 \subsubsection{Exercises}
 
 \begin{enumerate}
-\item Alight the text to the center of the display.
+\item Align the text to the center of the display.
 \item Implement a ``blinking text'' effect.
 \item Implement a scrolling text on the display.
 \item Try to make the LCD backlight to blink.
