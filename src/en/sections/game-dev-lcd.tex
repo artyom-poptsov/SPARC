@@ -6,6 +6,8 @@
 \section{Liquid crystal display (LCD)}
 \index{Game development!Display}
 
+\newglossaryentry{LCD}{name=LCD, description={Liquid Crystal Display}}
+
 We will be using a \emph{liquid crystal display} (LCD) connected to the Arduino
 for displaying the information.  The working principles of such displays are
 similar to the regular LCDs that display information on your computer.
@@ -40,5 +42,195 @@ complicated games.
 The overall look of the 20x4 display is shown on fig. \ref{fig:lcd-20x4}.
 
 \figureBigLCD{en}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{LCD connection}
+\index{Electronics!LCD}
+
+To make our work easier we will be using an LCD with the connection interface
+called \gls{I2C}. We've already discussed I2C in the section \ref{section:i2c}.
+
+Now then we've discussed I2C we can just say that such connection requires only
+4 wires: power, ground and two data transfer lines.
+
+Very often an I2C module is already soldered down to the display, but in other
+cases it can be sold as a separate part. In this case the module connection
+looks like is shown on fig. \ref{fig:lcd-00}.
+
+\figureLCDConnection{en}
+
+\note{en}{ It should be noted that the I2C module connection schematics can vary
+  depending on its vendor and the vendor of the LCD in question.  To avoid
+  damaging of the LCD it is strongly recommended to read the documentation --
+  usually it can be found on the vendor's website, or by searching for something
+  like ``<component> datasheet'' in a web search engine, where instead of
+  ``<component>'' we have to substitute the component model. }
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Printing some text}
+\index{Game development!Printing text}
+
+\newglossaryentry{method}{name=method, description={A procedure which is
+    declared inside a class (or, we can say, a procedure that is inside an
+    object) which represents some action that the object can perform, or an
+    action that can be performed upon an object.}}
+
+Following the programmers tradition, the first string that we will print on the
+display is ``Hello, World!''.  To do that we have to install an Arduino library
+for working with the display first; secondly we have to configure the LCD and
+only after that we will be able to print the text.
+
+Let's start with downloading a LCD library.  The easiest way to do that is to
+use the Arduino library manager, which can be found in ``Tools'' $\rightarrow$ ``Manage
+Libraries...''.  Then we have to select the right library in the list and press
+the ``Install'' button.  There are several libraries for working with LCDs using
+the \gls{I2C} protocol.  We can use ``Liquid Crystal I2C'' version 1.1.1
+developed by Marco Schwartz.
+
+After installing the library we can use its facilities.  Firstly we have to add
+the library to our project by including ``LiquidCrystal\_I2C.h'' file.  It can
+be done through a special \mintinline{cpp}{#include} directive.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
+  \end{minted}
+  \caption{Including an LCD library into our project.}
+  \label{listing:game-dev-lcd-include}
+\end{listing}
+
+In the global scope of our code (before \mintinline{cpp}{setup} and
+\mintinline{cpp}{loop} procedures) we have to create a special variable, through
+which we will be interacting with the display.  This variable differs from what
+we've seen before -- because in this variable we will be storing a reference to
+some complex \emph{object} stored somewhere in the memory during program
+execution inside a micro-controller.\footnote{The ``object'' term is from the
+programming methodology which is called \emph{object-oriented programming}
+(``OOP'' for short.)  We won't be focusing our attention on OOP for now, but a
+curious reader can get the overall understanding of the methodology from
+Wikipedia.}
+
+Let's call the variable \mintinline{cpp}{lcd}.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
+  \end{minted}
+  \caption{Creating an object for working with an LCD.}
+  \label{listing:game-dev-lcd-object}
+\end{listing}
+
+In the parenthesis we put the parameters for the object being created.  Let's
+take a closer look on them.
+
+The \mintinline{cpp}{0x27} number (which in binary code is represented as
+\mintinline{cpp}{0100 111} is the device address on the \gls{I2C} bus.  As we
+discussed in the section \ref{section:i2c}, the device address can be changed by
+shortening special jumper pads on our I2C module.  The higher four address bits
+(\mintinline{cpp}{0100}) are pre-configured by the manufacturer and cannot be
+changed, but the last three bits the ones that can be configured by the jumper
+pads on the module.  The most less-significant eighth bit in the address is not
+mentioned here as it affects the data transfer direction, and this bit is
+controlled by the \mintinline{cpp}{LiquidCrystal\_I2C} library.
+
+The numbers 16 and 2 set the size of the display (its width and height
+respectively.)  If our display is 20x4 then we have to replace those numbers by
+20 and 4.
+
+Now then we discussed the nuances of the LCD configuration we can initialize the
+display in \mintinline{cpp}{setup} procedure.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    lcd.init();
+    lcd.backlight();
+  \end{minted}
+  \caption{LCD initialization code.}
+  \label{listing:game-dev-lcd-init}
+\end{listing}
+
+As \mintinline{cpp}{lcd} variable stores a reference to some complex object,
+with some internal attributes and possible actions (\emph{methods}), the working
+with the variable may appear unfamiliar for the inexperienced readers on the
+first glance.
+
+We can say that a \gls{method} is a procedure that is stored inside an object.
+Calls to such procedures are not very different from the calls to regular
+procedures, although we have to write the object name before the procedure name,
+separating them with a dot.
+
+The \mintinline{cpp}{init} method performs the initialization of the LCD.
+Without it the display will not work correctly, so all other operations with the
+display must go after the call to \mintinline{cpp}{init}.
+
+The \mintinline{cpp}{backlight} method enables the LCD backlight.  The display
+itself does not produce any light (more precisely, display pixels don't glow),
+and the lighting of the display is provided by a special LED embedded into the
+display.  The call to \mintinline{cpp}{backlight} is not necessary, but usually
+display looks nicer with backlight enabled.
+
+There's also \mintinline{cpp}{noBacklight} method that disables the backlight.
+
+With all preparations done, we can print some text on the display in the
+\mintinline{cpp}{loop} procedure.  This is done in two steps: firstly we have to
+set our ``cursor'' to the position on the display where we want to print the
+text -- there's a special \mintinline{cpp}{setCursor} method that does just that.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    lcd.setCursor(0, 0);
+  \end{minted}
+  \caption{Setting the cursor position on an LCD.}
+  \label{listing:game-dev-lcd-set-cursor}
+\end{listing}
+
+The first parameter of \mintinline{cpp}{setCursor} sets the cursor position on
+the X axis, and the second parameter sets the Y position.
+
+After that we can finally print the text with \mintinline{cpp}{print} method.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    lcd.print("Hello, World!");
+  \end{minted}
+  \caption{Printing some text on an LCD.}
+  \label{listing:game-dev-lcd-print}
+\end{listing}
+
+The overall code should look similar to the example that is shown below.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
+
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+    }
+
+    void loop() {
+      lcd.setCursor(0, 0);
+      lcd.print("Hello, World!");
+    }
+  \end{minted}
+  \caption{An simple program example that prints a text to an LCD.}
+  \label{listing:game-dev-lcd-example-00}
+\end{listing}
+
+If we want, we can ``erase'' parts of the text, by overwritting them with
+spaces, or we can call \mintinline{cpp}{clear} method that clears the whole
+screen.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Exercises}
+
+\begin{enumerate}
+\item Alight the text to the center of the display.
+\item Implement a ``blinking text'' effect.
+\item Implement a scrolling text on the display.
+\item Try to make the LCD backlight to blink.
+\end{enumerate}
 
 \end{document}
