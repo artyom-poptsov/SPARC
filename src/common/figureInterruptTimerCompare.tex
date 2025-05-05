@@ -1,0 +1,42 @@
+\newcommand{\figureInterruptTimerCompare}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Срабатывание 8-битного таймера по сравнению.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    8-bit timer compare match trigger.
+  }
+  \fi
+  \begin{figure}[H]
+    \begin{tikzpicture}
+      \draw[lightgray] (0, 0) grid (10, 6);
+      \draw (0, 1) node[anchor=south east] {0};
+      \draw (0, 5) node[anchor=south east] {255};
+      \draw[thick, dotted, green] (-0.5, 2) -- (11, 2);
+      \draw[thick, dotted, green] (-0.5, 4) -- (11, 4);
+      \foreach \x in {0, 2, ..., 6} {
+        \draw[thick, orange] (\x,  1)
+        -- (\x + 2, 5)
+        -- (\x + 2, 1);
+        \draw (\x + 0.5, 2) node[circle,fill,inner sep=1.5pt, red]{};
+        \draw[thick, dotted, red] (\x + 0.5, 2) -- (\x + 0.5, -0.5);
+        \draw (\x + 0.5, -1.0) node[anchor=south] {ISR1};
+        \draw (\x + 1.5, 4) node[circle,fill,inner sep=1.5pt, red]{};
+        \draw[thick, dotted, red] (\x + 1.5, 4) -- (\x + 1.5, -0.5);
+        \draw (\x + 1.5, -1.0) node[anchor=south] {ISR2};
+      };
+      \draw (0, 2) node[anchor=south east] {OCR1};
+      \draw (0, 4) node[anchor=south east] {OCR2};
+      \draw[thick, ->] (0, 0) -- (11, 0) node[anchor=north west] {t};
+      \draw[thick, ->] (0, 0) -- (0,  7) node[anchor=south west] {V};
+    \end{tikzpicture}
+    \caption{\figureCaption}
+    \label{fig:timer-overflow-compare-match}
+  \end{figure}
+}
