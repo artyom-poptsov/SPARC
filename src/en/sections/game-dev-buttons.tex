@@ -1,0 +1,33 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Implementing the controls}
+\index{Game development!Controls}
+\label{section:game-dev-controls}
+
+To control the game character, we must have some device to input information
+into a computer (or in our case, a micro-controller.)  We will implement such
+device using several buttons connected through a breadboard to Arduino.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Button connection}
+\index{Game development!Button connection}
+
+Let's try to connect a button to an Arduino board.  A button is but a contractor
+between two contacts.  The simplest button replacement is two disconnected wires
+(an open electric circuit) that we can connect together (close the circuit), or
+open the circuit again.  Of course this method of control is inconvenient (and
+even dangerous, when high voltages and currents are used in an electric
+circuit), and that's why buttons usually implemented as some enclosed devices
+that provide a way to connect two wires without the need to grab and connect the
+wire ends with bare hands.
+
+Buttons differ in terms of working principles.  The simplest type of buttons are
+\emph{push-buttons}.
+
+They are called \emph{push-buttons} because they don't ``remember'' their state,
+and after they pushed they return the default (usually ``open'') state.
+
+\end{document}
