@@ -281,6 +281,7 @@ SECTIONS_EN = \
 	src/en/sections/communication-i2c.tex \
 	src/en/sections/game-dev-intro.tex \
 	src/en/sections/game-dev-lcd.tex \
+	src/en/sections/game-dev-genre-and-plot.tex	\
 	src/en/sections/appendix-octaves.tex \
 	src/en/sections/appendix-prostokvashino-score.tex \
 	src/en/sections/appendix-twinkle-twinkle-little-star-01.tex \
