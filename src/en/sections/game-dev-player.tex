@@ -1,0 +1,76 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Displaying the player}
+\label{section:player}
+\index{Game development!Player}
+
+In most of the computer games there is some character which represents us in the
+game as some form of an avatar, which can be controlled by us.
+
+First of all we can choose some symbol to show our player -- for example, we can
+use ``@'' for now.
+
+Let's set the ``image'' of our player as some character constant in our code,
+somewhere at the beginning of our program:
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    const char PLAYER = '@';
+  \end{minted}
+  \caption{Declaring a constant that stores the image of our player.}
+  \label{listing:game-dev-player-image}
+\end{listing}
+
+Then we have to set the position of our player in the two-dimensional space of
+our game ``map'':
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    int player_x = 0;
+    int player_y = 0;
+  \end{minted}
+  \caption{Declaring variables that store the position of our player on a game
+    map.}
+  \label{listing:game-dev-player-position}
+\end{listing}
+
+After that we can display our player on the screen.  The full source code of our
+program may look as is shown below.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
+
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+    const char PLAYER = '@';
+
+    int player_x = 0;
+    int player_y = 0;
+
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+    }
+
+    void loop() {
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+    }
+  \end{minted}
+  \caption{A code example that shows a player on the LCD.}
+  \label{listing:game-dev-player-example}
+\end{listing}
+
+After uploading this program to an Arduino, on the zeroth line and zeroth column
+the player image (``@'') should appear.
+
+As we declared the player position as variables, we can move the player across
+the screen by changing those variables.  To move a player in games usually
+buttons and/or a joystick is used.  In the next section we will discuss how to
+connect buttons to an Arduino and how to handle button presses.
+
+\end{document}
