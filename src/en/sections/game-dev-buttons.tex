@@ -65,4 +65,79 @@ An example of a simplest program that reads the button value is shown below.
   \label{listing:button-00}
 \end{listing}
 
+To clearly see how the value on the button port changes when button is pressed,
+we can log the value to the computer.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      pinMode(2, INPUT);
+      Serial.begin(9600);
+    }
+
+    void loop() {
+      // Read a value from the button and store
+      // it in the new variable "value".
+      int value = digitalRead(2);
+
+      // Then we can use this variable in the code
+      // to determine the current button state:
+      // if the variable contains the value 1 then
+      // the button is pressed, and if it contains 0
+      // then the button is not pressed.
+
+      // Print the value to the serial port.
+      Serial.println(value);
+    }
+  \end{minted}
+  \caption{Logging button states to a computer.}
+  \label{listing:button-01}
+\end{listing}
+
+Unfortunately when we look close enough we will see that even if the button is
+not pressed, sometimes there are stray ``1'' values in the log.  How is it so?
+The explanation is simple: as we seen in the ``White noise'' chapter, we are
+surrounded by electromagnetic background that captured by circuits and this in
+turn leads to the situation where sometimes the value on digital ports crosses
+the bar where Arduino considers it as the value ``1''.
+
+We can solve this problem at least in two ways.  The first one is that we can
+use a special \emph{pull-down resistor} that will pull the value on a digital
+port where the button is connected to the ground (GND.)
+
+\figureButtonPulldownResistorCircuit{en}
+
+The digital port must be configured in \mintinline{cpp}{INPUT_PULLUP} mode.  The
+rest of the example code stays the same.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      pinMode(2, INPUT_PULLUP);
+      Serial.begin(9600);
+    }
+
+    void loop() {
+      // Read a value from the button and store
+      // it in the new variable "value".
+      int value = digitalRead(2);
+
+      // Then we can use this variable in the code
+      // to determine the current button state:
+      // if the variable contains the value 1 then
+      // the button is pressed, and if it contains 0
+      // then the button is not pressed.
+
+      // Print the value to the serial port.
+      Serial.println(value);
+    }
+  \end{minted}
+  \caption{An example of \mintinline{cpp}{INPUT_PULLUP} mode usage.}
+  \label{listing:game-dev-input-pullup-example}
+\end{listing}
+
+In this mode the button behavior is ``inverted'' -- when it is pressed, then the
+digital port value will be ``0'' (\mintinline{cpp}{LOW}) and when it is not, the
+value will be ``1'' (\mintinline{cpp}{HIGH}.)
+
 \end{document}
