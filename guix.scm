@@ -69,40 +69,44 @@
           bash-minimal
           fontconfig
           git
-          gnu-make
           inkscape
           lilypond
           perl
           python-pygments
-          texlive-acronym
-          texlive-adjustbox
-          texlive-biblatex
-          texlive-bibtex
-          texlive-bibtexperllibs
-          texlive-bigfoot
-          texlive-chngcntr
-          texlive-circuitikz
-          texlive-collection-langcyrillic
-          texlive-csquotes
-          texlive-fancyvrb
-          texlive-fontspec
-          texlive-glossaries
-          texlive-glossaries-english
-          texlive-glossaries-extra
-          texlive-koma-script
-          texlive-lilyglyphs
-          texlive-minted
-          texlive-multirow
-          texlive-pgf
-          texlive-pgfplots
-          texlive-subfiles
-          texlive-svg
-          texlive-t1utils
-          texlive-textpos
-          texlive-transparent
-          texlive-trimspaces
-          texlive-upquote
-          texlive-xetex
+          (texlive-local-tree
+           (list texlive-acronym
+                 texlive-adjustbox
+                 texlive-biblatex
+                 texlive-bibtex
+                 texlive-bibtexperllibs
+                 texlive-bigfoot
+                 texlive-chngcntr
+                 texlive-circuitikz
+                 texlive-collection-langcyrillic
+                 texlive-csquotes
+                 texlive-fancyvrb
+                 texlive-fontspec
+                 texlive-framed
+                 texlive-glossaries
+                 texlive-glossaries-english
+                 texlive-glossaries-extra
+                 texlive-koma-script
+                 texlive-libkpathsea
+                 texlive-lilyglyphs
+                 texlive-lineno
+                 texlive-minted
+                 texlive-multirow
+                 texlive-pgf
+                 texlive-pgfplots
+                 texlive-subfiles
+                 texlive-svg
+                 texlive-t1utils
+                 texlive-textpos
+                 texlive-transparent
+                 texlive-trimspaces
+                 texlive-upquote
+                 texlive-xetex
+                 texlive-xstring))
           which))
    (inputs (list font-liberation))
    (arguments
