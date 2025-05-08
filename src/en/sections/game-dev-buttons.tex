@@ -140,4 +140,140 @@ In this mode the button behavior is ``inverted'' -- when it is pressed, then the
 digital port value will be ``0'' (\mintinline{cpp}{LOW}) and when it is not, the
 value will be ``1'' (\mintinline{cpp}{HIGH}.)
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Handling button presses}
+\index{Game development!Button connection!Handling button presses}
+
+First let's set the digital port number to which our first (and the only, for
+now) button is connected as a named constant \mintinline{cpp}{BUTTON_R} (``R''
+stands for ``Right''.)
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
+
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+    // Control buttons.
+    const char BUTTON_R = 2;      // "RIGHT"
+
+    const char PLAYER = '@';
+
+    int player_x = 0;
+    int player_y = 0;
+  \end{minted}
+  \caption{Setting constants for control buttons.}
+  \label{listing:game-dev-button-constants}
+\end{listing}
+
+Then in \mintinline{cpp}{setup} we have to configure the digital port mode for
+the button using \mintinline{cpp}{pinMode} procedure, as we did in the previous
+examples.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+
+      // Control buttons configuration.
+      pinMode(BUTTON_R, INPUT_PULLUP);
+    }
+  \end{minted}
+  \caption{Setting the \mintinline{cpp}{INPUT_PULLUP} mode for a digital port.}
+  \label{listing:game-dev-input-pullup-mode}
+\end{listing}
+
+After that we have to choose how we will handle button presses.  Currently the
+easiest way for us is to sequential polling of button ports, other ways to
+handle buttons we will discuss later.
+
+To handle the button presses we will check in \mintinline{cpp}{loop} the value
+for digital port where the button is connected, using the already familiar
+\mintinline{cpp}{digitalRead}.  When the check shows that the button value is
+\mintinline{cpp}{LOW}, we will change the player position in the game.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+    }
+  \end{minted}
+  \caption{Changing the player position on the ``RIGHT'' button press.}
+  \label{listing:game-dev-button-right}
+\end{listing}
+
+Thus when we press the ``RIGHT'' button, we will get the movement of a player to
+the right.
+
+Overall, the full code of our game currently looks like this:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #include <LiquidCrystal_I2C.h>
+
+    LiquidCrystal_I2C lcd(0x27,  16, 2);
+
+    // Control buttons.
+    const char BUTTON_R = 2;      // "RIGHT"
+
+    const char PLAYER = '@';
+
+    int player_x = 0;
+    int player_y = 0;
+
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+
+      // Configuration of control buttons.
+      pinMode(BUTTON_R, INPUT_PULLUP);
+    }
+
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+    }
+  \end{minted}
+  \caption{The full example of ``RIGHT'' button handling.}
+  \label{listing:game-dev-button-right-full-example}
+\end{listing}
+
+Nevertheless, here lies a problem -- after a single (to our naive observation)
+button press the player may run to the end of the game map, or even run away
+from the display altogether.  This is due to the fact that even a short (single)
+button press from the point of computer view takes a very long time.  During
+this time, while we hold our finger on a button before releasing it, the
+\mintinline{cpp}{loop} procedure can run several times; thus the button value
+gets read and handled many times.
+
+To fix this problem we can add a short delay (100ms, for example) at the end of
+\mintinline{cpp}{loop} procedure:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      // A delay to avoid too fast reading
+      // of the button state.
+      delay(100);
+    }
+  \end{minted}
+  \caption{Adding a delay to the \mintinline{cpp}{loop} procedure to improve the
+    button reading.}
+  \label{listing:game-dev-button-delay}
+\end{listing}
+
 \end{document}
