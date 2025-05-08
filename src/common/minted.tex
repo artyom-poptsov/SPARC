@@ -1,0 +1,32 @@
+\newbool{oldminted}
+
+\newread\mypipe
+\openin\mypipe="|kpsewhich minted2.sty"
+\ifeof\mypipe
+\else
+\begingroup
+\endlinechar=-1
+\read\mypipe to \x
+\ifdefempty{\x}{
+  \global\booltrue{oldminted}
+}{
+  \global\boolfalse{oldminted}
+}
+\endgroup
+\fi
+
+\ifbool{oldminted} {
+  \usepackage{minted}
+} {
+  \usepackage{minted2}
+}
+
+\definecolor{friendlybg}{HTML}{f0f0f0}
+\setminted[cpp]
+          {
+            fontsize=\small,
+            style=friendly,
+            bgcolor=friendlybg,
+            linenos
+          }
+          %%

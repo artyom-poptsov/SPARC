@@ -16,7 +16,7 @@
 \usepackage{tabularx}
 \usepackage{pgfplots}
 \usepackage{circuitikz}
-\usepackage{minted2}
+
 \usepackage{glossaries}
 \usepackage{makeidx}
 \usepackage{expl3}
@@ -29,6 +29,7 @@
 \addbibresource{references.bib}
 
 \input{common/common.tex}
+\input{common/minted.tex}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \setmainfont{Liberation Serif}
@@ -94,6 +95,18 @@
     \pgfmathsetseed{\number\RANDOMSEED}%
   }%
 }{}
+
+%% Set the Minted style.
+
+\definecolor{friendlybg}{HTML}{f0f0f0}
+\setminted[cpp]
+          {
+            fontsize=\small,
+            style=friendly,
+            bgcolor=friendlybg,
+            linenos
+          }
+          %%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \title{Science, Programming, Art and Radioelectronics Club\\(SPARC)}
