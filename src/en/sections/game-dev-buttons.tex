@@ -276,4 +276,128 @@ To fix this problem we can add a short delay (100ms, for example) at the end of
   \label{listing:game-dev-button-delay}
 \end{listing}
 
+In the same vein we can add the ``RIGHT'' button, by modifying just a little our
+previous examples.  As our game code will grow bigger and bigger, we will
+shorten already written parts for clarity sake, focusing on those parts that are
+changed.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // ... The code that includes the LCD library
+    //     and creates the "lcd" variable. ...
+
+    // Control buttons.
+    const char BUTTON_R = 2;      // "RIGHT"
+    const char BUTTON_L = 3;      // "LEFT"
+
+    const char PLAYER = '@';
+
+    // ... The code for player position variables ...
+
+    void setup() {
+      // ... LCD configuration code ...
+
+      // Настройка кнопок управления.
+      pinMode(BUTTON_R, INPUT_PULLUP);
+      pinMode(BUTTON_L, INPUT_PULLUP);
+    }
+
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        player_x++;
+      }
+      if (digitalRead(BUTTON_L) == LOW) {
+        player_x--;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      // A delay to avoid too fast reading
+      // of the button state.
+      delay(100);
+    }
+  \end{minted}
+  \caption{Handling the ``LEFT'' button.}
+  \label{listing:game-dev-button-left}
+\end{listing}
+
+Let's run this program and try to move our player across the screen.  Soon we
+may see that there's a serious problem -- the player can go across the display
+border (and left the game map altogether.)
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Constraining the player movement}
+\index{Game development!Constraining the player movement}
+\index{Programming!Conditions}
+
+To solve the aforementioned problem, we have to check the player position before
+allowing the player to move to the left or to the right.  Those checks are
+required in button presses handling code.
+
+For the movement to the right we have to check if the player will left the map
+on the next ``step'' (movement to the next cell.)  As we know the size of our
+display (let's say it is 16 columns) we can constrain the further right position
+to 15th cell.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // ... All code we written before ...
+
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        // Constrain the further right position
+        // to the 15th cell.
+        if (player_x < 15) {
+          player_x++;
+        }
+      }
+      if (digitalRead(BUTTON_L) == LOW) {
+        player_x--;
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      delay(100);
+    }
+  \end{minted}
+  \caption{Constraining player movements to the right.}
+  \label{listing:game-dev-player-right--constrain}
+\end{listing}
+
+With the left movement the check is almost the same, the only difference is that
+the further left position is constrained to zero.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    // ... Код, который мы писали до этого ...
+
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        // Constrain the further right position
+        // to the 15th cell.
+        if (player_x < 15) {
+          player_x++;
+        }
+      }
+      if (digitalRead(BUTTON_L) == LOW) {
+        // Constrain the further left position
+        // to the 0th cell.
+        if (player_x > 0) {
+          player_x--;
+        }
+      }
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      delay(100);
+    }
+  \end{minted}
+  \caption{Constraining player movements to the left and right.}
+  \label{listing:game-dev-player-left-constrain}
+\end{listing}
+
+In the listing \ref{listing:game-dev-player-left-constrain} shows an
+implementation of player left and right movement constrain.  Thus we handled two
+cases where our player could go across the map borders.
+
 \end{document}
