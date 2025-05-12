@@ -35,4 +35,51 @@ fig. \ref{fig:2d-array-example-with-references}.
 
 \figureArrayOfPointers{en}
 
+For our game implementation tasks we need to specify an array that stores the
+\mintinline{cpp}{char} type.  The size of our array -- or the size of our game
+map -- we will specify with named constants, somewhere in the top area of the
+code, before the \mintinline{cpp}{setup} procedure.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const int MAP_W = 20; // Map width.
+    const int MAP_H = 4;  // Map height.
+  \end{minted}
+  \caption{Specifying the size of the game map.}
+  \label{listing:game-dev-map-size}
+\end{listing}
+
+Then we will create a two-dimensional array that will become our game map.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    char game_map[MAP_H][MAP_W];
+  \end{minted}
+  \caption{Creating a game map as a two-dimensional array of symbols.}
+  \label{listing:game-dev-map-array}
+\end{listing}
+
+It should be noted that when we declare the array we use two pairs of square
+brackets.  In the first pair the height of the array is specified (the number of
+rows), and in the second pair the width of the array is specified (the number of
+columns.)
+
+Then we have to declare a procedure that displays the game map on the screen --
+let's call the procedure \mintinline{cpp}{map_show}.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void map_show() {
+      for (int y = 0; y < MAP_H; y++) {
+        for (int x = 0; x < MAP_W; x++) {
+          lcd.setCursor(x, y);
+          lcd.print( game_map[y][x] );
+        }
+      }
+    }
+  \end{minted}
+  \caption{A procedure that shows (renders) the game map on an LCD.}
+  \label{listing:game-dev-map-show}
+\end{listing}
+
 \end{document}
