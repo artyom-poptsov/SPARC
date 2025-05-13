@@ -15,29 +15,29 @@ device using several buttons connected through a breadboard to Arduino.
 \subsection{Button connection}
 \index{Game development!Button connection}
 
-Let's try to connect a button to an Arduino board.  A button is but a contractor
-between two contacts.  The simplest button replacement is two disconnected wires
-(an open electric circuit) that we can connect together (close the circuit), or
-open the circuit again.  Of course this method of control is inconvenient (and
-even dangerous, when high voltages and currents are used in an electric
-circuit), and that's why buttons usually implemented as some enclosed devices
-that provide a way to connect two wires without the need to grab and connect the
-wire ends with bare hands.
+Let's try to connect a button to an Arduino board.  A button is a simple
+momentary switching mechanism that connects two contacts when pressed.  The
+simplest button replacement is two disconnected wires (an open electric circuit)
+that we can connect together (close the circuit), or open the circuit again.  Of
+course this method of control is inconvenient (and even dangerous, when high
+voltages and currents are used in an electric circuit), and that's why buttons
+are usually implemented as some enclosed devices that provide a way to connect
+two wires without the need to grab and connect the wire ends with bare hands.
 
 Buttons differ in terms of working principles.  The simplest type of buttons are
 \emph{push-buttons}.
 
 They are called \emph{push-buttons} because they don't ``remember'' their state,
-and after they pushed they return the default (usually ``open'') state.
+and after they are pushed they return to the default (usually ``open'') state.
 
-Another common type of buttons is those that ``remember'' their state; those
-buttons also usually called ``switches''.
+Another common type of buttons are those that ``remember'' their state; those
+buttons are also usually called ``switches''.
 
 On the fig. \ref{fig:game-dev-button-00} we can find one of the possible ways of
-button connection.  On the first glance we can think that this variant is good
-enough -- when the button is pressed the circuit is closed and electric current
-flows from \texttt{5V} to the digital port number 2.  And indeed in this case we
-can read the value 1 (\texttt{HIGH}) from the digital port.
+button connection.  At first glance we can think that this variant is good
+enough -- when the button is pressed the circuit is closed and the electric
+current flows from \texttt{5V} to the digital port number 2.  And indeed in this
+case we can read the value 1 (\texttt{HIGH}) from the digital port.
 
 \figureButtonCircuit{en}
 
