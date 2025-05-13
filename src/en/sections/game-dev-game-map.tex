@@ -82,4 +82,72 @@ let's call the procedure \mintinline{cpp}{map_show}.
   \label{listing:game-dev-map-show}
 \end{listing}
 
+As can be seen from the listing \ref{listing:game-dev-map-show} the procedure
+body consists of two loops, one being inlined into other.  The first loop
+iterates over the \mintinline{cpp}{y} axis (the rows of the array.)  The second
+loop iterates over \mintinline{cpp}{x} axis (the columns of the array.)  As the
+second loop is inlined into the first loop, each single step over
+\mintinline{cpp}{y} takes full iteration over \mintinline{cpp}{x} values from 0
+to \mintinline{cpp}{MAP_W}.
+
+In the inlined loop we call \mintinline{cpp}{setCursor} procedure to set the
+position of the cursor on the display.  Then a symbol from the map is printed
+into this position using \mintinline{cpp}{print} procedure.
+
+As the \mintinline{cpp}{game_map} has the \mintinline{cpp}{char} type, the
+symbols stored in it are readily printed to the display in the right format --
+that is, as graphical symbols instead of symbol codes from the character table.
+
+The \mintinline{cpp}{map_show} must be called in \mintinline{cpp}{loop} to print
+the game map on the display.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        // ...
+      }
+      if (digitalRead(BUTTON_L) == LOW) {
+        // ...
+      }
+
+      // Calling to the procedure that
+      // prints the game map on the display.
+      map_show();
+
+      // Drawing the game character over
+      // the map.
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      delay(100);
+    }
+  \end{minted}
+  \caption{Calling to the game map drawing procedure in \texttt{loop}.}
+  \label{listing:game-dev-map-show-call}
+\end{listing}
+
+It should be noted that the map drawing is done before the drawing of the game
+character.  If we would change this order then the player would not be seen on
+the screen as it would be overwritten by the game map.
+
+After uploading this program we may notice that the display is filled with
+random characters.  It happens as we didn't initialize the
+\mintinline{cpp}{game_map} array with values, so it is filled with
+\emph{garbage} -- that is, with some unexpected values.
+
+To fix that situation we need to create a procedure for map generation, that
+fills the map with something sensible.  To begin with, we will fill the map with
+spaces, that symbolize the empty space on the map.
+
+Let's create a special char constant for the empty space on the map in the
+global scope, before \mintinline{cpp}{setup} procedure.
+
+\begin{minted}{cpp}
+  const char SPACE = ' ';    // Empty space.
+\end{minted}
+
+Now we can use this \mintinline{cpp}{SPACE} constant for specifying the empty
+space.
+
 \end{document}
