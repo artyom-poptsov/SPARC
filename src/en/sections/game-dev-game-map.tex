@@ -150,4 +150,93 @@ global scope, before \mintinline{cpp}{setup} procedure.
 Now we can use this \mintinline{cpp}{SPACE} constant for specifying the empty
 space.
 
+Let's continue with the description of game map generation procedure.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void map_generate() {
+      for (int y = 0; y < MAP_H; y++) {
+        for (int x = 0; x < MAP_W; x++) {
+          game_map[y][x] = SPACE;
+        }
+      }
+    }
+  \end{minted}
+  \caption{A procedure for the game map generation.}
+  \label{listing:game-dev-map-generate}
+\end{listing}
+
+As we can see from the listing \ref{listing:game-dev-map-generate}, the
+\mintinline{cpp}{map_generate} procedure is not very different from the
+\mintinline{cpp}{map_show} procedure.
+
+The \mintinline{cpp}{map_generate} procedure should be called once in
+\mintinline{cpp}{setup} procedure.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+
+      // Control buttons configuration.
+      pinMode(BUTTON_R, INPUT_PULLUP);
+      pinMode(BUTTON_L, INPUT_PULLUP);
+
+      // Calling to the map generation
+      // procedure.
+      map_generate();
+    }
+  \end{minted}
+  \caption{Calling to the map generation procedure in the
+    \mintinline{cpp}{setup} procedure.}
+  \label{listing:game-dev-map-generate-call}
+\end{listing}
+
+After uploading the new version of the program to the Arduino, we should see a
+screen where only the player is displayed, as the game map is ``empy'' (filled
+with spaces.)
+
+Now we've got the ability to place objects on the game map. We start with a new
+game objects -- let it be a ``wall'', that is, an impassable part of a map. We
+will use ``\#'' as the wall symbol.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const char SPACE = ' ';    // Empty space.
+    const char WALL  = '#';    // A wall.
+  \end{minted}
+  \caption{Creating a wall.}
+  \label{listing:game-dev-map-objects}
+\end{listing}
+
+After that we can place this object to map, by modifying the
+\mintinline{cpp}{map_generate} procedure.  Let's add several walls.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void map_generate() {
+      for (int y = 0; y < MAP_H; y++) {
+        for (int x = 0; x < MAP_W; x++) {
+          game_map[y][x] = SPACE;
+        }
+      }
+
+      // Here we manually add objects to
+      // the map.
+      game_map[0][10] = WALL;
+      game_map[1][10] = WALL;
+      game_map[2][10] = WALL;
+    }
+  \end{minted}
+  \caption{Placing objects on the game map.}
+  \label{listing:game-dev-map-objects-set}
+\end{listing}
+
+After uploading the new version of the program to the Arduino we should see that
+the objects appeared on the screen.  The same way we can place other objects
+here.  But here's a new problem -- how to interact with them?  In the current
+game implementation the player can go through the walls as if they a ghost.  The
+solution of this problem is described in the next section.
+
 \end{document}
