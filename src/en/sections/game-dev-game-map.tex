@@ -239,4 +239,59 @@ here.  But here's a new problem -- how to interact with them?  In the current
 game implementation the player can go through the walls as if they a ghost.  The
 solution of this problem is described in the next section.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Exercises}
+\begin{enumerate}
+\item Create new game objects as character constants, as we did it for
+  \mintinline{cpp}{SPACE} and \mintinline{cpp}{WALL} -- for example, we can add a
+  door to the next game level, or some other type of walls.
+\item Add additional objects to the map, to create the desired game world.
+\end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Interaction of the player with game objects}
+\index{Game development!Handling collisions}
+
+Probably we had an opportunity to work with graphical editors such as GNU Image
+Manipulation Program (GIMP) -- such advanced graphical editors allow us to create
+multi-layered images.  Each layer can have transparent areas, through which we
+can see the underlying layer.  Thus we can create complex compositions.
+Nevertheless when we export our project into a raster graphical format (PNG, for
+example) all those layers are combined into one layer, starting from bottom to
+top -- that is, each layer is being applied upon the previous layer, with the
+transparency taken into account.
+
+We can imagine our game world as the similar set of ``layers''.  Currently we
+have two layers -- the bottom one (let's call it layer number 0), that holds all
+the game objects of our world (and that is exactly what
+\mintinline{cpp}{game_map} array is for.)  The upper layer (let's call it the
+layer number 1) contains the player.
+
+To allow the player from the layer number 1 to interact with game objects on the
+layer number 0, we have to juxtapose the player position with the contents of
+the zeroth layer.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        if (player_x < 15) {
+          // Check what is on the map to the right
+          // of the player.
+          if (game_map[player_y][player_x + 1] != WALL) {
+            // If the right cell contains something other
+            // than a wall, we allow the player to move
+            // one cell to the right.
+            player_x++;
+          }
+        }
+      }
+
+      // ...
+    }
+  \end{minted}
+  \caption{Handling the player collisions with walls.}
+  \label{listing:game-dev-map-collisions-00}
+\end{listing}
+
 \end{document}
