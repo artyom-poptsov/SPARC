@@ -96,10 +96,10 @@ we can log the value to the computer.
 
 Unfortunately when we look close enough we will see that even if the button is
 not pressed, sometimes there are stray ``1'' values in the log.  How is it so?
-The explanation is simple: as we seen in the ``White noise'' chapter, we are
-surrounded by electromagnetic background that captured by circuits and this in
-turn leads to the situation where sometimes the value on digital ports crosses
-the bar where Arduino considers it as the value ``1''.
+The explanation is simple: as we have seen in the ``White noise'' chapter, we
+are surrounded by electromagnetic background that is captured by circuits and
+this in turn leads to the situation where sometimes the value on digital ports
+crosses the bar where Arduino considers it as the value ``1''.
 
 We can solve this problem at least in two ways.  The first one is that we can
 use a special \emph{pull-down resistor} that will pull the value on a digital
@@ -184,8 +184,8 @@ examples.
   \label{listing:game-dev-input-pullup-mode}
 \end{listing}
 
-After that we have to choose how we will handle button presses.  Currently the
-easiest way for us is to sequential polling of button ports, other ways to
+After that we have to choose how we will handle button presses.  Currently, the
+easiest way for us is to use sequential polling of button ports, other ways to
 handle buttons we will discuss later.
 
 To handle the button presses we will check in \mintinline{cpp}{loop} the value
@@ -247,7 +247,7 @@ Overall, the full code of our game currently looks like this:
 \end{listing}
 
 Nevertheless, here lies a problem -- after a single (to our naive observation)
-button press the player may run to the end of the game map, or even run away
+button press, the player may run to the end of the game map, or even run away
 from the display altogether.  This is due to the fact that even a short (single)
 button press from the point of computer view takes a very long time.  During
 this time, while we hold our finger on a button before releasing it, the
@@ -276,7 +276,7 @@ To fix this problem we can add a short delay (100ms, for example) at the end of
   \label{listing:game-dev-button-delay}
 \end{listing}
 
-In the same vein we can add the ``RIGHT'' button, by modifying just a little our
+In the same vein we can add the ``LEFT'' button, by modifying just a little our
 previous examples.  As our game code will grow bigger and bigger, we will
 shorten already written parts for clarity sake, focusing on those parts that are
 changed.
@@ -297,7 +297,7 @@ changed.
     void setup() {
       // ... LCD configuration code ...
 
-      // Настройка кнопок управления.
+      // Implementing control buttons.
       pinMode(BUTTON_R, INPUT_PULLUP);
       pinMode(BUTTON_L, INPUT_PULLUP);
     }
@@ -323,7 +323,7 @@ changed.
 
 Let's run this program and try to move our player across the screen.  Soon we
 may see that there's a serious problem -- the player can go across the display
-border (and left the game map altogether.)
+border (and leave the game map altogether.)
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Constraining the player movement}
@@ -331,10 +331,10 @@ border (and left the game map altogether.)
 \index{Programming!Conditions}
 
 To solve the aforementioned problem, we have to check the player position before
-allowing the player to move to the left or to the right.  Those checks are
+allowing the player to move to the leave or to the right.  Those checks are
 required in button presses handling code.
 
-For the movement to the right we have to check if the player will left the map
+For the movement to the right we have to check if the player will leave the map
 on the next ``step'' (movement to the next cell.)  As we know the size of our
 display (let's say it is 16 columns) we can constrain the further right position
 to 15th cell.
@@ -369,7 +369,7 @@ the further left position is constrained to zero.
 
 \begin{listing}[ht]
   \begin{minted}{cpp}
-    // ... Код, который мы писали до этого ...
+    // ... The source code what we've written before ...
 
     void loop() {
       if (digitalRead(BUTTON_R) == LOW) {
@@ -397,7 +397,7 @@ the further left position is constrained to zero.
 \end{listing}
 
 In the listing \ref{listing:game-dev-player-left-constrain} shows an
-implementation of player left and right movement constrain.  Thus we handled two
-cases where our player could go across the map borders.
+implementation of the player's left and right movement constrain.  Thus we
+handled two cases where our player could go across the map borders.
 
 \end{document}

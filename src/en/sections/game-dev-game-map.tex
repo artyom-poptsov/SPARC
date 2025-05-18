@@ -20,17 +20,17 @@ character.  But if we would create two separate variables for each object (for
 storing its coordinates on X and Y axis), the number of the variables would grow
 very fast.  We can imagine that a map of 20x4 in size can potentially hold up to
 80 objects and it gives us 160 variables for addressing each of them!  To solve
-this problem we have to resort to already familiar for us arrays, with just one
-caveat -- we have to use \emph{two-dimensional arrays}.
+this problem we have to resort to arrays that are already familiar to us, with
+just one caveat -- we have to use \emph{two-dimensional arrays}.
 
-A schematic representation of a two-dimensional array is shown on the
+A schematic representation of a two-dimensional array is shown in
 fig. \ref{fig:2d-array-example}.
 
 \figureArray{en}
 
 We can also imagine a two-dimensional array of 4x20 as an one-dimensional array
 consisting of 4 elements, where each of which holds a reference to another
-one-dimensional array of 20 cells in length, as is shown on the
+one-dimensional array of 20 cells in length, as is shown in
 fig. \ref{fig:2d-array-example-with-references}.
 
 \figureArrayOfPointers{en}
