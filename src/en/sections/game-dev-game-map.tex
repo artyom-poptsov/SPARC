@@ -315,4 +315,198 @@ find out what the cell to the right contains, we substitute
 next cell.)  Then the acquired value from the array is being compared to the
 \mintinline{cpp}{WALL} constant -- we use ``!='' (``not equal'') sign for that.
 
+As we will be using such comparisons quite often, it is reasonable to create
+special procedures that check game map cells for specific objects.  For example,
+we can create an auxiliary procedure of the following kind:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // A procedure that returns 1 (true) in case
+    // when there's a wall in the specified game
+    // map cell.  Otherwise the procedure returns
+    // 0 (false.)
+    bool is_wall(int x, int y) {
+      return game_map[y][x] == WALL;
+    }
+  \end{minted}
+  \caption{An implementation of a procedure that checks if there's a wall on a
+    game map cell.}
+  \label{listing:game-dev-map-collisions-01}
+\end{listing}
+
+\note{en}{ In C++ language 0 means ``false'', while any other non-zero value is
+  considered as true (e.g. numbers like 1, 42, -41 and so on are considered as
+  ``true'' from by C++.) }
+
+Using \mintinline{cpp}{is_wall} procedure we can shorten the code inside
+\mintinline{cpp}{loop} procedure as follows:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        if (player_x < 15) {
+          // Check if there's a wall to the right
+          // of a player.
+          if (! is_wall(player_x + 1, player_y)) {
+            // If there's no wall to the right we allow
+            // the player to move one cell to the right.
+            player_x++;
+          }
+        }
+      }
+
+      // ...
+    }
+  \end{minted}
+  \caption{Calling of \mintinline{cpp}{is_wall} procedure.}
+  \label{listing:game-dev-map-collisions-02}
+\end{listing}
+
+We should take a closer look on the following part of the code:
+
+\begin{minted}{cpp}
+  if (! is_wall(player_x + 1, player_y)) {
+    // ...
+  }
+\end{minted}
+
+Here we're using ``!'' symbol that means logical inversion (``NOT''), that
+inverts the value returned by \mintinline{cpp}{is_wall} procedure.
+
+In the same vain as we did the movement to the right, we have to handle
+collisions with the wall when the player moves to the left.  As the result, the
+code of the \mintinline{cpp}{procedure} will look as follows:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        if (player_x < 15) {
+          if (! is_wall(player_x + 1, player_y)) {
+            player_x++;
+          }
+        }
+      }
+
+      if (digitalRead(BUTTON_L) == LOW) {
+        if (player_x > 0) {
+          if (! is_wall(player_x - 1, player_y)) {
+            player_x--;
+          }
+        }
+      }
+
+      // Calling of the procedure that draws the map
+      // on the screen.
+      map_show();
+
+      // Drawing a player upon a map.
+      lcd.setCursor(player_x, player_y);
+      lcd.print(PLAYER);
+
+      // A delay to avoid reading button values
+      // too fast.
+      delay(100);
+    }
+  \end{minted}
+  \caption{An example of collision handling with walls.}
+  \label{listing:game-dev-map-collisions-03}
+\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Gathering objects from the map}
+\index{Game development!Gathering the objects from the map}
+
+An implementation of the objects gathering from the map is similar to the
+interaction with ``walls''.  We start with specifying the symbol that will
+represent a gatherable object -- let it be some ``health points'' (``HP''.)
+
+\begin{minted}{cpp}
+  const char SPACE = ' ';    // An empty space.
+  const char WALL  = '#';    // A wall.
+  const char HP    = '+';    // Health points.
+\end{minted}
+
+Then we create a procedure for checking if a HP is present on a game map cell --
+similar to what we did with the walls.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // A procedure that returns 1 (true) when a HP
+    // is present on the specified position the map.
+    // Otherwise the procedure returns 0 (false.)
+    bool is_hp(int x, int y) {
+      return game_map[y][x] == HP;
+    }
+  \end{minted}
+  \caption{A procedure for checking if a HP is present on the specified position
+    on the map.}
+  \label{listing:game-dev-is-hp-procedure}
+\end{listing}
+
+Using this procedure we can add an additional check in the
+\mintinline{cpp}{loop} procedure for the collision with the HP object.  When the
+HP is collected by the player we can remove this object from the map by
+overwriting it with an empty space (``SPACE''.)
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      if (digitalRead(BUTTON_R) == LOW) {
+        // ...
+      }
+
+      if (digitalRead(BUTTON_L) == LOW) {
+        // ...
+      }
+
+      if (is_hp(player_x, player_y)) {
+        game_map[player_y][player_x] = SPACE;
+      }
+
+      // Calling of the procedure that draws the map
+      // on the screen.
+      map_show();
+
+      // ...
+    }
+  \end{minted}
+  \caption{Calling to the \mintinline{cpp}{is_hp} procedure for collecting the
+    HP object from the map.}
+  \label{listing:game-dev-is-hp-procedure-call}
+\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Improving the game map rendering}
+
+As we should see now the player image on the display is blinking.  This is due
+to the fact that the game character drawing is being done in our code separately
+from the game map rendering -- we draw the map first, and only after that we draw
+the player.
+
+\begin{minted}{cpp}
+  void loop() {
+    // ...
+
+    // Calling of the procedure that draws the map
+    // on the screen.
+    map_show();
+
+    // Drawing a player over the map.
+    lcd.setCursor(player_x, player_y);
+    lcd.print(PLAYER);
+
+    // ...
+  }
+\end{minted}
+
+We can say that our game world is currently \emph{double-layered}.  Let us
+imagine some kind of graphical editor that supports layers.  We can draw on each
+separate layer and can toggle the visibility of the each layer.  The upper
+layers in that case are overlapping the lower ones; if an upper layer has areas
+of transparency, then through them we can see the lower layers.  But when we
+export the image into raster format (to the PNG format, for example), all the
+layers are being joined into one two-dimensional image.
+
 \end{document}
