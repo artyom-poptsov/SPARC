@@ -294,4 +294,25 @@ the zeroth layer.
   \label{listing:game-dev-map-collisions-00}
 \end{listing}
 
+As an example let us try to make player not to go through the walls.  If the
+player wants to go to the right cell and it contains a wall, then we must not
+change the position of the player.  But if the right cell contains nothing, then
+we change the position.  An example of how to do that can be fount in the source
+code in the listing \ref{listing:game-dev-map-collisions-00}.
+
+We should take a closer look on the following code.
+
+\begin{minted}{cpp}
+  if (game_map[player_y][player_x + 1] != WALL) {
+    // ...
+  }
+\end{minted}
+
+As we probably remember, \mintinline{cpp}{game_map} contains the game map.  To
+find out what the cell to the right contains, we substitute
+\mintinline{cpp}{player_y} as the array row index and \mintinline{cpp}{player_x
+  + 1} as the column index (addition of one to the position allows us to get the
+next cell.)  Then the acquired value from the array is being compared to the
+\mintinline{cpp}{WALL} constant -- we use ``!='' (``not equal'') sign for that.
+
 \end{document}
