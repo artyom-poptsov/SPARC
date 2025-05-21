@@ -509,4 +509,139 @@ of transparency, then through them we can see the lower layers.  But when we
 export the image into raster format (to the PNG format, for example), all the
 layers are being joined into one two-dimensional image.
 
+To solve the problem with ``blinking'' of the player, we have to integrate the
+player drawing code into the procedure that renders the map on the display, to
+combine all the layers into one.  The area of the map where the player stands is
+not visible anyway -- thus there's no point in drawing this invisible part.  So
+when we draw the map cell where the player is standing in
+\mintinline{cpp}{map_show} procedure, we can skip drawing of this part of the
+map altogether.
+
+Let us add two parameters to \mintinline{cpp}{map_show} procedure for specifying
+the position of the player on the map.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void map_show(int px, int py) {
+      for (int y = 0; y < MAP_H; y++) {
+        for (int x = 0; x < MAP_W; x++) {
+          lcd.setCursor(x, y);
+          if ((y == py) && (x == px)) {
+            lcd.print( PLAYER );
+          } else {
+            lcd.print( game_map[y][x] );
+          }
+        }
+      }
+    }
+  \end{minted}
+  \caption{A modification of \mintinline{cpp}{map_show} procedure for drawing
+    the game map along with the player.}
+  \label{listing:game-dev-map-show-improvement}
+\end{listing}
+
+Inside the procedure we have added a check -- if we see that on the current
+position the player is standing, then we draw the player instead of the map
+content for the position.
+
+Now the call to the procedure should look like follows.
+
+\begin{minted}{cpp}
+  void loop() {
+    // ...
+
+    // Calling to the procedure for rendering
+    // the map on the screen.
+    map_show(player_x, player_y);
+
+    // IMPORTANT: This part of the code
+    // is not needed anymore.
+    // lcd.setCursor(player_x, player_y);
+    // lcd.print(PLAYER);
+
+
+    // ...
+  }
+\end{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Auxiliary procedures for working with the game map}
+\index{Game development!Game map!Procedure library}
+\label{game-dev-game-map:extra-procedures}
+
+For improve the convenience for working with the game map, let us create a set
+of additional procedures that allow us to place an ``object'' (a symbol) into a
+specified map cell, to get an object from the map by its coordinates, to clear a
+map cell and to ``move'' an object on the map.
+
+We start with creating a procedure that places an object into a specified game
+map cell:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // A procedure for placing an object into
+    // a game map cell.
+    void map_set(int x, int y, char object) {
+      game_map[y][x] = object;
+    }
+  \end{minted}
+  \caption{Implementation of \mintinline{cpp}{map_set} procedure that allows us
+    to place an object on the map.}
+  \label{listing:game-dev-map-set-procedure}
+\end{listing}
+
+A procedure for getting an object from the map can be implemented like this:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // A procedure for getting an object
+    // from the map.
+    char map_get(int x, int y) {
+      return game_map[y][x];
+    }
+  \end{minted}
+  \caption{Implementation of \mintinline{cpp}{map_get} procedure for getting an
+    object from the map.}
+  \label{listing:game-dev-map-get--procedure}
+\end{listing}
+
+A procedure for clearing a map cell is based upon \mintinline{cpp}{map_set}
+procedure:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Clear a specified game map cell.
+    void map_clear(int x, int y) {
+      map_set(x, y, SPACE);
+    }
+  \end{minted}
+  \caption{Implementation of \mintinline{cpp}{map_clear} procedure for clearing
+    a map cell.}
+  \label{listing:game-dev-map-get--procedure}
+\end{listing}
+
+A procedure that allows to move an object implements a simple algorithm:
+\begin{enumerate}
+\item Copy the object from the source map cell (\mintinline{cpp}{x1},
+  \mintinline{cpp}{y1}) into the target cell (\mintinline{cpp}{x2},
+  \mintinline{cpp}{y2}.)
+\item Clear the source cell (\mintinline{cpp}{x1}, \mintinline{cpp}{y1}) of the
+  map.
+\end{enumerate}
+
+An implementation of such procedure can look like this:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Move an object on a map.
+    void map_move(int x1, int y1, int x2, int y2) {
+      map_set(x2, y2, map_get(x1, y1) );
+      map_clear(x1, y1);
+    }
+  \end{minted}
+  \caption{Implementation of \mintinline{cpp}{map_move} procedure that allows us
+    to move an object on the map.}
+  \label{listing:game-dev-map-move---procedure}
+\end{listing}
+
 \end{document}
