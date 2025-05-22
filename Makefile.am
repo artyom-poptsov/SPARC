@@ -286,6 +286,7 @@ SECTIONS_EN = \
 	src/en/sections/game-dev-player.tex	\
 	src/en/sections/game-dev-buttons.tex	\
 	src/en/sections/game-dev-game-map.tex	\
+	src/en/sections/game-dev-sounds.tex	\
 	src/en/sections/appendix-octaves.tex \
 	src/en/sections/appendix-prostokvashino-score.tex \
 	src/en/sections/appendix-twinkle-twinkle-little-star-01.tex \

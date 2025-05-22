@@ -1,0 +1,74 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Adding sounds}
+\index{Game development!Sound}
+
+Rarely we can find a game that is without sound effects.  Now we are going to
+add some sound to our game as well.
+
+Let us connect the speaker for outputting sounds to the eighth port -- we will
+specify it in the code as a named constants, before \mintinline{cpp}{setup}
+procedure.
+
+\begin{minted}{cpp}
+  const byte SPEAKER_PIN = 8; // Speaker port.
+\end{minted}
+
+Now in in \mintinline{cpp}{setup} procedure we will configure the speaker port
+to the output mode.
+
+\begin{minted}{cpp}
+  void setup() {
+    lcd.init();
+    lcd.backlight();
+
+    // Control buttons configuration.
+    pinMode(BUTTON_R, INPUT_PULLUP);
+    pinMode(BUTTON_L, INPUT_PULLUP);
+
+    // Configuration of the speaker port.
+    pinMode(SPEAKER_PIN, OUTPUT);
+
+    // Calling to the procedure of
+    // the map generation.
+    map_generate();
+  }
+\end{minted}
+
+Now we will copy \mintinline{cpp}{play_tone} procedure from the chapter
+\ref{chapter:music-and-technology-synthesis} to the our game.  Also we will add
+constants for notes.
+
+\begin{minted}{cpp}
+  // Fourth (in the scientific notation,
+  // starting from zero) octave.
+  const float c4 = 261.630;
+  const float d4 = 293.660;
+  const float e4 = 329.630;
+  const float f4 = 349.230;
+  const float g4 = 392.000;
+  const float a4 = 440.000;
+  const float b4 = 493.880;
+
+  // Procedure for generating a sound
+  // with the specified frequency.
+  void play_tone(int port, float f, long t) {
+    const long T = 1000000 / f;
+    long d = T / 2;
+    int count = t / T;
+    for (int i = 0; i < count; i++) {
+      digitalWrite(port, HIGH);
+      delayMicroseconds(d);
+      digitalWrite(port, LOW);
+      delayMicroseconds(d);
+    }
+  }
+\end{minted}
+
+
+
+
+
