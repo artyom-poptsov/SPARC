@@ -68,4 +68,49 @@ constants for notes.
   }
 \end{minted}
 
+Now that we have the basic code for sound generation, we will implement the item
+pickup sound.  In the previous sections we have already implemented player
+collisions handling with the objects on the map.  Now we can add the sound of
+``HP'' pickup.
+
+We can come up with some custom sound for that; for the example purposes we will
+choose \mintinline{cpp}{e4} and \mintinline{cpp}{g4} with different lengths that
+will give us an interesting (in our view) sound effect.
+
+\begin{minted}{cpp}
+  void loop() {
+    if (digitalRead(BUTTON_R) == LOW) {
+      // ...
+    }
+
+    if (digitalRead(BUTTON_L) == LOW) {
+      // ...
+    }
+
+    if (is_hp(player_x, player_y)) {
+      game_map[player_y][player_x] = SPACE;
+
+      // Playing the sound of item pickup.
+      play_tone(SPEAKER_PIN, e4, 125000);
+      play_tone(SPEAKER_PIN, g4, 250000);
+    }
+
+    map_show();
+
+    // ...
+  }
+\end{minted}
+
+In the same way we can add sound effects for other events in the game (e.g. for
+the loosing the game) -- but we will talk about it later.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Excercises}
+\begin{enumerate}
+\item Try to implement a sound effect for the collision of the player with a
+  wall -- for that we can choose some sound with very low frequency (not
+  necessarily a music sound), and play the sound when the player tries to go
+  through a wall.
+\end{enumerate}
+
 \end{document}
