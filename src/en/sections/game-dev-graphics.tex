@@ -1,0 +1,54 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\section{Graphics}
+\index{Game development!Graphics}
+\newglossaryentry{NPC}{name=NPC, description={Non-Playable Character}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Using pre-defined symbols}
+\index{Programming!Character table}
+\index{Game development!Graphics!Standard symbols}
+
+Computers ``perceive'' symbols as everything else -- that is, as numbers.  For
+each symbol there's some code that the computer remembers and processes, when we
+ask it to store a symbol into a memory or print it to the screen.
+
+\note{en}{ One of the simplest form of symbol encoding is ASCII (American
+  Standard Code for Information Interchange) table that describes symbols with
+  codes from 0 to 127.  In modern operating systems Unicode encoding is used
+  instead to support different languages.  Unicode table is way bigger than
+  ASCII and includes most of the languages of the world.  Nevertheless, Unicode
+  keeps the backward compatibility with ASCII, as the first 128 symbols are the
+  same as in the ASCII table. }
+
+In text-based LCDs there's an embedded symbol table that controls how the
+display prints the symbols.  The set of the symbols can differ depending on the
+model of the display in question, that's why it is recommended to refer to a
+symbol table for the specific screen.
+
+For example, in many displays the symbol with 255 code (\mintinline{cpp}{0xFF}
+in hexadecimal form) represents a filled rectangle.  To use this symbol in a
+project, it is convenient to create a constant that represents this game
+``object''.
+
+\begin{minted}{cpp}
+  const char WALL = 0xFF; // Symbol code.
+\end{minted}
+
+It should be noted that the symbol code is specified without quotes, as we are
+specifying the number of the symbol in the table instead of its graphical
+representation.
+
+After we created the constant for the symbol in the code, we can print it in the
+code as follows:
+
+\begin{minted}{cpp}
+  void loop() {
+    lcd.setCursor(0, 0);
+    lcd.print(WALL);
+  }
+\end{minted}
+
+\end{document}
