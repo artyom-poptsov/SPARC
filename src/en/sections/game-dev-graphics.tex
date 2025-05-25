@@ -51,4 +51,66 @@ code as follows:
   }
 \end{minted}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Creating custom symbols}
+\index{Game development!Graphics!Custom symbols}
+
+Despite that we're using a text LCD in our project and it does not provide means
+for drawing arbitrary images in any place on the screen, we can create custom
+symbols for it.  Those custom symbols can be drawn inside cells on the screen.
+
+The size of one screen cell is 8x5 pixels (8 rows, 5 columns.)  Schematically we
+can visualize it as is shown in fig. \ref{fig:game-dev-char}.
+
+\figureLCDChar{en}
+
+There are 80 of such cells on a display with 4 rows and 20 columns, as can be
+seen in fig. \ref{fig:game-dev-char}.
+
+Each pixel is represented by one bit.  One means that the pixel is filled, and
+zero means that the pixel is not filled.  For example, a line which is shown in
+fig. \ref{fig:game-dev-char-symbol-encoding} can be written as
+\mintinline{cpp}{0b01010}.
+
+\figureLCDCharRow{en}
+
+Each line is encoded as one byte (eight bits) of information, from which
+factually only 5 lower bits are used.  Totally there are 8 of such rows, thus
+for storing them we need an array of 8 bytes.
+
+An example of game character drawing:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    byte player_image[8] = {
+      0b01110,
+      0b01110,
+      0b00100,
+      0b01110,
+      0b10101,
+      0b01110,
+      0b01010,
+      0b01010
+    };
+  \end{minted}
+  \caption{A symbol for text-based LCD, which is represented by an
+    one-dimensional array of bytes.}
+  \label{listing:game-dev-lcd-custom-char}
+\end{listing}
+
+A visual representation of the symbol is shown below:
+
+\figureLCDCharPlayer{en}
+
+We can draw such images on a grid paper and then translate them by the hand into
+a program code.  Of course, programmers already automated this process so there
+are web pages that allow us to draw such characters and generate program code
+from them.  Here are one of them:
+\url{https://zoomch02.github.io/LCD-Character-Generator/}
+
+After the symbol is drawn, it must be written into LCD memory so we can use it
+later.  From the embedded character table we have access to codes from 0 to 7
+inclusive, that allows us to write 8 custom characters into the display memory.
+The rest of the symbols in the table cannot be overwritten.
+
 \end{document}
