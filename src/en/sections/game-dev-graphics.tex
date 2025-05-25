@@ -113,4 +113,69 @@ later.  From the embedded character table we have access to codes from 0 to 7
 inclusive, that allows us to write 8 custom characters into the display memory.
 The rest of the symbols in the table cannot be overwritten.
 
+To write a symbol into the LCD memory we have to use a special
+\mintinline{cpp}{createChar} procedure, into which we have to pass the symbol
+code and the desired representation of the symbol as an array.  It is convenient
+to use constants of the \mintinline{cpp}{char} type for the specification of the
+symbol code, s we will create \mintinline{cpp}{PLAYER} for our player:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const char PLAYER = 0; // Symbol code.
+    // A visual representation of the symbol.
+    byte player_image[8] = {
+      0b01110,
+      0b01110,
+      0b00100,
+      0b01110,
+      0b10101,
+      0b01110,
+      0b01010,
+      0b01010
+    };
+  \end{minted}
+  \caption{Creating a character constant for storing the code of a custom
+    symbol.}
+  \label{listing:game-dev-lcd-custom-char-const}
+\end{listing}
+
+Then in the \mintinline{cpp}{setup} procedure we will write the symbol into the
+display memory:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      lcd.init();
+      lcd.backlight();
+
+      // Writing the symbol into the display memory.
+      lcd.createChar(PLAYER, player_image);
+    }
+  \end{minted}
+  \caption{Writing of a custom symbol into the display memory.}
+  \label{listing:game-dev-lcd-create-char}
+\end{listing}
+
+After that we can print the symbol on the screen just by calling
+\mintinline{cpp}{print} procedure and passing to it our \mintinline{cpp}{PLAYER}
+constant:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      lcd.setCursor(0, 0);
+      lcd.print(PLAYER);
+    }
+  \end{minted}
+  \caption{Printing a custom symbol on the LCD screen.}
+  \label{listing:game-dev-lcd-print}
+\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercises}
+\begin{enumerate}
+\item Create a symbol for a non-playable character (\gls{NPC}) and for some
+  collectible item.
+\end{enumerate}
+
 \end{document}
