@@ -98,6 +98,7 @@ SECTIONS = \
 COMMON = \
 	src/common/common.tex \
 	src/common/figureADC.tex \
+	src/common/figureAVRMemory.tex \
 	src/common/figureAnalogSignalExample.tex \
 	src/common/figureArray.tex \
 	src/common/figureArrayOfPointers.tex \
