@@ -277,7 +277,7 @@ To fix this problem we can add a short delay (100ms, for example) at the end of
 \end{listing}
 
 In the same vein we can add the ``LEFT'' button, by modifying just a little our
-previous examples.  As our game code will grow bigger and bigger, we will
+previous examples.  As our game code will grows bigger and bigger, we will
 shorten already written parts for clarity sake, focusing on those parts that are
 changed.
 
@@ -331,7 +331,7 @@ border (and leave the game map altogether.)
 \index{Programming!Conditions}
 
 To solve the aforementioned problem, we have to check the player position before
-allowing the player to move to the leave or to the right.  Those checks are
+allowing the player to move to the left or to the right.  Those checks are
 required in button presses handling code.
 
 For the movement to the right we have to check if the player will leave the map
@@ -396,8 +396,8 @@ the further left position is constrained to zero.
   \label{listing:game-dev-player-left-constrain}
 \end{listing}
 
-In the listing \ref{listing:game-dev-player-left-constrain} shows an
-implementation of the player's left and right movement constrain.  Thus we
-handled two cases where our player could go across the map borders.
+The listing \ref{listing:game-dev-player-left-constrain} shows an implementation
+of the player's left and right movement constrain.  Thus we handled two cases
+where our player could go across the map borders.
 
 \end{document}

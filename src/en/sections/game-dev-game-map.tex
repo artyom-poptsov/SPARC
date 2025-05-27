@@ -11,7 +11,7 @@
 Usually some action takes place around the player in a game -- non-playable
 characters (NPC) jealously patrol the map territory; some objects, that player
 can interact with, appear and disappear; and finally everywhere lie various
-\emph{static} objects that can block the path for the player or can be just a
+\emph{static} objects that can block the path for the player or can be just an
 element of the decoration.
 
 A simple way to place an object on the map is to specify its coordinates on the
@@ -36,9 +36,9 @@ fig. \ref{fig:2d-array-example-with-references}.
 \figureArrayOfPointers{en}
 
 For our game implementation tasks we need to specify an array that stores the
-\mintinline{cpp}{char} type.  The size of our array -- or the size of our game
-map -- we will specify with named constants, somewhere in the top area of the
-code, before the \mintinline{cpp}{setup} procedure.
+\mintinline{cpp}{char} type.  We will the size of our array -- or the size of our
+game map -- with named constants, somewhere in the top area of the code, before
+the \mintinline{cpp}{setup} procedure.
 
 \begin{listing}[H]
   \begin{minted}{cpp}
@@ -83,10 +83,10 @@ let's call the procedure \mintinline{cpp}{map_show}.
 \end{listing}
 
 As can be seen from the listing \ref{listing:game-dev-map-show} the procedure
-body consists of two loops, one being inlined into other.  The first loop
+body consists of two loops, one being inlined into the other.  The first loop
 iterates over the \mintinline{cpp}{y} axis (the rows of the array.)  The second
-loop iterates over \mintinline{cpp}{x} axis (the columns of the array.)  As the
-second loop is inlined into the first loop, each single step over
+loop iterates over the \mintinline{cpp}{x} axis (the columns of the array.)  As
+the second loop is inlined into the first loop, each single step over
 \mintinline{cpp}{y} takes full iteration over \mintinline{cpp}{x} values from 0
 to \mintinline{cpp}{MAP_W}.
 
@@ -128,8 +128,8 @@ the game map on the display.
 \end{listing}
 
 It should be noted that the map drawing is done before the drawing of the game
-character.  If we would change this order then the player would not be seen on
-the screen as it would be overwritten by the game map.
+character.  If we change this order then the player would not be seen on the
+screen as it would be overwritten by the game map.
 
 After uploading this program we may notice that the display is filled with
 random characters.  It happens as we didn't initialize the
@@ -140,8 +140,8 @@ To fix that situation we need to create a procedure for map generation, that
 fills the map with something sensible.  To begin with, we will fill the map with
 spaces, that symbolize the empty space on the map.
 
-Let's create a special char constant for the empty space on the map in the
-global scope, before \mintinline{cpp}{setup} procedure.
+Let's create a special \mintinline{cpp}{char} constant for the empty space on
+the map in the global scope, before \mintinline{cpp}{setup} procedure.
 
 \begin{minted}{cpp}
   const char SPACE = ' ';    // Empty space.
@@ -170,7 +170,7 @@ As we can see from the listing \ref{listing:game-dev-map-generate}, the
 \mintinline{cpp}{map_generate} procedure is not very different from the
 \mintinline{cpp}{map_show} procedure.
 
-The \mintinline{cpp}{map_generate} procedure should be called once in
+The \mintinline{cpp}{map_generate} procedure should be called once in the
 \mintinline{cpp}{setup} procedure.
 
 \begin{listing}[H]
@@ -194,11 +194,11 @@ The \mintinline{cpp}{map_generate} procedure should be called once in
 \end{listing}
 
 After uploading the new version of the program to the Arduino, we should see a
-screen where only the player is displayed, as the game map is ``empy'' (filled
+screen where only the player is displayed, as the game map is ``empty'' (filled
 with spaces.)
 
 Now we've got the ability to place objects on the game map. We start with a new
-game objects -- let it be a ``wall'', that is, an impassable part of a map. We
+game object -- let it be a ``wall'', that is, an impassable part of a map. We
 will use ``\#'' as the wall symbol.
 
 \begin{listing}[H]
@@ -210,7 +210,7 @@ will use ``\#'' as the wall symbol.
   \label{listing:game-dev-map-objects}
 \end{listing}
 
-After that we can place this object to map, by modifying the
+After that we can place this object on a map, by modifying the
 \mintinline{cpp}{map_generate} procedure.  Let's add several walls.
 
 \begin{listing}[H]
@@ -235,9 +235,9 @@ After that we can place this object to map, by modifying the
 
 After uploading the new version of the program to the Arduino we should see that
 the objects appeared on the screen.  The same way we can place other objects
-here.  But here's a new problem -- how to interact with them?  In the current
-game implementation the player can go through the walls as if they a ghost.  The
-solution of this problem is described in the next section.
+here.  But there is a new problem -- how to interact with them?  In the current
+game implementation the player can go through the walls as if they are a ghost.
+The solution to this problem is described in the next section.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Exercises}
