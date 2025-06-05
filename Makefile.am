@@ -138,6 +138,7 @@ COMMON = \
 	src/common/figureSoundGraph.tex \
 	src/common/minted.tex \
 	src/common/tableCommunicationSerialPorts.tex \
+	src/common/tableGPWR.tex \
 	src/common/tableMusicNoteLengths.tex \
 	src/common/tableMusicOctaveExample.tex \
 	src/common/tableMusicTwinkleTwinkleLittleStar.tex \

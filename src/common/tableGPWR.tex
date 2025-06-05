@@ -1,0 +1,66 @@
+\newcommand{\tableGPWR}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableCaption{XXX: No translation.}
+  \def\tableAddress{XXX: No translation.}
+  \def\tableBits{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableAddress{Адрес}
+  \def\tableBits{Биты}
+  \def\tableCaption{
+    Рабочие регистры общего назначения микроконтроллеров AVR.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableAddress{Address}
+  \def\tableBits{Bits}
+  \def\tableCaption{
+    AVR CPU general purpose working registers.
+  }
+  \fi
+  \begin{table}[ht]
+    \centering
+    \def\arraystretch{1.5}%
+    \begin{tabular}{|m{2.5cm}|m{2.5cm}|c|}
+      \hline
+      \textbf{7} & \textbf{0} & \textbf{\tableAddress}\\
+      \hline
+      \multicolumn{2}{|c|}{R0} & \texttt{0x00}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R1} & \texttt{0x01}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R2} & \texttt{0x02}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{...} & \\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R13} & \texttt{0x0D}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R14} & \texttt{0x0E}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R15} & \texttt{0x0F}\\[1.5ex]
+      \hline
+      \hline
+      \multicolumn{2}{|c|}{R16} & \texttt{0x10}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R17} & \texttt{0x11}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{...} & \\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R26} & \texttt{0x1A}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R27} & \texttt{0x1B}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R28} & \texttt{0x1C}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R29} & \texttt{0x1D}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R30} & \texttt{0x1E}\\[1.5ex]
+      \hline
+      \multicolumn{2}{|c|}{R31} & \texttt{0x1F}\\[1.5ex]
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:avr-gpwr}
+  \end{table}
+}
