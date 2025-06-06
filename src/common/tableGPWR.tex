@@ -22,42 +22,55 @@
   \begin{table}[ht]
     \centering
     \def\arraystretch{1.5}%
-    \begin{tabular}{|m{2.5cm}|m{2.5cm}|c|}
+    \begin{tabular}{
+        |m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|m{0.5cm}|c|
+      }
       \hline
-      \textbf{7} & \textbf{0} & \textbf{\tableAddress}\\
+      \multicolumn{8}{|c|}{\textbf{\tableBits}}
+      & \multirow{2}{*}{\textbf{\tableAddress}}\\
+      \cline{1-8}
+      \textbf{7}
+      & \textbf{6}
+      & \textbf{5}
+      & \textbf{4}
+      & \textbf{3}
+      & \textbf{2}
+      & \textbf{1}
+      & \textbf{0}
+      & \\
       \hline
-      \multicolumn{2}{|c|}{R0} & \texttt{0x00}\\[1.5ex]
+      \multicolumn{8}{|c|}{R0} & \texttt{0x00}\\
       \hline
-      \multicolumn{2}{|c|}{R1} & \texttt{0x01}\\[1.5ex]
+      \multicolumn{8}{|c|}{R1} & \texttt{0x01}\\
       \hline
-      \multicolumn{2}{|c|}{R2} & \texttt{0x02}\\[1.5ex]
+      \multicolumn{8}{|c|}{R2} & \texttt{0x02}\\
       \hline
-      \multicolumn{2}{|c|}{...} & \\[1.5ex]
+      \multicolumn{8}{|c|}{...} & \\
       \hline
-      \multicolumn{2}{|c|}{R13} & \texttt{0x0D}\\[1.5ex]
+      \multicolumn{8}{|c|}{R13} & \texttt{0x0D}\\
       \hline
-      \multicolumn{2}{|c|}{R14} & \texttt{0x0E}\\[1.5ex]
+      \multicolumn{8}{|c|}{R14} & \texttt{0x0E}\\
       \hline
-      \multicolumn{2}{|c|}{R15} & \texttt{0x0F}\\[1.5ex]
+      \multicolumn{8}{|c|}{R15} & \texttt{0x0F}\\
       \hline
       \hline
-      \multicolumn{2}{|c|}{R16} & \texttt{0x10}\\[1.5ex]
+      \multicolumn{8}{|c|}{R16} & \texttt{0x10}\\
       \hline
-      \multicolumn{2}{|c|}{R17} & \texttt{0x11}\\[1.5ex]
+      \multicolumn{8}{|c|}{R17} & \texttt{0x11}\\
       \hline
-      \multicolumn{2}{|c|}{...} & \\[1.5ex]
+      \multicolumn{8}{|c|}{...} & \\
       \hline
-      \multicolumn{2}{|c|}{R26} & \texttt{0x1A}\\[1.5ex]
+      \multicolumn{8}{|c|}{R26} & \texttt{0x1A}\\
       \hline
-      \multicolumn{2}{|c|}{R27} & \texttt{0x1B}\\[1.5ex]
+      \multicolumn{8}{|c|}{R27} & \texttt{0x1B}\\
       \hline
-      \multicolumn{2}{|c|}{R28} & \texttt{0x1C}\\[1.5ex]
+      \multicolumn{8}{|c|}{R28} & \texttt{0x1C}\\
       \hline
-      \multicolumn{2}{|c|}{R29} & \texttt{0x1D}\\[1.5ex]
+      \multicolumn{8}{|c|}{R29} & \texttt{0x1D}\\
       \hline
-      \multicolumn{2}{|c|}{R30} & \texttt{0x1E}\\[1.5ex]
+      \multicolumn{8}{|c|}{R30} & \texttt{0x1E}\\
       \hline
-      \multicolumn{2}{|c|}{R31} & \texttt{0x1F}\\[1.5ex]
+      \multicolumn{8}{|c|}{R31} & \texttt{0x1F}\\
       \hline
     \end{tabular}
     \caption{\tableCaption}
