@@ -86,10 +86,10 @@ SECTIONS = \
 	src/ru/sections/game-dev-animation.tex	\
 	src/ru/sections/game-dev-logic.tex	\
 	src/ru/sections/game-dev-structures.tex	\
-	src/ru/sections/interrupts-intro.tex \
-	src/ru/sections/interrupts-types.tex \
-	src/ru/sections/interrupts-hw-external.tex \
-	src/ru/sections/interrupts-hw-internal.tex \
+	src/ru/sections/mcu-intro.tex \
+	src/ru/sections/mcu-interrupts-types.tex \
+	src/ru/sections/mcu-interrupts-hw-external.tex \
+	src/ru/sections/mcu-interrupts-hw-internal.tex \
 	src/ru/sections/appendix-octaves.tex	\
 	src/ru/sections/appendix-prostokvashino-score.tex \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-01.tex \
