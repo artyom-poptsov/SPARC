@@ -1,0 +1,66 @@
+\newcommand{\tableMCUPortsExample}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{
+    Цифровой порт
+  }
+  \def\tableSecondColumn{
+    Регистр
+  }
+  \def\tableThirdColumn{
+    Бит
+  }
+  \def\tableCaption{
+    Соответствие некоторых цифровых портов Arduino их расположению в регистрах
+    процессора.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{
+    Digital port
+  }
+  \def\tableSecondColumn{
+    Register
+  }
+  \def\tableThirdColumn{
+    Bit
+  }
+  \def\tableCaption{
+    Mapping of some digital I/O ports on Arduino to their layout in the MCU
+    registers.
+  }
+  \fi
+  \begin{table}[h]
+    \centering
+    \begin{tabular}{ | c | c | c | }
+      \hline
+      \textbf{\tableFirstColumn}
+      & \textbf{\tableSecondColumn}
+      & \textbf{\tableThirdColumn} \\
+      \hline
+      D0 & E & 0 \\
+      \hline
+      D1 & E & 1 \\
+      \hline
+      D2 & E & 4 \\
+      \hline
+      D3 & E & 5 \\
+      \hline
+      D4 & G & 5 \\
+      \hline
+      D5 & E & 3 \\
+      \hline
+      D6 & H & 3 \\
+      \hline
+      D7 & H & 4 \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:mcu-io-registers-example}
+  \end{table}
+}

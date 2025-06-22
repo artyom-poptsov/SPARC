@@ -91,6 +91,7 @@ SECTIONS = \
 	src/ru/sections/mcu-interrupts-hw-external.tex \
 	src/ru/sections/mcu-interrupts-hw-internal.tex \
 	src/ru/sections/mcu-memory.tex \
+	src/ru/sections/mcu-port-manipulation.tex \
 	src/ru/sections/appendix-octaves.tex	\
 	src/ru/sections/appendix-prostokvashino-score.tex \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-01.tex \
@@ -147,6 +148,7 @@ COMMON = \
 	src/common/tableIICPorts.tex \
 	src/common/tableInterrupts.tex \
 	src/common/tableLCM.tex \
+	src/common/tableMCUPortsExample.tex \
 	src/common/tableTwoDimensionalArray.tex
 
 COMMIT = $(shell git rev-parse HEAD)
