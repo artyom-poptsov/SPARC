@@ -109,7 +109,32 @@ Arduino Mega 2560, мы можем написать следующий код:
   \end{minted}
   \caption{Пример управления значением цифрового порта 2 на Arduino Mega 2560
     через регистр процессора.}
-  \label{listing:mcu-port-example}
+  \label{listing:mcu-port-example-1}
 \end{listing}
+
+Этот пример можно упростить, путём замены явного выставления бита в регистре
+\mintinline{cpp}{PORTE} на инверсию данного бита через операцию исключающего
+``ИЛИ'' (``XOR''.)  Также мы можем использовать сокращённые формы операций --
+такие, как ``\textbar='' и ``\^{}=''.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      DDRE |= (1 << 4);
+    }
+
+    void loop() {
+      PORTE ^= (1 << 4);
+      delay(100);
+    }
+  \end{minted}
+  \caption{Пример управления значением цифрового порта 2 на Arduino Mega 2560
+    путём инверсии бита в регистре процессора.}
+  \label{listing:mcu-port-example-2}
+\end{listing}
+
+В примере \ref{listing:mcu-port-example-2} мы каждые 100мс инвертируем пятый бит
+в регистре \mintinline{cpp}{DDRE}, таким образом меняя значение на
+соответствующем порту Arduino.
 
 \end{document}
