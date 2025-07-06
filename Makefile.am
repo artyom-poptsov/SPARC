@@ -146,6 +146,7 @@ COMMON = \
 	src/common/tableMusicTwinkleTwinkleLittleStar.tex \
 	src/common/tableMusicTwinkleTwinkleLittleStarNotes.tex \
 	src/common/tableIICPorts.tex \
+	src/common/tableIVT.tex \
 	src/common/tableInterrupts.tex \
 	src/common/tableLCM.tex \
 	src/common/tableMCUPortsExample.tex \
