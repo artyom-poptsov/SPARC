@@ -1,0 +1,69 @@
+\newcommand{\tableTCCRbits}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstRow{XXX: No translation.}
+  \def\tableSecondRow{(\texttt{0x81})}
+  \def\tableThirdRow{XXX: No translation.}
+  \def\tableFourthRow{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstRow{Бит}
+  \def\tableThirdRow{Чтение/Запись (Read/Write)}
+  \def\tableFourthRow{Начальное значение}
+  \def\tableCaption{
+    Назначение бит в регистре ``TCCR''.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstRow{Bit}
+  \def\tableThirdRow{Read/Write}
+  \def\tableFourthRow{Initial value}
+  \def\tableCaption{
+    Bit functions of ``TCCR'' register.
+  }
+  \fi
+  \begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{
+        | m{2.0cm}
+        | m{1cm}
+        | m{1cm}
+        | m{1cm}
+        | m{1cm}
+        | m{1cm}
+        | m{1cm}
+        | m{1cm}
+        | m{1cm}
+        | }
+      \hline
+      \textbf{\tableFirstRow} & 7 & 6 & 5 & 4 & 3 & 2 & 1 & 0 \\
+      \hline
+      \textbf{\tableSecondRow}
+      & ICNC1
+      & ICES1
+      & -
+      & WGM13
+      & WGM12
+      & CS12
+      & CS11
+      & CS10 \\
+      \hline
+      \textbf{\tableThirdRow}
+      & R/W
+      & R/W
+      & R
+      & R/W
+      & R/W
+      & R/W
+      & R/W
+      & R/W \\
+      \hline
+      \textbf{\tableFourthRow} & 0 & 0 & 0 & 0 & 0 & 0 & 0 & 0 \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:mcu-atmega328p-tccr-bits}
+  \end{table}
+}
