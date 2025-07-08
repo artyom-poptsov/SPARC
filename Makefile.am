@@ -150,6 +150,7 @@ COMMON = \
 	src/common/tableInterrupts.tex \
 	src/common/tableLCM.tex \
 	src/common/tableMCUPortsExample.tex \
+	src/common/tableTCCR.tex \
 	src/common/tableTwoDimensionalArray.tex
 
 COMMIT = $(shell git rev-parse HEAD)

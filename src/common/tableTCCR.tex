@@ -1,0 +1,74 @@
+\newcommand{\tableTCCR}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableFirstColumn{XXX: No translation.}
+  \def\tableSecondColumn{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableFirstColumn{
+    2 (CS12)
+  }
+  \def\tableSecondColumn{
+    1 (CS11)
+  }
+  \def\tableThirdColumn{
+    0 (CS10)
+  }
+  \def\tableFourthColumn{
+    Описание
+  }
+  \def\tableCaption{
+    Настройка источника тактового импульса.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableFirstColumn{
+    CS12
+  }
+  \def\tableSecondColumn{
+    CS11
+  }
+  \def\tableThirdColumn{
+    CS10
+  }
+  \def\tableFourthColumn{
+    Description
+  }
+  \def\tableCaption{
+    Clock source configuration
+  }
+  \fi
+  \begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{ | m{1.5cm} | m{1.5cm} | m{1.5cm} | m{5cm} | }
+      \hline
+      \textbf{\tableFirstColumn}
+      & \textbf{\tableSecondColumn}
+      & \textbf{\tableThirdColumn}
+      & \textbf{\tableFourthColumn} \\
+      \hline
+      0 & 0 & 0 & No clock source (Timer/Counter stopped). \\
+      \hline
+      0 & 0 & 1 & $\mbox{clk}_{\mbox{I/O}}/1$ (no prescaling) \\
+      \hline
+      0 & 1 & 0 & $\mbox{clk}_{\mbox{I/O}}/8$ (from prescaler)\\
+      \hline
+      0 & 1 & 1 & $\mbox{clk}_{\mbox{I/O}}/64$ (from prescaler)\\
+      \hline
+      1 & 0 & 0 & $\mbox{clk}_{\mbox{I/O}}/256$ (from prescaler)\\
+      \hline
+      1 & 0 & 1 & $\mbox{clk}_{\mbox{I/O}}/1024$ (from prescaler)\\
+      \hline
+      1 & 1 & 0
+      & External clock source on T1 pin. Clock on falling edge. \\
+      \hline
+      1 & 1 & 1
+      & External clock source on T1 pin. Clock on rising edge. \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:mcu-atmega328p-tccr}
+  \end{table}
+}
