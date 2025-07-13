@@ -125,6 +125,7 @@ COMMON = \
 	src/common/figureLCDCharPlayer.tex \
 	src/common/figureLCDCharRow.tex \
 	src/common/figureLCDConnection.tex \
+	src/common/figureMemoryHierarchy.tex \
 	src/common/figureMusicBarFourFour.tex \
 	src/common/figureMusicBarFourFourWithFrequencies.tex \
 	src/common/figureMusicSixBars.tex \
