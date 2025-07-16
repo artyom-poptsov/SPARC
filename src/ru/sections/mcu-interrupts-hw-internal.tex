@@ -194,15 +194,27 @@ OVF'', срабатывают при переполнении (англ. ``overf
 \begin{listing}[H]
   \begin{minted}{cpp}
     // 01. Частота процессора ATmega328p: 16МГц (16'000'000 Гц)
-    const long CPU_FREQ = 16000000; // Гц.
-    // 02. Делитель частоты процессора для таймера.
+    const double CPU_FREQ = 16000000.0; // Гц.
+
+    // 02. Предделитель частоты процессора для таймера.
     const int PRESCALER = 256;
+
     // 03. Желаемое значение задержки после включения
     //    и выключения.
-    const float DELAY = 500.0;
+    const double DELAY = 500000.0; // мкс
+
+    // Длина секунды в микросекундах.
+    const double SECOND = 1000000; // мкс
+
+    // Частота прибавления счётчика в тактах процессора.
+    const double CPU_TICKS_PER_STEP = CPU_FREQ / PRESCALER;
+
+    // Период одного прибавления счётчика таймера
+    // в микросекундах.
+    const double TICK_PERIOD = SECOND / CPU_TICKS_PER_STEP;
+
     // 04. Количество тактов таймера между прерываниями.
-    const long TICKS_COUNT = \
-      round((DELAY * CPU_FREQ) / (PRESCALER * 1000.0));
+    const long TICKS_COUNT = round(DELAY / TICK_PERIOD);
 
     void setup() {
       // 05. Настраиваем порт D2 на выход.
