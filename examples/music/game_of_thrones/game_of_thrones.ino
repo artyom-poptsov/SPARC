@@ -83,9 +83,6 @@ void setup() {
   track2.time_diff = 0;
   track2.increment = frequency_to_timer(MELODY2[0][0]);
   track2.speaker_pin_value = HIGH;
-  
-  //Serial.begin(9600);
-  //cli(); // Disable global interrupts
 
   TCCR1A = 0;
   TCCR1B = 0;
@@ -106,8 +103,8 @@ ISR(TIMER1_COMPA_vect) {
   }
   track1.current_time = micros();
   track1.time_diff = track1.current_time - track1.note_start_time;
-  
-  if ((track1.note_length > 0) 
+
+  if ((track1.note_length > 0)
       && (track1.time_diff < track1.note_length)) {
     digitalWrite(SPEAKER_1, track1.speaker_pin_value);
     track1.speaker_pin_value = ! track1.speaker_pin_value;
@@ -139,8 +136,8 @@ ISR(TIMER1_COMPB_vect) {
   }
   track2.current_time = micros();
   track2.time_diff = track2.current_time - track2.note_start_time;
-  
-  if ((track2.note_length > 0) 
+
+  if ((track2.note_length > 0)
       && (track2.time_diff < track2.note_length)) {
     digitalWrite(SPEAKER_2, track2.speaker_pin_value);
     track2.speaker_pin_value = ! track2.speaker_pin_value;
