@@ -7,6 +7,9 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Unreleased
+** ru
+*** Процедуры, функции и методы: Новый раздел
 * Version 4.0.0 (2025-04-05)
 ** common
 *** Move some common code into separate files

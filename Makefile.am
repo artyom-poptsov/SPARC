@@ -45,6 +45,7 @@ SECTIONS = \
 	src/ru/sections/dialogues-with-computer-control-flow.tex \
 	src/ru/sections/dialogues-with-computer-arduino-ide.tex \
 	src/ru/sections/dialogues-with-computer-program-structure.tex \
+	src/ru/sections/dialogues-with-computer-procedures.tex \
 	src/ru/sections/dialogues-with-computer-wokwi.tex \
 	src/ru/sections/white-noise-introduction.tex \
 	src/ru/sections/white-noise-analog-ports.tex \
