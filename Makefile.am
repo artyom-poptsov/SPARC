@@ -87,6 +87,7 @@ SECTIONS = \
 	src/ru/sections/game-dev-animation.tex	\
 	src/ru/sections/game-dev-logic.tex	\
 	src/ru/sections/game-dev-structures.tex	\
+	src/ru/sections/game-dev-engine.tex	\
 	src/ru/sections/mcu-intro.tex \
 	src/ru/sections/mcu-interrupts-types.tex \
 	src/ru/sections/mcu-interrupts-hw-external.tex \
@@ -108,6 +109,7 @@ COMMON = \
 	src/common/figureBigLCD.tex \
 	src/common/figureBigLCDSchematics.tex \
 	src/common/figureBlinkinLEDGraph.tex \
+	src/common/figureBuildSteps.tex \
 	src/common/figureButtonBounceGraph.tex \
 	src/common/figureButtonCircuit.tex \
 	src/common/figureButtonPulldownResistorCircuit.tex \
