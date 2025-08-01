@@ -110,6 +110,7 @@ COMMON = \
 	src/common/figureBigLCDSchematics.tex \
 	src/common/figureBlinkinLEDGraph.tex \
 	src/common/figureBuildSteps.tex \
+	src/common/figureBuildStepsMultipleFiles.tex \
 	src/common/figureButtonBounceGraph.tex \
 	src/common/figureButtonCircuit.tex \
 	src/common/figureButtonPulldownResistorCircuit.tex \
