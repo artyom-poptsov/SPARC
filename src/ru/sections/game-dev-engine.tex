@@ -238,6 +238,90 @@ IDE сообщения (порой, пугающие начинающих про
 \texttt{.ino} и \texttt{.h}.
 
 Первым делом в отдельный файл логично вынести процедуру
-\mintinline{cpp}{play_tone}.
+\mintinline{cpp}{play_tone}.  В терминологии Arduino IDE, файлы называются
+\emph{``вкладками''}, и создать такую вкладку можно через специальное меню.
+
+\begin{figure}[ht]
+  \centering
+  \includegraphics[width=10cm]{arduino-ide-tab-menu-button}
+  \caption{Кнопка для управления ``вкладками'' (файлами) проекта в Arduino IDE.}
+  \label{fig:arduino-ide-tab-menu-button}
+\end{figure}
+
+Мы будем использовать термин ``файл'' вместо ``владка'', когда будем ссылаться
+на файлы проекта -- так как этот термин более стандартный с точки зрения
+программирования.  С другой стороны, когда мы будем говорить про элементы
+графического интерфейса Arduino IDE, отображающие файлы проекта -- мы будем
+использовать термин ``вкладка'', так как это отражает способ их отображения в
+интерфейсе редактора.
+
+На рис. \ref{fig:arduino-ide-tab-menu-button} показана кнопка вызова меню работы
+с вкладками в Arduino IDE версии 1.8.  Содержимое меню включает в себя следующие
+пункты:
+
+\begin{itemize}
+\item ``New Tab'' (``Новая вкладка'') -- создание нового файла (``вкладки'') в
+  текущем проекте.
+\item ``Rename'' (``Переименовать'') -- переименовать текущую выбранную владку.
+\item ``Delete'' (``Удалить'') -- удалить текущую выбранную вкладку.
+\item ``Previous Tab'' (``Предыдущая вкладка'') -- переключиться на предыдущую
+  вкладку проекта.
+\item ``Next Tab'' (``Следующая вкладка'') -- переключиться на следующую вкладку
+  проекта.
+\item Название текущей вкладки.
+\end{itemize}
+
+Если нажать на ``New Tab'' (``Новая вкладка''), то в нижней части окна появится
+поле для ввода имени новой вкладки, как показано на
+рис. \ref{fig:arduino-ide-tab-name}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{arduino-ide-tab-name}
+  \caption{Поле для ввода названия нового файла в Arduino IDE.}
+  \label{fig:arduino-ide-tab-name}
+\end{figure}
+
+Создадим файл с именем ``sound.ino'', вписав его в поле и нажав кнопку ``Ok''.
+Важно писать имя файла с расширением, так как, строго говоря, расширение
+является частью имени файла.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{arduino-ide-tab-sound-ino}
+  \caption{Результат создания файла с именем ``sound.ino'' в Arduino IDE.}
+  \label{fig:arduino-ide-tab-sound-ino}
+\end{figure}
+
+В верхней части окна появится вкладка с названием ``sound'' -- для файлов с
+раширением ``.ino'', данное расширение не отображается в названии вкладки.
+
+Разместим процедуру \mintinline{cpp}{play_tone} в новом файле, как показано на
+рис. \ref{fig:arduino-ide-tab-play-tone}.  Справа от названия вкладки можно
+заментить значок параграфа (``\textsection'') -- это означает, что данный файл изменён и не
+сохранён.  Если мы сохраним изменения в файле, данный значок пропадёт.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{arduino-ide-tab-play-tone}
+  \caption{Исходный код процедуры \mintinline{cpp}{play_tone} в файле ``sound.ino''.}
+  \label{fig:arduino-ide-tab-play-tone}
+\end{figure}
+
+После того, как мы сохранили файл ``sound.ino'', можно вернуться на главый файл
+(в нашем случае, он называется ``sketch\_aug01a.ino'', и вызывать оттуда
+процедуру \mintinline{cpp}{play_tone}, как показано на
+рис. \ref{fig:arduino-ide-tab-play-tone-call}.
+
+\begin{figure}[H]
+  \centering
+  \includegraphics[width=10cm]{arduino-ide-tab-play-tone-call}
+  \caption{Вызов процедуры \mintinline{cpp}{play_tone}, описанной в файле
+    ``sound.ino''.}
+  \label{fig:arduino-ide-tab-play-tone-call}
+\end{figure}
+
+На данном этапе проект должен уже успешно собираться и работать -- то есть,
+компьютер смог собрать из двух файлов рабочий исполняемый файл.
 
 \end{document}
