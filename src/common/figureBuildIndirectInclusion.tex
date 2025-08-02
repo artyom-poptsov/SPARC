@@ -1,0 +1,75 @@
+\newcommand{\figureBuildIndirectInclusion}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Возможные ситуации при включении заголовочных файлов.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    Possible situations that occur during header file inclusion.
+  }
+  \fi
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      [
+        squarednode/.style={
+          rectangle,
+          draw=black!60,
+          thick,
+          minimum size=10mm},
+      ]
+      %% Nodes.
+      \begin{scope}[
+          every node/.style={circle, thick, draw, minimum size=15mm}
+        ]
+        \node (A) at (0, 0) {\texttt{a.ino}};
+        \node (B) [right=of A] {\texttt{b.ino}};
+        \node (C) [below=of B] {\texttt{b.h}};
+        \node (D) [above=of A] {\texttt{a.bin}};
+
+        \node (E) [right=of B] {\texttt{d.ino}};
+        \node (F) [below=of E] {\texttt{e.h}};
+        \node (G) [below=of F] {\texttt{f.h}};
+        \node (I) [above=of E] {\texttt{d.bin}};
+      \end{scope}
+
+      %% Lines.
+      \begin{scope}[>={Stealth[black]},
+          every node/.style={fill=white,circle},
+          every edge/.style={draw=black,very thick}]
+        \path[->] (C) edge (A);
+        \path[->] (C) edge (B);
+        \path[->] (A) edge[style={draw=black,dotted,very thick}] (D);
+        \path[->] (B) edge[style={draw=black,dotted,very thick}] (D);
+
+        \path[->] (F) edge (E);
+        \path[->] (G) edge (F);
+        \path[->] (E) edge[style={draw=black,dotted,very thick}] (I);
+        \path[->] (G) edge[bend right=60] (E);
+      \end{scope}
+
+      %% Captions.
+      \node[
+        rectangle,
+        draw,
+        minimum width = 6cm,
+        minimum height = 10cm
+      ] (r1) at (1,-1.25) {};
+      \node[
+        rectangle,
+        draw,
+        minimum width = 4cm,
+        minimum height = 10cm
+      ] (r2) at (6.1,-1.25) {};
+      \node (l1) [below=of r1] {A};
+      \node (l2) [below=of r2] {B};
+    \end{tikzpicture}
+    \caption{\figureCaption}
+    \label{fig:build-include}
+  \end{figure}
+}

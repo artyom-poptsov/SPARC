@@ -412,4 +412,73 @@ IDE сообщения (порой, пугающие начинающих про
 \subsection{Условная компиляция}
 \label{subsection:conditional-compiling}
 
+Посмотрим на первую гипотетическую ситуацию.  У нас есть заголовочный файл с
+названием ``sound.h'', где описан прототип процедуры
+\mintinline{cpp}{play_tone}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void play_tone(int port, float f, long t);
+  \end{minted}
+  \label{listing:game-dev-engine-procedure-header-2}
+  \caption{Файл ``sound.h'' с заголовком процедуры.}
+\end{listing}
+
+В главном файле (назовём его, для краткости, ``main.ino'') мы попытаемся дважды
+включить заголовочный файл ``sound.h''.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={1, 2}]{cpp}
+    #include "sound.h"
+    #include "sound.h"
+
+    void setup() {
+      pinMode(2, OUTPUT);
+    }
+
+    void loop() {
+      play_tone(2, 50, 1000000);
+    }
+  \end{minted}
+  \label{listing:game-dev-engine-procedure-header-include-2}
+  \caption{Пример двойного включения заголовочного файла ``sound.h'' с помощью
+    директивы препроцессора.}
+\end{listing}
+
+Когда препроцессор обработает обе директивы \mintinline{cpp}{#include}, то в
+результате мы получим следующий код.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={1, 2}]{cpp}
+    void play_tone(int port, float f, long t);
+    void play_tone(int port, float f, long t);
+
+    void setup() {
+      pinMode(2, OUTPUT);
+    }
+
+    void loop() {
+      play_tone(2, 50, 1000000);
+    }
+  \end{minted}
+  \label{listing:game-dev-engine-procedure-header-include-2}
+  \caption{Результат работы препроцессора.}
+\end{listing}
+
+Будет ли это ошибкой?  Нет, так как дублирование заголовков процедур допустимо в
+языках C/C++.
+
+Конечно, может возникнуть вопрос -- зачем нужно вообще было включать два раза
+файл ``sound.h'' в главный файл?  Разумеется, в обычной ситуации это не имеет
+смысла и вряд ли кто-то будет это специально делать.  Тем не менее, часто
+возникают ситуации, когда происходит включение одного и того же заголовочного
+файла несколько раз, по причине \emph{косвенного включения}.  Это может
+приводить не только к дублированию кода из заголовочных файлов в одном исходном
+файле, но и также приводить к дублированию кода между несколькими файлами, что
+тоже во многих случаях будет приводить к ошибкам, но уже на этапе линковки.
+
+Рассмотрим два примера, показанные на рис. \ref{fig:build-include}.
+
+\figureBuildIndirectInclusion{ru}
+
 \end{document}
