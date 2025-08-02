@@ -111,6 +111,7 @@ COMMON = \
 	src/common/figureBlinkinLEDGraph.tex \
 	src/common/figureBuildIndirectInclusion.tex \
 	src/common/figureBuildSteps.tex \
+	src/common/figureBuildStepsHeaders.tex \
 	src/common/figureBuildStepsMultipleFiles.tex \
 	src/common/figureButtonBounceGraph.tex \
 	src/common/figureButtonCircuit.tex \

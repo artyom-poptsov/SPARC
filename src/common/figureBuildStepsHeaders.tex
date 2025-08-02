@@ -1,0 +1,70 @@
+\newcommand{\figureBuildStepsHeaders}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \def\figurePreprocessor{XXX: No translation.}
+  \def\figureTranslator{XXX: No translation.}
+  \def\figureAssembler{XXX: No translation.}
+  \def\figureLinker{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Этапы сборки приложения с заголовочным файлом.
+  }
+  \def\figurePreprocessor{Препроцессор}
+  \def\figureTranslator{Транслятор}
+  \def\figureAssembler{Ассемблер}
+  \def\figureLinker{Линковщик}
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    Build steps for an application with a header file.
+  }
+  \def\figurePreprocessor{Preprocessor}
+  \def\figureTranslator{Translator}
+  \def\figureAssembler{Assembler}
+  \def\figureLinker{Linker}
+  \fi
+  \begin{figure}[H]
+    \centering
+    \begin{tikzpicture}
+      [
+        squarednode/.style={
+          rectangle,
+          draw=black!60,
+          thick,
+          minimum size=10mm},
+      ]
+      %% Nodes.
+      \node[squarednode] (mainIno) {\texttt{main.ino}};
+      \node[squarednode] (mainTU) [right=of mainIno] {\texttt{main.tu}};
+      \node[squarednode] (mainS) [right=of mainTU] {\texttt{main.s}};
+      \node[squarednode] (mainO) [right=of mainS] {\texttt{main.o}};
+      \node[squarednode] (mainBin) [right=of mainO] {\texttt{main.bin}};
+
+      \node[squarednode] (soundH) [below=of mainIno] {\texttt{sound.h}};
+      \node[squarednode] (soundIno) [below=of soundH] {\texttt{sound.ino}};
+      \node[squarednode] (soundTU) [right=of soundIno] {\texttt{sound.tu}};
+      \node[squarednode] (soundS) [right=of soundTU] {\texttt{sound.s}};
+      \node[squarednode] (soundO) [right=of soundS] {\texttt{sound.o}};
+
+      %% Lines.
+      \draw[->] (mainIno.east) -- (mainTU.west)
+      node[midway, rotate=90, xshift=1.5cm] {\figurePreprocessor};
+      \draw[->] (mainTU.east) -- (mainS.west)
+      node[midway, rotate=90, xshift=1.5cm] () {\figureTranslator};
+      \draw[->] (mainS.east) -- (mainO.west)
+      node[midway, rotate=90, xshift=1.5cm] () {\figureAssembler};
+      \draw[->] (mainO.east) -- (mainBin.west)
+      node[midway, rotate=90, xshift=1.5cm] () {\figureLinker};
+
+      \draw[->] (soundH.east) -- (mainTU.south);
+      \draw[->] (soundIno.east) -- (soundTU.west);
+      \draw[->] (soundTU.east) -- (soundS.west);
+      \draw[->] (soundS.east) -- (soundO.west);
+      \draw[->] (soundO.east) -- (mainBin.south);
+    \end{tikzpicture}
+    \caption{\figureCaption}
+    \label{fig:build-process-with-a-header}
+  \end{figure}
+}
