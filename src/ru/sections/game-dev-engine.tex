@@ -83,7 +83,8 @@ IDE сообщения (порой, пугающие начинающих про
 Другими популярными директивами препроцессора, которые мы можем встретить,
 являются команды \mintinline{cpp}{#include} и \mintinline{cpp}{#define}.
 
-Команда \mintinline{cpp}{#define} обычно используется в таком ключе:
+Команда \mintinline{cpp}{#define} (``define'' в переводе с английского означает
+``определить'') обычно используется в таком ключе:
 
 \begin{listing}[H]
   \begin{minted}[highlightlines={1, 8, 10}]{cpp}
@@ -277,7 +278,7 @@ IDE сообщения (порой, пугающие начинающих про
 поле для ввода имени новой вкладки, как показано на
 рис. \ref{fig:arduino-ide-tab-name}.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
   \includegraphics[width=10cm]{arduino-ide-tab-name}
   \caption{Поле для ввода названия нового файла в Arduino IDE.}
@@ -286,9 +287,16 @@ IDE сообщения (порой, пугающие начинающих про
 
 Создадим файл с именем ``sound.ino'', вписав его в поле и нажав кнопку ``Ok''.
 Важно писать имя файла с расширением, так как, строго говоря, расширение
-является частью имени файла.
+является частью имени файла.  Результат создания нового файла показан на
+рис. \ref{fig:arduino-ide-tab-sound-ino}.  Все ``.ino''-файлы автоматически
+создаются в корне каталога проекта -- это позволяет Arduino IDE самостоятельно
+находить все файлы, которые относятся к проекту, при сборке.
 
-\begin{figure}[H]
+Файлы в проект можно также добавить вручную, разместив (или создав) их в корне
+проекта, однако при этом потребуется перезапуск Arduino IDE для того, чтобы они
+появились в виде ``вкладок'' в редакторе.
+
+\begin{figure}[h]
   \centering
   \includegraphics[width=10cm]{arduino-ide-tab-sound-ino}
   \caption{Результат создания файла с именем ``sound.ino'' в Arduino IDE.}
@@ -303,7 +311,7 @@ IDE сообщения (порой, пугающие начинающих про
 заментить значок параграфа (``\textsection'') -- это означает, что данный файл изменён и не
 сохранён.  Если мы сохраним изменения в файле, данный значок пропадёт.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
   \includegraphics[width=10cm]{arduino-ide-tab-play-tone}
   \caption{Исходный код процедуры \mintinline{cpp}{play_tone} в файле ``sound.ino''.}
@@ -315,7 +323,7 @@ IDE сообщения (порой, пугающие начинающих про
 процедуру \mintinline{cpp}{play_tone}, как показано на
 рис. \ref{fig:arduino-ide-tab-play-tone-call}.
 
-\begin{figure}[H]
+\begin{figure}[h]
   \centering
   \includegraphics[width=10cm]{arduino-ide-tab-play-tone-call}
   \caption{Вызов процедуры \mintinline{cpp}{play_tone}, описанной в файле
@@ -358,7 +366,7 @@ IDE сообщения (порой, пугающие начинающих про
 Данный заголовок процедуры необходимо поместить в заголовочный файл ``sound.h'',
 как показано на рис. \ref{fig:arduino-ide-tab-sound-header}.
 
-\begin{figure}[ht]
+\begin{figure}[h]
   \centering
   \includegraphics[width=10cm]{arduino-ide-tab-sound-header}
   \caption{Заголовочный файл ``sound.h'' с заголовком процедуры
@@ -369,8 +377,9 @@ IDE сообщения (порой, пугающие начинающих про
 Заголовочный файл необходимо \emph{включить} в тот файл с исходным кодом, где мы
 будем ссылаться на процедуру \mintinline{cpp}{play_tone}, как показано в
 листинге \ref{listing:game-dev-engine-procedure-header-include}.  Включение
-файла производится с помощью директивы препроцессора \mintinline{cpp}{#include}.
-В нашем случае, включение необходимо сделать в основном файле нашего приложения
+файла производится с помощью директивы препроцессора \mintinline{cpp}{#include}
+(в переводе с английского ``include'' означает ``включить''.)  В нашем случае,
+включение необходимо сделать в основном файле нашего приложения
 (``sketch\_aug01a.ino''.)
 
 \begin{listing}[H]
@@ -523,10 +532,13 @@ IDE сообщения (порой, пугающие начинающих про
 определять через опции компилятора.
 
 Пример использования препроцессорного условия \mintinline{cpp}{#ifdef} (``if
-defined'') показан в листинге \ref{listing:game-dev-engine-procedure-header-4}.
+defined'' -- то есть, в переводе с английского, ``если определено'') показан в
+листинге \ref{listing:game-dev-engine-procedure-header-4}.
 
 \begin{listing}[H]
-  \begin{minted}[highlightlines={1, 5}]{cpp}
+  \begin{minted}[highlightlines={1, 3, 7}]{cpp}
+    #define DO_IT 1
+
     #ifdef DO_IT
     float c0 = 16.352;
 
@@ -538,14 +550,37 @@ defined'') показан в листинге \ref{listing:game-dev-engine-proce
 \end{listing}
 
 Исходный код между строчками \mintinline{cpp}{#ifdef DO_IT} и
-\mintinline{cpp}{#endif} попадёт в дальнейшую сборку только в случае, если
-определена препроцессорная константа \mintinline{cpp}{DO_IT}.  Если же константа
-не определена, то тогда данный код будет просто удалён -- и, следовательно, не
-попадёт в транслятор.
+\mintinline{cpp}{#endif} (буквально ``end if'' переводится, как ``конец если'')
+попадёт в дальнейшую сборку только в случае, если определена препроцессорная
+константа \mintinline{cpp}{DO_IT}.  Если же константа не определена, то тогда
+данный код будет просто удалён -- и, следовательно, не попадёт в транслятор.
+
+В нашем случае, препроцессорная константа определена равной 1.  Однако здесь
+стоит заметить, что в данном случае не обязательно давать константе какое-либо
+занчение.  Код в листинге \ref{listing:game-dev-engine-procedure-header-4-2}
+будет работать точно также, как и в листинге
+\ref{listing:game-dev-engine-procedure-header-4}, ведь препроцессору для
+проверки \mintinline{cpp}{#ifdef DO_IT} важен сам факт того, что константа была
+определена, а не её значение.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={1}]{cpp}
+    #define DO_IT
+
+    #ifdef DO_IT
+    float c0 = 16.352;
+
+    void play_tone(int port, float f, long t);
+    #endif
+  \end{minted}
+  \label{listing:game-dev-engine-procedure-header-4-2}
+  \caption{Пример использования препроцессорной константы без значения.}
+\end{listing}
 
 Можно инвертировать условие так, чтобы блок кода удалялся, когда константа не
 определена -- для этого существует препроцессорная директива
-\mintinline{cpp}{#ifndef} (``if not defined''.)
+\mintinline{cpp}{#ifndef} (``if not defined'' -- в переводе с английского, ``если
+не определено''.)
 
 \begin{listing}[H]
   \begin{minted}[highlightlines={1, 5}]{cpp}
