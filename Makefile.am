@@ -92,6 +92,7 @@ SECTIONS = \
 	src/ru/sections/mcu-interrupts-types.tex \
 	src/ru/sections/mcu-interrupts-hw-external.tex \
 	src/ru/sections/mcu-interrupts-hw-internal.tex \
+	src/ru/sections/mcu-interrupts-music.tex \
 	src/ru/sections/mcu-memory.tex \
 	src/ru/sections/mcu-port-manipulation.tex \
 	src/ru/sections/appendix-octaves.tex	\
