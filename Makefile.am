@@ -305,6 +305,7 @@ SECTIONS_EN = \
 	src/en/sections/game-dev-sounds.tex	\
 	src/en/sections/game-dev-graphics.tex	\
 	src/en/sections/game-dev-animation.tex \
+	src/en/sections/game-dev-structures.tex \
 	src/en/sections/appendix-octaves.tex \
 	src/en/sections/appendix-prostokvashino-score.tex \
 	src/en/sections/appendix-twinkle-twinkle-little-star-01.tex \
