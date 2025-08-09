@@ -27,4 +27,68 @@ several different types for fields.
 \subsection{Declaration of a structure}
 \index{Programming!Structures!Declaration}
 
+For example, a structure that describes a player may look like this:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    struct player {
+      int x;
+      int y;
+      char image;
+      byte hp;
+    };
+  \end{minted}
+  \caption{A description of a player as a structure.}
+  \label{listing:game-dev-structure}
+\end{listing}
+
+Variables \mintinline{cpp}{x}, \mintinline{cpp}{y}, \mintinline{cpp}{image} and
+\mintinline{cpp}{hp} are \emph{fields} of the structure -- as they describe the
+\emph{properties} of an object.
+
+We can declare a structure, for example, somewhere in the global scope, outside
+the procedures of our program.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Creation and initialization of structure instances}
+\index{Programming!Structures!Creation and initialization}
+
+To create a player we have to make an \emph{instance} of the structure.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Creation of "p" variable,
+    // that holds an instance of "player" structure:
+    struct player p;
+  \end{minted}
+  \caption{Creation of a structure instance.}
+  \label{listing:game-dev-structure-instance}
+\end{listing}
+
+When we are creating variables we have to initialize them.  The same with
+structures -- and we can perform initialization right after creating of a
+structure instance:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Creation of "p" variable,
+    // that holds an instance of "player" structure:
+    struct player p = {
+      0,   // x
+      0,   // y
+      '@', // image
+      100  // HP
+    };
+  \end{minted}
+  \caption{Initialization of a structure instance.}
+  \label{listing:game-dev-structure-instance-init}
+\end{listing}
+
+It's important to note that the initialization of the structure fields must be
+done in the same order as the fields listed in the structure declaration.  The
+comments written to the right side of each field in the listing
+\ref{listing:game-dev-structure-instance-init} were added specifically so as not
+to confuse the order of values.  That helps us to avoid situations like when the
+health points of a player suddenly become the symbol code for the player image.
+
 \end{document}
