@@ -142,4 +142,50 @@ is written after the variable that holds the structure instance, separated with
 a dot.  As in the case of regular variables, we can assign values to the
 structure fields and substitute the field values in expressions.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{``typedef'' keyword}
+\index{Programming!typedef}
+
+In C and C++ languages there is a special \mintinline{cpp}{typedef} keyword that
+allows us to create shorter and more concise names for the existing types and
+structures.
+
+This is especially useful when we're working with structures.  Thanks to
+\mintinline{cpp}{typedef}, we can save ourselves from the necessity of writing
+the \mintinline{cpp}{struct} keyword each time when we declare a new variable
+with the structure type.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    struct player {
+      int x;
+      int y;
+      char image;
+      byte hp;
+    };
+
+    // Creating a short name for a structure.
+    typedef struct player player_t;
+
+    // Declaring a variable with "player_t" type:
+    player_t p;
+
+    void setup() {
+      // Setting the values for the structure:
+      p.x = 0;
+      p.y = 0;
+      p.hp = 100;
+      p.image = '@';
+    }
+
+    // ...
+  \end{minted}
+  \caption{An example of \mintinline{cpp}{typedef} keyword usage.}
+  \label{listing:game-dev-structure-typedef}
+\end{listing}
+
+It is shown in the listing \ref{listing:game-dev-structure-typedef} that we can
+set a short name \mintinline{cpp}{player_t} for the structure describing a
+player.
+
 \end{document}
