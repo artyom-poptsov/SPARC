@@ -188,4 +188,40 @@ It is shown in the listing \ref{listing:game-dev-structure-typedef} that we can
 set a short name \mintinline{cpp}{player_t} for the structure describing a
 player.
 
+There's a frequently used naming convention for the new types in C language
+where the underscore along with with ``t'' letter (from ``type'') are added at
+the end of the type name.  We will use this style throughout the book.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Nested structures}
+\index{Programming!Structures!Nested structures}
+
+Sometimes an entity that we want to describe as a structure is complex enough,
+so we may want to separate it into several simpler entities.
+
+In our case we can describe separately the ``Point'' entity, as a structure on
+its own.  It will allow us to combine ``x'' and ``y'' into one object and pass
+it into procedures.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    struct point {
+      int x;
+      int y;
+    };
+
+    typedef struct point point_t;
+
+    struct player {
+      point_t position;
+      char image;
+      byte hp;
+    };
+
+    typedef struct player player_t;
+  \end{minted}
+  \caption{An example of nested structures.}
+  \label{listing:game-dev-nested-structures}
+\end{listing}
+
 \end{document}
