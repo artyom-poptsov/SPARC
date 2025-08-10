@@ -91,4 +91,55 @@ comments written to the right side of each field in the listing
 to confuse the order of values.  That helps us to avoid situations like when the
 health points of a player suddenly become the symbol code for the player image.
 
+We can use the following syntax to solve the problem of getting the order of
+values right:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Creation of "p" variable,
+    // that holds an instance of "player" structure:
+    struct player p = {
+      .x     = 0,
+      .y     = 0,
+      .image = '@',
+      .hp    = 100
+    };
+  \end{minted}
+  \caption{Structure initialization using field names.}
+  \label{listing:game-dev-structure-instance-init-names}
+\end{listing}
+
+The way that is shown in the listing
+\ref{listing:game-dev-structure-instance-init-names} allows us to set the values
+for structure fields in an arbitrary order, by explicitly specifying the names
+of the fields.  With that, we don't have to add comments to the values anymore,
+as it follows from the field names what the value means.  Unfortunately this
+approach is not supported on some platforms, namely on Arduino.
+
+Another way of the initialization is to set the field values after a structure
+instance is created.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Creation of "p" variable,
+    // that holds an instance of "player" structure:
+    struct player p;
+
+    void setup() {
+      // Setting values for the structure fields.
+      p.x = 0;
+      p.y = 0;
+      p.hp = 100;
+      p.image = '@';
+    }
+  \end{minted}
+  \caption{Setting the structure values after the creation of the structure.}
+  \label{listing:game-dev-structure-assignment}
+\end{listing}
+
+To access the structure fields we can use syntax where the structure field name
+is written after the variable that holds the structure instance, separated with
+a dot.  As in the case of regular variables, we can assign values to the
+structure fields and substitute the field values in expressions.
+
 \end{document}
