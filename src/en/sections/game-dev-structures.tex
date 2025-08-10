@@ -224,4 +224,38 @@ it into procedures.
   \label{listing:game-dev-nested-structures}
 \end{listing}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Usage of structures}
+\index{Programming!Structures!Usage}
+
+Now that we have structures, we can make the source code of the game more
+convenient and readable.  For example, instead of passing \mintinline{cpp}{x},
+\mintinline{cpp}{y} coordinates into procedures that check the presence of an
+object on a map, we can pass an instance of \mintinline{cpp}{point_t} structure.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // A structure that describes a point on a game map.
+    struct point {
+      int x;
+      int y;
+    };
+
+    typedef struct point point_t;
+
+    // A procedure that returns 1 (true) in the case when
+    // there's a key in the map cell addressed by "point".
+    // Otherwise it returns 0 (false).
+    bool is_key(point_t point) {
+      return game_map[point.y][point.x] == KEY;
+    }
+  \end{minted}
+  \caption{An example of using a structure for simplifying the game code.}
+  \label{listing:game-dev-structure-usage-00}
+\end{listing}
+
+We can see in the listing \ref{listing:game-dev-structure-usage-00} that
+\mintinline{cpp}{is_key} procedure was re-written so now it accepts an
+\mintinline{cpp}{point_t} structure instance as the argument.
+
 \end{document}
