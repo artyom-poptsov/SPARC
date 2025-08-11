@@ -319,4 +319,55 @@ Pointers and working with memory is one of the very important topics when we
 study such low-level languages as C and C++.  We will discuss pointers in detail
 later, for now we have to just figure out all we need for their basic usage.
 
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // A procedure that changes the position
+    // of a point.
+    move(point_t* point, int dx, int dy) {
+      //        ^
+      //        |
+      //        `---- A pointer to a "point_t"
+      point->x += dx;
+      point->y += dy;
+    }
+
+    void loop() {
+      // ...
+
+      point_t point = { 10, 20 };
+      move(&point, 2, 4);
+      //   ^
+      //   |
+      //   `------- Getting the address of "point"
+      //        variable.
+
+      // After finishing of "move" procedure,
+      // the point coordinates will be 12, 24.
+
+      // ...
+    }
+  \end{minted}
+  \caption{Passing a pointer to a structure instance into a procedure.}
+  \label{listing:game-dev-structure-usage-02}
+\end{listing}
+
+We can see a modified example in the listing
+\ref{listing:game-dev-structure-usage-02} where we changed a
+\mintinline{cpp}{move} procedure in such way so it now accepts a \emph{pointer}
+to a \mintinline{cpp}{point_t} structure.  Also we should note that for the
+\mintinline{cpp}{point} parameter we specified \mintinline{cpp}{point_t*} type.
+The asterisk symbol next to data type tells us that here a pointer to an object
+of such type is expected.
+
+Inside \mintinline{cpp}{move} procedure we also replaced dots with arrows
+(``->'') when we access the structure fields -- it is needed because now we're
+working with a pointer to a structure, and we have to ``reach'' its fields, by
+jumping to the address the pointer points to.
+
+In the \mintinline{cpp}{move} procedure call we can notice that before
+\mintinline{cpp}{point} variable there's an ampersand (``\&'') letter -- this
+means that we are \emph{getting the address} of the variable that stands after
+the ampersand.  This address is what exactly is being passed to the
+\mintinline{cpp}{move} procedure as the value of the first parameter.
+
 \end{document}
