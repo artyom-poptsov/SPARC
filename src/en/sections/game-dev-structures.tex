@@ -258,4 +258,65 @@ We can see in the listing \ref{listing:game-dev-structure-usage-00} that
 \mintinline{cpp}{is_key} procedure was re-written so now it accepts an
 \mintinline{cpp}{point_t} structure instance as the argument.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Passing a structure instance by its pointer}
+\index{Programming!Structures!Passing by the pointer}
+
+There's an important moment that we often have to take into the account: when we
+pass a structure instance into a procedure as was shown before, this instance is
+being \emph{copied} to the procedure parameters.  Moreover, when the computer
+finishes procedure execution, it deletes the copy of a structure instance, as
+the rest of the local variables inside the procedure.  Also the copying leads to
+memory overhead and slows down the procedure calls.
+
+One of the important takes from all things said is that if would try to change
+the structure instance values inside a procedure, it would not work as it will
+not affect the procedure instance outside the procedure.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Erroneous procedure definition
+    // that changes values inside a structure.
+    move(point_t point, int dx, int dy) {
+      point.x += dx;
+      point.y += dy;
+    }
+
+    void loop() {
+      // ...
+
+      point_t point = { 10, 20 };
+      move(point, 2, 4);
+
+      // Here we would find out that the point
+      // coordinates are still 10, 20, instead of
+      // expected 12, 24.
+
+      // ...
+    }
+  \end{minted}
+  \caption{Erroneous attempt to change the procedure instance values inside
+    procedure.}
+  \label{listing:game-dev-structure-usage-01}
+\end{listing}
+
+One of the simplest solutions of this problem is to move the structure instance
+out to the global scope, instead of passing it into a procedure -- it will allow
+us to work with this instance as with any other variable.  But his solution has
+notable drawbacks.  For example, as with the case of any other global variable,
+a global structure instance will be always getting in the way, provoking us to
+make errors and cluttering the code with extra global variables.  After all, the
+more global variables we have in our code, the uglier is our code.
+
+\index{Programming!Pointers} The right solution for this problem requires us to
+study another topic that we were ignoring up until this moment.  If we want to
+change the structure fields inside a procedure, we need to pass the structure
+instance itself instead of its copy.  We can achieve this by passing a
+\emph{pointer} to a procedure.  By \emph{pointer} we mean an address of memory
+where some variable is stored.
+
+Pointers and working with memory is one of the very important topics when we
+study such low-level languages as C and C++.  We will discuss pointers in detail
+later, for now we have to just figure out all we need for their basic usage.
+
 \end{document}
