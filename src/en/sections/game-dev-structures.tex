@@ -19,9 +19,9 @@ object that we can pass to procedures for processing.
 
 Fortunately we have a way to do it -- by the means of \emph{structures}.  A
 structure is a complex type of a variable that allow to store several values
-(possible of a different type) inside.  This is akin to a simple array but while
+(possibly of a different type) inside.  This is akin to a simple array but while
 in an array all the elements belong to one type, in a structure we can use
-several different types for fields.
+several different types for its \emph{fields}.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Declaration of a structure}
@@ -88,7 +88,7 @@ It's important to note that the initialization of the structure fields must be
 done in the same order as the fields listed in the structure declaration.  The
 comments written to the right side of each field in the listing
 \ref{listing:game-dev-structure-instance-init} were added specifically so as not
-to confuse the order of values.  That helps us to avoid situations like when the
+to confuse the order of values.  That helps us to avoid situations like when
 health points of a player suddenly become the symbol code for the player image.
 
 We can use the following syntax to solve the problem of getting the order of
@@ -109,7 +109,7 @@ values right:
   \label{listing:game-dev-structure-instance-init-names}
 \end{listing}
 
-The way that is shown in the listing
+The approach that is shown in the listing
 \ref{listing:game-dev-structure-instance-init-names} allows us to set the values
 for structure fields in an arbitrary order, by explicitly specifying the names
 of the fields.  With that, we don't have to add comments to the values anymore,
@@ -137,9 +137,9 @@ instance is created.
   \label{listing:game-dev-structure-assignment}
 \end{listing}
 
-To access the structure fields we can use syntax where the structure field name
-is written after the variable that holds the structure instance, separated with
-a dot.  As in the case of regular variables, we can assign values to the
+To access the structure fields we can use the syntax where the structure field
+name is written after the variable that holds the structure instance, separated
+with a dot.  As in the case of regular variables, we can assign values to the
 structure fields and substitute the field values in expressions.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -150,7 +150,7 @@ In C and C++ languages there is a special \mintinline{cpp}{typedef} keyword that
 allows us to create shorter and more concise names for the existing types and
 structures.
 
-This is especially useful when we're working with structures.  Thanks to
+This is especially useful when we are working with structures.  Thanks to
 \mintinline{cpp}{typedef}, we can save ourselves from the necessity of writing
 the \mintinline{cpp}{struct} keyword each time when we declare a new variable
 with the structure type.
@@ -269,9 +269,9 @@ finishes procedure execution, it deletes the copy of a structure instance, as
 the rest of the local variables inside the procedure.  Also the copying leads to
 memory overhead and slows down the procedure calls.
 
-One of the important takes from all things said is that if would try to change
-the structure instance values inside a procedure, it would not work as it will
-not affect the procedure instance outside the procedure.
+One of the important takes from all things said is that if we would try to
+change the structure instance values inside a procedure, it would not work as it
+will not affect the procedure instance outside the procedure.
 
 \begin{listing}[H]
   \begin{minted}{cpp}
@@ -302,11 +302,12 @@ not affect the procedure instance outside the procedure.
 
 One of the simplest solutions of this problem is to move the structure instance
 out to the global scope, instead of passing it into a procedure -- it will allow
-us to work with this instance as with any other variable.  But his solution has
-notable drawbacks.  For example, as with the case of any other global variable,
-a global structure instance will be always getting in the way, provoking us to
-make errors and cluttering the code with extra global variables.  After all, the
-more global variables we have in our code, the uglier is our code.
+us to work with this instance as with any other variable.  But this solution has
+some notable drawbacks.  For example, as with the case of any other global
+variable, a global structure instance will be always getting in the way,
+provoking us to make errors and cluttering the code with extra global variables.
+After all, the more global variables we have in our code, the uglier is our
+code.
 
 \index{Programming!Pointers} The right solution for this problem requires us to
 study another topic that we were ignoring up until this moment.  If we want to
