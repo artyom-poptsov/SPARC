@@ -8,8 +8,16 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   notice and this notice are preserved.
 
 * Unreleased
+** en
+*** Game development
+**** Structures: New section
 ** ru
-*** Процедуры, функции и методы: Новый раздел
+*** Разработка игр
+**** Структуры: Новый раздел
+**** Создание игрового движка: Новый раздел
+*** Диалоги с компьютером
+**** Процедуры, функции и методы: Новый раздел
+** Путешествие к центру микроконтроллера: Новая глава
 * Version 4.0.0 (2025-04-05)
 ** common
 *** Move some common code into separate files
