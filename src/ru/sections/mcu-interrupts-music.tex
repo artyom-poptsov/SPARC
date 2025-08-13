@@ -246,4 +246,33 @@
 \mintinline{cpp}{speaker_pin_value} хранит текущее значение цифрового порта
 \mintinline{cpp}{speaker_pin}.
 
+Далее нам необходимо задать в основном файле, в глобальной области констнанты.
+Здесь мы укажем частоту процессора, предделитель частоты и другие необходимые
+нам параметры, в том числе \gls{BPM} -- для мелодии ``Daisy Bell'' он равен 172
+ударам в минуту.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // Частота процессора.
+    const long CPU_FREQ = 16000000; // Гц
+
+    // Предделитель частоты.
+    const long CPU_PRESCALER = 8.0;
+
+    // Время между нотами, равное проценту от длины ноты.
+    const float DELAY_PERCENT = 0.05;
+
+    // Скорость мелодии "Daisy Bell".
+    const int BPM = 172; // Beats per minute.
+
+    // Одна минута, заданная в микросекундах.
+    const long MINUTE = 60000000; // мкс
+
+    // Длина такта.
+    const long TAKT = (MINUTE / BPM) * 4; // мкс
+  \end{minted}
+  \caption{Констатны, необходимые для генерации мелодии.}
+  \label{listing:mcu-music-4}
+\end{listing}
+
 \end{document}
