@@ -275,4 +275,36 @@
   \label{listing:mcu-music-4}
 \end{listing}
 
+В глобальной области мы разместим также экземпляр структуры
+\mintinline{cpp}{track_t}, который мы просто назовём \mintinline{cpp}{track1}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    volatile track_t track1;
+  \end{minted}
+  \caption{Создание экземпляра структуры \mintinline{cpp}{track_t}.}
+  \label{listing:mcu-music-5}
+\end{listing}
+
+Как было сказано в разделе \ref{subsection:isr}, необходимо использовать
+ключевое слово \mintinline{cpp}{volatile} для того, чтобы компилятор сохранил
+переменную \mintinline{cpp}{track1} при оптимизации.
+
+Здесь же, в глобальной области, разместим и процедуру
+\mintinline{cpp}{frequency_to_timer}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    long frequency_to_timer(double f) {
+      return (CPU_FREQ / (CPU_PRESCALER * f * 2)) - 1;
+    }
+  \end{minted}
+  \caption{Процедура для преобразования частоты звука в значение регистра
+    сравнения ``OCR''.}
+  \label{listing:mcu-music-6}
+\end{listing}
+
+В процедуре \mintinline{cpp}{setup} необходимо проинициализировать порты и
+экземпляр структуры \mintinline{cpp}{track_t}.
+
 \end{document}
