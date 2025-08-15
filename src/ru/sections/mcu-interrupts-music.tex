@@ -253,6 +253,9 @@
 
 \begin{listing}[H]
   \begin{minted}{cpp}
+    // Порт вывода звука.
+    const int SPEAKER_1 = 2;
+
     // Частота процессора.
     const long CPU_FREQ = 16000000; // Гц
 
@@ -306,5 +309,63 @@
 
 В процедуре \mintinline{cpp}{setup} необходимо проинициализировать порты и
 экземпляр структуры \mintinline{cpp}{track_t}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void setup() {
+      pinMode(SPEAKER_1, OUTPUT);
+
+      track1.note_index = 0;
+      track1.note_start_time = micros();
+      track1.note_length = TAKT / daisy1[0][1];
+      track1.note_delay = track1.note_length * DELAY_PERCENT;
+      track1.current_time = micros();
+      track1.time_diff = 0;
+      track1.increment = frequency_to_timer(daisy1[0][0]);
+      track1.speaker_pin_value = HIGH;
+
+      // ...
+    }
+  \end{minted}
+  \caption{Инициализация цифрового порта и структуры.}
+  \label{listing:mcu-music-7}
+\end{listing}
+
+Затем в \mintinline{cpp}{setup} надо проинициализировать также регистры
+процессора, для обработки прерываний от таймера.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={13-19}]{cpp}
+    void setup() {
+      pinMode(SPEAKER_1, OUTPUT);
+
+      track1.note_index = 0;
+      track1.note_start_time = micros();
+      track1.note_length = TAKT / daisy1[0][1];
+      track1.note_delay = track1.note_length * DELAY_PERCENT;
+      track1.current_time = micros();
+      track1.time_diff = 0;
+      track1.increment = frequency_to_timer(daisy1[0][0]);
+      track1.speaker_pin_value = HIGH;
+
+      TCCR1B |= B00000010;
+      if (track1.increment > 65535) {
+        OCR1A = 65535;
+      } else {
+        OCR1A = track1.increment;
+      }
+      TIMSK1 |= B00000010;
+    }
+  \end{minted}
+  \caption{Инициализация регистров процессора.}
+  \label{listing:mcu-music-8}
+\end{listing}
+
+Возможна ситуация, в которой значение \mintinline{cpp}{track1.increment} больше,
+чем максимальное значение регистра ``OCR1A'' (65535), поэтому мы не можем просто
+писать в регистр напрямую это значение.  Поэтому мы используем условие, где
+проверяем -- если значение \mintinline{cpp}{track1.increment} больше 65535, то
+тогда в регистр записывается 65535, иначе мы пишем то значение, которое у нас в
+\mintinline{cpp}{track1.increment}.
 
 \end{document}
