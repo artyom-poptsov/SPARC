@@ -203,8 +203,11 @@
       // ноты.
       long time_diff;
 
-      // Шаг прибавления значения регистра OCR.
-      long increment;
+      // Виртуальный регистр OCR.
+      long ocr;
+
+      // Счётчик для таймера.
+      long counter;
 
       // Цифровой порт для вывода звука.
       byte speaker_pin;
@@ -236,6 +239,10 @@
 ноты.  Для вычисления этого времени мы будем вычитать время начала
 воспроизведения ноты \mintinline{cpp}{note_start_time} из текущего времени
 \mintinline{cpp}{current_time}.
+
+\mintinline{cpp}{ocr} Виртуальный регистр OCR.  Значение данного поля может быть
+больше, чем максимальное значение физического регистра OCR, что позволяет
+отсчитывать большие промежутки времени.
 
 \mintinline{cpp}{increment} хранит значение, на которое прибавляется регистр
 сравнения OCR, используемого для прерывания.
@@ -321,7 +328,8 @@
       track1.note_delay = track1.note_length * DELAY_PERCENT;
       track1.current_time = micros();
       track1.time_diff = 0;
-      track1.increment = frequency_to_timer(daisy1[0][0]);
+      track1.ocr = frequency_to_timer(daisy1[0][0]);
+      track1.counter = track1.ocr;
       track1.speaker_pin_value = HIGH;
 
       // ...
@@ -335,7 +343,7 @@
 процессора, для обработки прерываний от таймера.
 
 \begin{listing}[H]
-  \begin{minted}[highlightlines={13-19}]{cpp}
+  \begin{minted}[highlightlines={13-15}]{cpp}
     void setup() {
       pinMode(SPEAKER_1, OUTPUT);
 
@@ -345,15 +353,12 @@
       track1.note_delay = track1.note_length * DELAY_PERCENT;
       track1.current_time = micros();
       track1.time_diff = 0;
-      track1.increment = frequency_to_timer(daisy1[0][0]);
+      track1.ocr = frequency_to_timer(daisy1[0][0]);
+      track1.counter = track1.ocr;
       track1.speaker_pin_value = HIGH;
 
       TCCR1B |= B00000010;
-      if (track1.increment > 65535) {
-        OCR1A = 65535;
-      } else {
-        OCR1A = track1.increment;
-      }
+      OCR1A = 1024;
       TIMSK1 |= B00000010;
     }
   \end{minted}
@@ -361,11 +366,43 @@
   \label{listing:mcu-music-8}
 \end{listing}
 
-Возможна ситуация, в которой значение \mintinline{cpp}{track1.increment} больше,
-чем максимальное значение регистра ``OCR1A'' (65535), поэтому мы не можем просто
-писать в регистр напрямую это значение.  Поэтому мы используем условие, где
-проверяем -- если значение \mintinline{cpp}{track1.increment} больше 65535, то
-тогда в регистр записывается 65535, иначе мы пишем то значение, которое у нас в
-\mintinline{cpp}{track1.increment}.
+Далее нам необходимо реализовать обработчик прерывания
+\mintinline{cpp}{TIMER1_COMPA_vect}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    ISR(TIMER1_COMPA_vect) {
+      if (track1.counter > 65535) {
+        OCR1A = 65535;
+        track1.counter -= 65535;
+        return;
+      } else {
+        OCR1A += track1.counter;
+        track1.counter = track1.ocr;
+      }
+
+      // ...
+    }
+  \end{minted}
+  \caption{Задание значения для регистра ``OCR1A'' в обработчике прерывания.}
+  \label{listing:mcu-music-9}
+\end{listing}
+
+Первым делом в обработчике мы должны задать новое значение регистра ``OCR1A''.
+Возможна ситуация, в которой значение счётчика \mintinline{cpp}{track1.counter}
+больше, чем максимальное значение 16-битного регистра ``OCR1A'' (65535) -- такое
+может возникнуть, если частота звука достаточно низка.  В связи с этим мы не
+можем просто писать в регистр это значение напрямую.
+
+Чтобы решить эту проблему, мы используем условие, где проверяем -- если значение
+\mintinline{cpp}{track1.counter} больше 65535, то тогда в регистр ``OCR1A''
+записывается максиально возможное число и значение
+\mintinline{cpp}{track1.counter} уменьшается на значение 65535.  Далее мы делаем
+выход из процедуры обработчика прерывания через \mintinline{cpp}{return}, и
+таким образом пропускам одно прерывание.  Так может повторяться несколько раз.
+Как только значение \mintinline{cpp}{track1.counter} становится меньше
+максимального значения регистра ``OCR1A'', то мы добавляем это значение в
+регистр и сбрасываем \mintinline{cpp}{track1.counter} в значение
+\mintinline{cpp}{track1.ocr}.
 
 \end{document}
