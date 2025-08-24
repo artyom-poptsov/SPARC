@@ -491,4 +491,91 @@
 (\mintinline{cpp}{LOW}) на цифровом порту чередуются, создавая колебания
 мембраны динамика.
 
+\begin{listing}[H]
+  \begin{minted}[highlightlines={20-40}]{cpp}
+    ISR(TIMER1_COMPA_vect) {
+      if (track1.counter > 65535) {
+        OCR1A = 65535;
+        track1.counter -= 65535;
+        return;
+      } else {
+        OCR1A += track1.counter;
+        track1.counter = track1.ocr;
+      }
+
+      track1.current_time = micros();
+      track1.time_diff = \
+      track1.current_time - track1.note_start_time;
+      if ((track1.note_length > 0)
+      && (track1.time_diff < track1.note_length)) {
+        digitalWrite(SPEAKER_1, track1.speaker_pin_value);
+        track1.speaker_pin_value = ! track1.speaker_pin_value;
+      }
+
+      if (track1.time_diff
+          >= track1.note_length + track1.note_delay) {
+        track1.note_index = \
+          (track1.note_index + 1) % track1.length;
+        track1.note_start_time = track1.current_time;
+        if (daisy1[track1.note_index][0] > 0) {
+          track1.ocr \
+            = frequency_to_timer(daisy1[track1.note_index][0]);
+          track1.note_length \
+            = TAKT / daisy1[track1.note_index][1];
+          track1.note_delay \
+            = track1.note_length * DELAY_PERCENT;
+        } else {
+          track1.ocr = 100;
+          track1.note_delay \
+            = TAKT / daisy1[track1.note_index][1];
+          track1.note_delay \
+            += track1.note_delay * DELAY_PERCENT;
+          track1.note_length = 0;
+        }
+      }
+    }
+  \end{minted}
+  \caption{Переход между нотами и реализация пауз.}
+  \label{listing:mcu-music-11}
+\end{listing}
+
+В следующем дополнении кода, выделенном в листинге \ref{listing:mcu-music-11} мы
+реализуем переход между нотами мелодии и обработка пауз.  Если разница между
+временем начала ноты и текущем временем (\mintinline{cpp}{time_diff}) больше или
+равна суммарной длительностью ноты и задержки до следующей ноты, то мы
+увеличиваем индекс выбора ноты из массива:
+
+\begin{minted}{cpp}
+track1.note_index = (track1.note_index + 1) % track1.length;
+\end{minted}
+
+Получение остатка от деления на длину массива (\mintinline{cpp}{track1.length})
+позволяет нам без дополнительных проверок оставаться в границах массива.
+
+Также нам необходимо запомнить время начала ноты, что мы и делаем в следующем
+коде:
+
+\begin{minted}{cpp}
+track1.note_start_time = track1.current_time;
+\end{minted}
+
+Если частота ноты больше нуля, то мы берём следующую ноту из массива для
+воспроизведения, считая необходимые параметры (значение для регистра OCR, длину
+ноты, задержку после ноты.)  Если же частота равна нулю, то тогда берутся другие
+параметры (регистр OCR равено 100, длина ноты равна нулю, и задержка после ноты,
+равная длине ноты плюс задержка после ноты.)  Это позволяет нам корректно
+отрабатывать паузы.
+
+Процедура \mintinline{cpp}{loop} в нашем случае просто будет содержать задержку
+в 100 мс:
+
+\begin{minted}{cpp}
+void loop() {
+  delay(100);
+}
+\end{minted}
+
+Если всё корретно написано, то после загрузки в Arduino Mega 2560, данная
+программа будет воспроизводить мелодию ``Daisy Bell'' на втором цифровом порту.
+
 \end{document}
