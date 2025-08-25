@@ -144,7 +144,50 @@
 авторством Harry Dacre.\footnote{Используется версия
 \url{https://musescore.com/user/33456843/scores/7008698}}
 
-Создадим массив с первыми восемью тактами мелодии.
+Объявим в файле ``music.ino'' ноты.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    float c0 = 16.352;
+    float d0 = 18.354;
+    float e0 = 20.602;
+    float f0 = 21.827;
+    float g0 = 24.500;
+    float a0 = 27.500;
+    float b0 = 30.868;
+
+    float c4 = c0 * 16;
+    float d4 = d0 * 16;
+    float e4 = e0 * 16;
+    float e4b = (e4 + d4) / 2;
+    float f4 = f0 * 16;
+    float g4 = g0 * 16;
+    float f4s = (f4 + g4) / 2;
+    float a4 = a0 * 16;
+    float b4 = b0 * 16;
+
+    float c5 = c0 * 32;
+    float d5 = d0 * 32;
+    float c5s = (c5 + d5) / 2;
+    float e5 = e0 * 32;
+    float f5 = f0 * 32;
+    float g5 = g0 * 32;
+    float f5s = (f5 + g5) / 2;
+    float a5 = a0 * 32;
+    float b5 = b0 * 32;
+    float a5s = (a5 + b5) / 2;
+
+    float c6 = c0 * 64;
+    float d6 = d0 * 64;
+    float e6 = e0 * 64;
+
+    const float R = 0; // Rest -- Покой, пауза.
+  \end{minted}
+  \caption{Ноты, необходимые для мелодии ``Daisy Bell''.}
+  \label{listing:mcu-music-2-1}
+\end{listing}
+
+И здесь же объявим массив с мелодией.
 
 \begin{listing}[H]
   \begin{minted}{cpp}
@@ -206,7 +249,7 @@
     const int LENGTH = sizeof(daisy1) / sizeof(daisy1[0]);
   \end{minted}
   \caption{Часть мелодии ``Daisy Bell''.}
-  \label{listing:mcu-music-2}
+  \label{listing:mcu-music-2-2}
 \end{listing}
 
 Константа \mintinline{cpp}{LENGTH} хранит количество нот в мелодии.
@@ -215,7 +258,8 @@
 ноты и воспроизводить их через прерывания.  Ситуация усложняется тем, что теперь
 нельзя просто так взять, и использовать привычный нам цикл.
 
-Для упрощения работы сделаем структуру, которая описывает музыкальный трек.
+Для упрощения работы, в файле ``music.h'' сделаем структуру, которая описывает
+музыкальный трек.
 
 \begin{listing}[H]
   \begin{minted}{cpp}
@@ -293,6 +337,61 @@
 
 \mintinline{cpp}{speaker_pin_value} хранит текущее значение цифрового порта
 \mintinline{cpp}{speaker_pin}.
+
+Также в файле ``music.h'' разместим ссылки на внешние (по отношению к данному
+файлу) ресурсы -- массив \mintinline{cpp}{daisy1} и на константу
+\mintinline{cpp}{LENGTH}, хранящую его длину.  В итоге, файл будет иметь
+следующее содержимое:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    #ifndef __MUSIC_H__
+    #define __MUSIC_H__
+
+    typedef struct {
+      // Количество нот в мелодии.
+      int length;
+
+      // Индекс (номер) ноты.
+      int  note_index;
+
+      // Время начала воспроизведения ноты.
+      long note_start_time;
+
+      // Длина ноты.
+      long note_length;
+
+      // Задержка после ноты.
+      long note_delay;
+
+      // Текущее время.
+      long current_time;
+
+      // Время, прошедшее с начала воспроизведения
+      // ноты.
+      long time_diff;
+
+      // Виртуальный регистр OCR.
+      long ocr;
+
+      // Счётчик для таймера.
+      long counter;
+
+      // Цифровой порт для вывода звука.
+      byte speaker_pin;
+
+      // Текущее значение на выходном цифровом порту.
+      byte speaker_pin_value;
+    } track_t;
+
+    extern float daisy1[][2];
+    extern const int LENGTH;
+
+    #endif /* ifndef __MUSIC_H__ */
+  \end{minted}
+  \caption{Содержимое файла ``music.h''.}
+  \label{listing:mcu-music-3-2}
+\end{listing}
 
 Далее нам необходимо задать в основном файле, в глобальной области констнанты.
 Здесь мы укажем частоту процессора, предделитель частоты и другие необходимые
