@@ -4,7 +4,7 @@
 typedef struct {
   // Количество нот в мелодии.
   int length;
-  
+
   // Индекс (номер) ноты.
   int  note_index;
 
