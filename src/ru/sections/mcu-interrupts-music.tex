@@ -1023,7 +1023,7 @@ void setup() {
       track1.time_diff \
         = track1.current_time - track1.note_start_time;
       if ((track1.note_length > 0)
-      && (track1.time_diff < track1.note_length)) {
+          && (track1.time_diff < track1.note_length)) {
         digitalWrite(SPEAKER_1, track1.speaker_pin_value);
         track1.speaker_pin_value = ! track1.speaker_pin_value;
       }
