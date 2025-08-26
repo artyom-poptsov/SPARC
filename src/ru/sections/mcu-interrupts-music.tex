@@ -134,6 +134,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Генерация музыки}
+\label{subsection:mcu-music-1}
 
 Как только мы получили возможность генерировать звук, до музыки остаётся один
 шаг -- нам нужно каким-то образом выстроить звуки в нужном порядке, чтобы
@@ -687,5 +688,374 @@ void loop() {
 Для этого мы будем использовать второй регистр сравнения ``OCR1B'' в дополнении
 к регистру ``OCR1A''.  Благодаря использованию двух регистров, мы сможем
 генерировать два прерывания на одном таймере (``Timer1''.)
+
+Начнём с того, что в файле ``music.ino'' мы объявим необходимые нам ноты.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    float c0 = 16.352;
+    float d0 = 18.354;
+    float e0 = 20.602;
+    float f0 = 21.827;
+    float g0 = 24.500;
+    float a0 = 27.500;
+    float b0 = 30.868;
+
+    float c1 = c0 * 2;
+
+    float c2 = c0 * 4;
+    float g2 = g0 * 4;
+
+    float c3 = c0 * 8;
+    float d3 = d0 * 8;
+    float e3 = e0 * 8;
+    float f3 = f0 * 8;
+    float g3 = g0 * 8;
+    float f3s = (f3 + g3) / 2;
+    float a3 = a0 * 8;
+    float b3 = b0 * 8;
+
+    float c4 = c0 * 16;
+    float d4 = d0 * 16;
+    float e4 = e0 * 16;
+    float e4b = (e4 + d4) / 2;
+    float f4 = f0 * 16;
+    float g4 = g0 * 16;
+    float f4s = (f4 + g4) / 2;
+    float a4 = a0 * 16;
+    float b4 = b0 * 16;
+
+    float c5 = c0 * 32;
+    float d5 = d0 * 32;
+    float c5s = (c5 + d5) / 2;
+    float e5 = e0 * 32;
+    float f5 = f0 * 32;
+    float g5 = g0 * 32;
+    float f5s = (f5 + g5) / 2;
+    float a5 = a0 * 32;
+    float b5 = b0 * 32;
+    float a5s = (a5 + b5) / 2;
+
+    float c6 = c0 * 64;
+    float d6 = d0 * 64;
+    float e6 = e0 * 64;
+
+    const float R = 0;
+  \end{minted}
+  \caption{Ноты для второй версии мелодии ``Daisy Bell''.}
+  \label{listing:mcu-music-12}
+\end{listing}
+
+В этом же файле мы объявим массивы с двумя дорожками мелодии (см. листинг
+\ref{listing:mcu-music-13}.)  Массив \mintinline{cpp}{daisy1} хранит мелодию для
+правой руки во вступлении к мелодии и вокал.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    float daisy1[][2] = {
+      // 1
+      {d5, 4}, {c5s, 4}, {d5, 4},
+      // 2
+      {b4, 4}, {a4, 4}, {g4, 4},
+      // 3
+      {a4, 2}, {f5s, 4},
+      // 4
+      {d5, 2}, {d6, 4},
+      // 5
+      {b5, 8}, {d5, 8},
+      {e5, 8}, {f5s, 8},
+      {g5, 8}, {a5, 8},
+      // 6
+      {a5s, 8}, {b5, 8},
+      {e6, 8}, {d6, 8},
+      {c6, 8}, {g5, 8},
+      // 7
+      {a5, 2}, {d5, 4},
+      // 8
+      {b4, 4.0 / 3.0},
+      // 9 (vocals)
+      {d5, 4}, {c5s, 4}, {d5, 4},
+      // 10
+      {b4, 4}, {a4, 4}, {g4, 4},
+      // 11
+      {a4, 2}, {f4s, 4},
+      // 12
+      {d4, 2}, {R, 4},
+      // 13
+      {a4, 4.0 / 3.0},
+      // 14
+      {d4, 4.0 / 3.0},
+      // 15
+      {d5, 4.0 / 3.0},
+      // 16
+      {b4, 2}, {R, 4},
+      // 17
+      {d5, 4}, {c5s, 4}, {d5, 4},
+      // 18
+      {b4, 4}, {a4, 4}, {g4, 4},
+      // 19
+      {a4, 2}, {f4s, 4},
+      // 20
+      {d4, 2}, {R, 4},
+      // 21
+      {g4, 4}, {d5, 4}, {g4, 4},
+      // 22
+      {f4s, 4}, {d4, 4}, {a4, 4},
+      // 23
+      {g4, 1},
+      // 24
+      {R, 4}, {R, 4}
+    };
+  \end{minted}
+  \caption{Массив с нотами для первой дорожки мелодии ``Daisy Bell''.}
+  \label{listing:mcu-music-13}
+\end{listing}
+
+В массиве \mintinline{cpp}{daisy2} мы разместим ноты второй дорожки мелодии, как
+показано в листинге \ref{listing:mcu-music-14}.  Эта дорожка будет
+аккомпанементом, который музыкантом играется левой рукой на пианино.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    float daisy1[][2] = {
+      // 1
+      {d5, 4}, {c5s, 4}, {d5, 4},
+      // 2
+      {b4, 4}, {a4, 4}, {g4, 4},
+      // 3
+      {a4, 2}, {f5s, 4},
+      // 4
+      {d5, 2}, {d6, 4},
+      // 5
+      {b5, 8}, {d5, 8},
+      {e5, 8}, {f5s, 8},
+      {g5, 8}, {a5, 8},
+      // 6
+      {a5s, 8}, {b5, 8},
+      {e6, 8}, {d6, 8},
+      {c6, 8}, {g5, 8},
+      // 7
+      {a5, 2}, {d5, 4},
+      // 8
+      {b4, 4.0 / 3.0},
+      // 9 (vocals)
+      {d5, 4}, {c5s, 4}, {d5, 4},
+      // 10
+      {b4, 4}, {a4, 4}, {g4, 4},
+      // 11
+      {a4, 2}, {f4s, 4},
+      // 12
+      {d4, 2}, {R, 4},
+      // 13
+      {a4, 4.0 / 3.0},
+      // 14
+      {d4, 4.0 / 3.0},
+      // 15
+      {d5, 4.0 / 3.0},
+      // 16
+      {b4, 2}, {R, 4},
+      // 17
+      {d5, 4}, {c5s, 4}, {d5, 4},
+      // 18
+      {b4, 4}, {a4, 4}, {g4, 4},
+      // 19
+      {a4, 2}, {f4s, 4},
+      // 20
+      {d4, 2}, {R, 4},
+      // 21
+      {g4, 4}, {d5, 4}, {g4, 4},
+      // 22
+      {f4s, 4}, {d4, 4}, {a4, 4},
+      // 23
+      {g4, 1},
+      // 24
+      {R, 4}, {R, 4}
+    };
+  \end{minted}
+  \caption{Массив с нотами для второй дорожки мелодии ``Daisy Bell''.}
+  \label{listing:mcu-music-14}
+\end{listing}
+
+В конце файла ``music.ino'' мы разместим константы с длинами массивов.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const int LENGTH_1 = sizeof(daisy1) / sizeof(daisy1[0]);
+    const int LENGTH_2 = sizeof(daisy2) / sizeof(daisy2[0]);
+  \end{minted}
+  \caption{Длины массивов с нотами мелодии ``Daisy Bell''.}
+  \label{listing:mcu-music-15}
+\end{listing}
+
+В заголовочном файле ``music.h'' мы пропишем ту же самую структуру
+\mintinline{cpp}{track_t}, как и в листинге \ref{listing:mcu-music-3-2}.  Также
+нам надо будет экспорировать массивы с мелодией и константы.
+
+\begin{minted}{cpp}
+  extern float daisy1[][2];
+  extern float daisy2[][2];
+  extern const int LENGTH_1;
+  extern const int LENGTH_2;
+\end{minted}
+
+В главном файле проекта ``daisy\_bell\_2.ino'' отличий не много, по сравнению с
+примерами из раздела \ref{subsection:mcu-music-1}.  В верхней части файла мы
+разместим константы для указания двух цифровых портов вывода звука.
+
+\begin{minted}{cpp}
+  const int SPEAKER_1 = 2;
+  const int SPEAKER_2 = 3;
+\end{minted}
+
+Далее мы создадим два музыкальных трека.
+
+\begin{minted}{cpp}
+  volatile track_t track1;
+  volatile track_t track2;
+\end{minted}
+
+В процедуре \mintinline{cpp}{setup} настраиваем оба цифровых порта на выход.
+
+\begin{minted}[highlightlines={2-3}]{cpp}
+void setup() {
+  pinMode(SPEAKER_1, OUTPUT);
+  pinMode(SPEAKER_2, OUTPUT);
+
+  // ...
+}
+\end{minted}
+
+Ниже необходимо инициализировать оба трека.
+
+\begin{minted}[highlightlines={5-14, 16-25}]{cpp}
+  void setup() {
+    pinMode(SPEAKER_1, OUTPUT);
+    pinMode(SPEAKER_2, OUTPUT);
+
+    track1.length = LENGTH_1;
+    track1.note_index = 0;
+    track1.note_start_time = micros();
+    track1.note_length = TAKT / daisy1[0][1];
+    track1.note_delay = track1.note_length * DELAY_PERCENT;
+    track1.current_time = micros();
+    track1.time_diff = 0;
+    track1.ocr = frequency_to_timer(daisy1[0][0]);
+    track1.counter = track1.ocr;
+    track1.speaker_pin_value = HIGH;
+
+    track2.length = LENGTH_2;
+    track2.note_index = 0;
+    track2.note_start_time = micros();
+    track2.note_length = TAKT / daisy2[0][1];
+    track2.note_delay = track2.note_length * DELAY_PERCENT;
+    track2.current_time = micros();
+    track2.time_diff = 0;
+    track2.ocr = frequency_to_timer(daisy2[0][0]);
+    track2.counter = track2.ocr;
+    track2.speaker_pin_value = HIGH;
+
+    // ...
+  }
+\end{minted}
+
+В конце \mintinline{cpp}{setup} мы инициализируем регистры процессора.
+Полностью код процедуры показан в листинге \ref{listing:mcu-music-16}.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={27-31}]{cpp}
+    void setup() {
+      pinMode(SPEAKER_1, OUTPUT);
+      pinMode(SPEAKER_2, OUTPUT);
+
+      track1.length = LENGTH_1;
+      track1.note_index = 0;
+      track1.note_start_time = micros();
+      track1.note_length = TAKT / daisy1[0][1];
+      track1.note_delay = track1.note_length * DELAY_PERCENT;
+      track1.current_time = micros();
+      track1.time_diff = 0;
+      track1.ocr = frequency_to_timer(daisy1[0][0]);
+      track1.counter = track1.ocr;
+      track1.speaker_pin_value = HIGH;
+
+      track2.length = LENGTH_2;
+      track2.note_index = 0;
+      track2.note_start_time = micros();
+      track2.note_length = TAKT / daisy2[0][1];
+      track2.note_delay = track2.note_length * DELAY_PERCENT;
+      track2.current_time = micros();
+      track2.time_diff = 0;
+      track2.ocr = frequency_to_timer(daisy2[0][0]);
+      track2.counter = track2.ocr;
+      track2.speaker_pin_value = HIGH;
+
+      TCCR1A = B00000000;
+      TCCR1B = B00000010;
+      OCR1A = 1024;
+      OCR1B = 1024;
+      TIMSK1 |= B00000110;
+    }
+  \end{minted}
+  \caption{Инициализация регистров процессора для обработки двух прерываний.}
+  \label{listing:mcu-music-16}
+\end{listing}
+
+Обработчиков прерываний теперь два: \mintinline{cpp}{TIMER1_COMPA_vect} для
+первого прерывания, и \mintinline{cpp}{TIMER1_COMPA_vect} -- для второго.
+Содержимое обработчиков почти идентично, за исключением того, что в первом
+используется \mintinline{cpp}{track1}, а во втором используется
+\mintinline{cpp}{track2}.  Листинг кода \mintinline{cpp}{TIMER1_COMPA_vect}
+показан в \ref{listing:mcu-music-16}.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    ISR(TIMER1_COMPA_vect) {
+      if (track1.counter > 65535) {
+        OCR1A = 65535;
+        track1.counter -= 65535;
+        return;
+      } else {
+        OCR1A += track1.counter;
+        track1.counter = track1.ocr;
+      }
+
+      track1.current_time = micros();
+      track1.time_diff \
+        = track1.current_time - track1.note_start_time;
+      if ((track1.note_length > 0)
+      && (track1.time_diff < track1.note_length)) {
+        digitalWrite(SPEAKER_1, track1.speaker_pin_value);
+        track1.speaker_pin_value = ! track1.speaker_pin_value;
+      }
+
+      if (track1.time_diff \
+          >= (track1.note_length + track1.note_delay)) {
+        track1.note_index \
+          = (track1.note_index + 1) % track1.length;
+        track1.note_start_time = track1.current_time;
+        if (daisy1[track1.note_index][0] > 0) {
+          track1.ocr \
+            = frequency_to_timer(daisy1[track1.note_index][0]);
+          track1.note_length \
+            = TAKT / daisy1[track1.note_index][1];
+          track1.note_delay \
+            = track1.note_length * DELAY_PERCENT;
+        } else {
+          track1.ocr = 100;
+          track1.note_delay \
+            = TAKT / daisy1[track1.note_index][1];
+          track1.note_delay \
+            += track1.note_delay * DELAY_PERCENT;
+          track1.note_length = 0;
+        }
+      }
+    }
+  \end{minted}
+  \caption{Инициализация регистров процессора для обработки двух прерываний.}
+  \label{listing:mcu-music-17}
+\end{listing}
+
+На данном этапе, если мы загрузим код проекта в Arduino Mega 2560 и подключим
+динамик на цифровой порт 2 и 3, то услышим из динамиков мелодию ``Daisy Bell''.
 
 \end{document}
