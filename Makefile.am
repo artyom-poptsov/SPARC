@@ -98,7 +98,8 @@ SECTIONS = \
 	src/ru/sections/appendix-octaves.tex	\
 	src/ru/sections/appendix-prostokvashino-score.tex \
 	src/ru/sections/appendix-twinkle-twinkle-little-star-01.tex \
-	src/ru/sections/appendix-twinkle-twinkle-little-star-02.tex
+	src/ru/sections/appendix-twinkle-twinkle-little-star-02.tex \
+	src/ru/sections/appendix-daisy-bell-score.tex
 
 COMMON = \
 	src/common/common.tex \

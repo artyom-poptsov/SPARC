@@ -1,0 +1,76 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newpage
+\chapter{Ноты мелодии ``Daisy Bell''}
+
+\begin{figure}[ht]
+  \begin{lilypond}
+    \relative c' {
+      \key g \major
+      \numericTimeSignature
+      \time 3/4
+      %% 1
+      << d'4 d' >> << cis, cis' >> << d,4 d' >>
+      %% 2
+      << b, b' >> << a, a' >> << g, g' >>
+      %% 3
+      << a,2 a' >>  fis4
+      %% 4
+      d2 d'4
+      %% 5
+      c8 d, e fis g a
+      %% 6
+      ais b e d c g
+      %% 7
+      << a2 c, >> << c4 d >>
+      %% 8
+      << b2. g' >>
+      %% 9
+      d4 cis d
+      %% 10
+      b a g
+      %% 11
+      a2 fis4
+      %% 12
+      d2 r4
+      %% 13
+      a2.
+      %% 14
+      d2.
+      %% 15
+      d'2.
+      %% 16
+      b2 r4
+      %% 17
+      d4 cis d
+      %% 18
+      b a g
+      %% 19
+      a2 fis4
+      %% 20
+      d2 r4
+      %% 21
+      g d' g,
+      %% 22
+      fis d a'
+      %% 23
+      {g2.~ |
+      %% 24
+      g4} r r
+    }
+    \layout {
+      indent = 0\mm
+      line-width = 120\mm
+      ragged-last = ##t
+    }
+  \end{lilypond}
+  \caption{Harry Dacre, ``Daisy Bell''.}
+  \label{fig:lilypond-melody-prostokvashino-full}
+\end{figure}
+
+Используется версия \url{https://musescore.com/crono23/scores/5491815}
+
+\end{document}
