@@ -9,65 +9,85 @@
 
 \begin{figure}[ht]
   \begin{lilypond}
-    \relative c' {
+\score {
+  \new PianoStaff <<
+    \new Staff = "right" \relative c' {
       \key g \major
       \numericTimeSignature
       \time 3/4
-      %% 1
-      << d'4 d' >> << cis, cis' >> << d,4 d' >>
-      %% 2
-      << b, b' >> << a, a' >> << g, g' >>
-      %% 3
-      << a,2 a' >>  fis4
-      %% 4
-      d2 d'4
-      %% 5
-      c8 d, e fis g a
-      %% 6
-      ais b e d c g
-      %% 7
-      << a2 c, >> << c4 d >>
-      %% 8
-      << b2. g' >>
-      %% 9
-      d4 cis d
-      %% 10
-      b a g
-      %% 11
-      a2 fis4
-      %% 12
-      d2 r4
-      %% 13
-      a2.
-      %% 14
-      d2.
-      %% 15
-      d'2.
-      %% 16
-      b2 r4
-      %% 17
-      d4 cis d
-      %% 18
-      b a g
-      %% 19
-      a2 fis4
-      %% 20
-      d2 r4
-      %% 21
-      g d' g,
-      %% 22
-      fis d a'
-      %% 23
-      {g2.~ |
-      %% 24
-      g4} r r
+
+      << d'4 d'4 >> << cis4 cis,4 >> << d'4 d,4 >> |
+      << b4 b'4 >> << a4 a,4 >> << g4 g'4 >> |
+      << a,2 a'2 >> fis4 |
+      d2 d'4 |
+      b8\< ( d,8 e8 fis8 g8 a8\!  |
+      ais8\> b8 e8 d8 b8 g8\! ) |
+      << \accent a2 c,2 >> << \accent c4 d4 >> |
+      << \accent g2. b,2.>> | 
+
+      d4 cis4 d4 |
+      b4 a4 g4 |
+      a2 fis4 |
+      d2 r4 |
+      a'2. |
+      d,2. |
+
+      d'2. |
+      b2 r4 |
+      d4 cis4 d4 |
+      b4 a4 g4 |
+      a2 fis4 |
+      d2 r4 | 
+
+      g4 d'4 g,4 |
+      fis4(d4) a'4 |
+      g2.( |
+      g4) r4 r4 |
+
     }
-    \layout {
-      indent = 0\mm
-      line-width = 120\mm
-      ragged-last = ##t
+
+    \new Staff = "left" \relative c, {
+      \clef "bass"
+      \key g \major
+      \time 3/4
+
+      g''4 << b4 d4 >> << b4 d4 >> |
+      g,4 << b4 d4 >> << b4 d4 >> |
+      fis,4 << a4 c4 d4 >> << a4 c4 d4 >> |
+      d,4 << fis4 c'4 d4 >> << fis,4 c'4 d4 >> |
+      g,4 << b4 d4 >> << b4 d4 >> |
+      g,4 << b4 d4 >> << b4 d4 >> |
+      << d,2 fis2 a2 \accent d2 >> << d,4 fis4 a4 \accent d4 >> |
+      << g,2. b2. \accent d2. >> |
+
+      << g,4 g,4 >> << b'4 d4 g4 >> << b,4 d4 g4 >> |
+      << g,4 g,4 >> << b'4 d4 g4 >> << b,4 d4 g4 >> |
+      << fis,4 fis,4 >> << c''4 d4 a'4 >> << c,4 d4 a'4 >> |
+      << d,,,4 d'4 >> << c'4 d4 fis4 >> << c4 d4 fis4 >> | 
+      << fis,4 fis,4 >> << c''4 d4 a'4 >> << c,4 d4 a'4 >> |
+      << d,,,4 d'4 >> << c'4 d4 fis4 >> << c4 d4 fis4 >> |
+
+      << g,4 g,4 >> << b'4 d4 g4 >> << b,4 d4 g4 >> |
+      << d,4 d,4 >> << b''4 d4 g4 >> << b,4 d4 g4 >> |
+      << g,4 g,4 >> << b'4 d4 g4 >> << b,4 d4 g4 >> |
+      << g,4 g,4 >> << b'4 d4 g4 >> << b,4 d4 g4 >> |
+      << fis,4 fis,4 >> << c''4 d4 a'4 >> << c,4 d4 a'4 >> |
+      << d,,,4 d'4 >> << c'4 d4 fis4 >> << c4 d4 fis4 >> |
+
+      << g,4 g,4 >> << b'4 d4 g4 >> << b,4 d4 g4 >> |
+      << d,,4 d'4 >> << c'4 d4 fis4 >> << c4 d4 fis4 >> |
+      << g,4 g,4 >> << b'4 d4 g4 >> << b,4 d4 g4 >> |
+      << b,4 d4 g4 >> r4 r4 |
     }
-  \end{lilypond}
+  >>
+}
+
+\layout {
+  indent = 0\mm
+  line-width = 140\mm
+  ragged-last = ##t
+}
+\end{lilypond}
   \caption{Harry Dacre, ``Daisy Bell''.}
   \label{fig:lilypond-melody-prostokvashino-full}
 \end{figure}
