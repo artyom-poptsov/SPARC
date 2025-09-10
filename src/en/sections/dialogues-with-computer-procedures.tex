@@ -1,0 +1,72 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Procedures, functions and methods}
+\index{Programming!Procedures, functions and methods}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{The concept of procedure}
+
+At this moment, we already have know some basic Arduino commands that allow us
+to configure digital ports and control their values, and to wait for a specific
+time.  Having such set of tools, we already can do some basic effects of LED
+blinking, such as ``Chasing lights''.
+
+Over time, we may notice that with adding more LEDs to a project the size of the
+source code grows very quickly, which makes the further work less comfortable.
+We somewhat solved this problem by using \emph{loops}, thus instructing the
+computer to repeat specific code according to the written parameters of a loop.
+
+Nevertheless, if we take another glance on the implementation of LED blinking
+with \mintinline{cpp}{for} loop, we may notice another potential for the further
+code improvement.
+
+\begin{listing}[ht]
+  \begin{minted}[
+      highlightlines={9-12,15-18}
+    ]{cpp}
+    void setup() {
+      for (int p = 2; p < 7; p++) {
+        pinMode(p, OUTPUT);
+      }
+    }
+
+    void loop() {
+      for (int p = 2; p < 7; p++) {
+        digitalWrite(p, HIGH);
+        delay(100);
+        digitalWrite(p, LOW);
+        delay(100);
+      }
+      for (int p = 6; p > 2; p--) {
+        digitalWrite(p, HIGH);
+        delay(100);
+        digitalWrite(p, LOW);
+        delay(100);
+      }
+    }
+  \end{minted}
+  \label{listing:for-loop-example-1}
+  \caption{An example of ``Chasing lights'' effect implemented through
+    \mintinline{cpp}{for} loop.}
+\end{listing}
+
+We can see in the listing \ref{listing:for-loop-example-1} that
+\mintinline{cpp}{loop} contains two \mintinline{cpp}{for} loops, that make the
+``Chasing lights'' effect where LEDs blink in order from one side to another,
+and then in reverse order.  More importantly, the highlighted parts of the code
+(that specifically make the blinking effect) are identical in both loops.
+
+The thing is that our computer has very limited set of commands and the concept
+of ``blinking'' is foreign for it -- unless we write the algorithm for it.  But
+even with that we are bound to explain this concept to the computer again and
+again.  But we have a way to explain the concept of ``blinking'' in such way
+that a computer will remember it -- by introducing a new command of ``blinking''
+that we can use in the further code.
+
+Such commands usually called \emph{``procedures''} or \emph{``functions''}.
+
+\end{document}
