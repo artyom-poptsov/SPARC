@@ -120,4 +120,37 @@ always blinks just one LED (on the 2nd digital port), and we don't have any way
 to change that when the procedure is called.  Let's add \emph{parameters} to the
 procedure to fix this issue.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Formal and actual parameters}
+
+When we're working with procedures, very often we have to have a way to
+influence how the procedure works.  To make it possible we have to specify
+\emph{parameters} for the procedure.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={1}]{cpp}
+    void blink(int n) {
+      digitalWrite(n, HIGH);
+      delay(100);
+      digitalWrite(n, LOW);
+      delay(100);
+    }
+  \end{minted}
+  \label{listing:procedure-example-2}
+  \caption{Declaration of ``blink'' procedure with one parameter.}
+\end{listing}
+
+In the listing \ref{listing:procedure-example-2} we can see that the declaration
+of ``blink'' procedure was changed -- we have added the variable titled
+\mintinline{cpp}{n} in the parenthesis, just after the procedure name.  We may
+notice that the variable is not initialized with a value -- it will get the value
+when we call the procedure.
+
+Parameters that are specified in the parenthesis in the procedure call are
+called \emph{formal parameters}.
+
+The \mintinline{cpp}{n} variable is used in the procedure body as any other
+variable.  In our case it is passed into \mintinline{cpp}{digitalWrite} as the
+number of a digital port.
+
 \end{document}
