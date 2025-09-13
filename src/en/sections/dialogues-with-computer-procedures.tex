@@ -69,4 +69,55 @@ that we can use in the further code.
 
 Such commands usually called \emph{``procedures''} or \emph{``functions''}.
 
+Let's take a look on a modified version of the code.
+
+\begin{listing}[H]
+  \begin{minted}[
+      highlightlines={7-12, 16, 19}
+    ]{cpp}
+    void setup() {
+      for (int p = 2; p < 7; p++) {
+        pinMode(p, OUTPUT);
+      }
+    }
+
+    void blink() {
+      digitalWrite(2, HIGH);
+      delay(100);
+      digitalWrite(2, LOW);
+      delay(100);
+    }
+
+    void loop() {
+      for (int p = 2; p < 7; p++) {
+        blink();
+      }
+      for (int p = 6; p > 2; p--) {
+        blink();
+      }
+    }
+  \end{minted}
+  \label{listing:procedure-example-1}
+  \caption{An example of procedure implementation.}
+\end{listing}
+
+We may notice that there is declaration of a ``blink'' procedure from the 7th
+until 12th line.  Also we can see from lines 8th to 11th the \emph{body} of the
+procedure -- that's specifically the useful work that procedure does when it's
+called.
+
+Furthermore, on the 16th line the ``blink'' procedure is being \emph{called} --
+that is, when the computer executes this line, it remembers what it did before
+the procedure, then ``jumps'' into the ``blink'' procedure, executes its body,
+and them returns to back the point of the procedure call and continues the
+execution of the code that follows the procedure call.
+
+As we can see, we can call procedures arbitrary number of times -- for example,
+we call ``blink'' procedure again on the 19th line.
+
+Unfortunately, our example has an important drawback -- ``blink'' procedure
+always blinks just one LED (on the 2nd digital port), and we don't have any way
+to change that when the procedure is called.  Let's add \emph{parameters} to the
+procedure to fix this issue.
+
 \end{document}
