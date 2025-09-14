@@ -121,7 +121,7 @@ to change that when the procedure is called.  Let's add \emph{parameters} to the
 procedure to fix this issue.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Formal and actual parameters}
+\subsection{Formal and factual parameters}
 
 When we're working with procedures, very often we have to have a way to
 influence how the procedure works.  To make it possible we have to specify
@@ -152,5 +152,164 @@ called \emph{formal parameters}.
 The \mintinline{cpp}{n} variable is used in the procedure body as any other
 variable.  In our case it is passed into \mintinline{cpp}{digitalWrite} as the
 number of a digital port.
+
+\begin{listing}[H]
+  \begin{minted}[
+      highlightlines={7-12, 16, 19}
+    ]{cpp}
+    void setup() {
+      for (int p = 2; p < 7; p++) {
+        pinMode(p, OUTPUT);
+      }
+    }
+
+    void blink(int n) {
+      digitalWrite(n, HIGH);
+      delay(100);
+      digitalWrite(n, LOW);
+      delay(100);
+    }
+
+    void loop() {
+      for (int p = 2; p < 7; p++) {
+        blink(2);
+      }
+      for (int p = 6; p > 2; p--) {
+        blink(3);
+      }
+    }
+  \end{minted}
+  \label{listing:procedure-example-3}
+  \caption{An example of a procedure call with parameters.}
+\end{listing}
+
+Let's take a look at the full \ref{listing:procedure-example-3} listing.  We can
+see that on the 16th line when we call ``blink'' procedure we now added the
+number 2 in the parenthesis -- this number will be \emph{copied} into the
+procedure body, as the value of \mintinline{cpp}{n} variable.  On the 19th line
+we called the same procedure, but this time we passed 3 as the parameter value.
+Thus in the first loop we will get the 3rd LED blinking on the digital port
+number 2 five times, and in the second loop we will get LED blinking on the
+digital port number 3.
+
+Parameters that set on the procedure call are called \emph{factual parameters}.
+
+If we want to make the ``Chasing lights'' effect we need to put a variable from
+a loop into procedure factual parameters instead of numeric constants (such as 2
+or 3.)
+
+\begin{listing}[H]
+  \begin{minted}[
+      highlightlines={3, 6}
+    ]{cpp}
+    void loop() {
+      for (int p = 2; p < 7; p++) {
+        blink(p);
+      }
+      for (int p = 6; p > 2; p--) {
+        blink(p);
+      }
+    }
+  \end{minted}
+  \label{listing:procedure-example-4}
+  \caption{An example of ``Chasing lights'' effect implementation.}
+\end{listing}
+
+It is important to point out that in the example
+\ref{listing:procedure-example-4} the value of \mintinline{cpp}{p} variable is
+being \emph{copied} into the ``blink'' procedure, where it is becoming the value
+of \mintinline{cpp}{n} parameter.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={1, 3, 5}]{cpp}
+    void blink(int n, int d) {
+      digitalWrite(n, HIGH);
+      delay(d);
+      digitalWrite(n, LOW);
+      delay(d);
+    }
+  \end{minted}
+  \label{listing:procedure-example-5}
+  \caption{Declaration of ``blink'' procedure with two parameters.}
+\end{listing}
+
+Now let's take a look at an example where we will influence two procedure
+parameters: the number of a digital port and the time of a delay between LED
+turning on and off.  For this we will need to modify ``blink'' procedure as is
+shown in the listing \ref{listing:procedure-example-5}.
+
+The full code example of a modified procedure is shown in the listing below.
+
+\begin{listing}[H]
+  \begin{minted}[
+      highlightlines={7-12, 16, 19}
+    ]{cpp}
+    void setup() {
+      for (int p = 2; p < 7; p++) {
+        pinMode(p, OUTPUT);
+      }
+    }
+
+    void blink(int n, int d) {
+      digitalWrite(n, HIGH);
+      delay(d);
+      digitalWrite(n, LOW);
+      delay(d);
+    }
+
+    void loop() {
+      for (int p = 2; p < 7; p++) {
+        blink(p, 200);
+      }
+      for (int p = 6; p > 2; p--) {
+        blink(p, 100);
+      }
+    }
+  \end{minted}
+  \label{listing:procedure-example-6}
+  \caption{An example of a procedure call with two parameters.}
+\end{listing}
+
+Let's discuss the loops inside the \mintinline{cpp}{loop} procedure in the
+listing \ref{listing:procedure-example-6}.  We can see that the value of
+\mintinline{cpp}{p} variable is being passed into ``blink'' procedure as the
+first factual parameter in both loops, while a numerical constant is being
+passed in the procedure as the second parameters: in the first loop it's the
+number 200 and in the second loop it's 100.
+
+An important point is that the passing of parameters into a loop is
+\emph{position-dependent} -- that is, the factual parameters are being copied
+into formal parameters in a procedure in the same order as they are specified
+inside the parenthesis.
+
+\begin{listing}[H]
+  \begin{minted}[
+      highlightlines={12}
+    ]{cpp}
+    // ...
+
+    void blink(int n, int d) {
+      digitalWrite(n, HIGH);
+      delay(d);
+      digitalWrite(n, LOW);
+      delay(d);
+    }
+
+    void loop() {
+      for (int p = 2; p < 7; p++) {
+        blink(200, p);
+      }
+      // ...
+    }
+  \end{minted}
+  \label{listing:procedure-example-7}
+  \caption{An example of a erroneous call of procedure with two parameters.}
+\end{listing}
+
+In other words, if we change the order of ``p'' and ``100'' parameters in the
+procedure call (as is shown in the \ref{listing:procedure-example-7} listing),
+we will get 100 in the ``n'' parameter and the value which is dependent on the
+loop iteration in the ``d'' parameter (which obviously does not make much
+sense.)
 
 \end{document}
