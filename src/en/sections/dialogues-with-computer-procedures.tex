@@ -324,4 +324,26 @@ encounter precisely the concept of functions.  Let's figure out what the
 difference between the aforementioned concepts and how we can use them properly
 in different contexts.
 
+We will stick to the terminology that is proposed\cite[28]{sicp-en} by the
+authors of ``Structure and interpretation of computer programs'' book,
+specifically we will separate the terms ``function'' and ``procedure''.  In our
+understanding, a ``function'' is a mathematical term that not always can be
+applied to what we write in our programs.  In mathematics the description of a
+function give almost no information about the sequence of steps that we need to
+do to achieve the expected results -- instead, we end up with a
+\emph{declarative} description (that answers the question ``what needs to be
+done?'')  On the other hand, in informatics (and programming in particular) we
+need to know the sequence of steps in details, that allows us to achieve the
+expected result (that is, we need knowledge that answers the ``how to do that?''
+question.)
+
+Moreover, in the programming, procedures often modify some \emph{global state}
+of the system, where they are executed -- for example, they may modify the value
+of some global variables, or change the values on digital ports (as in the case
+with Arduino) and so on.  Because of that, repeated calls to the same procedure
+with the same input parameters may lead to different effects, due to this global
+state.  This, usually, differs from the behavior of mathematical functions where
+a call to the same procedure with the same parameters will lead each time to the
+same results.
+
 \end{document}
