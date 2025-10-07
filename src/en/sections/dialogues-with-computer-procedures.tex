@@ -355,4 +355,59 @@ procedure declared inside a class.  At this stage the meaning of that words may
 elude us but this is fine as our programming knowledge progresses, this term
 will inevitably became easy to understand and familiar.
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Another glance on procedures}
+
+Let's take a look on a \mintinline{cpp}{blink} procedure example, specifically
+on line where we call it.
+
+\begin{listing}[H]
+  \begin{minted}[
+      highlightlines={12}
+    ]{cpp}
+    // ...
+
+    void blink(int n, int d) {
+      digitalWrite(n, HIGH);
+      delay(d);
+      digitalWrite(n, LOW);
+      delay(d);
+    }
+
+    void loop() {
+      for (int p = 2; p < 7; p++) {
+        blink(200, p);
+      }
+      // ...
+    }
+  \end{minted}
+  \label{listing:procedure-example-8}
+  \caption{An example of procedure call with two parameters.}
+\end{listing}
+
+As we can see in example \ref{listing:procedure-example-8}, the call to
+\mintinline{cpp}{blink} is very similar to a call to
+\mintinline{cpp}{digitalWrite}.  Let's compare those two calls: in one case we
+see the name of a procedure being called (\mintinline{cpp}{blink} in one case,
+and \mintinline{cpp}{digitalWrite} in another), then we see brackets where
+factual parameters are written.  We can draw a conclusion that as those two
+things are similar then they are something of the same type.\footnote{The
+feeling of similarity in the programming is rarely misleading.  To explain this
+figuratively if something looks like a duck and quacks like a duck -- then likely
+it is a duck.  While we gain more experience in the programming we will see
+similarity of things more often not only inside one programming language, but
+between different languages as well.}
+
+And indeed, \mintinline{cpp}{blink} and \mintinline{cpp}{digitalWrite} are
+procedures that we call in our code.  The only difference is that
+\mintinline{cpp}{digitalWrite} procedure was written by someone else and is
+included to the standard library of Arduino procedures, while
+\mintinline{cpp}{blink} we wrote ourselves.
+
+An interesting idea to ponder is that by writing our procedures we are sort of
+\emph{extending} the programming language with new commands, ``bending'' it to
+our task at hand.  And that's perfect!  Because when we have a set of commands
+specifically designed for our tasks, solutions may form naturally as if on their
+own, without mental struggles from our side.
+
 \end{document}
