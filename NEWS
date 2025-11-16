@@ -7,6 +7,13 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
+* Unreleased
+** ru
+*** Основы электроники
+Исправление полярности батареи в схемах.
+** en
+*** Electronics
+Fix battery polarity in circuits.
 * Version 5.0.0 (2025-09-09)
 ** en
 *** Game development
