@@ -125,6 +125,7 @@ COMMON = \
 	src/common/figureElectronicsSequentialResistors.tex \
 	src/common/figureElectronicsVoltage.tex \
 	src/common/figureElectronicsVoltageWithCurrent.tex \
+	src/common/figureElectronicsWaterVessels.tex \
 	src/common/figureIICSchematics.tex \
 	src/common/figureInterruptTimerCompare.tex \
 	src/common/figureInterruptTimerOverflow.tex \

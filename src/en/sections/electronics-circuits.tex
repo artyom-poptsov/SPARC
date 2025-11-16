@@ -12,32 +12,7 @@ Now let's imagine two vessels, one of which holds ten liters of water and the
 second one holds zero liters (or, as people usually say, it is \emph{empty}), as
 shown on the fig. \ref{fig:electronics-circuits-0}.
 
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}[
-      declare function={f1(\x) = 0.15 * sin(8.0 * deg(\x));
-    }]
-
-    \draw[thick] (0, 0) -- (0, 4);
-    \draw[thick] (2, 0) -- (2, 4);
-    \draw[thick] (0, 0) -- (2, 0);
-
-    \draw[thick] (3, 0) -- (3, 4);
-    \draw[thick] (5, 0) -- (5, 4);
-    \draw[thick] (3, 0) -- (5, 0);
-
-    \begin{scope}[yshift=3cm, color=blue]
-      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
-    \end{scope}
-
-    \draw (1, 0) node[below] {A};
-    \draw (4, 0) node[below] {B};
-
-  \end{tikzpicture}
-  \caption{An example of two vessels: one filled with water (A) and one that is
-    empty (B).}
-  \label{fig:electronics-circuits-0}
-\end{figure}
+\figureElectronicsWaterVessels{en}
 
 If we connect vessel ``A'' with vessel ``B'' the water will flow from ``A'' to
 ``B'' due to the laws of physics (as shown in fig.
