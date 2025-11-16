@@ -161,22 +161,7 @@ total resistance of a conductor in case of sequential connection of resistances.
 An example of electric circuit with sequential connection of resistors is shown
 on fig. \ref{fig:electronics-circuit-resistors-in-series}.
 
-\begin{figure}[ht]
-  \centering
-  \begin{circuitikz}
-    \draw
-    (0, 0) to[battery, l=Battery, invert]
-    (0, 4) to[short]
-    (1, 4) to[resistor, l=$R_1$] (3, 4)
-    (3, 4) to[resistor, l=$R_2$] (5, 4)
-    (5, 4) to[full led, l=LED] (7, 4)
-    (7, 4) to[short]
-    (7, 0) to[short]
-    (0, 0);
-  \end{circuitikz}
-  \caption{Sequential connection of resistors $R_1$ and $R_2$.}
-  \label{fig:electronics-circuit-resistors-in-series}
-\end{figure}
+\figureElectronicsSequentialResistors{en}
 
 \index{Electronics!Resistance!Parallel Resistor Connection}
 

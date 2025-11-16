@@ -1,0 +1,38 @@
+\newcommand{\figureElectronicsSequentialResistors}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \def\figureBattery{XXX: No translation.}
+  \def\figureLED{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Последовательное подключение сопротивлений $R_1$ и $R_2$.
+  }
+  \def\figureBattery{Батарея}
+  \def\figureLED{Светодиод}
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    Sequential connection of resistors $R_1$ and $R_2$.
+  }
+  \def\figureBattery{Battery}
+  \def\figureLED{LED}
+  \fi
+  \begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+      \draw
+      (0, 0) to[battery, l=\figureBattery, invert]
+      (0, 4) to[short]
+      (1, 4) to[resistor, l=$R_1$] (3, 4)
+      (3, 4) to[resistor, l=$R_2$] (5, 4)
+      (5, 4) to[full led, l=\figureLED] (7, 4)
+      (7, 4) to[short]
+      (7, 0) to[short]
+      (0, 0);
+    \end{circuitikz}
+    \caption{\figureCaption}
+    \label{fig:electronics-circuit-resistors-in-series}
+  \end{figure}
+}

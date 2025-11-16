@@ -122,6 +122,7 @@ COMMON = \
 	src/common/figureDigitalSignalExample.tex \
 	src/common/figureElectronicsResistance.tex \
 	src/common/figureElectronicsResistorCircuit.tex \
+	src/common/figureElectronicsSequentialResistors.tex \
 	src/common/figureElectronicsVoltage.tex \
 	src/common/figureElectronicsVoltageWithCurrent.tex \
 	src/common/figureIICSchematics.tex \
