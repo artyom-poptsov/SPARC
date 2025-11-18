@@ -124,6 +124,7 @@ COMMON = \
 	src/common/figureElectronicsResistance.tex \
 	src/common/figureElectronicsResistorCircuit.tex \
 	src/common/figureElectronicsSequentialResistors.tex \
+	src/common/figureElectronicsSimpleCircruit.tex \
 	src/common/figureElectronicsVoltage.tex \
 	src/common/figureElectronicsVoltageWithCurrent.tex \
 	src/common/figureElectronicsWaterVessels.tex \

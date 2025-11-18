@@ -33,22 +33,7 @@ Electrical current is measured in \emph{Amperes} (A).
 Figure \ref{fig:electronics-simple-circuit} shows an electrical circuit that is
 analogous to the one pictured on fig. \ref{fig:electronics-circuits-1}.
 
-%% TODO: Re-draw the example water piping as it does not have a "functional
-%% component".
-
-\begin{figure}[ht]
-  \centering
-  \begin{circuitikz}
-    \draw (0,0)
-    to[battery, l=Battery, invert] (0,2) % The voltage source
-    to[short] (2,2)
-    to[full led, l=LED] (2,0) % The lamp
-    to[short] (0,0);
-  \end{circuitikz}
-  \caption{An electrical circuit that uses a battery as the power source and a
-    \gls{LED} as a functional component.}
-  \label{fig:electronics-simple-circuit}
-\end{figure}
+\figureElectronicsSimpleCircuit{en}
 
 As can be seen on fig. \ref{fig:electronics-simple-circuit} a light-emitting
 diode (LED) is used as the functional component.  LEDs are widely used in modern

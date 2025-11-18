@@ -1,0 +1,38 @@
+\newcommand{\figureElectronicsSimpleCircuit}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \def\figureBattery{XXX: No translation.}
+  \def\figureLED{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Электрическая цепь с батареей в качестве источника напряжения и светодиодом
+    в качестве нагрузки.
+  }
+  \def\figureBattery{Батарея}
+  \def\figureLED{Светодиод}
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    An electrical circuit that uses a battery as the power source and a
+    \gls{LED} as a functional component.
+  }
+  \def\figureBattery{Battery}
+  \def\figureLED{LED}
+  \fi
+  %% TODO: Re-draw the example water piping as it does not have a "functional
+  %% component".
+  \begin{figure}[ht]
+    \centering
+    \begin{circuitikz}
+      \draw (0,0)
+      to[battery, l=\figureBattery, invert] (0,2) % The voltage source
+      to[short] (2,2)
+      to[full led, l=\figureLED] (2,0) % The lamp
+      to[short] (0,0);
+    \end{circuitikz}
+    \caption{\figureCaption}
+    \label{fig:electronics-simple-circuit}
+  \end{figure}
+}
