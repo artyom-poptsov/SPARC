@@ -121,6 +121,7 @@ COMMON = \
 	src/common/figureButtonPullupResistorCircuit.tex \
 	src/common/figureDigitalSignalExample.tex \
 	src/common/figureElectronicsConnectedWaterVessels.tex \
+	src/common/figureElectronicsLED.tex \
 	src/common/figureElectronicsResistance.tex \
 	src/common/figureElectronicsResistorCircuit.tex \
 	src/common/figureElectronicsSequentialResistors.tex \

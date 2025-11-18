@@ -40,24 +40,7 @@
 Светодиоды имеют разные формы и размеры, но скорее всего вы рано или поздно
 встретите подобные тем, что показаны на рис. \ref{fig:electronics-led}.
 
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}
-    \draw (0, 0) arc [
-            start angle=0,
-            end angle=180,
-            x radius=1cm,
-            y radius =1cm
-          ];
-    \draw (-2, 0) -- (-2, -1.5);
-    \draw (0, 0) -- (0, -1.5);
-    \draw (-2.25, -1.5) -- (0.25, -1.5) -- (0.25, -2.0) -- (-2.25, -2.0) -- (-2.25, -1.5);
-    \draw[line width=0.5mm] (-1.5, -2.0) -- (-1.5, -5) node[left] {Анод};
-    \draw[line width=0.5mm] (-0.5, -2.0) -- (-0.5, -4) node[right] {Катод};
-  \end{tikzpicture}
-  \caption{Схематическое изображение одного из видов светодиода.}
-  \label{fig:electronics-led}
-\end{figure}
+\figureElectronicsLED{ru}
 
 У новых светодиодов такого вида обычна длинная ножка является плюсом, также
 называемым \emph{анодом} (сокращённо ``А'').  Короткая же ножка является минусом
