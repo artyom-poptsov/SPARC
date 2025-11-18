@@ -18,43 +18,7 @@ If we connect vessel ``A'' with vessel ``B'' the water will flow from ``A'' to
 ``B'' due to the laws of physics (as shown in fig.
 \ref{fig:electronics-circuits-1}.)
 
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}[
-      declare function={f1(\x) = 0.15 * sin(8.0 * deg(\x));
-    }]
-
-    \draw[thick] (0, 0) -- (0, 4);
-    \draw[thick] (2, 0.5) -- (2, 4);
-    \draw[thick] (0, 0) -- (2, 0);
-
-    \draw[thick] (3, 0.5) -- (3, 4);
-    \draw[thick] (5, 0) -- (5, 4);
-    \draw[thick] (3, 0) -- (5, 0);
-
-    \draw[thick] (2, 0) -- (3, 0);
-    \draw[thick] (2, 0.5) -- (3, 0.5);
-
-    \draw[thick, color=blue, -{Implies}, double] (2, 0.25) -- (3, 0.25);
-
-    \begin{scope}[yshift=3cm, color=blue]
-      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
-    \end{scope}
-    \draw[thick, color=blue, -{Implies}, double] (1, 3cm) -- (1, 2cm);
-
-    \begin{scope}[yshift=0.75cm, xshift=3cm, color=blue]
-      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
-    \end{scope}
-    \draw[thick, color=blue, -{Implies}, double] (4, 1cm) -- (4, 2cm);
-
-    \draw (1, 0) node[below] {A};
-    \draw (4, 0) node[below] {B};
-
-  \end{tikzpicture}
-  \caption{An example of two vessels with different levels of water connected
-    with a pipe.}
-  \label{fig:electronics-circuits-1}
-\end{figure}
+\figureElectronicsConnectedWaterVessels{en}
 
 When we connected vessels ``A'' and ``B'' with a pipe we've got a \emph{closed
 circuit} that allows the flow of water.  Electrical circuits work in the similar

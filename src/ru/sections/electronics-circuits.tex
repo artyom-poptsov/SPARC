@@ -15,42 +15,7 @@
 Если мы соединим ёмкость ``А'' и ``Б'' трубой, то вода потечёт из ``А'' в ``Б'',
 по законам физики (см. рисунок \ref{fig:electronics-circuits-1}.)
 
-\begin{figure}[ht]
-  \centering
-  \begin{tikzpicture}[
-      declare function={f1(\x) = 0.15 * sin(8.0 * deg(\x));
-    }]
-
-    \draw[thick] (0, 0) -- (0, 4);
-    \draw[thick] (2, 0.5) -- (2, 4);
-    \draw[thick] (0, 0) -- (2, 0);
-
-    \draw[thick] (3, 0.5) -- (3, 4);
-    \draw[thick] (5, 0) -- (5, 4);
-    \draw[thick] (3, 0) -- (5, 0);
-
-    \draw[thick] (2, 0) -- (3, 0);
-    \draw[thick] (2, 0.5) -- (3, 0.5);
-
-    \draw[thick, color=blue, -{Implies}, double] (2, 0.25) -- (3, 0.25);
-
-    \begin{scope}[yshift=3cm, color=blue]
-      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
-    \end{scope}
-    \draw[thick, color=blue, -{Implies}, double] (1, 3cm) -- (1, 2cm);
-
-    \begin{scope}[yshift=0.75cm, xshift=3cm, color=blue]
-      \draw (0, 0) plot[domain=0:2, variable=\x, samples=200, smooth] ({\x}, {f1(\x)});
-    \end{scope}
-    \draw[thick, color=blue, -{Implies}, double] (4, 1cm) -- (4, 2cm);
-
-    \draw (1, 0) node[below] {А};
-    \draw (4, 0) node[below] {Б};
-
-  \end{tikzpicture}
-  \caption{Пример двух ёмкостей с разным уровнем воды, соединённые трубкой.}
-  \label{fig:electronics-circuits-1}
-\end{figure}
+\figureElectronicsConnectedWaterVessels{ru}
 
 Соединив две ёмкости, мы получили \emph{замкнутую цепь}, по которой возможен ток
 воды.  Подобным образом работают электрические цепи, только вместо тока воды в
