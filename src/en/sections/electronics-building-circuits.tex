@@ -48,31 +48,7 @@ always have 5V as you probably already guessed.
 Let's build an electric circuit with a resistor and an LED shown on
 fig. \ref{fig:electronics-arduino-circuit-00}.
 
-\begin{figure}[ht]
-  \centering
-  \begin{circuitikz}
-    \draw (3.5, 0) node[
-      dipchip,
-      num pins=2,
-      external pins width=0.0,
-      no topmark,
-      hide numbers,
-      xscale = 2.5,
-      yscale = 2.5](C1){Arduino};
-    \node [above left, font=\small] at (C1.bpin 1) {5V};
-    \node [above right, font=\small] at (C1.bpin 2) {GND};
-    \draw
-    (C1.bpin 1) to[short]
-    (0, 0) to[short]
-    (0, 4) to[resistor, l=$R_1$] (3, 4)
-    (3, 4) to[full led, l=LED] (7, 4)
-    (7, 4) to[short]
-    (7, 0) to[short]
-    (C1.bpin 2);
-  \end{circuitikz}
-  \caption{A circuit with a resistor, an LED and Arduino.}
-  \label{fig:electronics-arduino-circuit-00}
-\end{figure}
+\figureElectronicsLEDCircuit{en}
 
 We will assembly our circuit using a \emph{breadboard}.  The appearance of a
 breadboard is shown on fig. \ref{fig:breadboard}.  On the left side of the
