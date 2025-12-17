@@ -1,0 +1,23 @@
+\newcommand{\figureLCMLeds}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    I2C-модуль LCM1602 на базе микросхемы PCF8574 с подключенными восемью
+    светодиодами.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    LCM1602 I2C module based on PCF8574 chip with eight connected LEDs.
+  }
+  \fi
+  \begin{figure}[H]
+    \centering
+    \includegraphics[width=12cm]{schematics/lcm1602-i2c-leds}
+    \caption{\figureCaption}
+    \label{fig:lcm1602-i2c-leds}
+  \end{figure}
+}
