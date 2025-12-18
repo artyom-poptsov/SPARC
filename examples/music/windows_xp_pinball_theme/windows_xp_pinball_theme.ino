@@ -1,4 +1,4 @@
-/* pinball_theme.ino -- Microsoft Windows XP Pinball Theme.
+/* windows_xp_pinball_theme.ino -- Microsoft Windows XP Pinball Theme.
 
    This program is based on the Microsoft Windows XP Pinball 
    Theme (3D Pinball for Windows - Space Cadet) score by Benabyss:
