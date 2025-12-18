@@ -1,0 +1,35 @@
+\newcommand{\tableBitwiseAND}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableCaption{
+    Таблица истинности для операции побитового ``И''.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableCaption{
+    Truth table for bitwise ``AND'' operation.
+  }
+  \fi
+  \begin{table}[ht]
+    \centering
+    \def\arraystretch{1.5}%
+    \begin{tabular}{|m{2.5cm}|m{2.5cm}|m{2.5cm}|}
+      \hline
+      \textbf{A} & \textbf{B} & \textbf{A \& B} \\
+      \hline
+      0 & 0 & 0 \\
+      \hline
+      0 & 1 & 0 \\
+      \hline
+      1 & 0 & 0 \\
+      \hline
+      1 & 1 & 1 \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:bitwise-and}
+  \end{table}
+}

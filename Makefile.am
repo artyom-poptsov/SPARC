@@ -156,6 +156,10 @@ COMMON = \
 	src/common/figureSmallLCDSchematics.tex \
 	src/common/figureSoundGraph.tex \
 	src/common/minted.tex \
+	src/common/tableBitwiseAND.tex \
+	src/common/tableBitwiseNOT.tex \
+	src/common/tableBitwiseOR.tex \
+	src/common/tableBitwiseXOR.tex \
 	src/common/tableCommunicationSerialPorts.tex \
 	src/common/tableGPWR.tex \
 	src/common/tableMusicNoteLengths.tex \
