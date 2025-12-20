@@ -77,6 +77,7 @@ SECTIONS = \
 	src/ru/sections/communication-serial-port.tex \
 	src/ru/sections/communication-i2c.tex \
 	src/ru/sections/communication-bitwise-operations.tex \
+	src/ru/sections/communication-spi.tex \
 	src/ru/sections/game-dev-intro.tex \
 	src/ru/sections/game-dev-lcd.tex	\
 	src/ru/sections/game-dev-genre-and-plot.tex	\
