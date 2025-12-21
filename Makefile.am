@@ -151,6 +151,7 @@ COMMON = \
 	src/common/figureMusicTwinkleTwinkleLittleStar.tex \
 	src/common/figureMusicWeWillRockYouSimplified.tex \
 	src/common/figureProtocolClassification.tex \
+	src/common/figureSPI.tex \
 	src/common/figurePWMGraph.tex \
 	src/common/figureSerialPortDiagram.tex \
 	src/common/figureSmallLCD.tex \
