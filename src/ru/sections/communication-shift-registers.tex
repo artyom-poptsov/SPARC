@@ -24,9 +24,45 @@
 Примером применения подобного регистра служит управление набором светодиодов или
 семисегментным индикатором.
 
-Примером является микросхема 74HC595.
+Примером является микросхема 74HC595.  Расположение контактов (или, как говорят,
+\emph{распиновка}) данной микросхемы показана на
+рис. \ref{fig:shift-register-sipo}.
 
 \figureShiftRegisterSIPO{ru}
+
+Функция загрузки одного байта в сдвиговый регистр:
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={12-21}]{cpp}
+    // Порты, подключенные с сдвиговому регистру.
+    const byte DATA  = 2;
+    const byte CLOCK = 3;
+    const byte LATCH = 4;
+
+    void setup() {
+      pinMode(DATA, OUTPUT);
+      pinMode(CLOCK, OUTPUT);
+      pinMode(LATCH, OUTPUT);
+    }
+
+    // Функция работы со сдвиговым регистром.
+    void shift_out(byte value) {
+      for (int i = 7; i >= 0; i--) {
+        digitalWrite(DATA, (value & (1 << i)) > 0);
+        digitalWrite(CLOCK, HIGH);
+        digitalWrite(CLOCK, LOW);
+      }
+      digitalWrite(LATCH, HIGH);
+      digitalWrite(LATCH, LOW);
+    }
+
+    void loop() {
+      shift_out(0b01010101);
+    }
+  \end{minted}
+  \label{listing:communication-sipo-shift-out}
+  \caption{Функция последовательной загрузки одного байта в сдвиговый регистр.}
+\end{listing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Параллельно-последовательный регистр}
