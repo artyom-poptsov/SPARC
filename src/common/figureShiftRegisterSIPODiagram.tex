@@ -1,0 +1,40 @@
+\newcommand{\figureShiftRegisterSIPODiagram}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Принцип работы последовательно-параллельного сдвигового регистра 74HC595.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    Working principle of serial-in/parallel-out shift register 74HC595.
+  }
+  \fi
+  \begin{figure}[H]
+    \centering
+    \begin{tikztimingtable}
+      %% 37 (00100101)
+      DATA  & 2L 1H 3L 1H 5L 1H 8L \\
+      CLOCK & LL 16{T} 3L \\
+      LATCH & LL 17L 1H 1L \\
+      Q1    & LL 17L 2L \\
+      Q2    & LL 17L 2L \\
+      Q3    & LL 17L 2L \\
+      Q4    & LL 17L 2H \\
+      Q5    & LL 17L 2H \\
+      Q6    & LL 17L 2L \\
+      Q7    & LL 17L 2H \\
+      Q8    & LL 17L 2L \\
+      QA    & LL 19L    \\
+      \extracode
+      \begin{background}[shift={(0.1,0)},help lines]
+        \vertlines{}
+      \end{background}
+    \end{tikztimingtable}
+    \caption{\figureCaption}
+    \label{fig:shift-register-sipo-diagram}
+  \end{figure}
+}

@@ -102,6 +102,7 @@
                  texlive-svg
                  texlive-t1utils
                  texlive-textpos
+                 texlive-tikz-timing
                  texlive-transparent
                  texlive-trimspaces
                  texlive-upquote

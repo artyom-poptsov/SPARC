@@ -156,6 +156,7 @@ COMMON = \
 	src/common/figurePWMGraph.tex \
 	src/common/figureSerialPortDiagram.tex \
 	src/common/figureShiftRegisterSIPO.tex \
+	src/common/figureShiftRegisterSIPODiagram.tex \
 	src/common/figureSmallLCD.tex \
 	src/common/figureSmallLCDSchematics.tex \
 	src/common/figureSoundGraph.tex \
