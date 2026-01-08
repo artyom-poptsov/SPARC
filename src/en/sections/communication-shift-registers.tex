@@ -1,0 +1,96 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Shift registers}
+\label{section:shift-registers}
+\index{Electronics!Shift register}
+
+Now that we understood bitwise operations, it's time to try them in action,
+using interaction with \emph{shift registers} as an examples.  Shift registers,
+also sometimes called I/O port expansions, allow us to expand the number of
+digital ports on a micro-controller.  Often they are used for slow periphery
+devices that have many pins -- for example, we can use shift registers to connect
+seven-segment displays and arrays of buttons to a micro-controller.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Serial-in parallel-out (SIPO) shift register}
+
+
+Serial-in parallel out (SIPO) shift register translates a serial set of signals
+(a binary code) to a parallel output.
+
+Examples of tasks where a SIPO shift register can be used include controlling a set of LEDs or controlling a seven-segment indicator.
+
+One of the implementations of SIPO shift register is 74HC595 chip.  The contact
+placement of the chip (in other words, its \emph{pinout}) is shown in
+fig. \ref{fig:shift-register-sipo}.
+
+\figureShiftRegisterSIPO{en}
+
+The purpose of chip pins is described in the table
+\ref{table:shift-register-sipo-pins}.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | m{1.5cm} | m{2.5cm} | m{6.0cm} | }
+    \hline
+    \textbf{Pin}
+    & \textbf{Alternative name}
+    & \textbf{Description} \\
+    \hline
+    GND
+    & GROUND
+    & Ground, must be connected to a ``GND'' pin on Arduino. \\
+    \hline
+    $V_{cc}$
+    &
+    & The voltage of power supply, must be connected to a 5V pin
+    on Arduino. \\
+    \hline
+    Q0...Q7
+    & QA...QH
+    & The outputs of the shift register. \\
+    \hline
+    DS
+    & ``DATA'', ``SER''
+    & The input data line. \\
+    \hline
+    $\overline{OE}$
+    & ``Output Enabled''
+    & Works as a switch for the output signals on
+    Q0...Q8 pins. \\
+    \hline
+    ST\_CP
+    & ``LATCH''
+    & ``Latch'', outputs the values from the chip memory
+    to Q0..Q7 pins. \\
+    \hline
+    SH\_CP
+    & ``CLOCK'', ``SRCLK'' (Shift Register Clock)
+    & Controls the loading the data into a register.  It is expected that
+    this line must convey a clock signal.  When its value changes from
+    \texttt{LOW} to \texttt{HIGH}, the register reads one bit from the ``DS''
+    line into its memory. \\
+    \hline
+    $\overline{MR}$
+    & ``RESET'', ``SRCLR'' (Shift Register Clear)
+    & Reset pin.  Can be used to reset all the values in register memory
+    to zero.  The reset performed when this line is pulled to \texttt{LOW}. \\
+    \hline
+    QA
+    & Q7', QH'
+    & The register serial output.  We can connect a ``DS'' line of the next
+    SIPO register.  A shift register ``pushes out'' the most significant bit
+    from memory to this pin each time when we push another bit into it through
+    ``DS'' pin. \\
+    \hline
+  \end{tabular}
+  \caption{Description of 74HC595 pins.}
+  \label{table:shift-register-sipo-pins}
+\end{table}
+
+\end{document}
