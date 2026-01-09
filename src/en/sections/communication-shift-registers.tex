@@ -123,4 +123,46 @@ as follows:
   \hline
 \end{tabular}
 
+Firstly, we have to set one of the bits from the input data byte on the data bus
+(``DS''.)  To get that bit value, we can use bitwise operations that we
+discussed in the previous section.  In the current case, we can use a
+combination of a bit shift and a bit mask application.
+
+So we can write a procedure \mintinline{cpp}{shift_out} that will load a given
+byte to a shift register.  An example of such procedure implementation is shown
+in the listing \ref{listing:communication-sipo-shift-out}.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={12-21}]{cpp}
+    // Ports that are connected to a shift register.
+    const byte DATA  = 2;
+    const byte CLOCK = 3;
+    const byte LATCH = 4;
+
+    void setup() {
+      pinMode(DATA, OUTPUT);
+      pinMode(CLOCK, OUTPUT);
+      pinMode(LATCH, OUTPUT);
+    }
+
+    // A procedure for working with
+    // a shift register.
+    void shift_out(byte value) {
+      for (int i = 7; i >= 0; i--) {
+        digitalWrite(DATA, (value & (1 << i)) > 0);
+        digitalWrite(CLOCK, HIGH);
+        digitalWrite(CLOCK, LOW);
+      }
+      digitalWrite(LATCH, HIGH);
+      digitalWrite(LATCH, LOW);
+    }
+
+    void loop() {
+      shift_out(0b01010101);
+    }
+  \end{minted}
+  \label{listing:communication-sipo-shift-out}
+  \caption{A procedure for sequential loading of one byte to a shift register.}
+\end{listing}
+
 \end{document}
