@@ -99,4 +99,28 @@ The working principle of a SIPO shift register is shown in fig.
 
 \figureShiftRegisterSIPODiagram{en}
 
+In this example we load number 37 (\mintinline{cpp}{0b00100101}) into a shift
+register memory.  To do that, we sequentially set the data line (\texttt{DATA})
+to bit values of the chosen number.  The shift register stores each bit into
+internal memory on clock signal change from 0 (\texttt{LOW}) to 1
+(\texttt{HIGH}.)  When we finish with data loading, we change the value of
+(\texttt{LATCH}) line from 0 to 1, which in turn sets the voltage of Q0...Q7 to
+the bit values from the shift register internal memory.
+
+Given this description, we can develop our own procedure for data loading into a
+shift register.  Let's suppose that a shift register is connected to an Arduino
+as follows:
+
+\begin{tabular}{ | m{3.0cm} | m{3.0cm} | }
+  \hline
+  \textbf{Digital port} & \textbf{Purpose} \\
+  \hline
+  2 & DS (DATA)\\
+  \hline
+  3 & SH\_CP (CLOCK) \\
+  \hline
+  4 & ST\_CP (LATCH) \\
+  \hline
+\end{tabular}
+
 \end{document}
