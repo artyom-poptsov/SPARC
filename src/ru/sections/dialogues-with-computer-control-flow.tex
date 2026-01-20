@@ -360,8 +360,8 @@
 
 \begin{listing}[ht]
   \begin{minted}{cpp}
-    //                   5.
-    //        1.         2.           4.
+    //              5.
+    //        1.    2.      4.
     for (int i = 0; i < 10; i = i + 1) {
       // 3. (тело цикла)
     }
@@ -383,12 +383,12 @@
       \draw[dotted, red] (\x, 0.1) -- (\x, 0.5);
     };
     \draw (1.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{int i = 0}$}};
-    \draw (2.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{t < 10}$}};
+    \draw (2.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i < 10}$}};
     \draw (3.50, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Тело цикла}$}};
-    \draw (4.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i++}$}};
+    \draw (4.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i = i + 1}$}};
     \draw (5.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i < 10}$}};
     \draw (6.50, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{Тело цикла}$}};
-    \draw (7.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i++}$}};
+    \draw (7.25, 0.5)  node[above, red] {\rotatebox[origin=l]{45}{$\mbox{i = i + 1}$}};
     \draw (8.00, 0.5)  node[above, red] {$\mbox{...}$};
     \draw (11, 0) node[below] {$t$};
   \end{tikzpicture}
