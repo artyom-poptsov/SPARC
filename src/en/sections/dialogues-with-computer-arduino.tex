@@ -8,10 +8,18 @@
 \newglossaryentry{CNC}{name=CNC, description={Computer Numerical Control}}
 \newglossaryentry{MCU}{name=MCU, description={Micro-Controller Unit}}
 
-A micro-controller (or \gls{MCU}) is a simple and often comparatively cheap
-embedded computer that usually solves one task.  MCUs control modern domestic
-devices, children toys, musical instruments and industrial robots; upon MCUs are
-built 3D-printers and many other types of \gls{CNC}.
+A micro-controller (or \gls{MCU}) is a programmable chip that consists of a
+processor and a wide range of additional blocks.  MCUs are used to control
+electronic devices: modern domestic devices, children toys, musical instruments
+and industrial robots; upon MCUs are built 3D-printers and many other types of
+\gls{CNC}.
+
+One of the notable traits of an MCU is that it has high component integration
+ratio: the space inside the chip is shared between a CPU, a RAM and non-volatile
+memory.  The cost of MCUs may vary, as it heavily depends on the MCU features
+and its purpose: the cheapest ones cost around few cents\cite{hackaday:padauk},
+while on average consumer-grade MCUs have price tag starting from few dollars up
+to few hundred dollars.
 
 We will be working with Arduino MCU platform that provides convenient
 programming interface.
