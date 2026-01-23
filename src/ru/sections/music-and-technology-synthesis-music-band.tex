@@ -264,8 +264,8 @@ Arduino, при этом по значению на одном из цифров
         / sizeof(sweet_dreams_guitar[0]);
         for (int i = 0; i < count; i++) {
           play_tone(SPEAKER,
-          sweet_dreams_guitar[i][0],
-          T / sweet_dreams_guitar[i][1]);
+                    sweet_dreams_guitar[i][0],
+                    T / sweet_dreams_guitar[i][1]);
           delay(10);
         }
       } else {
@@ -273,8 +273,8 @@ Arduino, при этом по значению на одном из цифров
         / sizeof(sweet_dreams_vocals[0]);
         for (int i = 0; i < count; i++) {
           play_tone(SPEAKER,
-          sweet_dreams_vocals[i][0],
-          T / sweet_dreams_vocals[i][1]);
+                    sweet_dreams_vocals[i][0],
+                    T / sweet_dreams_vocals[i][1]);
           delay(10);
         }
       }
@@ -423,16 +423,16 @@ Arduino, при этом по значению на одном из цифров
         / sizeof(sweet_dreams_guitar[0]);
         for (int i = 0; i < count; i++) {
           play_tone(SPEAKER,
-          sweet_dreams_guitar[i][0],
-          T / sweet_dreams_guitar[i][1]);
+                    sweet_dreams_guitar[i][0],
+                    T / sweet_dreams_guitar[i][1]);
         }
       } else {
         int count = sizeof(sweet_dreams_vocals)
         / sizeof(sweet_dreams_vocals[0]);
         for (int i = 0; i < count; i++) {
           play_tone(SPEAKER,
-          sweet_dreams_vocals[i][0],
-          T / sweet_dreams_vocals[i][1]);
+                    sweet_dreams_vocals[i][0],
+                    T / sweet_dreams_vocals[i][1]);
         }
       }
     }
