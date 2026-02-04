@@ -1,0 +1,40 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Voltage divider}
+
+\subsection{Implementation of a simple voltage divider based on resistors}
+
+Now that we have learned how to read a signal from analog ports we have to
+connect something substantial to an Arduino analog port -- some device which
+signal we can physically change, thus affect the value on the analog port.
+
+\note{en}{ When implementing voltage dividers we have to take into account which
+  maximal voltage value we can supply to a port of a microcontroller platform.
+  For example, Arduino Mega 2560 and Arduino UNO allows us to use voltages up to
+  5V, while other platforms maximum voltage value may be constrained to 3.3V.
+  When we building electronic circuits we always have to refer to the
+  documentation for the chosen MCU platform! }
+
+Let's begin with a simple experiment.  Let's take two 5kOhm resistors and
+connect them as is shown in the fig.  \ref{fig:electronics-arduino-circuit-01}.
+
+\figureVoltageDivider{en}
+
+As can be seen in the figure, the ``A'' mark points to a branching in the
+circuit where one of the wires goes to ``A0'' port on Arduino.  As the electric
+current has two ways where it can go (either ``A0'' or ``GND'') it is divided
+into two parts.  If resistors $R_1$ and $R_2$ have equal resistance value
+(e.g. 5kOhm) then the current is divided by 2.
+
+The circuit we just built is called a \emph{voltage divider}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Implementation of a voltage divider based on a potentiometer}
+
+
+
+\end{document}
