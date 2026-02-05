@@ -30,7 +30,13 @@ current has two ways where it can go (either ``A0'' or ``GND'') it is divided
 into two parts.  If resistors $R_1$ and $R_2$ have equal resistance value
 (e.g. 5kOhm) then the current is divided by 2.
 
-The circuit we just built is called a \emph{voltage divider}.
+The circuit we just built is called a \emph{voltage divider}.  Such circuit
+allows us to divide input voltage by some coefficient, which value depends on
+the relation between $R_1$ and $R_2$ resistance.  The smaller the value of $R_1$
+resistance and the larger the value of $R_2$ resistance, the closer the output
+voltave of the voltage divider to the input voltage (in our case, to 5V.)  And
+vice versa, the larger the value of $R_1$ and smaller the value of $R_2$, the
+closer the output value to 0V.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Implementation of a voltage divider based on a potentiometer}
