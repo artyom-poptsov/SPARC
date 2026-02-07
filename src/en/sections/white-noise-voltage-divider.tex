@@ -63,4 +63,52 @@ potentiometer handle.  Thus a potentiometer combines two resistors (sort of),
 where the sum of resistor values is set by the potentiometer value, while the
 relation between their resistance value can be changed.
 
+A potentiometer provides a convenient way to adjust the value on an Arduino
+analog port.  If we would upload the program shown in the listing
+\ref{listing:analog-ports-get-value} then ``Serial plotter'' (that can be called
+from the ``Tools'' menu) will display change in the analog value in graph while
+we turn the dial on the potentiometer.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    void setup() {
+      pinMode(2, OUTPUT);
+    }
+
+    void loop() {
+      int value = analogRead(A0);
+      digitalWrite(2, HIGH);
+      delay(value);
+      digitalWrite(2, LOW);
+      delay(value);
+    }
+  \end{minted}
+  \label{listing:analog-ports-001}
+  \caption{Controlling the speed of LED blinking using the value from an analog
+    port.}
+\end{listing}
+
+The listing \ref{listing:analog-ports-001} shows an example of LED blinking
+speed control using the analog value from the ``A0'' port.  If we build the
+circuit which is shown in fig. \ref{fig:electronics-potentiometer}, then the
+rotation of the potentiometer handle will affect the speed of LED blinking by
+changing the delay between turning LED on and off.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Exercises}
+
+\begin{enumerate}
+
+\item Modify the source code from the example
+  \ref{listing:serial-port-sine-wave-example} so we can change the sine graph
+  using a potentiometer.
+\item Implement the speed control of ``Chasing lights'' effect using a
+  potentiometer.
+\item Connect five or more LEDs to an Arduino.  Implement a program that
+  translates the angle of the potentiometer handle rotation into the number of
+  enabled LEDs: the closer the position of the handle to one of the extremes,
+  the more LEDs should be enabled; and vice verse, the closer the handle
+  position to the opposite extreme, the less LEDs should be enabled.
+\end{enumerate}
+
 \end{document}
