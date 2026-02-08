@@ -10,14 +10,42 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 * Unreleased
 ** ru
 *** Основы электроники
-Исправление полярности батареи в схемах.
+- Исправление полярности батареи в схемах.
+*** Диалоги с компьютером
+**** Введение
+- Улучшение формулировок.
+**** Arduino
+- Улучшение формулировок.
+**** Управляющие конструкции
+- Исправление ошибок описания цикла =for=.
 *** Язык общения машин
 **** Новый раздел "Битовые операции"
 В данный раздел перенесена информация о битовых операциях, которая раньше была в
 разделе "Шина I2C".  Информация дополнена таблицами и сделана более наглядной.
+*** Белый шум
+Добавление раздела "Делитель напряжения".
+*** Синтез музыки и технологии
+**** Создание музыкальной группы
+- Исправление форматирования кода.
 ** en
 *** Electronics
 Fix battery polarity in circuits.
+*** Dialogues with computer
+**** Introduction
+- Improve phrasing.
+**** Arduino
+- Improve phrasing.
+**** Procedures, functions and methods: New section
+*** White noise
+**** Voltage divider: New section
+*** Communication
+**** Shift registers: New section
+** Common
+*** Move some common code into separate files
+*** =figureElectronicsResistorCircuit.tex=
+Fix battery polarity.
+*** Examples
+**** windows_xp_pinball_theme: New example
 * Version 5.0.0 (2025-09-09)
 ** en
 *** Game development
