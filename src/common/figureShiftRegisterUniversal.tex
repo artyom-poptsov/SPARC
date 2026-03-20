@@ -1,0 +1,76 @@
+\newcommand{\figureShiftRegisterUniversal}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\figureCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\figureCaption{
+    Распиновка универсального сдвигового регистра 74LS194.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\figureCaption{
+    Pinout of an universal shift register 74LS194.
+  }
+  \fi
+  \begin{figure}[ht]
+    \centering
+    \begin{tikzpicture}
+      %%%% Rectangles.
+      \draw (0, 1.75) rectangle (3, 8);
+      \foreach \ys/\ye in {
+        7.75/7.25,              % Q1
+        7.00/6.50,              % Q2
+        6.25/5.75,              % Q3
+        5.50/5.00,              % Q4
+        4.75/4.25,              % Q5
+        4.00/3.50,              % Q6
+        3.25/2.75,              % Q7
+        2.50/2.00               % GND
+      } {
+        \draw (-0.25, \ys) rectangle (0, \ye);
+        \draw (3.00, \ys) rectangle (3.25, \ye);
+      }
+      %%%% Keys
+      \draw (1.0, 8.0) arc [start angle=180, end angle=360, radius=0.5cm];
+      \draw (0.75, 7.50) arc [start angle=0, end angle=360, radius=0.10cm];
+      %%%% Text.
+      %% Left side:
+      \node[anchor=west] at (0, 7.50) {1};
+      \node[anchor=east] at (-0.25, 7.50) {$\overline{CLR}$};
+      \node[anchor=west] at (0, 6.75) {2};
+      \node[anchor=east] at (-0.25, 6.75) {SR SER};
+      \node[anchor=west] at (0, 6.00) {3};
+      \node[anchor=east] at (-0.25, 6.00) {A};
+      \node[anchor=west] at (0, 5.25) {4};
+      \node[anchor=east] at (-0.25, 5.25) {B};
+      \node[anchor=west] at (0, 4.50) {5};
+      \node[anchor=east] at (-0.25, 4.50) {C};
+      \node[anchor=west] at (0, 3.75) {6};
+      \node[anchor=east] at (-0.25, 3.75) {D};
+      \node[anchor=west] at (0, 3.00) {7};
+      \node[anchor=east] at (-0.25, 3.00) {SL SER};
+      \node[anchor=west] at (0, 2.25) {8};
+      \node[anchor=east] at (-0.25, 2.25) {GND};
+      %% Right side:
+      \node[anchor=east] at (3, 7.50) {16};
+      \node[anchor=west] at (3.25, 7.50) {$V_{cc}$};
+      \node[anchor=east] at (3, 6.75) {15};
+      \node[anchor=west] at (3.25, 6.75) {$Q_{A}$};
+      \node[anchor=east] at (3, 6.00) {14};
+      \node[anchor=west] at (3.25, 6.00) {$Q_{B}$};
+      \node[anchor=east] at (3, 5.25) {13};
+      \node[anchor=west] at (3.25, 5.25) {$Q_{C}$};
+      \node[anchor=east] at (3, 4.50) {12};
+      \node[anchor=west] at (3.25, 4.50) {$Q_{D}$};
+      \node[anchor=east] at (3, 3.75) {11};
+      \node[anchor=west] at (3.25, 3.75) {CLK};
+      \node[anchor=east] at (3, 3.00) {10};
+      \node[anchor=west] at (3.25, 3.00) {S1};
+      \node[anchor=east] at (3, 2.25) {9};
+      \node[anchor=west] at (3.25, 2.25) {S0};
+    \end{tikzpicture}
+    \caption{\figureCaption}
+    \label{fig:shift-register-sipo}
+  \end{figure}
+}

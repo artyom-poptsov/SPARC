@@ -158,6 +158,7 @@ COMMON = \
 	src/common/figureShiftRegisterSIPO.tex \
 	src/common/figureShiftRegisterSIPODiagram.tex \
 	src/common/figureShiftRegisterPISO.tex \
+	src/common/figureShiftRegisterUniversal.tex \
 	src/common/figureSmallLCD.tex \
 	src/common/figureSmallLCDSchematics.tex \
 	src/common/figureSoundGraph.tex \
