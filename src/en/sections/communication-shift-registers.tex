@@ -9,6 +9,17 @@
 \label{section:shift-registers}
 \index{Electronics!Shift register}
 
+\newglossaryentry{SIPO}{
+  name=SIPO,
+  description={
+    Serial-In-Parallel-Out shift register.}
+}
+\newglossaryentry{PISO}{
+  name=PISO,
+  description={
+    Parallel-In-Serial-Out shift register.}
+}
+
 Now that we understood bitwise operations, it's time to try them in action,
 using interaction with \emph{shift registers} as an examples.  Shift registers,
 also sometimes called I/O port expansions, allow us to expand the number of
@@ -19,9 +30,8 @@ seven-segment displays and arrays of buttons to a micro-controller.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Serial-in parallel-out (SIPO) shift register}
 
-
-Serial-in parallel out (SIPO) shift register translates a serial set of signals
-(a binary code) to a parallel output.
+Serial-in parallel out (\gls{SIPO}) shift register translates a serial set of
+signals (a binary code) to a parallel output.
 
 Examples of tasks where a SIPO shift register can be used include controlling a
 set of LEDs or controlling a seven-segment indicator.
@@ -164,5 +174,21 @@ in the listing \ref{listing:communication-sipo-shift-out}.
   \label{listing:communication-sipo-shift-out}
   \caption{A procedure for sequential loading of one byte to a shift register.}
 \end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Exercises}
+
+\begin{enumerate}
+\item Create a ``Chasing lights'' effect using a shift register in such a way so
+  two adjacent LEDs turn on and turn off simultaneously, using bitwise
+  operations.
+\item Create a ``Chasing lights'' effect using a shift register in such a way so
+  LEDs are blinking starting from the center and then go to the borders, using
+  bitwise operations.
+\item Implement LEDs blinking effect using a shift register where each LED is
+  choosing randomly.
+\item Implement pulse-width modulation effect using a shift register by the
+  means of fast bit switching in the shift register memory.
+\end{enumerate}
 
 \end{document}
