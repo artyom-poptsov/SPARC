@@ -6,48 +6,30 @@ on:
       - master
       - '*'
     tags:
-       - '*'
+      - '*'
   pull_request:
     branches:
       - master
 
 jobs:
-  build_latex:
+  build:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        include:
+          - target: x86_64-linux-gnu
+            package: book-sparc
+    name: "${{ matrix.target }}/${{ matrix.package }}"
+
     steps:
-      - name: Get the current date
-        id: date
-        run: echo "::set-output name=date::$(date +'%Y-%m-%d')"
-      - name: "Guix cache"
-        uses: "actions/cache@v3"
+      - uses: actions/checkout@v4
+      - uses: PromyLOPh/guix-install-action@v1
         with:
-          path: "~/.cache/guix"
-          # Guix cashed once a day; the first build will be slow but the
-          # subsequent builds on the current day will be faster.
-          key: "guix-cache-x86-${{ steps.date.outputs.date }}"
-          restore-keys: |
-            guix-cache-x86-
-      - name: "Install Guix"
-        uses: "PromyLOPh/guix-install-action@v1"
-        with:
-          channels: |-
-            (list
-             (channel
-              (name 'guix)
-              (url "https://codeberg.org/guix/guix-mirror")
-              (introduction
-               (make-channel-introduction
-                "9edb3f66fd807b096b48283debdcddccfea34bad"
-                (openpgp-fingerprint
-                 "CA4F 8CF4 37D7 478F DA05  5FD4 4213 7701 1A37 8446")))))
-      - name: "Ensure no locale warning"
-        run: |
-          test -z "$(guix --version 2>&1 >/dev/null)"
-      - name: "Checkout repository"
-        uses: "actions/checkout@v3"
-      - name: Build the book
-        run: |
-          guix build --file=guix.scm
+          pullAfterInstall: false
+      - name: Build "${{ matrix.target }}/${{ matrix.package }}"
+        run: >-
+          guix build -f guix.scm
+          ${{ matrix.target != 'x86_64-linux-gnu' && format('--target={0}', matrix.target) || '' }}
       - name: Install the book
         run: |
           guix package --install-from-file=guix.scm
