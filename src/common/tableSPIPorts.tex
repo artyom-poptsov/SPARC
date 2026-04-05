@@ -1,0 +1,134 @@
+\newcommand{\tableSPIPorts}[1]{
+  \def\lang{\detokenize{#1}}
+  \def\langRu{\detokenize{ru}}
+  \def\langEn{\detokenize{en}}
+  \def\tableBoardColumnHeader{XXX: No translation.}
+  \def\tableDefaultPortsColumnHeader{XXX: No translation.}
+  \def\tableAdditionalPortsHeader{XXX: No translation.}
+  \def\tableNotesColumnHeader{XXX: No translation.}
+  \def\tableCaption{XXX: No translation.}
+  \ifx \lang\langRu
+  \def\tableBoardColumnHeader{
+    Плата
+  }
+  \def\tableDefaultPortsColumnHeader{
+    Порты SPI по-умолчанию
+  }
+  \def\tableAdditionalPortsHeader{
+    Дополнительные SPI порты
+  }
+  \def\tableNotesColumnHeader{
+    Примечания
+  }
+  \def\tableCaption{
+    SPI-порты на разных платформах Arduino.
+  }
+  \fi
+  \ifx \lang\langEn
+  \def\tableBoardColumnHeader{
+    Board
+  }
+  \def\tableDefaultPortsColumnHeader{
+    Default SPI ports
+  }
+  \def\tableAdditionalPortsHeader{
+    Additional SPI ports
+  }
+  \def\tableNotesColumnHeader{
+    Notes
+  }
+  \def\tableCaption{
+    SPI ports on different Arduino boards.
+  }
+  \fi
+  \begin{table}[h]
+    \centering
+    \small
+    \begin{tabular}{
+        | m{2.5cm} | c | c | c | c | c | c | c | c | m{3cm} |
+      }
+      \hline
+      \multirow{2}{4em}{
+        \textbf{\tableBoardColumnHeader}
+      }
+      & \multicolumn{4}{c|}{
+        \textbf{\tableDefaultPortsColumnHeader}
+      }
+      & \multicolumn{4}{c|}{
+        \textbf{\tableAdditionalPortsHeader}
+      }
+      & \multirow{2}{*}{
+        \textbf{\tableNotesColumnHeader}
+      } \\
+      \cline{2-9}
+      & \textbf{CS}
+      & \textbf{SCLK}
+      & \textbf{COPI}
+      & \textbf{CIPO}
+      & \textbf{CS}
+      & \textbf{SCLK}
+      & \textbf{COPI}
+      & \textbf{CIPO}
+      & \\
+      \hline
+      UNO R3, UNO R3 SMD, UNO WiFi Rev2, UNO Mini LE
+      %% CS SCLK COPI CIPO
+      &  10 & 13 & 11 & 12
+      &     &    &    &
+      %% NOTES
+      & SPI pins available on ICSP header \\
+      \hline
+      UNO R4 Minima, UNO R4 WiFi
+      %% CS SCLK COPI CIPO
+      &  10 & 13 & 11 & 12
+      &     &    &    &
+      %% NOTES
+      & SPI pins available on ICSP header \\
+      \hline
+      Leonardo, Yún Rev2, Zero
+      %% CS SCLK COPI CIPO
+      &  10 & 13 & 11 & 12
+      &     &    &    &
+      %% NOTES
+      & SPI pins available on ICSP header \\
+      \hline
+      Micro
+      %% CS SCLK COPI CIPO
+      &     & 15 & 16 & 14
+      &     &    &    &
+      %% NOTES
+      & \\
+      \hline
+      Nano
+      %% CS SCLK COPI CIPO
+      &     & 13 & 11 & 12
+      &     &    &    &
+      %% NOTES
+      & \\
+      \hline
+      Due
+      %% CS SCLK COPI CIPO
+      &     & 76 & 75 & 74
+      &     &    &    &
+      %% NOTES
+      & SPI pins available on dedicated SPI header \\
+      \hline
+      GIGA R1 WiFi
+      %% CS SCLK COPI CIPO
+      &     & 91 & 90 & 89
+      &  10 & 13 & 11 & 12
+      %% NOTES
+      & Pins 89, 90, 91 are located on the SPI header \\
+      \hline
+      Mega 2560 Rev3
+      %% CS SCLK COPI CIPO
+      &  53 & 52 & 51 & 50
+      &     &    &    &
+      %% NOTES
+      & SPI pins available on ICSP header \\
+      \hline
+    \end{tabular}
+    \caption{\tableCaption}
+    \label{table:spi-ports}
+  \end{table}
+}

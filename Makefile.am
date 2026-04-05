@@ -180,6 +180,7 @@ COMMON = \
 	src/common/tableInterrupts.tex \
 	src/common/tableLCM.tex \
 	src/common/tableMCUPortsExample.tex \
+	src/common/tableSPIPorts.tex \
 	src/common/tableTCCR.tex \
 	src/common/tableTCCRbits.tex \
 	src/common/tableTwoDimensionalArray.tex
