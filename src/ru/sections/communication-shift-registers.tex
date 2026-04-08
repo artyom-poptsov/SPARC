@@ -361,40 +361,49 @@
 \ref{listing:communication-sipo-shift-in}.
 
 \begin{listing}[H]
-  \begin{minted}[highlightlines={13-28}]{cpp}
+  \begin{minted}[highlightlines={15-37}]{cpp}
     // Порты, подключенные с сдвиговому регистру.
     const byte DATA  = 2;
     const byte CLOCK = 3;
-    const byte LATCH = 4;
+    const byte LOAD  = 4;
 
     void setup() {
-      Serial.begin(9600);
-      pinMode(DATA, OUTPUT);
+      Serial.begin(115200);
+      pinMode(DATA, INPUT);
       pinMode(CLOCK, OUTPUT);
-      pinMode(LATCH, OUTPUT);
+      pinMode(LOAD, OUTPUT);
+      digitalWrite(LOAD, HIGH);
+      digitalWrite(CLOCK, LOW);
     }
 
     // Функция работы со сдвиговым регистром.
     byte shift_in() {
       byte result = 0;
       // Сэмплирование значений на входах регистра.
-      digitalWrite(LATCH, LOW);
-      digitalWrite(LATCH, HIGH);
+      digitalWrite(LOAD, LOW);
+      delayMicroseconds(1);
+      digitalWrite(CLOCK, HIGH);
+      delayMicroseconds(1);
+      digitalWrite(CLOCK, LOW);
+      delayMicroseconds(1);
+      digitalWrite(LOAD, HIGH);
       // Чтение бит.
       for (int i = 7; i >= 0; i--) {
-        int bit = digitalRead(DATA);
+        byte bit = digitalRead(DATA);
         result = result | (bit << i);
         // Смещение на следующий бит.
         digitalWrite(CLOCK, HIGH);
+        delayMicroseconds(1);
         digitalWrite(CLOCK, LOW);
+        delayMicroseconds(1);
       }
       return result;
     }
 
     void loop() {
       byte b = shift_in();
-      Serial.println(b);
-      delay(10);
+      Serial.println(b, BIN);
+      delay(100);
     }
   \end{minted}
   \label{listing:communication-sipo-shift-in}
