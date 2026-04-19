@@ -1,6 +1,6 @@
 ## Makefile.am -- Config file for GNU Automake.
 ##
-## Copyright (C) 2024-2025 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+## Copyright (C) 2024-2026 Artyom V. Poptsov <poptsov.artyom@gmail.com>
 ##
 ## This file is part of SPARC book.
 ##
@@ -253,7 +253,7 @@ make_index: out/src/ru/sparc.aux
 out/src/ru/sparc.aux: src/ru/sparc.tex out/src/ru/sparc.tex out/src/ru/version.tex
 	@echo "XELATEX   out/sparc.tex -> out/sparc.xdv" \
 		&& cd out/src/ru/ \
-		&& xelatex --interaction=batchmode --draftmode --no-pdf --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
+		&& xelatex --interaction=batchmode --no-pdf --shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
 		|| (echo "---- sparc.pdf.log.1 ----"; cat sparc.pdf.log.1; echo "---- sparc.log ----"; cat sparc.log) && exit 0
 
 out/src/ru/sparc.pdf: out/src/ru/sparc.aux make_glossary make_index out/src/ru/sparc-blx.bib
@@ -393,7 +393,6 @@ out/src/en/sparc.aux: src/en/sparc.tex out/src/en/sparc.tex out/src/en/version.t
 		&& cd out/src/en/ \
 		&& xelatex \
 			--interaction=batchmode \
-			--draftmode \
 			--no-pdf \
 			--shell-escape sparc.tex > sparc.pdf.log.1 2>&1 \
 		|| (echo "---- sparc.pdf.log.1 ----"; \
