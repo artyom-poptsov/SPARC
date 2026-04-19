@@ -192,28 +192,22 @@ OVF'', срабатывают при переполнении (англ. ``overf
 В качестве примера использования прерывания по сравнению мы можем привести
 мигание свтодиодом на порту ``D2''.
 
-\begin{listing}[H]
+\begin{listing}[ht]
   \begin{minted}{cpp}
     // 01. Частота процессора ATmega328p: 16МГц (16'000'000 Гц)
     const double CPU_FREQ = 16000000.0; // Гц.
-
     // 02. Предделитель частоты процессора для таймера.
     const int PRESCALER = 256;
-
     // 03. Желаемое значение задержки после включения
     //    и выключения.
     const double DELAY = 500000.0; // мкс
-
     // Длина секунды в микросекундах.
     const double SECOND = 1000000; // мкс
-
     // Частота прибавления счётчика в тактах процессора.
     const double CPU_TICKS_PER_STEP = CPU_FREQ / PRESCALER;
-
     // Период одного прибавления счётчика таймера
     // в микросекундах.
     const double TICK_PERIOD = SECOND / CPU_TICKS_PER_STEP;
-
     // 04. Количество тактов таймера между прерываниями.
     const long TICKS_COUNT = round(DELAY / TICK_PERIOD);
 
@@ -370,29 +364,23 @@ OVF'', срабатывают при переполнении (англ. ``overf
 
 Посмотрим теперь пример кода, где мигают два светодиода, с разной частотой.
 
-\begin{listing}[H]
+\begin{listing}[ht]
   \begin{minted}{cpp}
     // 01. Частота процессора ATmega328p: 16МГц (16'000'000 Гц)
     const double CPU_FREQ = 16000000.0; // Гц.
-
     // 02. Предделитель частоты процессора для таймера.
     const int PRESCALER = 256;
-
     // 03. Желаемое значение задержки после включения
     //    и выключения.
     const double DELAY_1 = 250000.0; // мкс
     const double DELAY_2 = 750000.0; // мкс
-
     // Длина секунды в микросекундах.
     const double SECOND = 1000000; // мкс
-
     // Частота прибавления счётчика в тактах процессора.
     const double CPU_TICKS_PER_STEP = CPU_FREQ / PRESCALER;
-
     // Период одного прибавления счётчика таймера
     // в микросекундах.
     const double TICK_PERIOD = SECOND / CPU_TICKS_PER_STEP;
-
     // 04. Количество тактов таймера между прерываниями.
     const long TICKS_COUNT_1 = round(DELAY_1 / TICK_PERIOD);
     const long TICKS_COUNT_2 = round(DELAY_2 / TICK_PERIOD);
@@ -443,8 +431,8 @@ OVF'', срабатывают при переполнении (англ. ``overf
 \end{listing}
 
 В листинге \ref{listing:mcu-timer-example-3} можно видеть, что задаются два
-вектора прерываний:\\``TIMER1\_COMPA\_vect'' (11) и ``TIMER1\_COMPB\_vect''
-(14.)  Совпадение счётчика с ``COMPA'' будет происходить раз в 250мс, тогда как
+вектора прерываний: ``TIMER1\_COMPA\_vect'' (11) и ``TIMER1\_COMPB\_vect'' (14.)
+Совпадение счётчика с ``COMPA'' будет происходить раз в 250мс, тогда как
 совпадение с ``COMPB'' будет происходить раз в 750мс.
 
 \end{document}
