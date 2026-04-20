@@ -73,6 +73,10 @@ SPI новым.
 
 \tableSPIPorts{ru}
 
+Стоит обратить внимание, что реализация протокола SPI может отличаться, поэтому
+при работе с каждым новым устройством по SPI необходимо руководствоваться
+документацией на устройство.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Библиотека SPI}
 
@@ -84,5 +88,50 @@ SPI новым.
 \begin{minted}{cpp}
   #include <SPI.h>
 \end{minted}
+
+Настройка параметров SPI осуществляется через специальный тип данных
+\mintinline{cpp}{SPISettings}, который позволяет задавать три опции:
+
+\begin{itemize}
+\item Макисмальную скорость шины SPI.  Значение этого параметра зависит от
+  тактовой частоты процессора -- например, если частота равна 15МГц, то частота
+  шины должна быть задана в 15'000'000.  Arduino автоматически выберет
+  оптимальную скорость шины, равную или меньше заданной.
+\item Порядок бит.  Доступно два варианта: наиболее значимый бит (Most
+  Significant Bit, MSB) первым и наимеенее Least Significant Bit (LSB) первым.
+  В опциях эти варианты задаются соответственно константами
+  \mintinline{cpp}{MSBFIRST} и \mintinline{cpp}{LSBFIRST}.  Чаще всего
+  используется вариант MSB.
+\item Режим работы SPI.  Существуют четыре режима работы, которые определяют,
+  сдвигаются ли биты по восходящему или нисходящему фронту, а также является ли
+  значение бездействия тактового импульса низким (\texttt{LOW}) или высоким
+  (\texttt{HIGH}.)
+\end{itemize}
+
+\begin{table}[H]
+  \small
+  \centering
+  \begin{tabular}{ | m{1.75cm} | m{1cm} | m{1cm} | m{1cm} | m{1cm} | }
+    \hline
+    \textbf{Режим}
+    & \textbf{Clock Polarity (CPOL)}
+    & \textbf{Clock Phase (CPHA)}
+    & \textbf{Output Edge}
+    & \textbf{Data Capture} \\
+    \hline
+    \texttt{SPI\_MODE0} & 0 & 0 & Falling & Rising \\
+    \hline
+    \texttt{SPI\_MODE1} & 0 & 1 & Rising & Falling \\
+    \hline
+    \texttt{SPI\_MODE2} & 1 & 0 & Rising & Falling \\
+    \hline
+    \texttt{SPI\_MODE3} & 1 & 1 & Falling & Rising \\
+    \hline
+  \end{tabular}
+  \caption{Режимы работы SPI.}
+  \label{table:spi-modes}
+\end{table}
+
+Таблица режимов работы SPI представлена в таблице \ref{table:spi-modes}.
 
 \end{document}
