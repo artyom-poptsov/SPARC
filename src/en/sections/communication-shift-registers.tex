@@ -155,8 +155,7 @@ in the listing \ref{listing:communication-sipo-shift-out}.
       pinMode(LATCH, OUTPUT);
     }
 
-    // A procedure for working with
-    // a shift register.
+    // A procedure for working with a shift register.
     void shift_out(byte value) {
       for (int i = 7; i >= 0; i--) {
         digitalWrite(DATA, (value & (1 << i)) > 0);
@@ -173,6 +172,97 @@ in the listing \ref{listing:communication-sipo-shift-out}.
   \end{minted}
   \label{listing:communication-sipo-shift-out}
   \caption{A procedure for sequential loading of one byte to a shift register.}
+\end{listing}
+
+\mintinline{cpp}{shift_out} procedure accepts one byte as a parameter and
+bit-by-bit shifts the byte into a register.  We are using a combination of
+bitwise left shift, bitwise ``AND'' and a logical operation to move one bit into
+the register.  We are performing a check if the result of bitwise operations is
+greater than zero, to reduce the result to one or zero.  After setting the
+\mintinline{cpp}{DATA} line to the required value, we are toggling the signal on
+\mintinline{cpp}{CLOCK} which leads to the reading the current
+\mintinline{cpp}{DATA} value into the register internal memory.  After the loop
+finishes, we are toggling the \mintinline{cpp}{LATCH} line, outputting the the
+current values from the internal register memory to the ``Q0...Q7'' pins.
+
+Using this procedure we can control LEDs using a shift register.  In the listing
+\ref{listing:communication-sipo-shift-out} we are enabling every other LED, by
+specifying \mintinline{cpp}{0b01010101} bit sequence.
+
+As another example we can implement ``Chasing lights'' effect, using bitwise
+shift operations.  Aside from \mintinline{cpp}{loop} procedure, the rest of the
+program (including \mintinline{cpp}{shift_out} procedure) stays the same.  In
+\mintinline{cpp}{loop} procedure we can implement ``Chasing lights'' effect as
+follows:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    void loop() {
+      for (int n = 0; n < 8; n++) {
+        shift_out( 1 << n );
+        delay(100);
+      }
+    }
+  \end{minted}
+  \label{listing:communication-sipo-chasing-lights}
+  \caption{Implementation of ``Chasing lights'' effect on a shift register.}
+\end{listing}
+
+If we connect ``OE'' pin of a SIPO shift register to a digital Arduino port we
+can quickly turn on and off the outputting of the values from the shift register
+memory to the ``Q0...Q7'' pins, while keeping the values into the memory.  We
+can use it, for example, to implement extra ``Chasing lights'' effects and even
+the pulse-width modulation (PWM.)  We have already discussed PWM in
+\ref{chapter:pwm} and we can use the already tried simple method of PWM
+implementation (without interrupts), as is shown in
+\ref{listing:communication-sipo-pwm} listing.
+
+This example can be improved to produce more complex effects with LEDs.  Thanks
+to PWM implementation using ``OE'' line, new opportunities for PWM signal
+generation are opening up for us.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    // ... Creation of "DATA", "CLOCK" and "LATCH"
+    //     constants ...
+
+    const byte OE = 5; // Output Enable
+
+    void setup() {
+      // ... Configuration of "DATA", "CLOCK" and "LATCH"
+      //     ports ...
+
+      pinMode(OE, OUTPUT);
+    }
+
+    // ... The implementation of "shift_Out" is the same ...
+
+    // Implementation of PWM on a shift register.
+    void pwm_shift_out(byte value, float dc, long t) {
+      shift_out(value);
+      const int T = 1000;
+      int d1 = T * dc;
+      int d2 = T - d1;
+      int count = t / T;
+      for (int n = 0; n < count; n++) {
+        digitalWrite(OE, LOW);
+        delayMicroseconds(d1);
+        digitalWrite(OE, HIGH);
+        delayMicroseconds(d2);
+      }
+    }
+
+    void loop() {
+      for (float dc = 0.001; dc < 1; dc += 0.001) {
+        pwm_shift_out(0b01010101, dc, 1000);
+      }
+      for (float dc = 0.999; dc > 0; dc -= 0.001) {
+        pwm_shift_out(0b01010101, dc, 1000);
+      }
+    }
+  \end{minted}
+  \label{listing:communication-sipo-pwm}
+  \caption{Implementation of pulse-width modulation using a shift register.}
 \end{listing}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
