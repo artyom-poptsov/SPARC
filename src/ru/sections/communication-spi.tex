@@ -89,7 +89,7 @@ SPI новым.
   #include <SPI.h>
 \end{minted}
 
-Настройка параметров SPI осуществляется через специальный тип данных
+Настройка параметров SPI осуществляется через класс
 \mintinline{cpp}{SPISettings}, который позволяет задавать три опции:
 
 \begin{itemize}
@@ -132,6 +132,19 @@ SPI новым.
   \label{table:spi-modes}
 \end{table}
 
-Таблица режимов работы SPI представлена в таблице \ref{table:spi-modes}.
+Таблица режимов работы SPI представлена в таблице \ref{table:spi-modes}. Все
+вышеописанные параметры задаются в конструкторе класса
+\mintinline{cpp}{SPISettings}, при его создании.  Например, если мы хотим
+использовать частоту шины 14000000 Гц, порядок бит MSB и режим
+\mintinline{cpp}{SPI_MODE0}, то создание \mintinline{cpp}{SPISettings} будет
+выглядеть так, как показано ниже:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    SPISettings settings(14000000, MSBFIRST, SPI_MODE0);
+  \end{minted}
+  \label{listing:communication-spi-settings}
+  \caption{Создание \mintinline{cpp}{SPISettings} с нужными параметрами.}
+\end{listing}
 
 \end{document}
