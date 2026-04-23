@@ -147,4 +147,62 @@ SPI новым.
   \caption{Создание \mintinline{cpp}{SPISettings} с нужными параметрами.}
 \end{listing}
 
+Далее мы можем использовать созданный объект \mintinline{cpp}{settings} для
+начала сеанса коммуникации по SPI.  Взаимодействие с шиной SPI выполняется через
+глобальный экземпляр класса \mintinline{cpp}{SPIClass} под названием
+\mintinline{cpp}{SPI}, который становится доступен после включения заголовочного
+файла \mintinline{cpp}{spi.h}.
+
+Для начала коммуникации по шине SPI необходимо получить эксклюзивный доступ к
+ней с помощью метода \mintinline{cpp}{beginTransaction}, в который мы должны
+передать экземпляр класса \mintinline{cpp}{SPISettings}.  Вызов данного метода
+также сохраняет настройки SPI, которые используются при дальнейшей работы с
+шиной.
+
+Далее мы можем передать данные по шине SPI с помощью методов передачи и приёма
+данных, также доступных из объекта \mintinline{cpp}{SPI}.
+
+По завершению передачи и приёма данных необходимо вызвать метод\\
+\mintinline{cpp}{endTransaction} для завершения сеанса передачи данных.  Если
+этого не сделать, это может нарушить работу других частей кода и библиотек,
+также работающих с шиной SPI.
+
+Если шина SPI используется для работы с двумя или более устройствами, то перед
+передачей данных необходимо выбрать устройство для коммуникации с помощью линии
+``Chip Select'' (CS), подтянув её к значению \texttt{LOW}.  По завершению обмена
+данными с устройством, необходимо на его линии CS выставить значение
+\texttt{HIGH}.
+
+Предположим, что мы хотим отправить один байт данных (число 42) на устройство,
+Chip Select которого подключен к цифровому порту 2.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const byte CS = 2;
+    SPISettings settings(14000000, MSBFIRST, SPI_MODE0);
+    void setup() {
+      pinMode(CS, OUTPUT);
+
+      SPI.beginTransaction(settings);
+      digitalWrite(CS, LOW);
+      SPI.transfer(42);
+      digitalWrite(CS, HIGH;
+      SPI.endTransaction();
+    }
+  \end{minted}
+  \label{listing:communication-spi-begin}
+  \caption{Пример работы с SPI.}
+\end{listing}
+
+В примере \ref{listing:communication-spi-begin} мы начинаем работу с SPI в
+процедуре \mintinline{cpp}{setup}, хотя точно также мы могли бы это сделать в
+\mintinline{cpp}{loop} или любой другой процедуре.
+
+Здесь также стоит отметить, что существуют несколько методов передачи данных:
+\begin{itemize}
+\item \mintinline{cpp}{transfer(uint8_t data)}
+\item \mintinline{cpp}{transfer16(uint16_t data)}
+\item \mintinline{cpp}{transfer(void *buf, size_t count)}
+\end{itemize}
+
 \end{document}
