@@ -186,7 +186,7 @@ Chip Select которого подключен к цифровому порту
       SPI.beginTransaction(settings);
       digitalWrite(CS, LOW);
       SPI.transfer(42);
-      digitalWrite(CS, HIGH;
+      digitalWrite(CS, HIGH);
       SPI.endTransaction();
     }
   \end{minted}
@@ -200,9 +200,12 @@ Chip Select которого подключен к цифровому порту
 
 Здесь также стоит отметить, что существуют несколько методов передачи данных:
 \begin{itemize}
-\item \mintinline{cpp}{transfer(uint8_t data)}
-\item \mintinline{cpp}{transfer16(uint16_t data)}
-\item \mintinline{cpp}{transfer(void *buf, size_t count)}
+\item \mintinline{cpp}{transfer(uint8_t data)} -- передача однобайтового
+  значения.
+\item \mintinline{cpp}{transfer16(uint16_t data)} -- передача двухбайтового
+  значения.
+\item \mintinline{cpp}{transfer(void *buf, size_t count)} -- передача буфера
+  \mintinline{cpp}{buf} длиной \mintinline{cpp}{count} байт.
 \end{itemize}
 
 \end{document}
