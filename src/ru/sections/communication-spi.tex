@@ -161,6 +161,10 @@ SPI новым.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsubsection{Передача данных}
 
+Настройка SPI начинается с вызова метода \mintinline{cpp}{begin} у объекта
+\mintinline{cpp}{SPI}.  Данное действие нужно выполнить один раз, и поэтому
+лучше это сделать в процедуре \mintinline{cpp}{setup}.
+
 Далее мы можем использовать созданный объект \mintinline{cpp}{settings} для
 начала сеанса коммуникации по SPI.  Взаимодействие с шиной SPI выполняется через
 глобальный экземпляр класса \mintinline{cpp}{SPIClass} под названием
@@ -196,6 +200,8 @@ Chip Select которого подключен к цифровому порту
     SPISettings settings(14000000, MSBFIRST, SPI_MODE0);
     void setup() {
       pinMode(CS, OUTPUT);
+
+      SPI.begin();
 
       SPI.beginTransaction(settings);
       digitalWrite(CS, LOW);
@@ -252,5 +258,44 @@ Chip Select которого подключен к цифровому порту
 На рисунке \ref{fig:spi-shift-register} показано схематическое изображение связи
 буфера на стороне контроллера (``Controller'') с буфером на стороне
 периферийного устройства (``Periphery''.)
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    #include <SPI.h>
+
+    const byte LATCH = 4;
+    SPISettings settings(2000000, MSBFIRST, SPI_MODE2);
+
+    void setup() {
+      Serial.begin(9600);
+      pinMode(LATCH, OUTPUT);
+      SPI.begin();
+    }
+
+    int data_index = 0;
+    const char DATA[] = "hello";
+    void loop() {
+      char response;
+
+      SPI.beginTransaction(settings);
+      response = SPI.transfer(DATA[data_index]);
+      SPI.endTransaction();
+      digitalWrite(LATCH, HIGH);
+      delay(1);
+      digitalWrite(LATCH, LOW);
+      Serial.print("character sent:     ");
+      Serial.println(DATA[data_index]);
+      Serial.print("character received: ");
+      Serial.println(response);
+      delay(500);
+      data_index++;
+      if (data_index == sizeof(DATA)) {
+        data_index = 0;
+      }
+    }
+  \end{minted}
+  \label{listing:communication-spi-shift-register}
+  \caption{Пример работы со сдвиговым регистром через SPI.}
+\end{listing}
 
 \end{document}
