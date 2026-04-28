@@ -154,6 +154,7 @@ COMMON = \
 	src/common/figureProtocolClassification.tex \
 	src/common/figureSPI.tex \
 	src/common/figureSPIShiftRegister.tex \
+	src/common/figureSPIShiftRegisterConnections.tex \
 	src/common/figurePWMGraph.tex \
 	src/common/figureSerialPortDiagram.tex \
 	src/common/figureShiftRegisterSIPO.tex \
