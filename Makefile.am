@@ -325,6 +325,7 @@ SECTIONS_EN = \
 	src/en/sections/communication-i2c.tex \
 	src/en/sections/communication-bitwise-operations.tex \
 	src/en/sections/communication-shift-registers.tex \
+	src/en/sections/communication-spi.tex \
 	src/en/sections/game-dev-intro.tex \
 	src/en/sections/game-dev-lcd.tex \
 	src/en/sections/game-dev-genre-and-plot.tex	\

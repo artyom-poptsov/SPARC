@@ -1,0 +1,341 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Serial Peripheral Interface (SPI) bus}
+\label{section:spi}
+\index{Electronics!SPI Bus}
+\newglossaryentry{SPI}{name=SPI, description={Serial Peripheral Interface}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{General information}
+
+\textit{\gls{SPI}} -- a synchronous data transfer bus that is used for
+communication between devices on short distances.
+
+The bus uses ``controller-periphery'' model where the controller controls the
+communication with a periphery device, initiating the data transfer.  There can
+be several periphery devices.  Some devices can change the role between
+``controller'' and ``periphery'' on the fly.
+
+The protocol works in full duplex mode and uses four \cite{arduino:spi} logical
+lines:
+
+\begin{itemize}
+\item \textbf{CS} (Chip Select) -- the signal from the controller that initiates
+  the communication with a selected periphery device on the SPI bus.  The line
+  is active when its value is low.  There must be one CS line for each periphery
+  device, thus the number of such lines depends on the number of periphery
+  devices.
+\item \textbf{SCLK} (Serial Clock) -- the clock signal from the controller.
+\item \textbf{COPI} (Controller Out Peripheral In) -- the line that is used to
+  transfer data from the controller to a periphery device.
+\item \textbf{CIPO} (Controller In, Peripheral Out) -- the line that is used to
+  transfer data from a periphery device to the controller.
+\end{itemize}
+
+In the past, terms ``master'' and ``slave'' were used in the place of
+``controller'' and ``periphery''.  In this book, we will be using modern
+terminology ``controller''/''periphery'' -- the table
+\ref{table:spi-old-terminology} shows the correspondence between the old terms
+of SPI bus with the new ones.
+
+\begin{table}[H]
+  \centering
+  \begin{tabular}{ | c | c | }
+    \hline
+    \textbf{Master/Slave (old variant)}
+    & \textbf{Controller/Periphery (new variant)} \\
+    \hline
+    Master In Slave Out (MISO) & Controller In, Peripheral Out (CIPO) \\
+    \hline
+    Master Out Slave In (MOSI) & Controller Out Peripheral In (COPI) \\
+    \hline
+    Slave Select pin (SS) & Chip Select Pin (CS) \\
+    \hline
+  \end{tabular}
+  \caption{The correspondence of the old SPI terms with the new ones.}
+  \label{table:spi-old-terminology}
+\end{table}
+
+The SPI bus can be schematically represented as is shown on the
+fig. \ref{fig:spi-bus}.
+
+\figureSPI{en}
+
+The communication between the controller and a periphery device can be
+represented as a system where both sides have a data buffer and the data
+transfer occurs between those two buffers.
+
+There can be differences in digital ports assigned for the
+SPI\cite{arduino:reference} protocol on different the Arduino platforms, as is
+shown in the table \ref{table:spi-ports}.
+
+\tableSPIPorts{en}
+
+It should be noted that the implementation of the SPI bus can vary, thus when
+working with each new device through the SPI bus we have to rely on the
+documentation for that device.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{SPI library}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Including the library to a project}
+
+The Arduino IDE ships with the SPI library\cite{arduino:reference}, that
+provides procedures for working with the bus.  We can add the library into a
+project by including the ``spi.h'' header:
+
+\begin{minted}{cpp}
+  #include <SPI.h>
+\end{minted}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Configuration of SPI parameters}
+
+The configuration of the SPI bus is performed through the
+\mintinline{cpp}{SPISettings} class which allows us to set three options:
+
+\begin{itemize}
+\item Maximum SPI speed.  The value of this parameter depends on the clock
+  frequency of the CPU -- for example, when the frequency is 15MHz, the SPI
+  frequency must be set to 15'000'000.  Arduino automatically set the optimal
+  bus speed which equals to or less than the specified frequency.
+\item The bit order.  There are two variants: the most significant bit (MSB)
+  first, or the least significant bit (LSB) first.  In the SPI options those
+  variants can be set with \mintinline{cpp}{MSBFIRST} and
+  \mintinline{cpp}{LSBFIRST} constants respectively.
+\item The SPI working mode.  There are four modes that control whether the bits
+  are shifted on rising or falling edges of clock pulses, and whether the idle
+  value of the clock line is \texttt{LOW} or \texttt{HIGH}.
+\end{itemize}
+
+\begin{table}[H]
+  \small
+  \centering
+  \begin{tabular}{ | m{1.75cm} | m{1cm} | m{1cm} | m{1cm} | m{1cm} | }
+    \hline
+    \textbf{Режим}
+    & \textbf{Clock Polarity (CPOL)}
+    & \textbf{Clock Phase (CPHA)}
+    & \textbf{Output Edge}
+    & \textbf{Data Capture} \\
+    \hline
+    \texttt{SPI\_MODE0} & 0 & 0 & Falling & Rising \\
+    \hline
+    \texttt{SPI\_MODE1} & 0 & 1 & Rising & Falling \\
+    \hline
+    \texttt{SPI\_MODE2} & 1 & 0 & Rising & Falling \\
+    \hline
+    \texttt{SPI\_MODE3} & 1 & 1 & Falling & Rising \\
+    \hline
+  \end{tabular}
+  \caption{SPI working modes.}
+  \label{table:spi-modes}
+\end{table}
+
+The all four SPI working modes are shown in the table \ref{table:spi-modes}.
+All the mentioned parameters are set in the \mintinline{cpp}{SPISettings} class
+constructor at the time of the instance creation.  For example, if we want to
+use the SPI frequency bus equal to 14'000'000 Hz, the MSB bit order and the SPI
+mode set to \mintinline{cpp}{SPI_MODE0}, we can create
+\mintinline{cpp}{SPISettings} instance as follows:
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    SPISettings settings(14000000, MSBFIRST, SPI_MODE0);
+  \end{minted}
+  \label{listing:communication-spi-settings}
+  \caption{Creation of \mintinline{cpp}{SPISettings} with the required
+    parameters.}
+\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Data transfer}
+
+The interaction with the SPI bus is done through the global
+\mintinline{cpp}{SPIClass} instance which is called \mintinline{cpp}{SPI}.  This
+object become available as soon as we include \mintinline{cpp}{spi.h} header
+file into our project.
+
+The configuration of the SPI bus starts with the calling to
+\mintinline{cpp}{begin} method from the \mintinline{cpp}{SPI} instance.  This
+must be done once, thus the preferred place to do this is the
+\mintinline{cpp}{setup} procedure.
+
+Next we can use the created \mintinline{cpp}{SPISettings} instance (let's call
+it \mintinline{cpp}{settings}) to start the SPI communication session.
+
+To start the communication session on the SPI bus we have to acquire an
+exclusive access to the bus using \mintinline{cpp}{beginTransaction} method.  We
+have to pass an \mintinline{cpp}{SPISettings} instance to this method.  The call
+to the method stores the SPI settings for further usage in the global SPI
+instance.
+
+After that we can transfer data through the SPI bus using the methods of data
+transfer, which also available from the \mintinline{cpp}{SPI} instance.
+
+When data transfer is done, we have to call \mintinline{cpp}{endTransaction}
+method to finish the SPI communication session.  If we fail to do that, it can
+disturb the workings of the other code parts and libraries that also work with
+the SPI bus.
+
+If SPI bus is used to communicate with two or more devices, we have to select
+the right periphery device for communication using of ``Chip Select'' (CS)
+lines, by pulling the right line to the \texttt{LOW} value.  After the
+communication with the periphery device is done, we have to pull the
+corresponding CS line to \texttt{HIGH}.
+
+Let's assume that we want to transfer one byte of data (number 42) to a
+periphery device, which CS line is connected to the digital port number 2.
+
+\begin{listing}[H]
+  \begin{minted}{cpp}
+    const byte CS = 2;
+    SPISettings settings(14000000, MSBFIRST, SPI_MODE0);
+    void setup() {
+      pinMode(CS, OUTPUT);
+
+      SPI.begin();
+
+      SPI.beginTransaction(settings);
+      digitalWrite(CS, LOW);
+      uint8_t return_value = SPI.transfer(42);
+      digitalWrite(CS, HIGH);
+      SPI.endTransaction();
+    }
+  \end{minted}
+  \label{listing:communication-spi-begin}
+  \caption{An example of working with the SPI bus.}
+\end{listing}
+
+In the example \ref{listing:communication-spi-begin} we are using SPI bus in the
+\mintinline{cpp}{setup} procedure, although we can do that the same way in the
+\mintinline{cpp}{loop} or any other procedure.  Using \mintinline{cpp}{transfer}
+method we pass the value 42 to a periphery device, and get one byte in response.
+The response is saved in \mintinline{cpp}{return_value} variable -- we can ignore
+this value if we don't expect anything from the periphery device in the
+response.
+
+It is worth mentioning that there are three methods for data transfer:
+
+\begin{itemize}
+\item \mintinline{cpp}{uint8_t transfer(uint8_t data)} -- a method for
+  transferring of an one-byte value to a periphery device over the COPI line.
+  The method returns the value acquired from the device over the CIPO line.
+\item \mintinline{cpp}{uint16_t transfer16(uint16_t data)} -- a method for
+  transferring a two-byte value to a periphery device.  As for the previous
+  method, the procedure returns the value acquired from the device over the CIPO
+  line, but a two-byte value in this case.
+\item \mintinline{cpp}{void transfer(void *buf, size_t count)} -- a method for
+  transferring a data buffer \mintinline{cpp}{buf} of \mintinline{cpp}{count}
+  byte in size.  The response from the device over the CIPO line is written to
+  the buffer \mintinline{cpp}{buf} in the place of each transferred byte.
+\end{itemize}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Controlling of a shift register}
+
+As we mentioned in the \ref{section:spi-basics} section, the communication
+between a controller and a periphery device over the \gls{SPI} bus can be
+represented as the system of two data buffers between which the data transfer
+occurs.  The operation of \gls{SIPO} and \gls{PISO} shift registers fits well
+into this concept.
+
+Let's take \gls{SIPO} for example -- it represents an one-byte (8 bits) external
+memory into which we sequentially shift out the bits over the ``DS'' line,
+acquiring the shifted out bits from the register over the ``QA'' line.  It can
+be said that we have an one-byte memory on the controller side as well, from
+which we shift out the data to the register.  If we ``loop'' those two memory
+buffers together so the shifted out bits from the register are written in the
+controller memory, we will effectively get the SPI bus implementation.
+
+\figureSPIShiftRegister{en}
+
+A schematic representation of a buffer on the controller side (``Controller'')
+with the buffer on the shift register side (``Periphery'') is shown in the
+fig. \ref{fig:spi-shift-register}.
+
+\figureSPIShiftRegisterConnections{en}
+
+The connection between a controller and a SIPO shift register is shown in the
+fig. \ref{fig:spi-sipo-register}.
+
+In addition to the ``COPI'' and ``CIPO'' lines, the controller have to be
+connected to the shift register with the ``LATCH'' line, which is used to output
+the data from the shift register memory to its outputs ``Q0...Q7''.  This line
+replaces the standard ``chip select'' (``CS'') line which is used in the SPI
+bus.
+
+\begin{listing}[ht]
+  \begin{minted}{cpp}
+    #include <SPI.h>
+
+    const byte LATCH = 4;
+    SPISettings settings(2000000, MSBFIRST, SPI_MODE2);
+
+    void setup() {
+      Serial.begin(9600);
+      pinMode(LATCH, OUTPUT);
+      SPI.begin();
+    }
+
+    int data_index = 0;
+    const char DATA[] = "hello";
+    void loop() {
+      char response;
+
+      SPI.beginTransaction(settings);
+      response = SPI.transfer(DATA[data_index]);
+      SPI.endTransaction();
+      digitalWrite(LATCH, HIGH);
+      delay(1);
+      digitalWrite(LATCH, LOW);
+      Serial.print("character sent:     ");
+      Serial.println(DATA[data_index]);
+      Serial.print("character received: ");
+      Serial.println(response);
+      delay(500);
+      data_index++;
+      if (data_index == sizeof(DATA)) {
+        data_index = 0;
+      }
+    }
+  \end{minted}
+  \label{listing:communication-spi-shift-register}
+  \caption{An example of communication with a shift register using the SPI bus.}
+\end{listing}
+
+An example of data transfer between a shift register and a controller is shown
+in the listing \ref{listing:communication-spi-shift-register}.  We are using
+``hello'' string as the data sample, transferring it letter-by-letter to the
+shift register.  After transferring each byte (one symbol) to the register, we
+are switching ``LATCH'' line, thus outputting the binary code of the symbol in
+the register memory to its output pins.  In the response, we are receiving the
+previous byte (a symbol) from the register memory.  For sake of clarity, we
+print the transferred and received data to the serial port.
+
+Application of the SPI bus for the communication with shift register allows us
+to avoid writing our own code for the data transfer, thus making our programs
+more readable.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Exercises}
+
+\begin{enumerate}
+\item Connect a SPI shift register using SPI bus to an Arduino.  Implement
+  various LED effects using the shift register.
+\item Connect two shift registers to an Arduino using SPI bus.  Implement a
+  binary counter which outputting numbers in the binary form to a shift register
+  and to LEDs.  Sequentially output numbers from 0 to $2^{16} - 1$ to the counter.
+\item Modify the previous task by adding the counter speed regulation by means
+  of a potentiometer.
+\item Investigate the counter overflow in the second task when using
+  \mintinline{cpp}{int} data type on the Arduino.  How the number is encoded in
+  the binary form after crossing the $2^{15} - 1$ threshold?
+\end{enumerate}
+
+\end{document}
