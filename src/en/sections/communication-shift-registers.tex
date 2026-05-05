@@ -281,4 +281,164 @@ generation are opening up for us.
   means of fast bit switching in the shift register memory.
 \end{enumerate}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Parallel-in serial-out (PISO) shift register}
+
+Parallel-in serial-out (PISO) shift register translates parallel inputs into a
+serial set of signals (binary code.)  An example of a eight-bit PISO register is
+74HC165\cite{ti:sn74hc165} chip.  The pinout of this chip is shown in the
+fig. \ref{fig:shift-register-piso}.
+
+\figureShiftRegisterPISO{en}
+
+The functions of 74HC165 pins is described in the table
+\ref{table:shift-register-piso-pins}.
+
+\begin{table}[H]
+  \centering
+  \small
+  \begin{tabular}{ | m{1.2cm} | m{2.55cm} | m{6.75cm} | }
+    \hline
+    \textbf{Pin}
+    & \textbf{Alternative naming}
+    & \textbf{Description} \\
+    \hline
+    GND
+    & GROUND
+    & Ground pin, must be connected to a ``GND'' pin on Arduino. \\
+    \hline
+    $V_{cc}$
+    &
+    & Power supply voltage in the range between 2V and 6V.
+    Must be connected to a 5V pin on Arduino. \\
+    \hline
+    A...H
+    & D0...D7
+    & Inputs of the shift register. \\
+    \hline
+    SER
+    & ``Serial''
+    & Serial input which is used for sequential connection of several 74HC165
+    chips 74HC165. \\
+    \hline
+    CLK
+    & ``Clock''
+    & Controls the data downloading from the shift register.  A micro-controller
+    must provide a clock signal on this line.  When the line value switches from
+    \texttt{LOW} to \texttt{HIGH}, one bit is ``pushed out'' of the memory
+    74HC165 to the $Q_H$ line. \\
+    \hline
+    CLK INH
+    & ``Clock inhibit''
+    & Clock signal inhibitor.  When the value of this line is \texttt{HIGH},
+    then the output value of the chip is not changing. \\
+    \hline
+    $\overline{LD}$
+    & $SH/\overline{LD}$, ``Shift/Load Control''
+    & Loads values from the parallel inputs of the chip to the internal memory
+    when pulled to \texttt{LOW}. \\
+    \hline
+    $Q_H$
+    &
+    & Serial data output.  Outputs the last bit from the chip memory. \\
+    \hline
+    $\overline{Q}_H$
+    &
+    & Outputs a value which is equal to the inverted $Q_H$ line value. \\
+    \hline
+  \end{tabular}
+  \caption{Description of 74HC165 pin functions.}
+  \label{table:shift-register-piso-pins}
+\end{table}
+
+An implementation of \mintinline{cpp}{shift_in} procedure is shown in the
+listing \ref{listing:communication-piso-shift-in}.  To read a byte from the
+shift register, we have to measure (or, in other words, to \emph{sample}) values
+on the input pins.  To perform the sampling, we have to pull the ``LD'' line to
+\texttt{LOW}, and then switch the clock line \texttt{CLOCK} from \texttt{LOW} to
+\texttt{HIGH} and back to \texttt{LOW} (which triggers the register to measure
+the input values on the ``A...H'' pins and storing them into the internal
+memory), and then we have to pull the ``LD'' line back to \texttt{HIGH}.
+
+After all that manipulation we can read one byte of data from the register
+memory, which contains the information about the values on the input pins
+``A...H'' measured at the time of sampling.
+
+We read the byte from the register memory in the bit-by-bit fashion, where each
+read value adds to the \mintinline{cpp}{result} variable by a combination of a
+bit shift and a bitwise ``OR''.  To read the next bit from the register we have
+to switch the ``CLK'' line from \texttt{LOW} to \texttt{HIGH} and back again.
+
+We use small delays of 1us to increase the stability of the communication with a
+shift register, as without the delay register may not be able to react to the
+changes on the input lines.
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={15-38}]{cpp}
+    // Ports connected to a shift register.
+    const byte DATA  = 2; // QH
+    const byte CLOCK = 3; // CLK
+    const byte LOAD  = 4; // SH/LD
+
+    void setup() {
+      Serial.begin(115200);
+      pinMode(DATA, INPUT);
+      pinMode(CLOCK, OUTPUT);
+      pinMode(LOAD, OUTPUT);
+      digitalWrite(LOAD, HIGH);
+      digitalWrite(CLOCK, LOW);
+    }
+
+    // A procedure for working with a shift register.
+    byte shift_in() {
+      byte result = 0;
+      // Sampling of values on the shift
+      // register input pins.
+      digitalWrite(LOAD, LOW);
+      delayMicroseconds(1);
+      digitalWrite(CLOCK, HIGH);
+      delayMicroseconds(1);
+      digitalWrite(CLOCK, LOW);
+      delayMicroseconds(1);
+      digitalWrite(LOAD, HIGH);
+      // Reading the bits.
+      for (int i = 7; i >= 0; i--) {
+        byte bit = digitalRead(DATA);
+        result = result | (bit << i);
+        // Shifting to the next bit.
+        digitalWrite(CLOCK, HIGH);
+        delayMicroseconds(1);
+        digitalWrite(CLOCK, LOW);
+        delayMicroseconds(1);
+      }
+      return result;
+    }
+
+    void loop() {
+      byte b = shift_in();
+      Serial.println(b, BIN);
+      delay(100);
+    }
+  \end{minted}
+  \label{listing:communication-piso-shift-in}
+  \caption{A procedure for the sequential reading of the byte from the shift
+    register.}
+\end{listing}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Exercises}
+
+\begin{enumerate}
+\item Using a PISO shift register and eight buttons, implement a program that
+  controls eight LEDs.  Each button must control one LED: when the button is
+  pressed, the LED assigned to the button must turn on; when the button is
+  pressed again, the LED must turn off.
+\item Implement a digital piano based on a PISO shift register, seven buttons
+  and a speaker.  Buttons must be assigned to note from a single octave (let's
+  say from C4 to B4.)
+\item Modify the previous task by adding another two buttons, for transposition
+  of the notes one octave up or down.  One of the buttons must shift the notes
+  one octave down, while another must shift the notes one octave up.
+\end{enumerate}
+
 \end{document}
