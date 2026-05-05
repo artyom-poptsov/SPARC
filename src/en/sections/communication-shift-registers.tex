@@ -374,7 +374,8 @@ shift register, as without the delay register may not be able to react to the
 changes on the input lines.
 
 \begin{listing}[H]
-  \begin{minted}[highlightlines={15-38}]{cpp}
+  \begin{minted}[highlightlines={15-38
+    }]{cpp}
     // Ports connected to a shift register.
     const byte DATA  = 2; // QH
     const byte CLOCK = 3; // CLK
@@ -440,5 +441,74 @@ changes on the input lines.
   of the notes one octave up or down.  One of the buttons must shift the notes
   one octave down, while another must shift the notes one octave up.
 \end{enumerate}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Universal shift register}
+
+A universal shift register can work in both directions, depending on the
+configuration.  It has parallel and serial ports for uploading and downloading
+the data, and also a port for setting the data transfer direction.
+
+An example of such register is the 74LS194\cite{ti:sn74ls194a} chip.
+
+\figureShiftRegisterUniversal{en}
+
+\begin{table}[H]
+  \centering
+  \small
+  \begin{tabular}{ | m{1.2cm} | m{2.55cm} | m{6.75cm} | }
+    \hline
+    \textbf{Pin}
+    & \textbf{Alternative naming}
+    & \textbf{Description} \\
+    \hline
+    GND
+    & GROUND
+    & Ground pin, must be connected to a ``GND'' pin on Arduino. \\
+    \hline
+    $V_{cc}$
+    &
+    & Power supply voltage in the range between 2V and 6V.
+    Must be connected to a 5V pin on Arduino. \\
+    \hline
+    A...D
+    & D0...D3, $P_{A}...P_{D}$
+    & Inputs of the shift register. \\
+    \hline
+    $Q_{A}...Q_{D}$
+    &
+    & Parallel outputs of the shift register. \\
+    \hline
+    SR SER
+    & SRI (``Shift Right Input'')
+    & The serial output. \\
+    \hline
+    SL SER
+    & SLI (``Shift Left Input'')
+    & The serial input. \\
+    \hline
+    CLK
+    & ``Clock''
+    Controls the data downloading from the shift register.  A micro-controller
+    must provide a clock signal on this line.  When the line value switches from
+    \texttt{LOW} to \texttt{HIGH}, one bit is ``pushed out'' of the memory
+    74HC165 to the $Q_H$ line. \\
+    \hline
+    $\overline{CLR}$
+    & MR, Shift Register Clear
+    & Resets all the values from the register memory to zero when pulled to
+    \texttt{LOW}. \\
+    \hline
+    S0, S1
+    &  Register select
+    &  Controls the shift register working mode.\\
+    \hline
+  \end{tabular}
+  \caption{A description of 74LS194 pin functions.}
+  \label{table:shift-register-universal-pins}
+\end{table}
+
+Functions of 74LS194 pins is described in the table
+\ref{table:shift-register-univeral-pins}.
 
 \end{document}
