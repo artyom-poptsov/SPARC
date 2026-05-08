@@ -6,7 +6,6 @@
 \usepackage{fontspec}
 \usepackage{graphicx}
 \renewcommand{\thefigure}{\thesection.\arabic{figure}}
-\usepackage{hyperref}
 \usepackage{multirow}
 \usepackage[absolute,overlay,showboxes]{textpos}
 \usepackage{etoolbox}
@@ -18,7 +17,8 @@
 \usepackage{circuitikz}
 
 \usepackage{glossaries}
-\usepackage{makeidx}
+\usepackage{imakeidx}
+\usepackage{hyperref} % Must go after "imakeidx"
 \usepackage{expl3}
 \usepackage{chngcntr}
 \usepackage{svg}
@@ -37,6 +37,7 @@
 \setmonofont{Liberation Mono}
 
 \makeindex
+\makeindex[name=hardware,title=Hardware]
 \makeglossaries
 
 \urlstyle{same}
@@ -255,6 +256,10 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addcontentsline{toc}{chapter}{Index}
 \printindex
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{chapter}{Hardware}
+\printindex[hardware]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \addcontentsline{toc}{chapter}{Glossary}

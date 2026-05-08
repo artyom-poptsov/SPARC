@@ -27,6 +27,7 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 *** Синтез музыки и технологии
 **** Создание музыкальной группы
 - Исправление форматирования кода.
+*** Новый индекс "Аппаратное обеспечение"
 ** en
 *** Electronics
 Fix battery polarity in circuits.
@@ -41,6 +42,7 @@ Fix battery polarity in circuits.
 *** Communication
 **** Shift registers: New section
 **** Serial Peripheral Interface (SPI) bus: New section
+*** New "Hardware" index
 ** Common
 *** Move some common code into separate files
 *** =figureElectronicsResistorCircuit.tex=

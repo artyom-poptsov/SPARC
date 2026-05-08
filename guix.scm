@@ -91,6 +91,7 @@
                  texlive-glossaries
                  texlive-glossaries-english
                  texlive-glossaries-extra
+                 texlive-imakeidx
                  texlive-koma-script
                  texlive-libkpathsea
                  texlive-lilyglyphs
