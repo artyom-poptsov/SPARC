@@ -47,6 +47,8 @@ Fix battery polarity in circuits.
 *** Move some common code into separate files
 *** =figureElectronicsResistorCircuit.tex=
 Fix battery polarity.
+*** =figureMusicTwinkleTwinkleLittleStar.tex=
+Specify the BPM value.
 *** Examples
 **** windows_xp_pinball_theme: New example
 * Version 5.0.0 (2025-09-09)
