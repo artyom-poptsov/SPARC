@@ -3,12 +3,12 @@ dnl   Process this file with autoconf to produce configure.
 dnl
 
 define(SPARC_CONFIGURE_COPYRIGHT, [[
-Copyright (C) 2016-2025 Artyom V. Poptsov <poptsov.artyom@gmail.com>
+Copyright (C) 2016-2026 Artyom V. Poptsov <poptsov.artyom@gmail.com>
 
 This file is part of Science, Programming, Art and Radioelectronics Club (SPARC)
 book.
 
-Science, Programming, Art and Radioelectronics Club (SPARC) book © 2016-2025 by
+Science, Programming, Art and Radioelectronics Club (SPARC) book © 2016-2026 by
 Artyom V. Poptsov is licensed under CC BY-SA 4.0
 
 You should have received a copy of the Creative Commons Attribution-ShareAlike
@@ -16,7 +16,7 @@ You should have received a copy of the Creative Commons Attribution-ShareAlike
 <https://creativecommons.org/licenses/by-sa/4.0/>.
 ]])
 
-AC_INIT([SPARC], [5.0.0], [poptsov.artyom@gmail.com],
+AC_INIT([SPARC], [6.0.0], [poptsov.artyom@gmail.com],
         [sparc],
         [https://github.com/artyom-poptsov/SPARC])
 

@@ -7,17 +7,19 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
   are permitted in any medium without royalty provided the copyright
   notice and this notice are preserved.
 
-* Unreleased
+* Version 6.0.0 (2026-06-12)
 ** ru
 *** Основы электроники
-- Исправление полярности батареи в схемах.
+Исправление полярности батареи в схемах.
 *** Диалоги с компьютером
 **** Введение
-- Улучшение формулировок.
-**** Arduino
-- Улучшение формулировок.
+Улучшение формулировок.
+**** Платформа Arduino
+Улучшение формулировок.
+**** Основы работы с мультиметром: Улучшение таблицы
+Улучшение таблицы, показывающей основные функции мультиметра.
 **** Управляющие конструкции
-- Исправление ошибок описания цикла =for=.
+Исправление ошибок описания цикла =for=.
 *** Язык общения машин
 **** Новый раздел "Битовые операции"
 В данный раздел перенесена информация о битовых операциях, которая раньше была в
@@ -26,7 +28,7 @@ Copyright (C) Artyom V. Poptsov <poptsov.artyom@gmail.com>
 Добавление раздела "Делитель напряжения".
 *** Синтез музыки и технологии
 **** Создание музыкальной группы
-- Исправление форматирования кода.
+Исправление форматирования кода.
 *** Новый индекс "Аппаратное обеспечение"
 ** en
 *** Electronics
@@ -37,9 +39,14 @@ Fix battery polarity in circuits.
 **** Arduino
 - Improve phrasing.
 **** Procedures, functions and methods: New section
+**** Multimeter Basics: Improve a table
+Improve a table that lists common multimeter functions.
 *** White noise
 **** Voltage divider: New section
 *** Communication
+**** Bitwise operators: New section
+The information about bitwise operators that used to be in the "I2C bus"
+section now moved to the new section called "Bitwise operators".
 **** Shift registers: New section
 **** Serial Peripheral Interface (SPI) bus: New section
 *** New "Hardware" index
