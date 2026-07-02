@@ -91,6 +91,7 @@ SECTIONS = \
 	src/ru/sections/game-dev-logic.tex	\
 	src/ru/sections/game-dev-structures.tex	\
 	src/ru/sections/game-dev-engine.tex	\
+	src/ru/sections/game-dev-physics.tex \
 	src/ru/sections/mcu-intro.tex \
 	src/ru/sections/mcu-interrupts-types.tex \
 	src/ru/sections/mcu-interrupts-hw-external.tex \
