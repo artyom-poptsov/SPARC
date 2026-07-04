@@ -141,6 +141,7 @@ COMMON = \
 	src/common/figureLCDChar.tex \
 	src/common/figureLCDCharAnimation.tex \
 	src/common/figureLCDCharPlayer.tex \
+	src/common/figureLCDCharPlayerJump.tex \
 	src/common/figureLCDCharRow.tex \
 	src/common/figureLCDConnection.tex \
 	src/common/figureLCMLeds.tex \
