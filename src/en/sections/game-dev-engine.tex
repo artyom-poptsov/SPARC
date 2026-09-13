@@ -1,0 +1,60 @@
+\documentclass[../sparc.tex]{subfiles}
+\graphicspath{{\subfix{../images/}}}
+\begin{document}
+
+\newpage
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Creating a game engine}
+\index{Game development!Game engine}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{What is a ``Game engine''?}
+
+During game development programmers, accumulate a set of reusable procedures and
+data types (structures) that were created specifically to make the working on
+the game easier.  Using those specialized tools we can quickly develop the game
+logic without the need to deal with the low-level mechanisms, such as drawing
+pixels on a screen, moving objects around a map etc.
+
+When a team of developers faces with the need to create a new version of a game
+or even with development of a new game, it usually turns out that basic problems
+have already been solved in the previous game.  It's not surprising as working
+with a game map, playing sounds and calculating physics exist in many games.
+Why repeating the work that is already done, when we can use the existing
+procedures and data structures?
+
+Thus we come to the idea of making our own \emph{game engine} -- a library of
+procedures and types created specifically for game development.  Even if we use
+our engine for only one game it will give us an advantage in terms of and
+ordering of in modularity and code organization.
+
+At the most basic level development of a game engine boils down to moving our
+data types and procedures into separate files.  This is the next level of
+modularity: first we separated the logic into procedures; now we will group
+those procedures into separate files according to their purpose.
+
+To figure out how to split our project into files we must understand what the
+process of building our project into a single executable file entails.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Stages of application building}
+\index{Programming!Application build process!Compiler}
+
+\newglossaryentry{compiler}{name=compiler, description={A program that
+    translates a text written in one programming language (source code) into
+    other (target code.)}}
+
+Up to this point we discussed application build process as a single, indivisible
+process: we click a button Arduino IDE interface and then computer immediately
+starts performing some operations on our project's code, and then it uploads the
+program into an Arduino and finally we get long-awaited blinking LED.  But not
+everything is as easy as it seems at the first glance.
+
+Of course we have already saw already encountered situations when a project
+refused to build due to syntax errors in our code: forgotten parenthesis and
+semicolons make themselves felt at the early stages of the build process.  In
+this case we could see error messages (that sometimes freaking out novice
+programmers) in Arduino IDE.  Now it is time to lift the curtain of secrecy from
+compilation process and look inside.
+
+\end{document}
