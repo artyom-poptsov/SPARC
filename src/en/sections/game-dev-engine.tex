@@ -57,4 +57,84 @@ this case we could see error messages (that sometimes freaking out novice
 programmers) in Arduino IDE.  Now it is time to lift the curtain of secrecy from
 compilation process and look inside.
 
+In the beginning computer starts its work with the source code that we wrote.
+It's important to understand that a computer (or, more precisely, its processor)
+does not understand our programming language and a special ``translator'' from
+the intermediate language (that is, programming language) to the low-level
+machine commands is required.  The \gls{compiler} acts as the ``translator''
+that translates text written in one programming language (source code) into
+other (target code.)  The target code can be either a \emph{machine instruction}
+language (a processor understood language) or a non-machine language.  In our
+case the target language is the machine instruction language.
+
+But compilation is a quite complicated process that can be divided into several
+main steps as is shown on the fig. \ref{fig:build-process}.
+
+\figureBuildSteps{en}
+
+Let's discuss those steps in order.
+
+\subsubsection{Preprocessor}
+\index{Programming!Application build process!Preprocessor}
+
+First of all the source code (\texttt{main.ino} file) is being processed by the
+\emph{preprocessor} -- a special program that is a part of the compiler.  On this
+stage commentaries are being deleted and special \emph{preprocessor directives}
+(sometimes called \emph{preprocessor commands}) are being handled.  In C/C++
+language the preprocessor language is a separate programming language with quite
+primitive set of commands and describes operations that preprocessor must do
+with the source code.
+
+Essentially preprocessor operates with tree basic tools: code deletion, copying
+and inserting.
+
+For example, as we discussed above, commentaries (all the lines that start with
+two right slashes, or lines that are in between \mintinline{cpp}{/*...*/}) are
+being deleted and do not proceed to the subsequent stages of building.
+
+Other popular preprocessor directives that we can encounter are
+\mintinline{cpp}{#include} and \mintinline{cpp}{#define} commands.
+
+\mintinline{cpp}{#define} command is usually used in the following way:
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={1, 8, 10}]{cpp}
+    #define DELAY_TIME 100
+    void setup() {
+      pinMode(2, OUTPUT);
+    }
+
+    void loop() {
+      digitalWrite(2, HIGH);
+      delay(DELAY_TIME);
+      digitalWrite(2, LOW);
+      delay(DELAY_TIME);
+    }
+  \end{minted}
+  \label{listing:preprocessor-define-example-1}
+  \caption{An example of using a preprocessor directive for specifying a
+    constant.}
+\end{listing}
+
+In the listing \ref{listing:preprocessor-define-example-1} we can see an example
+of \mintinline{cpp}{#define} use for specifying a named constant
+\mintinline{cpp}{DELAY_TIME} that sets the time of delay between the turning on
+and off the LED.  In the \mintinline{cpp}{loop} procedure this constant is being
+substituted as the value of delay in the \mintinline{cpp}{delay} procedure call.
+
+When the preprocessor encountering a constant defined with
+\mintinline{cpp}{#define} before, it replaces its name with the factual value of
+the constant.  It's important to understand here that preprocessor performs
+almost no checks regarding the correctness of the result of the constant
+substitution.  Thus in the case of a mistakenly specified constant, the
+preprocessor will substitute its value all over the code where the constant is
+mentioned, but on the later stages of the compilation process an error will
+occur.
+
+In addition we can see on the first line of the listing
+\ref{listing:preprocessor-define-example-1} that we don't use already familiar
+to us data types, and we even don't put an ubiquitous semicolon at the end;
+moreover, terminating the a \mintinline{cpp}{#define} line with a semicolon will
+subsequently lead to an error.
+
 \end{document}
