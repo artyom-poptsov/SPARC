@@ -137,4 +137,39 @@ to us data types, and we even don't put an ubiquitous semicolon at the end;
 moreover, terminating the a \mintinline{cpp}{#define} line with a semicolon will
 subsequently lead to an error.
 
+The question arises: should we use \mintinline{cpp}{#define} when we have
+\mintinline{cpp}{const} keyword?  We might as well do the following:
+
+\begin{listing}[H]
+  \begin{minted}[highlightlines={1}]{cpp}
+    const int DELAY_TIME = 100;
+    void setup() {
+      pinMode(2, OUTPUT);
+    }
+
+    void loop() {
+      digitalWrite(2, HIGH);
+      delay(DELAY_TIME);
+      digitalWrite(2, LOW);
+      delay(DELAY_TIME);
+    }
+  \end{minted}
+  \label{listing:preprocessor-define-example-2}
+  \caption{An example of specifying a regular constant.}
+\end{listing}
+
+Indeed, the approach that is shown in the listing
+\ref{listing:preprocessor-define-example-2} has a lot of advantages comparing to
+the listing \ref{listing:preprocessor-define-example-1} where we used
+\mintinline{cpp}{#define}.  For example, the constant that we defined with
+\mintinline{cpp}{const} is typed (uses \mintinline{cpp}{int} data type) and all
+necessary syntax correctness checks are performed when compiling such code
+(unlike \mintinline{cpp}{#define}.)  For this reason in most of the cases usage
+of regular constants are preferable to usage of \mintinline{cpp}{#define}.
+
+However, we shouldn't rule out using preprocessor directives as there are cases
+where using preprocessor is acceptable and even required.  The thing is that the
+preprocessor performs operations specifically with on program's source code and
+thus the later compiling stages receive already processed code.
+
 \end{document}
