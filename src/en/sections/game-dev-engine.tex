@@ -170,6 +170,56 @@ of regular constants are preferable to usage of \mintinline{cpp}{#define}.
 However, we shouldn't rule out using preprocessor directives as there are cases
 where using preprocessor is acceptable and even required.  The thing is that the
 preprocessor performs operations specifically with on program's source code and
-thus the later compiling stages receive already processed code.
+thus the later compiling stages receive already processed code.  If we take a
+look on intermediate state of our C/C++ code after preprocessor work, we will
+not see any mention of \mintinline{cpp}{DELAY_TIME} that we specified with
+\mintinline{cpp}{#define} -- instead of that, we will see its value (100) in all
+the places where we referenced this constant.
+
+Another useful for us preprocessor directive is \mintinline{cpp}{#include} -- it
+instructs the preprocessor to copy and paste in the place of the directive the
+content of a file that is referenced by it.  We will discuss this directive in
+the section \ref{subsection:multi-file-applications}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Translator}
+\index{Programming!Application build process!Translator}
+
+After preprocessor, \emph{translator} takes over -- its task is to translate the
+high-level programming language (C/C++) into the low-level \emph{assembly}
+language.  At this stage \emph{syntactic errors} are being found, like missing
+parenthesis and semicolons, references to undeclared variables and so on.
+
+The resulting code can be relatively easily read (and even modified) by a human,
+but it is already written at a much more ``primitive'' level.  After this, we
+have just one step down left to the machine (binary) code.
+
+Assembly code is heavily dependent on the processor for which it is being build,
+as different processors may have different instruction sets.  We can say that
+such code is \emph{platform-dependent}.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Assembler}
+\index{Programming!Application build process!Assembler}
+
+Then the \emph{assembler} program steps in.  This program takes the code written
+in the assembly language and translates it into machine commands -- specifically,
+the low-level instructions of the processor for which the build is being
+performed.
+
+The result of the assembler work is an \emph{object file} -- essentially a file
+that contains machine code.  This file is not \emph{executable} yet, although
+inside we have instructions that the processor can read and execute.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsubsection{Linker}
+\index{Programming!Application build process!Linker}
+
+At the end, the target executable application file is being assembled from
+several ``parts'' -- that is, application object files and third party libraries.
+This ``gluing'' of the puzzle performs a program that is called \emph{linker}.
+
+In case of Arduino, the final binary file is being uploaded to a board for
+execution.
 
 \end{document}
